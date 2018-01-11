@@ -1,4 +1,4 @@
-![CBC](/images/CB_coin.png)
+![CBC](/images/CBC.png)
 
 **Do you work at a digital asset exchange or wallet provider?** 
 
