@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-  This file is part of rippled: https://github.com/ripple/rippled
-  Copyright (c) 2012-2015 Ripple Labs Inc.
+  This file is part of cbcd: https://github.com/cbc/cbcd
+  Copyright (c) 2012-2015 cbc Labs Inc.
   
   Permission to use, copy, modify, and/or distribute this software for any
   purpose  with  or without fee is hereby granted, provided that the above
@@ -17,8 +17,8 @@
 */
 //==============================================================================
 
-#ifndef RIPPLE_SQLITE_SQLITE_H_INCLUDED
-#define RIPPLE_SQLITE_SQLITE_H_INCLUDED
+#ifndef cbc_SQLITE_SQLITE_H_INCLUDED
+#define cbc_SQLITE_SQLITE_H_INCLUDED
 
 /**  A self-contained, serverless, zero configuration, transactional SQL engine.
 
@@ -27,7 +27,7 @@
     SQLite is public domain software, visit http://sqlite.org
 */
 
-#ifndef RIPPLE_SQLITE_CPP_INCLUDED
+#ifndef cbc_SQLITE_CPP_INCLUDED
 #include <sqlite/sqlite/sqlite3.h>
 #endif
 

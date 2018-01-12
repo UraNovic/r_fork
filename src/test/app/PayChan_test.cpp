@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,17 +18,17 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/basics/chrono.h>
-#include <ripple/protocol/Feature.h>
-#include <ripple/protocol/Indexes.h>
-#include <ripple/protocol/JsonFields.h>
-#include <ripple/protocol/PayChan.h>
-#include <ripple/protocol/TxFlags.h>
+#include <cbc/basics/chrono.h>
+#include <cbc/protocol/Feature.h>
+#include <cbc/protocol/Indexes.h>
+#include <cbc/protocol/JsonFields.h>
+#include <cbc/protocol/PayChan.h>
+#include <cbc/protocol/TxFlags.h>
 #include <test/jtx.h>
 
 #include <chrono>
 
-namespace ripple
+namespace cbc
 {
 namespace test
 {
@@ -893,6 +893,6 @@ struct PayChan_test : public beast::unit_test::suite
     }
 };
 
-BEAST_DEFINE_TESTSUITE (PayChan, app, ripple);
+BEAST_DEFINE_TESTSUITE (PayChan, app, cbc);
 }  // test
-}  // ripple
+}  // cbc

@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,12 +18,12 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/protocol/PublicKey.h>
-#include <ripple/protocol/SecretKey.h>
-#include <ripple/beast/unit_test.h>
+#include <cbc/protocol/PublicKey.h>
+#include <cbc/protocol/SecretKey.h>
+#include <cbc/beast/unit_test.h>
 #include <vector>
 
-namespace ripple {
+namespace cbc {
 
 class PublicKey_test : public beast::unit_test::suite
 {
@@ -390,6 +390,6 @@ public:
     }
 };
 
-BEAST_DEFINE_TESTSUITE(PublicKey,protocol,ripple);
+BEAST_DEFINE_TESTSUITE(PublicKey,protocol,cbc);
 
-} // ripple
+} // cbc

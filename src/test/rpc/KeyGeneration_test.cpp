@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2015 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2015 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,16 +18,16 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/basics/StringUtilities.h>
+#include <cbc/basics/StringUtilities.h>
 #include <test/jtx/TestSuite.h>
-#include <ripple/json/json_value.h>
-#include <ripple/json/json_writer.h>
-#include <ripple/protocol/ErrorCodes.h>
-#include <ripple/protocol/JsonFields.h>
-#include <ripple/rpc/handlers/WalletPropose.h>
-#include <ripple/rpc/impl/RPCHelpers.h>
+#include <cbc/json/json_value.h>
+#include <cbc/json/json_writer.h>
+#include <cbc/protocol/ErrorCodes.h>
+#include <cbc/protocol/JsonFields.h>
+#include <cbc/rpc/handlers/WalletPropose.h>
+#include <cbc/rpc/impl/RPCHelpers.h>
 
-namespace ripple {
+namespace cbc {
 
 namespace RPC {
 
@@ -96,7 +96,7 @@ static key_strings const strong_brain_strings =
         "attacks.",
 };
 
-class WalletPropose_test : public ripple::TestSuite
+class WalletPropose_test : public cbc::TestSuite
 {
 public:
     void testRandomWallet(boost::optional<std::string> const& keyType)
@@ -726,7 +726,7 @@ public:
     }
 };
 
-BEAST_DEFINE_TESTSUITE(WalletPropose,ripple_basics,ripple);
+BEAST_DEFINE_TESTSUITE(WalletPropose,cbc_basics,cbc);
 
 } // RPC
-} // ripple
+} // cbc

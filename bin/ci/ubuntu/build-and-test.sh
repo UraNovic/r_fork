@@ -8,8 +8,8 @@ __dirname=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 echo "using CC: $CC"
 echo "using TARGET: $TARGET"
 
-# Ensure APP defaults to rippled if it's not set.
-: ${APP:=rippled}
+# Ensure APP defaults to cbcd if it's not set.
+: ${APP:=cbcd}
 echo "using APP: $APP"
 
 JOBS=${NUM_PROCESSORS:-2}
@@ -41,9 +41,9 @@ if [[ ${BUILD:-scons} == "cmake" ]]; then
   cmake --build . -- $BUILDARGS
   if [[ ${BUILD_BOTH:-} == true ]]; then
     if [[ ${TARGET} == *.unity ]]; then
-      cmake --build . --target rippled_classic -- $BUILDARGS
+      cmake --build . --target cbcd_classic -- $BUILDARGS
     else
-      cmake --build . --target rippled_unity -- $BUILDARGS
+      cmake --build . --target cbcd_unity -- $BUILDARGS
     fi
   fi
   popd
@@ -67,10 +67,10 @@ rm -f build/${APP}
 # See what we've actually built
 ldd $APP_PATH
 
-if [[ ${APP} == "rippled" ]]; then
+if [[ ${APP} == "cbcd" ]]; then
   export APP_ARGS="--unittest --quiet --unittest-log"
-  # Only report on src/ripple files
-  export LCOV_FILES="*/src/ripple/*"
+  # Only report on src/cbc files
+  export LCOV_FILES="*/src/cbc/*"
   # Nothing to explicitly exclude
   export LCOV_EXCLUDE_FILES="LCOV_NO_EXCLUDE"
 else

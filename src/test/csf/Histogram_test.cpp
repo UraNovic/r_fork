@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012-2017 Ripple Labs Inc
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012-2017 cbc Labs Inc
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -19,11 +19,11 @@
 
 
 #include <BeastConfig.h>
-#include <ripple/beast/unit_test.h>
+#include <cbc/beast/unit_test.h>
 #include <test/csf/Histogram.h>
 
 
-namespace ripple {
+namespace cbc {
 namespace test {
 
 class Histogram_test : public beast::unit_test::suite
@@ -83,7 +83,7 @@ public:
     }
 };
 
-BEAST_DEFINE_TESTSUITE(Histogram, test, ripple);
+BEAST_DEFINE_TESTSUITE(Histogram, test, cbc);
 
 }  // test
-}  // ripple
+}  // cbc

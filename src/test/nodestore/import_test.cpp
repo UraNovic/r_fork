@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,12 +18,12 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/basics/contract.h>
-#include <ripple/nodestore/impl/codec.h>
-#include <ripple/beast/clock/basic_seconds_clock.h>
-#include <ripple/beast/rfc2616.h>
-#include <ripple/beast/core/LexicalCast.h>
-#include <ripple/beast/unit_test.h>
+#include <cbc/basics/contract.h>
+#include <cbc/nodestore/impl/codec.h>
+#include <cbc/beast/clock/basic_seconds_clock.h>
+#include <cbc/beast/rfc2616.h>
+#include <cbc/beast/core/LexicalCast.h>
+#include <cbc/beast/unit_test.h>
 #include <nudb/create.hpp>
 #include <nudb/detail/format.hpp>
 #include <nudb/xxhasher.hpp>
@@ -35,7 +35,7 @@
 #include <map>
 #include <sstream>
 
-#include <ripple/unity/rocksdb.h>
+#include <cbc/unity/rocksdb.h>
 
 /*
 
@@ -58,7 +58,7 @@ multi(32gb):
 
 */
 
-namespace ripple {
+namespace cbc {
 namespace NodeStore {
 
 namespace detail {
@@ -294,7 +294,7 @@ parse_args(std::string const& s)
 
 //------------------------------------------------------------------------------
 
-#if RIPPLE_ROCKSDB_AVAILABLE
+#if cbc_ROCKSDB_AVAILABLE
 
 class import_test : public beast::unit_test::suite
 {
@@ -586,12 +586,12 @@ public:
     }
 };
 
-BEAST_DEFINE_TESTSUITE(import,NodeStore,ripple);
+BEAST_DEFINE_TESTSUITE(import,NodeStore,cbc);
 
 #endif
 
 //------------------------------------------------------------------------------
 
 } // NodeStore
-} // ripple
+} // cbc
 

@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
     copyright notice and this permission notice appear in all copies.
@@ -16,20 +16,20 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/app/paths/Flow.h>
-#include <ripple/app/paths/RippleCalc.h>
-#include <ripple/app/paths/impl/Steps.h>
-#include <ripple/basics/contract.h>
-#include <ripple/core/Config.h>
-#include <ripple/ledger/ApplyViewImpl.h>
-#include <ripple/ledger/PaymentSandbox.h>
-#include <ripple/ledger/Sandbox.h>
-#include <ripple/protocol/Feature.h>
-#include <ripple/protocol/JsonFields.h>
+#include <cbc/app/paths/Flow.h>
+#include <cbc/app/paths/cbcCalc.h>
+#include <cbc/app/paths/impl/Steps.h>
+#include <cbc/basics/contract.h>
+#include <cbc/core/Config.h>
+#include <cbc/ledger/ApplyViewImpl.h>
+#include <cbc/ledger/PaymentSandbox.h>
+#include <cbc/ledger/Sandbox.h>
+#include <cbc/protocol/Feature.h>
+#include <cbc/protocol/JsonFields.h>
 #include <test/jtx.h>
 #include <test/jtx/PathSet.h>
 
-namespace ripple {
+namespace cbc {
 namespace test {
 
 struct DirectStepInfo
@@ -44,7 +44,7 @@ struct XRPEndpointStepInfo
     AccountID acc;
 };
 
-enum class TrustFlag {freeze, auth, noripple};
+enum class TrustFlag {freeze, auth, nocbc};
 
 /*constexpr*/ std::uint32_t trustFlag (TrustFlag f, bool useHigh)
 {
@@ -58,10 +58,10 @@ enum class TrustFlag {freeze, auth, noripple};
             if (useHigh)
                 return lsfHighAuth;
             return lsfLowAuth;
-        case TrustFlag::noripple:
+        case TrustFlag::nocbc:
             if (useHigh)
-                return lsfHighNoRipple;
-            return lsfLowNoRipple;
+                return lsfHighNocbc;
+            return lsfLowNocbc;
     }
     return 0; // Silence warning about end of non-void function
 }
@@ -100,7 +100,7 @@ equal(std::unique_ptr<Step> const& s1, XRPEndpointStepInfo const& xrpsi)
 }
 
 bool
-equal(std::unique_ptr<Step> const& s1, ripple::Book const& bsi)
+equal(std::unique_ptr<Step> const& s1, cbc::Book const& bsi)
 {
     if (!s1)
         return false;
@@ -324,7 +324,7 @@ public:
 struct ExistingElementPool
 {
     std::vector<jtx::Account> accounts;
-    std::vector<ripple::Currency> currencies;
+    std::vector<cbc::Currency> currencies;
     std::vector<std::string> currencyNames;
 
     jtx::Account
@@ -334,7 +334,7 @@ struct ExistingElementPool
         return accounts[id];
     }
 
-    ripple::Currency
+    cbc::Currency
     getCurrency(size_t id)
     {
         assert(id < currencies.size());
@@ -507,13 +507,13 @@ struct ExistingElementPool
     {
         std::vector<std::tuple<STAmount, STAmount, AccountID, AccountID>> diffs;
 
-        auto xrpBalance = [](ReadView const& v, ripple::Keylet const& k) {
+        auto xrpBalance = [](ReadView const& v, cbc::Keylet const& k) {
             auto const sle = v.read(k);
             if (!sle)
                 return STAmount{};
             return (*sle)[sfBalance];
         };
-        auto lineBalance = [](ReadView const& v, ripple::Keylet const& k) {
+        auto lineBalance = [](ReadView const& v, cbc::Keylet const& k) {
             auto const sle = v.read(k);
             if (!sle)
                 return STAmount{};
@@ -557,7 +557,7 @@ struct ExistingElementPool
         return getAccount(nextAvailAccount++);
     }
 
-    ripple::Currency
+    cbc::Currency
     getAvailCurrency()
     {
         return getCurrency(nextAvailCurrency++);
@@ -629,7 +629,7 @@ struct PayStrandAllPairs_test : public beast::unit_test::suite
     {
         testcase("All pairs");
         using namespace jtx;
-        using RippleCalc = ::ripple::path::RippleCalc;
+        using cbcCalc = ::cbc::path::cbcCalc;
 
         ExistingElementPool eep;
         Env env(*this, features);
@@ -643,7 +643,7 @@ struct PayStrandAllPairs_test : public beast::unit_test::suite
         auto const src = eep.getAvailAccount();
         auto const dst = eep.getAvailAccount();
 
-        RippleCalc::Input inputs;
+        cbcCalc::Input inputs;
         inputs.defaultPathsAllowed = false;
 
         auto callback = [&](
@@ -653,7 +653,7 @@ struct PayStrandAllPairs_test : public beast::unit_test::suite
             std::array<PaymentSandbox, 2> sbs{
                 {PaymentSandbox{env.current().get(), tapNONE},
                  PaymentSandbox{env.current().get(), tapNONE}}};
-            std::array<RippleCalc::Output, 2> rcOutputs;
+            std::array<cbcCalc::Output, 2> rcOutputs;
             // pay with both env1 and env2
             // check all result and account balances match
             // save results so can see if run out of funds or somesuch
@@ -668,7 +668,7 @@ struct PayStrandAllPairs_test : public beast::unit_test::suite
 
                 try
                 {
-                    rcOutputs[i] = RippleCalc::rippleCalculate(
+                    rcOutputs[i] = cbcCalc::cbcCalculate(
                         sbs[i],
                         sendMax,
                         deliver,
@@ -853,7 +853,7 @@ struct PayStrandAllPairs_test : public beast::unit_test::suite
     }
 };
 
-BEAST_DEFINE_TESTSUITE_MANUAL(PayStrandAllPairs, app, ripple);
+BEAST_DEFINE_TESTSUITE_MANUAL(PayStrandAllPairs, app, cbc);
 
 struct PayStrand_test : public beast::unit_test::suite
 {
@@ -876,7 +876,7 @@ struct PayStrand_test : public beast::unit_test::suite
         auto const usdC = USD.currency;
 
         using D = DirectStepInfo;
-        using B = ripple::Book;
+        using B = cbc::Book;
         using XRPS = XRPEndpointStepInfo;
 
         auto test = [&, this](
@@ -1145,16 +1145,16 @@ struct PayStrand_test : public beast::unit_test::suite
             env(pay(alice, carol, USD(100)),
                 path(~USD, ~EUR, ~USD),
                 sendmax(XRP(200)),
-                txflags(tfNoRippleDirect),
+                txflags(tfNocbcDirect),
                 ter(temBAD_PATH_LOOP));
         }
 
         {
             Env env(*this, features);
-            env.fund(XRP(10000), alice, bob, noripple(gw));
+            env.fund(XRP(10000), alice, bob, nocbc(gw));
             env.trust(USD(1000), alice, bob);
             env(pay(gw, alice, USD(100)));
-            test(env, USD, boost::none, STPath(), terNO_RIPPLE);
+            test(env, USD, boost::none, STPath(), terNO_cbc);
         }
 
         {
@@ -1308,7 +1308,7 @@ struct PayStrand_test : public beast::unit_test::suite
             env(pay(alice, alice, EUR(1)),
                 json(paths.json()),
                 sendmax(XRP(10)),
-                txflags(tfNoRippleDirect | tfPartialPayment),
+                txflags(tfNocbcDirect | tfPartialPayment),
                 ter(temBAD_PATH));
         }
 
@@ -1326,7 +1326,7 @@ struct PayStrand_test : public beast::unit_test::suite
             // payment path: XRP -> XRP/USD -> USD/XRP
             env(pay(alice, carol, XRP(100)),
                 path(~USD, ~XRP),
-                txflags(tfNoRippleDirect),
+                txflags(tfNocbcDirect),
                 ter(temBAD_SEND_XRP_PATHS));
         }
 
@@ -1345,7 +1345,7 @@ struct PayStrand_test : public beast::unit_test::suite
             env(pay(alice, carol, XRP(100)),
                 path(~USD, ~XRP),
                 sendmax(XRP(200)),
-                txflags(tfNoRippleDirect),
+                txflags(tfNocbcDirect),
                 ter(temBAD_SEND_XRP_MAX));
         }
     }
@@ -1385,7 +1385,7 @@ struct PayStrand_test : public beast::unit_test::suite
             env(pay(alice, carol, USD(100)),
                 sendmax(USD(100)),
                 path(~XRP, ~USD),
-                txflags(tfNoRippleDirect),
+                txflags(tfNocbcDirect),
                 ter(expectedResult));
         }
         {
@@ -1408,7 +1408,7 @@ struct PayStrand_test : public beast::unit_test::suite
             env(pay(alice, carol, CNY(100)),
                 sendmax(XRP(100)),
                 path(~USD, ~EUR, ~USD, ~CNY),
-                txflags(tfNoRippleDirect),
+                txflags(tfNocbcDirect),
                 ter(temBAD_PATH_LOOP));
         }
     }
@@ -1433,31 +1433,31 @@ struct PayStrand_test : public beast::unit_test::suite
         AccountID const srcAcc = alice.id();
         AccountID dstAcc = bob.id();
         STPathSet pathSet;
-        ::ripple::path::RippleCalc::Input inputs;
+        ::cbc::path::cbcCalc::Input inputs;
         inputs.defaultPathsAllowed = true;
         try
         {
             PaymentSandbox sb{env.current().get(), tapNONE};
             {
-                auto const r = ::ripple::path::RippleCalc::rippleCalculate(
+                auto const r = ::cbc::path::cbcCalc::cbcCalculate(
                     sb, sendMax, deliver, dstAcc, noAccount(), pathSet,
                     env.app().logs(), &inputs);
                 BEAST_EXPECT(r.result() == temBAD_PATH);
             }
             {
-                auto const r = ::ripple::path::RippleCalc::rippleCalculate(
+                auto const r = ::cbc::path::cbcCalc::cbcCalculate(
                     sb, sendMax, deliver, noAccount(), srcAcc, pathSet,
                     env.app().logs(), &inputs);
                 BEAST_EXPECT(r.result() == temBAD_PATH);
             }
             {
-                auto const r = ::ripple::path::RippleCalc::rippleCalculate(
+                auto const r = ::cbc::path::cbcCalc::cbcCalculate(
                     sb, noAccountAmount, deliver, dstAcc, srcAcc, pathSet,
                     env.app().logs(), &inputs);
                 BEAST_EXPECT(r.result() == temBAD_PATH);
             }
             {
-                auto const r = ::ripple::path::RippleCalc::rippleCalculate(
+                auto const r = ::cbc::path::cbcCalc::cbcCalculate(
                     sb, sendMax, noAccountAmount, dstAcc, srcAcc, pathSet,
                     env.app().logs(), &inputs);
                 BEAST_EXPECT(r.result() == temBAD_PATH);
@@ -1491,7 +1491,7 @@ struct PayStrand_test : public beast::unit_test::suite
     }
 };
 
-BEAST_DEFINE_TESTSUITE(PayStrand, app, ripple);
+BEAST_DEFINE_TESTSUITE(PayStrand, app, cbc);
 
 }  // test
-}  // ripple
+}  // cbc

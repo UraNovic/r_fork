@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,14 +18,14 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/protocol/Sign.h>
-#include <ripple/protocol/STTx.h>
-#include <ripple/protocol/STParsedJSON.h>
-#include <ripple/protocol/types.h>
-#include <ripple/json/to_string.h>
-#include <ripple/beast/unit_test.h>
+#include <cbc/protocol/Sign.h>
+#include <cbc/protocol/STTx.h>
+#include <cbc/protocol/STParsedJSON.h>
+#include <cbc/protocol/types.h>
+#include <cbc/json/to_string.h>
+#include <cbc/beast/unit_test.h>
 
-namespace ripple {
+namespace cbc {
 
 class STTx_test : public beast::unit_test::suite
 {
@@ -190,7 +190,7 @@ public:
     }
 };
 
-BEAST_DEFINE_TESTSUITE(STTx,ripple_app,ripple);
-BEAST_DEFINE_TESTSUITE(InnerObjectFormatsSerializer,ripple_app,ripple);
+BEAST_DEFINE_TESTSUITE(STTx,cbc_app,cbc);
+BEAST_DEFINE_TESTSUITE(InnerObjectFormatsSerializer,cbc_app,cbc);
 
-} // ripple
+} // cbc

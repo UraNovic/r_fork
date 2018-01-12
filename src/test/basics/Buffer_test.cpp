@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github0.com/ripple/rippled
-    Copyright (c) 2012-2016 Ripple Labs Inc.
+    This file is part of cbcd: https://github0.com/cbc/cbcd
+    Copyright (c) 2012-2016 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,11 +18,11 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/basics/Buffer.h>
-#include <ripple/beast/unit_test.h>
+#include <cbc/basics/Buffer.h>
+#include <cbc/beast/unit_test.h>
 #include <cstdint>
 
-namespace ripple {
+namespace cbc {
 namespace test {
 
 struct Buffer_test : beast::unit_test::suite
@@ -268,7 +268,7 @@ struct Buffer_test : beast::unit_test::suite
     }
 };
 
-BEAST_DEFINE_TESTSUITE(Buffer, ripple_basics, ripple);
+BEAST_DEFINE_TESTSUITE(Buffer, cbc_basics, cbc);
 
 }  // namespace test
-}  // namespace ripple
+}  // namespace cbc

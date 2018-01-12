@@ -17,8 +17,8 @@
 */
 //==============================================================================
 
-#include <ripple/beast/utility/Journal.h>
-#include <ripple/beast/unit_test.h>
+#include <cbc/beast/utility/Journal.h>
+#include <cbc/beast/unit_test.h>
 
 namespace beast {
 

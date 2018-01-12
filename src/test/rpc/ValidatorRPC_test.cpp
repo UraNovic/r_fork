@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012-2016 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012-2016 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,20 +18,20 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/app/main/BasicApp.h>
-#include <ripple/app/misc/ValidatorSite.h>
-#include <ripple/beast/unit_test.h>
-#include <ripple/core/ConfigSections.h>
-#include <ripple/json/json_value.h>
-#include <ripple/protocol/JsonFields.h>
-#include <ripple/protocol/Sign.h>
+#include <cbc/app/main/BasicApp.h>
+#include <cbc/app/misc/ValidatorSite.h>
+#include <cbc/beast/unit_test.h>
+#include <cbc/core/ConfigSections.h>
+#include <cbc/json/json_value.h>
+#include <cbc/protocol/JsonFields.h>
+#include <cbc/protocol/Sign.h>
 #include <beast/core/detail/base64.hpp>
 #include <test/jtx.h>
 #include <test/jtx/TrustedPublisherServer.h>
 
 #include <set>
 
-namespace ripple {
+namespace cbc {
 
 namespace test {
 
@@ -394,7 +394,7 @@ public:
     }
 };
 
-BEAST_DEFINE_TESTSUITE(ValidatorRPC, app, ripple);
+BEAST_DEFINE_TESTSUITE(ValidatorRPC, app, cbc);
 
 }  // namespace test
-}  // namespace ripple
+}  // namespace cbc

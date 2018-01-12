@@ -21,13 +21,13 @@
 #include <BeastConfig.h>
 #endif
 
-#include <ripple/beast/hash/impl/spookyv2.h>
-#include <ripple/beast/hash/endian.h>
-#include <ripple/beast/hash/tests/hash_metrics.h>
-#include <ripple/beast/hash/hash_append.h>
-#include <ripple/beast/xor_shift_engine.h>
-#include <ripple/beast/unit_test.h>
-#include <ripple/beast/type_name.h>
+#include <cbc/beast/hash/impl/spookyv2.h>
+#include <cbc/beast/hash/endian.h>
+#include <cbc/beast/hash/tests/hash_metrics.h>
+#include <cbc/beast/hash/hash_append.h>
+#include <cbc/beast/xor_shift_engine.h>
+#include <cbc/beast/unit_test.h>
+#include <cbc/beast/type_name.h>
 #include <array>
 #include <algorithm>
 #include <cstring>

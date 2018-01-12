@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright 2015 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright 2015 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,18 +18,18 @@
 //==============================================================================
 
 #include <beast/core/detail/base64.hpp>
-#include <ripple/basics/Slice.h>
-#include <ripple/basics/strHex.h>
-#include <ripple/app/misc/ValidatorList.h>
+#include <cbc/basics/Slice.h>
+#include <cbc/basics/strHex.h>
+#include <cbc/app/misc/ValidatorList.h>
 #include <test/jtx.h>
-#include <ripple/protocol/digest.h>
-#include <ripple/protocol/HashPrefix.h>
-#include <ripple/protocol/PublicKey.h>
-#include <ripple/protocol/SecretKey.h>
-#include <ripple/protocol/Sign.h>
+#include <cbc/protocol/digest.h>
+#include <cbc/protocol/HashPrefix.h>
+#include <cbc/protocol/PublicKey.h>
+#include <cbc/protocol/SecretKey.h>
+#include <cbc/protocol/Sign.h>
 
 
-namespace ripple {
+namespace cbc {
 namespace test {
 
 class ValidatorList_test : public beast::unit_test::suite
@@ -1071,7 +1071,7 @@ public:
     }
 };
 
-BEAST_DEFINE_TESTSUITE(ValidatorList, app, ripple);
+BEAST_DEFINE_TESTSUITE(ValidatorList, app, cbc);
 
 } // test
-} // ripple
+} // cbc

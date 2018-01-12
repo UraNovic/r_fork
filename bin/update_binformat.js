@@ -11,9 +11,9 @@
 
 // XXX: Process LedgerFormats.(h|cpp) as well.
 
-var filenameProto = __dirname + '/../src/cpp/ripple/SerializeProto.h',
-    filenameTxFormatsH = __dirname + '/../src/cpp/ripple/TransactionFormats.h',
-    filenameTxFormats = __dirname + '/../src/cpp/ripple/TransactionFormats.cpp';
+var filenameProto = __dirname + '/../src/cpp/cbc/SerializeProto.h',
+    filenameTxFormatsH = __dirname + '/../src/cpp/cbc/TransactionFormats.h',
+    filenameTxFormats = __dirname + '/../src/cpp/cbc/TransactionFormats.cpp';
 
 var fs = require('fs');
 

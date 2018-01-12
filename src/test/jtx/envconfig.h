@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012-2017 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012-2017 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -17,12 +17,12 @@
 */
 //==============================================================================
 
-#ifndef RIPPLE_TEST_JTX_ENVCONFIG_H_INCLUDED
-#define RIPPLE_TEST_JTX_ENVCONFIG_H_INCLUDED
+#ifndef cbc_TEST_JTX_ENVCONFIG_H_INCLUDED
+#define cbc_TEST_JTX_ENVCONFIG_H_INCLUDED
 
-#include <ripple/core/Config.h>
+#include <cbc/core/Config.h>
 
-namespace ripple {
+namespace cbc {
 namespace test {
 
 /// @brief initializes a config object for use with jtx::Env
@@ -52,7 +52,7 @@ envconfig()
 ///
 /// @param modfunc callable function or lambda to modify the default config.
 /// The first argument to the function must be std::unique_ptr to
-/// ripple::Config. The function takes ownership of the unique_ptr and
+/// cbc::Config. The function takes ownership of the unique_ptr and
 /// relinquishes ownership by returning a unique_ptr.
 ///
 /// @param args additional arguments that will be passed to
@@ -105,7 +105,7 @@ port_increment(std::unique_ptr<Config>, int);
 
 } // jtx
 } // test
-} // ripple
+} // cbc
 
 #endif
 

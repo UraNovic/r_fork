@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,15 +18,15 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/basics/contract.h>
-#include <ripple/protocol/InnerObjectFormats.h>
-#include <ripple/protocol/ErrorCodes.h>          // RPC::containsError
-#include <ripple/json/json_reader.h>             // Json::Reader
-#include <ripple/protocol/STParsedJSON.h>        // STParsedJSONObject
-#include <ripple/beast/unit_test.h>
+#include <cbc/basics/contract.h>
+#include <cbc/protocol/InnerObjectFormats.h>
+#include <cbc/protocol/ErrorCodes.h>          // RPC::containsError
+#include <cbc/json/json_reader.h>             // Json::Reader
+#include <cbc/protocol/STParsedJSON.h>        // STParsedJSONObject
+#include <cbc/beast/unit_test.h>
 #include <test/jtx.h>
 
-namespace ripple {
+namespace cbc {
 
 namespace InnerObjectFormatsUnitTestDetail
 {
@@ -204,6 +204,6 @@ public:
     }
 };
 
-BEAST_DEFINE_TESTSUITE(InnerObjectFormatsParsedJSON,ripple_app,ripple);
+BEAST_DEFINE_TESTSUITE(InnerObjectFormatsParsedJSON,cbc_app,cbc);
 
-} // ripple
+} // cbc

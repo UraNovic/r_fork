@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,14 +18,14 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/shamap/SHAMap.h>
+#include <cbc/shamap/SHAMap.h>
 #include <test/shamap/common.h>
-#include <ripple/basics/Blob.h>
-#include <ripple/basics/StringUtilities.h>
-#include <ripple/beast/unit_test.h>
-#include <ripple/beast/utility/Journal.h>
+#include <cbc/basics/Blob.h>
+#include <cbc/basics/StringUtilities.h>
+#include <cbc/beast/unit_test.h>
+#include <cbc/beast/utility/Journal.h>
 
-namespace ripple {
+namespace cbc {
 namespace tests {
 
 #ifndef __INTELLISENSE__
@@ -322,7 +322,7 @@ public:
     }
 };
 
-BEAST_DEFINE_TESTSUITE(SHAMap,ripple_app,ripple);
+BEAST_DEFINE_TESTSUITE(SHAMap,cbc_app,cbc);
 
 } // tests
-} // ripple
+} // cbc

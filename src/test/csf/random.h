@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012-2017 Ripple Labs Inc
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012-2017 cbc Labs Inc
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -17,13 +17,13 @@
 */
 //==============================================================================
 
-#ifndef RIPPLE_TEST_CSF_RANDOM_H_INCLUDED
-#define RIPPLE_TEST_CSF_RANDOM_H_INCLUDED
+#ifndef cbc_TEST_CSF_RANDOM_H_INCLUDED
+#define cbc_TEST_CSF_RANDOM_H_INCLUDED
 
 #include <random>
 #include <vector>
 
-namespace ripple {
+namespace cbc {
 namespace test {
 namespace csf {
 
@@ -173,6 +173,6 @@ public:
 
 }  // csf
 }  // test
-}  // ripple
+}  // cbc
 
 #endif

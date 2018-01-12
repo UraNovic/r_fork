@@ -17,9 +17,9 @@
 */
 //==============================================================================
 
-#include <ripple/beast/core/LexicalCast.h>
-#include <ripple/beast/unit_test.h>
-#include <ripple/beast/xor_shift_engine.h>
+#include <cbc/beast/core/LexicalCast.h>
+#include <cbc/beast/unit_test.h>
+#include <cbc/beast/xor_shift_engine.h>
 
 namespace beast {
 

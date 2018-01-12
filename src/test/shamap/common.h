@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -17,16 +17,16 @@
 */
 //==============================================================================
 
-#ifndef RIPPLE_SHAMAP_TESTS_COMMON_H_INCLUDED
-#define RIPPLE_SHAMAP_TESTS_COMMON_H_INCLUDED
+#ifndef cbc_SHAMAP_TESTS_COMMON_H_INCLUDED
+#define cbc_SHAMAP_TESTS_COMMON_H_INCLUDED
 
 #include <BeastConfig.h>
-#include <ripple/basics/chrono.h>
-#include <ripple/nodestore/DummyScheduler.h>
-#include <ripple/nodestore/Manager.h>
-#include <ripple/shamap/Family.h>
+#include <cbc/basics/chrono.h>
+#include <cbc/nodestore/DummyScheduler.h>
+#include <cbc/nodestore/Manager.h>
+#include <cbc/shamap/Family.h>
 
-namespace ripple {
+namespace cbc {
 namespace tests {
 
 class TestFamily : public Family
@@ -116,6 +116,6 @@ public:
 };
 
 } // tests
-} // ripple
+} // cbc
 
 #endif

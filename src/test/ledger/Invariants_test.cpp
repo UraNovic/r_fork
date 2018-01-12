@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012-2017 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012-2017 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -20,14 +20,14 @@
 #include <BeastConfig.h>
 #include <test/jtx.h>
 #include <test/jtx/Env.h>
-#include <ripple/beast/utility/Journal.h>
-#include <ripple/app/tx/apply.h>
-#include <ripple/app/tx/impl/Transactor.h>
-#include <ripple/app/tx/impl/ApplyContext.h>
-#include <ripple/protocol/STLedgerEntry.h>
+#include <cbc/beast/utility/Journal.h>
+#include <cbc/app/tx/apply.h>
+#include <cbc/app/tx/impl/Transactor.h>
+#include <cbc/app/tx/impl/ApplyContext.h>
+#include <cbc/protocol/STLedgerEntry.h>
 #include <boost/algorithm/string/predicate.hpp>
 
-namespace ripple {
+namespace cbc {
 
 class Invariants_test : public beast::unit_test::suite
 {
@@ -227,9 +227,9 @@ class Invariants_test : public beast::unit_test::suite
             [](Account const& A1, Account const& A2, ApplyContext& ac)
             {
                 // create simple trust SLE with xrp currency
-                auto index = getRippleStateIndex (A1, A2, xrpIssue().currency);
+                auto index = getcbcStateIndex (A1, A2, xrpIssue().currency);
                 auto const sleNew = std::make_shared<SLE>(
-                    ltRIPPLE_STATE, index);
+                    ltcbc_STATE, index);
                 ac.view().insert (sleNew);
                 return true;
             });
@@ -425,7 +425,7 @@ public:
     }
 };
 
-BEAST_DEFINE_TESTSUITE (Invariants, ledger, ripple);
+BEAST_DEFINE_TESTSUITE (Invariants, ledger, cbc);
 
-}  // ripple
+}  // cbc
 

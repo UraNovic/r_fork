@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
     copyright notice and this permission notice appear in all copies.
@@ -17,28 +17,28 @@
 
 #include <BeastConfig.h>
 #include <test/jtx.h>
-#include <ripple/app/paths/Flow.h>
-#include <ripple/app/paths/impl/Steps.h>
-#include <ripple/basics/contract.h>
-#include <ripple/core/Config.h>
-#include <ripple/ledger/ApplyViewImpl.h>
-#include <ripple/ledger/PaymentSandbox.h>
-#include <ripple/ledger/Sandbox.h>
+#include <cbc/app/paths/Flow.h>
+#include <cbc/app/paths/impl/Steps.h>
+#include <cbc/basics/contract.h>
+#include <cbc/core/Config.h>
+#include <cbc/ledger/ApplyViewImpl.h>
+#include <cbc/ledger/PaymentSandbox.h>
+#include <cbc/ledger/Sandbox.h>
 #include <test/jtx/PathSet.h>
-#include <ripple/protocol/Feature.h>
-#include <ripple/protocol/JsonFields.h>
+#include <cbc/protocol/Feature.h>
+#include <cbc/protocol/JsonFields.h>
 
-namespace ripple {
+namespace cbc {
 namespace test {
 
-bool getNoRippleFlag (jtx::Env const& env,
+bool getNocbcFlag (jtx::Env const& env,
     jtx::Account const& src,
     jtx::Account const& dst,
     Currency const& cur)
 {
     if (auto sle = env.le (keylet::line (src, dst, cur)))
     {
-        auto const flag = (src.id() > dst.id()) ? lsfHighNoRipple : lsfLowNoRipple;
+        auto const flag = (src.id() > dst.id()) ? lsfHighNocbc : lsfLowNocbc;
         return sle->isFlag (flag);
     }
     Throw<std::runtime_error> ("No line in getTrustFlag");
@@ -133,7 +133,7 @@ struct Flow_test : public beast::unit_test::suite
             // alice will redeem to bob; a transfer fee will be charged
             env (pay (bob, alice, USDB(6)));
             env (pay (alice, dan, USDC (5)), path (bob, carol),
-                sendmax (USDA (6)), txflags (tfNoRippleDirect));
+                sendmax (USDA (6)), txflags (tfNocbcDirect));
             env.require (balance (dan, USDC (5)));
             env.require (balance (alice, USDB (0.5)));
         }
@@ -149,7 +149,7 @@ struct Flow_test : public beast::unit_test::suite
             env (rate (bob, 1.1));
 
             env (pay (alice, dan, USDC (5)), path (bob, carol),
-                 sendmax (USDA (6)), txflags (tfNoRippleDirect));
+                 sendmax (USDA (6)), txflags (tfNocbcDirect));
             env.require (balance (dan, USDC (5)));
             env.require (balance (bob, USDA (5)));
         }
@@ -169,7 +169,7 @@ struct Flow_test : public beast::unit_test::suite
             // Pay alice so she redeems to carol and a transfer fee is charged
             env (pay (carol, alice, USDC(10)));
             env (pay (alice, erin, USDD (5)), path (carol, dan),
-                path (bob, dan), txflags (tfNoRippleDirect));
+                path (bob, dan), txflags (tfNocbcDirect));
 
             env.require (balance (erin, USDD (5)));
             env.require (balance (dan, USDB (5)));
@@ -223,7 +223,7 @@ struct Flow_test : public beast::unit_test::suite
                 env(pay(alice, bob, USDA(100)));
                 env.require(balance(bob, USDA(100)));
                 env(pay(dan, carol, USDA(10)),
-                    path(bob), sendmax(USDD(100)), txflags(tfNoRippleDirect));
+                    path(bob), sendmax(USDD(100)), txflags(tfNocbcDirect));
                 env.require(balance(bob, USDA(90)));
                 if (bobAliceQOut > bobDanQIn)
                     env.require(balance(
@@ -507,7 +507,7 @@ struct Flow_test : public beast::unit_test::suite
             env (offer (bob, drops (1), EUR (1000)), txflags (tfPassive));
 
             env (pay (alice, carol, EUR (1)), path (~XRP, ~EUR),
-                sendmax (USD (0.4)), txflags (tfNoRippleDirect|tfPartialPayment));
+                sendmax (USD (0.4)), txflags (tfNocbcDirect|tfPartialPayment));
 
             env.require (balance (carol, EUR (1)));
             env.require (balance (bob, USD (0.4)));
@@ -634,7 +634,7 @@ struct Flow_test : public beast::unit_test::suite
             env (offer (dan, USD (100), EUR (100)));
             // alice -> bob -> gw -> carol. $50 should have transfer fee; $10, no fee
             env (pay (alice, carol, EUR (50)), path (bob, gw, ~EUR),
-                sendmax (USDA (60)), txflags (tfNoRippleDirect));
+                sendmax (USDA (60)), txflags (tfNocbcDirect));
             env.require (
                 balance (bob, USD (-10)),
                 balance (bob, USDA (60)),
@@ -715,7 +715,7 @@ struct Flow_test : public beast::unit_test::suite
 
         env (pay (alice, carol, USD (1000000)), path (~XRP, ~USD),
             sendmax (EUR (500)),
-            txflags (tfNoRippleDirect | tfPartialPayment));
+            txflags (tfNocbcDirect | tfPartialPayment));
 
         auto const carolUSD = env.balance(carol, USD).value();
         BEAST_EXPECT(carolUSD > USD (0) && carolUSD < USD (50));
@@ -755,7 +755,7 @@ struct Flow_test : public beast::unit_test::suite
             auto expectedResult =
                 closeTime < fix1141Time () ? tecPATH_DRY : tesSUCCESS;
             env (pay (alice, carol, USD (100)), path (~USD), sendmax (XRP (100)),
-                txflags (tfNoRippleDirect | tfPartialPayment | tfLimitQuality),
+                txflags (tfNocbcDirect | tfPartialPayment | tfLimitQuality),
                 ter (expectedResult));
 
             if (expectedResult == tesSUCCESS)
@@ -964,7 +964,7 @@ struct Flow_test : public beast::unit_test::suite
         // liquidity to decrease in the forward pass
         auto const toSend = consumeOffer ? USD(10) : USD(9);
         env(pay(alice, alice, toSend), path(~USD), sendmax(XRP(20000)),
-            txflags(tfPartialPayment | tfNoRippleDirect));
+            txflags(tfPartialPayment | tfNocbcDirect));
     }
 
     void testUnfundedOffer (bool withFix, FeatureBitset features)
@@ -998,7 +998,7 @@ struct Flow_test : public beast::unit_test::suite
 
             env(offer(gw, drops(9000000000), tinyAmt3));
             env(pay(alice, bob, tinyAmt1), path(~USD),
-                sendmax(drops(9000000000)), txflags(tfNoRippleDirect));
+                sendmax(drops(9000000000)), txflags(tfNocbcDirect));
 
             if (withFix)
                 BEAST_EXPECT(!isOffer(env, gw, XRP(0), USD(0)));
@@ -1032,7 +1032,7 @@ struct Flow_test : public beast::unit_test::suite
 
             env(offer(gw, tinyAmt3, drops(9000000000)));
             env(pay(alice, bob, drops(9000000000)), path(~XRP),
-                sendmax(USD(1)), txflags(tfNoRippleDirect));
+                sendmax(USD(1)), txflags(tfNocbcDirect));
 
             if (withFix)
                 BEAST_EXPECT(!isOffer(env, gw, USD(0), XRP(0)));
@@ -1062,7 +1062,7 @@ struct Flow_test : public beast::unit_test::suite
         env(trust(alice, USD(100)));
         env.close();
 
-        BEAST_EXPECT(!getNoRippleFlag(env, gw, alice, usdC));
+        BEAST_EXPECT(!getNocbcFlag(env, gw, alice, usdC));
 
         env(pay(
             gw, alice,
@@ -1094,7 +1094,7 @@ struct Flow_test : public beast::unit_test::suite
             XRP(.001)));
 
         env(pay(alice, bob, XRP(10000)), path(~XRP), sendmax(USD(100)),
-            txflags(tfPartialPayment | tfNoRippleDirect));
+            txflags(tfPartialPayment | tfNocbcDirect));
     }
 
     void
@@ -1114,13 +1114,13 @@ struct Flow_test : public beast::unit_test::suite
         auto const carol = Account("carol");
         auto const gw = Account("gw");
 
-        env.fund(XRP(100000000), alice, noripple(bob), carol, gw);
+        env.fund(XRP(100000000), alice, nocbc(bob), carol, gw);
         env.trust(gw["USD"](10000), alice, carol);
-        env(trust(bob, gw["USD"](10000), tfSetNoRipple));
+        env(trust(bob, gw["USD"](10000), tfSetNocbc));
         env.trust(gw["USD"](10000), bob);
         env.close();
 
-        // set no ripple between bob and the gateway
+        // set no cbc between bob and the gateway
 
         env(pay(gw, alice, gw["USD"](1000)));
         env.close();
@@ -1129,7 +1129,7 @@ struct Flow_test : public beast::unit_test::suite
         env.close();
 
         env(pay(alice, alice, XRP(1)), path(gw, bob, ~XRP),
-            sendmax(gw["USD"](1000)), txflags(tfNoRippleDirect),
+            sendmax(gw["USD"](1000)), txflags(tfNocbcDirect),
             ter(withFix ? tecPATH_DRY : tesSUCCESS));
         env.close();
 
@@ -1143,7 +1143,7 @@ struct Flow_test : public beast::unit_test::suite
         env.close();
 
         env(pay (carol, carol, gw["USD"](1000)), path(~bob["USD"], gw),
-            sendmax(XRP(100000)), txflags(tfNoRippleDirect),
+            sendmax(XRP(100000)), txflags(tfNocbcDirect),
             ter(withFix ? tecPATH_DRY : tesSUCCESS));
         env.close();
 
@@ -1163,7 +1163,7 @@ struct Flow_test : public beast::unit_test::suite
         env.close(closeTime);
 
         // pay alice -> xrp -> USD/bob -> bob -> gw -> alice
-        // set no ripple on bob's side of the bob/gw trust line
+        // set no cbc on bob's side of the bob/gw trust line
         // carol has the bob/USD and makes an offer, bob has USD/gw
 
         auto const alice = Account("alice");
@@ -1174,7 +1174,7 @@ struct Flow_test : public beast::unit_test::suite
 
         env.fund(XRP(100000000), alice, bob, carol, gw);
         env.trust(USD(10000), alice, carol);
-        env(trust(bob, USD(10000), tfSetNoRipple));
+        env(trust(bob, USD(10000), tfSetNocbc));
         env.trust(USD(10000), bob);
         env.trust(bob["USD"](10000), carol);
         env.close();
@@ -1187,7 +1187,7 @@ struct Flow_test : public beast::unit_test::suite
         env.close();
 
         env(pay(alice, alice, USD(1000)), path(~bob["USD"], bob, gw),
-            sendmax(XRP(1)), txflags(tfNoRippleDirect),
+            sendmax(XRP(1)), txflags(tfNocbcDirect),
             ter(withFix ? tecPATH_DRY : tesSUCCESS));
         env.close();
     }
@@ -1320,8 +1320,8 @@ struct Flow_manual_test : public Flow_test
     }
 };
 
-BEAST_DEFINE_TESTSUITE(Flow,app,ripple);
-BEAST_DEFINE_TESTSUITE_MANUAL(Flow_manual,app,ripple);
+BEAST_DEFINE_TESTSUITE(Flow,app,cbc);
+BEAST_DEFINE_TESTSUITE_MANUAL(Flow_manual,app,cbc);
 
 } // test
-} // ripple
+} // cbc

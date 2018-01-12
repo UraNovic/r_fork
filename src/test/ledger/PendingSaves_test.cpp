@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
     copyright notice and this permission notice appear in all copies.
@@ -16,10 +16,10 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/app/ledger/PendingSaves.h>
-#include <ripple/beast/unit_test.h>
+#include <cbc/app/ledger/PendingSaves.h>
+#include <cbc/beast/unit_test.h>
 
-namespace ripple {
+namespace cbc {
 namespace test {
 
 struct PendingSaves_test : public beast::unit_test::suite
@@ -55,7 +55,7 @@ struct PendingSaves_test : public beast::unit_test::suite
     }
 };
 
-BEAST_DEFINE_TESTSUITE(PendingSaves,ledger,ripple);
+BEAST_DEFINE_TESTSUITE(PendingSaves,ledger,cbc);
 
 } // test
-} // ripple
+} // cbc

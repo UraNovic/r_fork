@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,12 +18,12 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/basics/make_SSLContext.h>
-#include <ripple/beast/rfc2616.h>
-#include <ripple/server/Server.h>
-#include <ripple/server/Session.h>
-#include <ripple/beast/unit_test.h>
-#include <ripple/core/ConfigSections.h>
+#include <cbc/basics/make_SSLContext.h>
+#include <cbc/beast/rfc2616.h>
+#include <cbc/server/Server.h>
+#include <cbc/server/Session.h>
+#include <cbc/beast/unit_test.h>
+#include <cbc/core/ConfigSections.h>
 #include <test/jtx.h>
 #include <test/jtx/envconfig.h>
 #include <boost/asio.hpp>
@@ -33,7 +33,7 @@
 #include <stdexcept>
 #include <thread>
 
-namespace ripple {
+namespace cbc {
 namespace test {
 
 class Server_test : public beast::unit_test::suite
@@ -547,8 +547,8 @@ public:
     }
 };
 
-BEAST_DEFINE_TESTSUITE(Server,http,ripple);
+BEAST_DEFINE_TESTSUITE(Server,http,cbc);
 
 } // test
-} // ripple
+} // cbc
 

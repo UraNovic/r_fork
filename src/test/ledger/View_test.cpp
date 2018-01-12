@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -19,17 +19,17 @@
 
 #include <BeastConfig.h>
 #include <test/jtx.h>
-#include <ripple/app/ledger/Ledger.h>
-#include <ripple/ledger/ApplyViewImpl.h>
-#include <ripple/ledger/OpenView.h>
-#include <ripple/ledger/PaymentSandbox.h>
-#include <ripple/ledger/Sandbox.h>
-#include <ripple/core/ConfigSections.h>
-#include <ripple/protocol/Feature.h>
-#include <ripple/protocol/Protocol.h>
+#include <cbc/app/ledger/Ledger.h>
+#include <cbc/ledger/ApplyViewImpl.h>
+#include <cbc/ledger/OpenView.h>
+#include <cbc/ledger/PaymentSandbox.h>
+#include <cbc/ledger/Sandbox.h>
+#include <cbc/core/ConfigSections.h>
+#include <cbc/protocol/Feature.h>
+#include <cbc/protocol/Protocol.h>
 #include <type_traits>
 
-namespace ripple {
+namespace cbc {
 namespace test {
 
 class View_test
@@ -835,8 +835,8 @@ class GetAmendments_test
     }
 };
 
-BEAST_DEFINE_TESTSUITE(View,ledger,ripple);
-BEAST_DEFINE_TESTSUITE(GetAmendments,ledger,ripple);
+BEAST_DEFINE_TESTSUITE(View,ledger,cbc);
+BEAST_DEFINE_TESTSUITE(GetAmendments,ledger,cbc);
 
 }  // test
-}  // ripple
+}  // cbc

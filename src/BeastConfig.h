@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -106,38 +106,38 @@
 
 //------------------------------------------------------------------------------
 //
-// Ripple
+// cbc
 //
 //------------------------------------------------------------------------------
 
-/** Config: RIPPLE_VERIFY_NODEOBJECT_KEYS
+/** Config: cbc_VERIFY_NODEOBJECT_KEYS
     This verifies that the hash of node objects matches the payload.
     It is quite expensive so normally this is turned off!
 */
-#ifndef   RIPPLE_VERIFY_NODEOBJECT_KEYS
-//#define RIPPLE_VERIFY_NODEOBJECT_KEYS 1
+#ifndef   cbc_VERIFY_NODEOBJECT_KEYS
+//#define cbc_VERIFY_NODEOBJECT_KEYS 1
 #endif
 
-/** Config: RIPPLE_DUMP_LEAKS_ON_EXIT
+/** Config: cbc_DUMP_LEAKS_ON_EXIT
     Displays heap blocks and counted objects which were not disposed of
     during exit.
 */
-#ifndef RIPPLE_DUMP_LEAKS_ON_EXIT
-#define RIPPLE_DUMP_LEAKS_ON_EXIT 1
+#ifndef cbc_DUMP_LEAKS_ON_EXIT
+#define cbc_DUMP_LEAKS_ON_EXIT 1
 #endif
 
 //------------------------------------------------------------------------------
 
 // These control whether or not certain functionality gets
-// compiled into the resulting rippled executable
+// compiled into the resulting cbcd executable
 
-/** Config: RIPPLE_ROCKSDB_AVAILABLE
+/** Config: cbc_ROCKSDB_AVAILABLE
     Controls whether or not the RocksDB database back-end is compiled into
-    rippled. RocksDB requires a relatively modern C++ compiler (tested with
+    cbcd. RocksDB requires a relatively modern C++ compiler (tested with
     gcc versions 4.8.1 and later) that supports some C++11 features.
 */
-#ifndef   RIPPLE_ROCKSDB_AVAILABLE
-//#define RIPPLE_ROCKSDB_AVAILABLE 0
+#ifndef   cbc_ROCKSDB_AVAILABLE
+//#define cbc_ROCKSDB_AVAILABLE 0
 #endif
 
 //------------------------------------------------------------------------------
@@ -145,21 +145,21 @@
 // Here temporarily to turn off new Validations code while it
 // is being written.
 //
-#ifndef RIPPLE_USE_VALIDATORS
-#define RIPPLE_USE_VALIDATORS 0
+#ifndef cbc_USE_VALIDATORS
+#define cbc_USE_VALIDATORS 0
 #endif
 
-/** Config: RIPPLE_SINGLE_IO_SERVICE_THREAD
+/** Config: cbc_SINGLE_IO_SERVICE_THREAD
     When set, restricts the number of threads calling io_service::run to one.
     This is useful when debugging.
 */
-#ifndef RIPPLE_SINGLE_IO_SERVICE_THREAD
-#define RIPPLE_SINGLE_IO_SERVICE_THREAD 0
+#ifndef cbc_SINGLE_IO_SERVICE_THREAD
+#define cbc_SINGLE_IO_SERVICE_THREAD 0
 #endif
 
 // Uses OpenSSL instead of alternatives
-#ifndef RIPPLE_USE_OPENSSL
-#define RIPPLE_USE_OPENSSL 1
+#ifndef cbc_USE_OPENSSL
+#define cbc_USE_OPENSSL 1
 #endif
 
 #endif

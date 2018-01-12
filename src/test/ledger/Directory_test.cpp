@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
     copyright notice and this permission notice appear in all copies.
@@ -15,17 +15,17 @@
 */
 //==============================================================================
 
-#include <ripple/beast/xor_shift_engine.h>
-#include <ripple/ledger/BookDirs.h>
-#include <ripple/ledger/Directory.h>
-#include <ripple/ledger/Sandbox.h>
-#include <ripple/protocol/Feature.h>
-#include <ripple/protocol/JsonFields.h>
-#include <ripple/protocol/Protocol.h>
+#include <cbc/beast/xor_shift_engine.h>
+#include <cbc/ledger/BookDirs.h>
+#include <cbc/ledger/Directory.h>
+#include <cbc/ledger/Sandbox.h>
+#include <cbc/protocol/Feature.h>
+#include <cbc/protocol/JsonFields.h>
+#include <cbc/protocol/Protocol.h>
 #include <test/jtx.h>
 #include <algorithm>
 
-namespace ripple {
+namespace cbc {
 namespace test {
 
 struct Directory_test : public beast::unit_test::suite
@@ -441,7 +441,7 @@ struct Directory_test : public beast::unit_test::suite
     }
 };
 
-BEAST_DEFINE_TESTSUITE(Directory,ledger,ripple);
+BEAST_DEFINE_TESTSUITE(Directory,ledger,cbc);
 
 }
 }

@@ -1,8 +1,8 @@
 
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -36,8 +36,8 @@
 #include <test/rpc/LedgerData_test.cpp>
 #include <test/rpc/LedgerRPC_test.cpp>
 #include <test/rpc/LedgerRequestRPC_test.cpp>
-#include <test/rpc/NoRipple_test.cpp>
-#include <test/rpc/NoRippleCheck_test.cpp>
+#include <test/rpc/Nocbc_test.cpp>
+#include <test/rpc/NocbcCheck_test.cpp>
 #include <test/rpc/OwnerInfo_test.cpp>
 #include <test/rpc/Peers_test.cpp>
 #include <test/rpc/RobustTransaction_test.cpp>

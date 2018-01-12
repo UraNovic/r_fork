@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -17,24 +17,24 @@
 */
 //==============================================================================
 
-#include <ripple/app/main/Application.h>
-#include <ripple/app/misc/LoadFeeTrack.h>
-#include <ripple/app/misc/TxQ.h>
-#include <ripple/app/tx/apply.h>
-#include <ripple/basics/Log.h>
-#include <ripple/basics/mulDiv.h>
+#include <cbc/app/main/Application.h>
+#include <cbc/app/misc/LoadFeeTrack.h>
+#include <cbc/app/misc/TxQ.h>
+#include <cbc/app/tx/apply.h>
+#include <cbc/basics/Log.h>
+#include <cbc/basics/mulDiv.h>
 #include <test/jtx/TestSuite.h>
 #include <test/jtx/envconfig.h>
-#include <ripple/protocol/ErrorCodes.h>
-#include <ripple/protocol/Feature.h>
-#include <ripple/protocol/JsonFields.h>
-#include <ripple/protocol/st.h>
+#include <cbc/protocol/ErrorCodes.h>
+#include <cbc/protocol/Feature.h>
+#include <cbc/protocol/JsonFields.h>
+#include <cbc/protocol/st.h>
 #include <test/jtx.h>
 #include <test/jtx/ticket.h>
 #include <boost/optional.hpp>
 #include <test/jtx/WSClient.h>
 
-namespace ripple {
+namespace cbc {
 
 namespace test {
 
@@ -147,7 +147,7 @@ class TxQ_test : public beast::unit_test::suite
         // to stay at the default.
         env.close(env.now() + 5s, 10000ms);
         checkMetrics(env, 0,
-            2 * (ripple::detail::supportedAmendments().size() + 1),
+            2 * (cbc::detail::supportedAmendments().size() + 1),
                 0, expectedInLedger, 256);
         auto const fees = env.current()->fees();
         BEAST_EXPECT(fees.base == base);
@@ -182,7 +182,7 @@ public:
         checkMetrics(env, 0, boost::none, 0, 3, 256);
 
         // Create several accounts while the fee is cheap so they all apply.
-        env.fund(XRP(50000), noripple(alice, bob, charlie, daria));
+        env.fund(XRP(50000), nocbc(alice, bob, charlie, daria));
         checkMetrics(env, 0, boost::none, 4, 3, 256);
 
         // Alice - price starts exploding: held
@@ -204,7 +204,7 @@ public:
         //////////////////////////////////////////////////////////////
 
         // Make some more accounts. We'll need them later to abuse the queue.
-        env.fund(XRP(50000), noripple(elmo, fred, gwen, hank));
+        env.fund(XRP(50000), nocbc(elmo, fred, gwen, hank));
         checkMetrics(env, 0, 10, 6, 5, 256);
 
         // Now get a bunch of transactions held.
@@ -363,7 +363,7 @@ public:
         checkMetrics(env, 0, boost::none, 0, 2, 256);
 
         // Create several accounts while the fee is cheap so they all apply.
-        env.fund(XRP(50000), noripple(alice, bob, charlie));
+        env.fund(XRP(50000), nocbc(alice, bob, charlie));
         checkMetrics(env, 0, boost::none, 3, 2, 256);
 
         // Future transaction for Alice - fails
@@ -420,11 +420,11 @@ public:
         checkMetrics(env, 0, boost::none, 0, 2, 256);
 
         // Fund across several ledgers so the TxQ metrics stay restricted.
-        env.fund(XRP(1000), noripple(alice, bob));
+        env.fund(XRP(1000), nocbc(alice, bob));
         env.close(env.now() + 5s, 10000ms);
-        env.fund(XRP(1000), noripple(charlie, daria));
+        env.fund(XRP(1000), nocbc(charlie, daria));
         env.close(env.now() + 5s, 10000ms);
-        env.fund(XRP(1000), noripple(edgar, felicia));
+        env.fund(XRP(1000), nocbc(edgar, felicia));
         env.close(env.now() + 5s, 10000ms);
 
         checkMetrics(env, 0, boost::none, 0, 2, 256);
@@ -525,9 +525,9 @@ public:
         checkMetrics(env, 0, boost::none, 0, 2, 256);
 
         // Fund across several ledgers so the TxQ metrics stay restricted.
-        env.fund(XRP(1000), noripple(alice, bob));
+        env.fund(XRP(1000), nocbc(alice, bob));
         env.close(env.now() + 5s, 10000ms);
-        env.fund(XRP(1000), noripple(carol));
+        env.fund(XRP(1000), nocbc(carol));
         env.close(env.now() + 5s, 10000ms);
 
         // Fill the ledger
@@ -625,7 +625,7 @@ public:
         auto alice = Account("alice");
         auto bob = Account("bob");
 
-        env.fund(XRP(1000), noripple(alice));
+        env.fund(XRP(1000), nocbc(alice));
 
         // These types of checks are tested elsewhere, but
         // this verifies that TxQ handles the failures as
@@ -654,7 +654,7 @@ public:
 
         checkMetrics(env, 0, boost::none, 0, 2, 256);
 
-        env.fund(XRP(1000), noripple(alice, bob));
+        env.fund(XRP(1000), nocbc(alice, bob));
 
         checkMetrics(env, 0, boost::none, 2, 2, 256);
 
@@ -678,7 +678,7 @@ public:
                 [&](OpenView& view, beast::Journal j)
                 {
                     std::tie(ter, didApply) =
-                        ripple::apply(env.app(),
+                        cbc::apply(env.app(),
                             view, *jt.stx, tapNONE,
                                 env.journal);
                     return didApply;
@@ -716,11 +716,11 @@ public:
 
         initFee(env, 3, 10, 10, 200, 50);
         auto const initQueueMax =
-            2 * (ripple::detail::supportedAmendments().size() + 1);
+            2 * (cbc::detail::supportedAmendments().size() + 1);
 
         // Create several accounts while the fee is cheap so they all apply.
-        env.fund(drops(2000), noripple(alice));
-        env.fund(XRP(500000), noripple(bob, charlie, daria));
+        env.fund(drops(2000), nocbc(alice));
+        env.fund(XRP(500000), nocbc(bob, charlie, daria));
         checkMetrics(env, 0, initQueueMax, 4, 3, 256);
 
         // Alice - price starts exploding: held
@@ -947,13 +947,13 @@ public:
         checkMetrics(env, 0, boost::none, 0, 4, 256);
 
         // Create several accounts while the fee is cheap so they all apply.
-        env.fund(XRP(50000), noripple(alice, bob, charlie, daria));
+        env.fund(XRP(50000), nocbc(alice, bob, charlie, daria));
         checkMetrics(env, 0, boost::none, 4, 4, 256);
 
         env.close();
         checkMetrics(env, 0, 8, 0, 4, 256);
 
-        env.fund(XRP(50000), noripple(elmo, fred, gwen, hank));
+        env.fund(XRP(50000), nocbc(elmo, fred, gwen, hank));
         checkMetrics(env, 0, 8, 4, 4, 256);
 
         env.close();
@@ -1071,7 +1071,7 @@ public:
 
         BEAST_EXPECT(!env.app().getTxQ().getMetrics(*env.current()));
 
-        env.fund(XRP(50000), noripple(alice));
+        env.fund(XRP(50000), nocbc(alice));
 
         // If the queue was enabled, most of these would
         // return terQUEUED. (The required fee for the last
@@ -1098,7 +1098,7 @@ public:
 
         checkMetrics(env, 0, boost::none, 0, 1, 256);
 
-        env.fund(XRP(50000), noripple(alice));
+        env.fund(XRP(50000), nocbc(alice));
         checkMetrics(env, 0, boost::none, 1, 1, 256);
 
         env(fset(alice, asfAccountTxnID));
@@ -1137,7 +1137,7 @@ public:
 
         checkMetrics(env, 0, boost::none, 0, 2, 256);
 
-        env.fund(XRP(50000), noripple(alice));
+        env.fund(XRP(50000), nocbc(alice));
         checkMetrics(env, 0, boost::none, 1, 2, 256);
 
         for (int i = 0; i < 10; ++i)
@@ -1168,14 +1168,14 @@ public:
 
         initFee(env, 3, 10, 10, 200, 50);
         auto const initQueueMax =
-            2 * (ripple::detail::supportedAmendments().size() + 1);
+            2 * (cbc::detail::supportedAmendments().size() + 1);
 
         BEAST_EXPECT(env.current()->fees().base == 10);
 
         checkMetrics(env, 0, initQueueMax, 0, 3, 256);
 
-        env.fund(drops(5000), noripple(alice));
-        env.fund(XRP(50000), noripple(bob));
+        env.fund(drops(5000), nocbc(alice));
+        env.fund(XRP(50000), nocbc(bob));
         checkMetrics(env, 0, initQueueMax, 2, 3, 256);
         auto USD = bob["USD"];
 
@@ -1261,7 +1261,7 @@ public:
 
         checkMetrics(env, 0, boost::none, 0, 3, 256);
 
-        env.fund(XRP(50000), noripple(alice, bob));
+        env.fund(XRP(50000), nocbc(alice, bob));
         env.memoize(charlie);
         env.memoize(daria);
         checkMetrics(env, 0, boost::none, 2, 3, 256);
@@ -1326,7 +1326,7 @@ public:
 
         checkMetrics(env, 0, boost::none, 0, 3, 256);
 
-        env.fund(XRP(50000), noripple(alice, charlie), gw);
+        env.fund(XRP(50000), nocbc(alice, charlie), gw);
         checkMetrics(env, 0, boost::none, 4, 3, 256);
 
         auto USD = gw["USD"];
@@ -1719,7 +1719,7 @@ public:
         auto const alice = Account("alice");
         auto const bob = Account("bob");
 
-        env.fund(XRP(500000), noripple(alice, bob));
+        env.fund(XRP(500000), nocbc(alice, bob));
         checkMetrics(env, 0, boost::none, 2, 1, 256);
 
         auto const aliceSeq = env.seq(alice);
@@ -2427,7 +2427,7 @@ public:
 
 
         // Fund the first few accounts at non escalated fee
-        env.fund(XRP(50000), noripple(a,b,c,d));
+        env.fund(XRP(50000), nocbc(a,b,c,d));
         checkMetrics(env, 0, boost::none, 4, 3, 256);
 
         // First transaction establishes the messaging
@@ -2491,7 +2491,7 @@ public:
         checkMetrics(env, 0, 8, 0, 4, 256);
 
         // Fund then next few accounts at non escalated fee
-        env.fund(XRP(50000), noripple(e,f,g,h,i));
+        env.fund(XRP(50000), nocbc(e,f,g,h,i));
 
         // Extra transactions with low fee are queued
         auto queued = ter(terQUEUED);
@@ -2804,7 +2804,7 @@ public:
     }
 };
 
-BEAST_DEFINE_TESTSUITE(TxQ,app,ripple);
+BEAST_DEFINE_TESTSUITE(TxQ,app,cbc);
 
 }
 }

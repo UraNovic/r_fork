@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright 2015 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright 2015 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,16 +18,16 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/basics/BasicConfig.h>
+#include <cbc/basics/BasicConfig.h>
 #include <test/jtx/TestSuite.h>
-#include <ripple/overlay/Cluster.h>
-#include <ripple/overlay/ClusterNode.h>
-#include <ripple/protocol/SecretKey.h>
+#include <cbc/overlay/Cluster.h>
+#include <cbc/overlay/ClusterNode.h>
+#include <cbc/protocol/SecretKey.h>
 
-namespace ripple {
+namespace cbc {
 namespace tests {
 
-class cluster_test : public ripple::TestSuite
+class cluster_test : public cbc::TestSuite
 {
 public:
     std::unique_ptr<Cluster>
@@ -267,7 +267,7 @@ public:
     }
 };
 
-BEAST_DEFINE_TESTSUITE(cluster,overlay,ripple);
+BEAST_DEFINE_TESTSUITE(cluster,overlay,cbc);
 
 } // tests
-} // ripple
+} // cbc

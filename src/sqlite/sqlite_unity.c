@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-  This file is part of rippled: https://github.com/ripple/rippled
-  Copyright (c) 2012-2015 Ripple Labs Inc.
+  This file is part of cbcd: https://github.com/cbc/cbcd
+  Copyright (c) 2012-2015 cbc Labs Inc.
   
   Permission to use, copy, modify, and/or distribute this software for any
   purpose  with  or without fee is hereby granted, provided that the above
@@ -18,7 +18,7 @@
 //==============================================================================
 
 // Prevents sqlite.h from being included, since it screws up the .c
-#define RIPPLE_SQLITE_CPP_INCLUDED
+#define cbc_SQLITE_CPP_INCLUDED
 
 #include <sqlite/sqlite.h>
 
@@ -48,7 +48,7 @@
 */
 //#define SQLITE_THREADSAFE 2
 
-#if defined RIPPLE_SQLITE_USE_NDEBUG && !defined (NDEBUG)
+#if defined cbc_SQLITE_USE_NDEBUG && !defined (NDEBUG)
 #define NDEBUG
 #endif
 

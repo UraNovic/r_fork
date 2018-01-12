@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2017 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2017 cbc Labs Inc.
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
     copyright notice and this permission notice appear in all copies.
@@ -16,13 +16,13 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/app/tx/apply.h>
-#include <ripple/protocol/STAccount.h>
+#include <cbc/app/tx/apply.h>
+#include <cbc/protocol/STAccount.h>
 #include <string>
 #include <test/jtx.h>
 #include <vector>
 
-namespace ripple {
+namespace cbc {
 namespace test {
 
 struct PseudoTx_test : public beast::unit_test::suite
@@ -82,7 +82,7 @@ struct PseudoTx_test : public beast::unit_test::suite
             env.app().openLedger().modify(
                 [&](OpenView& view, beast::Journal j) {
                     auto const result =
-                        ripple::apply(env.app(), view, stx, tapNONE, j);
+                        cbc::apply(env.app(), view, stx, tapNONE, j);
                     BEAST_EXPECT(!result.second && result.first == temINVALID);
                     return result.second;
                 });
@@ -108,7 +108,7 @@ struct PseudoTx_test : public beast::unit_test::suite
     }
 };
 
-BEAST_DEFINE_TESTSUITE(PseudoTx, app, ripple);
+BEAST_DEFINE_TESTSUITE(PseudoTx, app, cbc);
 
 }  // test
-}  // ripple
+}  // cbc

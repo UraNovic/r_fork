@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-  This file is part of rippled: https://github.com/ripple/rippled
-  Copyright (c) 2012-2015 Ripple Labs Inc.
+  This file is part of cbcd: https://github.com/cbc/cbcd
+  Copyright (c) 2012-2015 cbc Labs Inc.
 
   Permission to use, copy, modify, and/or distribute this software for any
   purpose  with  or without fee is hereby granted, provided that the above
@@ -17,17 +17,17 @@
 */
 //==============================================================================
 
-#ifndef RIPPLE_TEST_JTX_ACCOUNT_H_INCLUDED
-#define RIPPLE_TEST_JTX_ACCOUNT_H_INCLUDED
+#ifndef cbc_TEST_JTX_ACCOUNT_H_INCLUDED
+#define cbc_TEST_JTX_ACCOUNT_H_INCLUDED
 
-#include <ripple/protocol/SecretKey.h>
-#include <ripple/protocol/UintTypes.h>
-#include <ripple/crypto/KeyType.h>
-#include <ripple/beast/hash/uhash.h>
+#include <cbc/protocol/SecretKey.h>
+#include <cbc/protocol/UintTypes.h>
+#include <cbc/crypto/KeyType.h>
+#include <cbc/beast/hash/uhash.h>
 #include <unordered_map>
 #include <string>
 
-namespace ripple {
+namespace cbc {
 namespace test {
 namespace jtx {
 
@@ -162,6 +162,6 @@ operator< (Account const& lhs,
 
 } // jtx
 } // test
-} // ripple
+} // cbc
 
 #endif

@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2017 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2017 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -38,7 +38,7 @@
 #include <unordered_set>
 #include <utility>
 
-namespace ripple {
+namespace cbc {
 namespace test {
 
 namespace detail {
@@ -149,10 +149,10 @@ class multi_runner_base
         print_results(S& s);
     };
 
-    static constexpr const char* shared_mem_name_ = "RippledUnitTestSharedMem";
+    static constexpr const char* shared_mem_name_ = "cbcdUnitTestSharedMem";
     // name of the message queue a multi_runner_child will use to communicate with
     // multi_runner_parent
-    static constexpr const char* message_queue_name_ = "RippledUnitTestMessageQueue";
+    static constexpr const char* message_queue_name_ = "cbcdUnitTestMessageQueue";
 
     // `inner_` will be created in shared memory
     inner* inner_;
@@ -289,7 +289,7 @@ multi_runner_child::run_multi(Pred pred)
     std::iota(order.begin(), order.end(), 0);
     {
         std::unordered_set<std::string> prioritize{
-            "ripple.app.Flow", "ripple.tx.Offer"};
+            "cbc.app.Flow", "cbc.tx.Offer"};
         std::vector<std::size_t> to_swap;
         to_swap.reserve(prioritize.size());
 

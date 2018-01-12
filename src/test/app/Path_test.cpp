@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012-2015 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012-2015 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,26 +18,26 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/app/paths/AccountCurrencies.h>
-#include <ripple/basics/contract.h>
-#include <ripple/core/JobQueue.h>
-#include <ripple/json/json_reader.h>
-#include <ripple/json/to_string.h>
-#include <ripple/protocol/JsonFields.h>
-#include <ripple/protocol/STParsedJSON.h>
-#include <ripple/protocol/TxFlags.h>
-#include <ripple/resource/Fees.h>
-#include <ripple/rpc/Context.h>
-#include <ripple/rpc/impl/Tuning.h>
-#include <ripple/rpc/RPCHandler.h>
+#include <cbc/app/paths/AccountCurrencies.h>
+#include <cbc/basics/contract.h>
+#include <cbc/core/JobQueue.h>
+#include <cbc/json/json_reader.h>
+#include <cbc/json/to_string.h>
+#include <cbc/protocol/JsonFields.h>
+#include <cbc/protocol/STParsedJSON.h>
+#include <cbc/protocol/TxFlags.h>
+#include <cbc/resource/Fees.h>
+#include <cbc/rpc/Context.h>
+#include <cbc/rpc/impl/Tuning.h>
+#include <cbc/rpc/RPCHandler.h>
 #include <test/jtx.h>
-#include <ripple/beast/unit_test.h>
+#include <cbc/beast/unit_test.h>
 #include <chrono>
 #include <condition_variable>
 #include <mutex>
 #include <thread>
 
-namespace ripple {
+namespace cbc {
 namespace test {
 
 //------------------------------------------------------------------------------
@@ -153,7 +153,7 @@ Json::Value
 rpf(jtx::Account const& src, jtx::Account const& dst, std::uint32_t num_src)
 {
     Json::Value jv = Json::objectValue;
-    jv[jss::command] = "ripple_path_find";
+    jv[jss::command] = "cbc_path_find";
     jv[jss::source_account] = toBase58(src);
 
     if (num_src > 0)
@@ -235,7 +235,7 @@ public:
             app.getOPs(), app.getLedgerMaster(), c, Role::USER, {}};
 
         Json::Value params = Json::objectValue;
-        params[jss::command] = "ripple_path_find";
+        params[jss::command] = "cbc_path_find";
         params[jss::source_account] = toBase58 (src);
         params[jss::destination_account] = toBase58 (dst);
         params[jss::destination_amount] = saDstAmount.getJson(0);
@@ -681,9 +681,9 @@ public:
     // alice --> carol --> dan --> bob
     // Balance of 100 USD Bob - Balance of 37 USD -> Rod
     void
-    issues_path_negative_ripple_client_issue_23_smaller()
+    issues_path_negative_cbc_client_issue_23_smaller()
     {
-        testcase("path negative: ripple-client issue #23: smaller");
+        testcase("path negative: cbc-client issue #23: smaller");
         using namespace jtx;
         Env env(*this);
         env.fund(XRP(10000), "alice", "bob", "carol", "dan");
@@ -700,9 +700,9 @@ public:
     // alice -120 USD-> edward -25 USD-> bob
     // alice -25 USD-> carol -75 USD -> dan -100 USD-> bob
     void
-    issues_path_negative_ripple_client_issue_23_larger()
+    issues_path_negative_cbc_client_issue_23_larger()
     {
-        testcase("path negative: ripple-client issue #23: larger");
+        testcase("path negative: cbc-client issue #23: larger");
         using namespace jtx;
         Env env(*this);
         env.fund(XRP(10000), "alice", "bob", "carol", "dan", "edward");
@@ -793,7 +793,7 @@ public:
                 "HighNode" : "0000000000000000",
                 "HighQualityIn" : 2000,
                 "HighQualityOut" : 1400000000,
-                "LedgerEntryType" : "RippleState",
+                "LedgerEntryType" : "cbcState",
                 "LowLimit" : {
                     "currency" : "USD",
                     "issuer" : "rG1QQv2nh2gr7RCZ1P8YYcBUKCCN633jCn",
@@ -832,7 +832,7 @@ public:
                     "value" : "1000"
                 },
                 "HighNode" : "0000000000000000",
-                "LedgerEntryType" : "RippleState",
+                "LedgerEntryType" : "cbcState",
                 "LowLimit" : {
                     "currency" : "USD",
                     "issuer" : "rG1QQv2nh2gr7RCZ1P8YYcBUKCCN633jCn",
@@ -879,7 +879,7 @@ public:
                     "value" : "0"
                 },
                 "HighNode" : "0000000000000000",
-                "LedgerEntryType" : "RippleState",
+                "LedgerEntryType" : "cbcState",
                 "LowLimit" :
                 {
                     "currency" : "USD",
@@ -1123,7 +1123,7 @@ public:
         env(pay(G1BS, A1, G1BS["HKD"](1000)));
         env(pay(G2SW, A2, G2SW["HKD"](1000)));
         // SnapSwap wants to be able to set trust line quality settings so they
-        // can charge a fee when transactions ripple across. Liquidity
+        // can charge a fee when transactions cbc across. Liquidity
         // provider, via trusting/holding both accounts
         env(pay(G1BS, M1, G1BS["HKD"](1200)));
         env(pay(G2SW, M1, G2SW["HKD"](5000)));
@@ -1366,8 +1366,8 @@ public:
         alternative_paths_consume_best_transfer_first();
         alternative_paths_limit_returned_paths_to_best_quality();
         issues_path_negative_issue();
-        issues_path_negative_ripple_client_issue_23_smaller();
-        issues_path_negative_ripple_client_issue_23_larger();
+        issues_path_negative_cbc_client_issue_23_smaller();
+        issues_path_negative_cbc_client_issue_23_larger();
         via_offers_via_gateway();
         indirect_paths_path_find();
         quality_paths_quality_set_and_test();
@@ -1390,7 +1390,7 @@ public:
     }
 };
 
-BEAST_DEFINE_TESTSUITE(Path,app,ripple);
+BEAST_DEFINE_TESTSUITE(Path,app,cbc);
 
 } // test
-} // ripple
+} // cbc

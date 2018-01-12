@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2016 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2016 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -17,18 +17,18 @@
 */
 //==============================================================================
 
-#ifndef RIPPLE_TEST_ABSTRACTCLIENT_H_INCLUDED
-#define RIPPLE_TEST_ABSTRACTCLIENT_H_INCLUDED
+#ifndef cbc_TEST_ABSTRACTCLIENT_H_INCLUDED
+#define cbc_TEST_ABSTRACTCLIENT_H_INCLUDED
 
-#include <ripple/json/json_value.h>
+#include <cbc/json/json_value.h>
 
-namespace ripple {
+namespace cbc {
 namespace test {
 
-/* Abstract Ripple Client interface.
+/* Abstract cbc Client interface.
 
    This abstracts the transport layer, allowing
-   commands to be submitted to a rippled server.
+   commands to be submitted to a cbcd server.
 */
 class AbstractClient
 {
@@ -59,6 +59,6 @@ public:
 };
 
 } // test
-} // ripple
+} // cbc
 
 #endif

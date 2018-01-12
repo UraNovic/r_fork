@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012-2015 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012-2015 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,16 +18,16 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/app/main/Application.h>
-#include <ripple/app/misc/SHAMapStore.h>
-#include <ripple/core/ConfigSections.h>
-#include <ripple/core/DatabaseCon.h>
-#include <ripple/core/SociDB.h>
-#include <ripple/protocol/JsonFields.h>
+#include <cbc/app/main/Application.h>
+#include <cbc/app/misc/SHAMapStore.h>
+#include <cbc/core/ConfigSections.h>
+#include <cbc/core/DatabaseCon.h>
+#include <cbc/core/SociDB.h>
+#include <cbc/protocol/JsonFields.h>
 #include <test/jtx.h>
 #include <test/jtx/envconfig.h>
 
-namespace ripple {
+namespace cbc {
 namespace test {
 
 class SHAMapStore_test : public beast::unit_test::suite
@@ -213,7 +213,7 @@ public:
         Env env(*this, envconfig(onlineDelete));
 
         auto& store = env.app().getSHAMapStore();
-        env.fund(XRP(10000), noripple("alice"));
+        env.fund(XRP(10000), nocbc("alice"));
 
         validationCheck(env, 0);
         ledgerCheck(env, 1, 2);
@@ -245,7 +245,7 @@ public:
 
         for (auto i = firstSeq + 1; i < deleteInterval + firstSeq; ++i)
         {
-            env.fund(XRP(10000), noripple("test" + to_string(i)));
+            env.fund(XRP(10000), nocbc("test" + to_string(i)));
             env.close();
 
             ledgerTmp = env.rpc("ledger", "current");
@@ -633,7 +633,7 @@ public:
 };
 
 // VFALCO This test fails because of thread asynchronous issues
-BEAST_DEFINE_TESTSUITE(SHAMapStore,app,ripple);
+BEAST_DEFINE_TESTSUITE(SHAMapStore,app,cbc);
 
 }
 }

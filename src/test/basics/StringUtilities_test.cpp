@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,12 +18,12 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/basics/Slice.h>
-#include <ripple/basics/StringUtilities.h>
-#include <ripple/basics/ToString.h>
-#include <ripple/beast/unit_test.h>
+#include <cbc/basics/Slice.h>
+#include <cbc/basics/StringUtilities.h>
+#include <cbc/basics/ToString.h>
+#include <cbc/beast/unit_test.h>
 
-namespace ripple {
+namespace cbc {
 
 class StringUtilities_test : public beast::unit_test::suite
 {
@@ -46,7 +46,7 @@ public:
     {
         testcase ("strUnHex");
 
-        testUnHexSuccess ("526970706c6544", "RippleD");
+        testUnHexSuccess ("526970706c6544", "cbcD");
         testUnHexSuccess ("A", "\n");
         testUnHexSuccess ("0A", "\n");
         testUnHexSuccess ("D0A", "\r\n");
@@ -95,6 +95,6 @@ public:
     }
 };
 
-BEAST_DEFINE_TESTSUITE(StringUtilities, ripple_basics, ripple);
+BEAST_DEFINE_TESTSUITE(StringUtilities, cbc_basics, cbc);
 
-} // ripple
+} // cbc

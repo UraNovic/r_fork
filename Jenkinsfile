@@ -25,7 +25,7 @@ try {
             def response = httpRequest(
                 timeout: 10,
                 authentication: github_cred,
-                url: 'https://api.github.com/repos/ripple/rippled/collaborators')
+                url: 'https://api.github.com/repos/cbc/cbcd/collaborators')
             def collab_data = readJSON(text: response.content)
             collab_found = false;
             for (collaborator in collab_data) {
@@ -67,7 +67,7 @@ try {
         for (int index = 0; index < variants.size(); index++) {
             def bldtype = variants[index]
             builds[bldtype] = {
-                node('rippled-dev') {
+                node('cbcd-dev') {
                     checkout scm
                     dir ('build') {
                         deleteDir()
@@ -128,7 +128,7 @@ try {
                                 "0px",
                                 "white")
                             archive("${bldtype}.txt")
-                            lock('rippled_dev_status') {
+                            lock('cbcd_dev_status') {
                                 all_status[bldtype] =
                                     [fail_count == 0, bldtype, "${st}, t: ${time}"]
                             }
@@ -152,7 +152,7 @@ finally {
             def results = """
 ## Jenkins Build Summary
 
-Built from [this commit](https://github.com/ripple/rippled/commit/${commit_id})
+Built from [this commit](https://github.com/cbc/cbcd/commit/${commit_id})
 
 Built at __${datestamp}__
 
@@ -177,7 +177,7 @@ Build Type | Result | Status
                     def resp = httpRequest(
                         timeout: 10,
                         authentication: github_cred,
-                        url: "https://api.github.com/repos/ripple/rippled/pulls/$CHANGE_ID")
+                        url: "https://api.github.com/repos/cbc/cbcd/pulls/$CHANGE_ID")
                     def result = readJSON(text: resp.content)
                     // follow issue comments link
                     url_comment = result['_links']['issue']['href'] + '/comments'
@@ -185,7 +185,7 @@ Build Type | Result | Status
                 else {
                     // if not a PR, just search comments for our commit ID
                     url_comment =
-                        'https://api.github.com/repos/ripple/rippled/commits/' +
+                        'https://api.github.com/repos/cbc/cbcd/commits/' +
                         "${commit_id}/comments"
                 }
 

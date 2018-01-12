@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,19 +18,19 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/basics/Log.h>
+#include <cbc/basics/Log.h>
 #include <test/jtx.h>
-#include <ripple/json/to_string.h>
-#include <ripple/protocol/Feature.h>
-#include <ripple/protocol/JsonFields.h>
-#include <ripple/protocol/TxFlags.h>
-#include <ripple/beast/hash/uhash.h>
-#include <ripple/beast/unit_test.h>
+#include <cbc/json/to_string.h>
+#include <cbc/protocol/Feature.h>
+#include <cbc/protocol/JsonFields.h>
+#include <cbc/protocol/TxFlags.h>
+#include <cbc/beast/hash/uhash.h>
+#include <cbc/beast/unit_test.h>
 #include <boost/lexical_cast.hpp>
 #include <boost/optional.hpp>
 #include <utility>
 
-namespace ripple {
+namespace cbc {
 namespace test {
 
 class Env_test : public beast::unit_test::suite
@@ -164,17 +164,17 @@ public:
             // variadics
             env.fund(n, "alice");
             env.fund(n, "bob", "carol");
-            env.fund(n, "dave", noripple("eric"));
-            env.fund(n, "fred", noripple("gary", "hank"));
-            env.fund(n, noripple("irene"));
-            env.fund(n, noripple("jim"), "karen");
-            env.fund(n, noripple("lisa", "mary"));
+            env.fund(n, "dave", nocbc("eric"));
+            env.fund(n, "fred", nocbc("gary", "hank"));
+            env.fund(n, nocbc("irene"));
+            env.fund(n, nocbc("jim"), "karen");
+            env.fund(n, nocbc("lisa", "mary"));
 
             // flags
-            env.fund(n, noripple("xavier"));
-            env.require(nflags("xavier", asfDefaultRipple));
+            env.fund(n, nocbc("xavier"));
+            env.require(nflags("xavier", asfDefaultcbc));
             env.fund(n, "yana");
-            env.require(flags("yana", asfDefaultRipple));
+            env.require(flags("yana", asfDefaultcbc));
         }
 
         // trust
@@ -202,7 +202,7 @@ public:
         // seq
         {
             Env env(*this);
-            env.fund(n, noripple("alice", gw));
+            env.fund(n, nocbc("alice", gw));
             BEAST_EXPECT(env.seq("alice") == 1);
             BEAST_EXPECT(env.seq(gw) == 1);
         }
@@ -775,7 +775,7 @@ public:
     }
 };
 
-BEAST_DEFINE_TESTSUITE(Env,app,ripple);
+BEAST_DEFINE_TESTSUITE(Env,app,cbc);
 
 } // test
-} // ripple
+} // cbc

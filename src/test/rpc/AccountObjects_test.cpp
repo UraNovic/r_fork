@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2016 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2016 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -17,15 +17,15 @@
 */
 //==============================================================================
 
-#include <ripple/protocol/JsonFields.h>
-#include <ripple/json/json_value.h>
-#include <ripple/json/to_string.h>
-#include <ripple/json/json_reader.h>
+#include <cbc/protocol/JsonFields.h>
+#include <cbc/json/json_value.h>
+#include <cbc/json/to_string.h>
+#include <cbc/json/json_reader.h>
 #include <test/jtx.h>
 
 #include <boost/utility/string_ref.hpp>
 
-namespace ripple {
+namespace cbc {
 namespace test {
 
 static char const* bobs_account_objects[] = {
@@ -76,7 +76,7 @@ R"json({
         "value" : "1000"
     },
     "HighNode" : "0000000000000000",
-    "LedgerEntryType" : "RippleState",
+    "LedgerEntryType" : "cbcState",
     "LowLimit" : {
         "currency" : "USD",
         "issuer" : "r9cZvwKU3zzuZK9JFovGg1JC5n7QiqNL8L",
@@ -99,7 +99,7 @@ R"json({
         "value" : "1000"
     },
     "HighNode" : "0000000000000000",
-    "LedgerEntryType" : "RippleState",
+    "LedgerEntryType" : "cbcState",
     "LowLimit" : {
         "currency" : "USD",
         "issuer" : "r32rQHyesiTtdWFU7UJVtff4nCR5SHCbJW",
@@ -323,7 +323,7 @@ public:
     }
 };
 
-BEAST_DEFINE_TESTSUITE(AccountObjects,app,ripple);
+BEAST_DEFINE_TESTSUITE(AccountObjects,app,cbc);
 
 }
 }

@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright 2014 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright 2014 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -17,22 +17,22 @@
 */
 //==============================================================================
 
-#include <ripple/app/misc/Manifest.h>
-#include <ripple/app/misc/ValidatorList.h>
-#include <ripple/basics/contract.h>
-#include <ripple/basics/StringUtilities.h>
+#include <cbc/app/misc/Manifest.h>
+#include <cbc/app/misc/ValidatorList.h>
+#include <cbc/basics/contract.h>
+#include <cbc/basics/StringUtilities.h>
 #include <test/jtx.h>
-#include <ripple/core/DatabaseCon.h>
-#include <ripple/app/main/DBInit.h>
-#include <ripple/protocol/SecretKey.h>
-#include <ripple/protocol/Sign.h>
-#include <ripple/protocol/STExchange.h>
+#include <cbc/core/DatabaseCon.h>
+#include <cbc/app/main/DBInit.h>
+#include <cbc/protocol/SecretKey.h>
+#include <cbc/protocol/Sign.h>
+#include <cbc/protocol/STExchange.h>
 #include <beast/core/detail/base64.hpp>
 #include <boost/filesystem.hpp>
 #include <boost/algorithm/string.hpp>
 #include <boost/utility/in_place_factory.hpp>
 
-namespace ripple {
+namespace cbc {
 namespace test {
 
 class Manifest_test : public beast::unit_test::suite
@@ -716,7 +716,7 @@ public:
     }
 };
 
-BEAST_DEFINE_TESTSUITE(Manifest,app,ripple);
+BEAST_DEFINE_TESTSUITE(Manifest,app,cbc);
 
 } // test
-} // ripple
+} // cbc

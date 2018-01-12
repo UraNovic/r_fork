@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2017 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2017 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,12 +18,12 @@
 //==============================================================================
 #include <test/jtx.h>
 
-#include <ripple/beast/unit_test.h>
-#include <ripple/protocol/AccountID.h>
-#include <ripple/protocol/JsonFields.h>
-#include <ripple/protocol/STAmount.h>
+#include <cbc/beast/unit_test.h>
+#include <cbc/protocol/AccountID.h>
+#include <cbc/protocol/JsonFields.h>
+#include <cbc/protocol/STAmount.h>
 
-namespace ripple {
+namespace cbc {
 
 class OwnerInfo_test : public beast::unit_test::suite
 {
@@ -112,9 +112,9 @@ class OwnerInfo_test : public beast::unit_test::suite
         }
 
         // accepted ledger entry
-        if (! BEAST_EXPECT (result[jss::accepted].isMember(jss::ripple_lines)))
+        if (! BEAST_EXPECT (result[jss::accepted].isMember(jss::cbc_lines)))
             return;
-        auto lines = result[jss::accepted][jss::ripple_lines];
+        auto lines = result[jss::accepted][jss::cbc_lines];
         if (! BEAST_EXPECT (lines.isArray() && lines.size() == 2))
             return;
 
@@ -155,9 +155,9 @@ class OwnerInfo_test : public beast::unit_test::suite
 
 
         // current ledger entry
-        if (! BEAST_EXPECT (result[jss::current].isMember(jss::ripple_lines)))
+        if (! BEAST_EXPECT (result[jss::current].isMember(jss::cbc_lines)))
             return;
-        lines = result[jss::current][jss::ripple_lines];
+        lines = result[jss::current][jss::cbc_lines];
         if (! BEAST_EXPECT (lines.isArray() && lines.size() == 2))
             return;
 
@@ -208,7 +208,7 @@ public:
     }
 };
 
-BEAST_DEFINE_TESTSUITE(OwnerInfo,app,ripple);
+BEAST_DEFINE_TESTSUITE(OwnerInfo,app,cbc);
 
-} // ripple
+} // cbc
 

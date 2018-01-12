@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012-2015 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012-2015 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -19,15 +19,15 @@
 
 #include <BeastConfig.h>
 
-#include <ripple/core/ConfigSections.h>
-#include <ripple/core/SociDB.h>
-#include <ripple/basics/contract.h>
+#include <cbc/core/ConfigSections.h>
+#include <cbc/core/SociDB.h>
+#include <cbc/basics/contract.h>
 #include <test/jtx/TestSuite.h>
-#include <ripple/basics/BasicConfig.h>
+#include <cbc/basics/BasicConfig.h>
 #include <boost/filesystem.hpp>
 #include <boost/algorithm/string.hpp>
 
-namespace ripple {
+namespace cbc {
 class SociDB_test final : public TestSuite
 {
 private:
@@ -374,6 +374,6 @@ public:
     }
 };
 
-BEAST_DEFINE_TESTSUITE(SociDB,core,ripple);
+BEAST_DEFINE_TESTSUITE(SociDB,core,cbc);
 
-}  // ripple
+}  // cbc

@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-  This file is part of rippled: https://github.com/ripple/rippled
-  Copyright (c) 2012-2017 Ripple Labs Inc.
+  This file is part of cbcd: https://github.com/cbc/cbcd
+  Copyright (c) 2012-2017 cbc Labs Inc.
 
   Permission to use, copy, modify, and/or distribute this software for any
   purpose  with  or without fee is hereby granted, provided that the above
@@ -21,11 +21,11 @@
 #include <test/jtx.h>
 #include <test/jtx/WSClient.h>
 #include <test/jtx/PathSet.h>
-#include <ripple/protocol/Feature.h>
-#include <ripple/protocol/JsonFields.h>
-#include <ripple/protocol/Quality.h>
+#include <cbc/protocol/Feature.h>
+#include <cbc/protocol/JsonFields.h>
+#include <cbc/protocol/Quality.h>
 
-namespace ripple {
+namespace cbc {
 namespace test {
 
 class Offer_test : public beast::unit_test::suite
@@ -55,10 +55,10 @@ class Offer_test : public beast::unit_test::suite
     {
         Json::Value jvParams;
         jvParams[jss::ledger_index] = "current";
-        jvParams[jss::ripple_state][jss::currency] = currency;
-        jvParams[jss::ripple_state][jss::accounts] = Json::arrayValue;
-        jvParams[jss::ripple_state][jss::accounts].append(acct_a.human());
-        jvParams[jss::ripple_state][jss::accounts].append(acct_b.human());
+        jvParams[jss::cbc_state][jss::currency] = currency;
+        jvParams[jss::cbc_state][jss::accounts] = Json::arrayValue;
+        jvParams[jss::cbc_state][jss::accounts].append(acct_a.human());
+        jvParams[jss::cbc_state][jss::accounts].append(acct_b.human());
         return env.rpc ("json", "ledger_entry",
             to_string(jvParams))[jss::result];
     };
@@ -343,7 +343,7 @@ public:
             {
                 env (pay (alice, bob, USD (1)), path (~USD),
                     sendmax (XRP (102)),
-                    txflags (tfNoRippleDirect | tfPartialPayment));
+                    txflags (tfNocbcDirect | tfPartialPayment));
 
                 env.require (
                     offers (carol, 0),
@@ -367,9 +367,9 @@ public:
         }
     }
 
-    void testEnforceNoRipple (FeatureBitset features)
+    void testEnforceNocbc (FeatureBitset features)
     {
-        testcase ("Enforce No Ripple");
+        testcase ("Enforce No cbc");
 
         using namespace jtx;
 
@@ -383,7 +383,7 @@ public:
         Account const dan {"dan"};
 
         {
-            // No ripple with an implied account step after an offer
+            // No cbc with an implied account step after an offer
             Env env {*this, features};
             auto const closeTime =
                 fix1449Time () +
@@ -395,11 +395,11 @@ public:
             auto const gw2 = Account {"gw2"};
             auto const USD2 = gw2["USD"];
 
-            env.fund (XRP (10000), alice, noripple (bob), carol, dan, gw1, gw2);
+            env.fund (XRP (10000), alice, nocbc (bob), carol, dan, gw1, gw2);
             env.trust (USD1 (1000), alice, carol, dan);
-            env(trust (bob, USD1 (1000), tfSetNoRipple));
+            env(trust (bob, USD1 (1000), tfSetNocbc));
             env.trust (USD2 (1000), alice, carol, dan);
-            env(trust (bob, USD2 (1000), tfSetNoRipple));
+            env(trust (bob, USD2 (1000), tfSetNocbc));
 
             env (pay (gw1, dan, USD1 (50)));
             env (pay (gw1, bob, USD1 (50)));
@@ -408,7 +408,7 @@ public:
             env (offer (dan, XRP (50), USD1 (50)));
 
             env (pay (alice, carol, USD2 (50)), path (~USD1, bob),
-                sendmax (XRP (50)), txflags (tfNoRippleDirect),
+                sendmax (XRP (50)), txflags (tfNocbcDirect),
                 ter(tecPATH_DRY));
         }
         {
@@ -435,7 +435,7 @@ public:
             env (offer (dan, XRP (50), USD1 (50)));
 
             env (pay (alice, carol, USD2 (50)), path (~USD1, bob),
-                sendmax (XRP (50)), txflags (tfNoRippleDirect));
+                sendmax (XRP (50)), txflags (tfNocbcDirect));
 
             env.require (balance (alice, xrpMinusFee (env, 10000 - 50)));
             env.require (balance (bob, USD1 (100)));
@@ -2022,7 +2022,7 @@ public:
         if (wsc->version() == 2)
         {
             BEAST_EXPECT(jrr.isMember(jss::jsonrpc) && jrr[jss::jsonrpc] == "2.0");
-            BEAST_EXPECT(jrr.isMember(jss::ripplerpc) && jrr[jss::ripplerpc] == "2.0");
+            BEAST_EXPECT(jrr.isMember(jss::cbcrpc) && jrr[jss::cbcrpc] == "2.0");
             BEAST_EXPECT(jrr.isMember(jss::id) && jrr[jss::id] == 5);
         }
 
@@ -4229,7 +4229,7 @@ public:
 
     void testRCSmoketest(FeatureBitset features)
     {
-        testcase("RippleConnect Smoketest payment flow");
+        testcase("cbcConnect Smoketest payment flow");
         using namespace jtx;
 
         Env env {*this, features};
@@ -4238,7 +4238,7 @@ public:
                 100 * env.closed()->info().closeTimeResolution;
         env.close (closeTime);
 
-        // This test mimics the payment flow used in the Ripple Connect
+        // This test mimics the payment flow used in the cbc Connect
         // smoke test.  The players:
         //   A USD gateway with hot and cold wallets
         //   A EUR gateway with hot and cold walllets
@@ -4258,20 +4258,20 @@ public:
         env.fund (XRP(100000), hotUS, coldUS, hotEU, coldEU, mm);
         env.close();
 
-        // Cold wallets require trust but will ripple by default
+        // Cold wallets require trust but will cbc by default
         for (auto const& cold : {coldUS, coldEU})
         {
             env(fset (cold, asfRequireAuth));
-            env(fset (cold, asfDefaultRipple));
+            env(fset (cold, asfDefaultcbc));
         }
         env.close();
 
         // Each hot wallet trusts the related cold wallet for a large amount
-        env (trust(hotUS, USD(10000000)), txflags (tfSetNoRipple));
-        env (trust(hotEU, EUR(10000000)), txflags (tfSetNoRipple));
+        env (trust(hotUS, USD(10000000)), txflags (tfSetNocbc));
+        env (trust(hotEU, EUR(10000000)), txflags (tfSetNocbc));
         // Market maker trusts both cold wallets for a large amount
-        env (trust(mm, USD(10000000)), txflags (tfSetNoRipple));
-        env (trust(mm, EUR(10000000)), txflags (tfSetNoRipple));
+        env (trust(mm, USD(10000000)), txflags (tfSetNocbc));
+        env (trust(mm, EUR(10000000)), txflags (tfSetNocbc));
         env.close();
 
         // Gateways authorize the trustlines of hot and market maker
@@ -4308,7 +4308,7 @@ public:
             jvParams[jss::source_account] = hotUS.human();
 
             Json::Value const jrr {env.rpc(
-                "json", "ripple_path_find", to_string(jvParams))[jss::result]};
+                "json", "cbc_path_find", to_string(jvParams))[jss::result]};
 
             BEAST_EXPECT(jrr[jss::status] == "success");
             BEAST_EXPECT(
@@ -4523,7 +4523,7 @@ public:
         testRmFundedOffer(features);
         testTinyPayment(features);
         testXRPTinyPayment(features);
-        testEnforceNoRipple(features);
+        testEnforceNocbc(features);
         testInsufficientReserve(features);
         testFillModes(features);
         testMalformed(features);
@@ -4626,8 +4626,8 @@ class Offer_manual_test : public Offer_test
     }
 };
 
-BEAST_DEFINE_TESTSUITE (Offer, tx, ripple);
-BEAST_DEFINE_TESTSUITE_MANUAL (Offer_manual, tx, ripple);
+BEAST_DEFINE_TESTSUITE (Offer, tx, cbc);
+BEAST_DEFINE_TESTSUITE_MANUAL (Offer_manual, tx, cbc);
 
 }  // test
-}  // ripple
+}  // cbc

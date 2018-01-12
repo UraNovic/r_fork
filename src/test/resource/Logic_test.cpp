@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,17 +18,17 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/basics/chrono.h>
-#include <ripple/basics/random.h>
-#include <ripple/beast/unit_test.h>
+#include <cbc/basics/chrono.h>
+#include <cbc/basics/random.h>
+#include <cbc/beast/unit_test.h>
 #include <boost/utility/base_from_member.hpp>
-#include <ripple/resource/Consumer.h>
-#include <ripple/resource/impl/Entry.h>
-#include <ripple/resource/impl/Logic.h>
+#include <cbc/resource/Consumer.h>
+#include <cbc/resource/impl/Entry.h>
+#include <cbc/resource/impl/Logic.h>
 
 
 
-namespace ripple {
+namespace cbc {
 namespace Resource {
 
 class Manager_test : public beast::unit_test::suite
@@ -255,7 +255,7 @@ public:
     }
 };
 
-BEAST_DEFINE_TESTSUITE(Manager,resource,ripple);
+BEAST_DEFINE_TESTSUITE(Manager,resource,cbc);
 
 }
 }

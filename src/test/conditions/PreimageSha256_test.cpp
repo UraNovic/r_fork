@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2016 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2016 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -17,19 +17,19 @@
 */
 //==============================================================================
 
-#include <ripple/basics/Buffer.h>
-#include <ripple/basics/strHex.h>
-#include <ripple/basics/Slice.h>
-#include <ripple/beast/unit_test.h>
-#include <ripple/conditions/Condition.h>
-#include <ripple/conditions/Fulfillment.h>
-#include <ripple/conditions/impl/PreimageSha256.h>
+#include <cbc/basics/Buffer.h>
+#include <cbc/basics/strHex.h>
+#include <cbc/basics/Slice.h>
+#include <cbc/beast/unit_test.h>
+#include <cbc/conditions/Condition.h>
+#include <cbc/conditions/Fulfillment.h>
+#include <cbc/conditions/impl/PreimageSha256.h>
 #include <algorithm>
 #include <string>
 #include <utility>
 #include <vector>
 
-namespace ripple {
+namespace cbc {
 namespace cryptoconditions {
 
 class PreimageSha256_test : public beast::unit_test::suite
@@ -186,7 +186,7 @@ class PreimageSha256_test : public beast::unit_test::suite
     }
 };
 
-BEAST_DEFINE_TESTSUITE (PreimageSha256, conditions, ripple);
+BEAST_DEFINE_TESTSUITE (PreimageSha256, conditions, cbc);
 
 }
 

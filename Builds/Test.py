@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
-#    This file is part of rippled: https://github.com/ripple/rippled
-#    Copyright (c) 2012 - 2017 Ripple Labs Inc.
+#    This file is part of cbcd: https://github.com/cbc/cbcd
+#    Copyright (c) 2012 - 2017 cbc Labs Inc.
 #
 #    Permission to use, copy, modify, and/or distribute this software for any
 #    purpose  with  or without fee is hereby granted, provided that the above
@@ -73,8 +73,8 @@ if IS_WINDOWS:
 else:
     CMAKE_UNITY_CONFIGS = []
     CMAKE_NONUNITY_CONFIGS = []
-CMAKE_UNITY_COMBOS = { '' : [['rippled', 'rippled_classic'], CMAKE_UNITY_CONFIGS],
-    '.nounity' : [['rippled', 'rippled_unity'], CMAKE_NONUNITY_CONFIGS] }
+CMAKE_UNITY_COMBOS = { '' : [['cbcd', 'cbcd_classic'], CMAKE_UNITY_CONFIGS],
+    '.nounity' : [['cbcd', 'cbcd_unity'], CMAKE_NONUNITY_CONFIGS] }
 
 if IS_WINDOWS:
     CMAKE_DIR_TARGETS = { ('msvc' + unity,) : targets for unity, targets in
@@ -120,7 +120,7 @@ ALL_BUILDS = [options + target
               for options in ALL_OPTIONS]
 
 parser = argparse.ArgumentParser(
-    description='Test.py - run ripple tests'
+    description='Test.py - run cbc tests'
 )
 
 parser.add_argument(
@@ -285,9 +285,9 @@ def shell(cmd, args=(), silent=False):
 def run_tests(args):
     failed = []
     if IS_WINDOWS:
-        binary_re = re.compile(r'build\\([^\\]+)\\rippled.exe')
+        binary_re = re.compile(r'build\\([^\\]+)\\cbcd.exe')
     else:
-        binary_re = re.compile(r'build/([^/]+)/rippled')
+        binary_re = re.compile(r'build/([^/]+)/cbcd')
     _, lines = shell('scons', ('-n', '--tree=derived',) + args, silent=True)
     for line in lines:
         match = binary_re.search(line)
@@ -464,7 +464,7 @@ def main():
                 if not build_dirs:
                     build_dirs = ('default',)
                 if not build_targets:
-                    build_targets = ('rippled',)
+                    build_targets = ('cbcd',)
                 if not build_configs:
                     build_configs = ('',)
                 for cmake_dir in build_dirs:

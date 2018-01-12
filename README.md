@@ -24,7 +24,7 @@ and currency pairs.
   - Easy access to liquidity through a competitive FX marketplace
 
 ## Cross-border payments
-Ripple enables banks to settle cross-border payments in real-time, with
+cbc enables banks to settle cross-border payments in real-time, with
 end-to-end transparency, and at lower costs. Banks can provide liquidity
 for FX themselves or source it from third parties.
 

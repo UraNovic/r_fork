@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-  This file is part of rippled: https://github.com/ripple/rippled
-  Copyright (c) 2012-2016 Ripple Labs Inc.
+  This file is part of cbcd: https://github.com/cbc/cbcd
+  Copyright (c) 2012-2016 cbc Labs Inc.
 
   Permission to use, copy, modify, and/or distribute this software for any
   purpose  with  or without fee is hereby granted, provided that the above
@@ -19,13 +19,13 @@
 
 #include <BeastConfig.h>
 #include <test/jtx.h>
-#include <ripple/beast/unit_test.h>
-#include <ripple/protocol/Feature.h>
-#include <ripple/protocol/JsonFields.h>
-#include <ripple/protocol/SField.h>
+#include <cbc/beast/unit_test.h>
+#include <cbc/protocol/Feature.h>
+#include <cbc/protocol/JsonFields.h>
+#include <cbc/protocol/SField.h>
 #include <test/jtx/WSClient.h>
 
-namespace ripple {
+namespace cbc {
 
 class TrustAndBalance_test : public beast::unit_test::suite
 {
@@ -38,10 +38,10 @@ class TrustAndBalance_test : public beast::unit_test::suite
     {
         Json::Value jvParams;
         jvParams[jss::ledger_index] = "current";
-        jvParams[jss::ripple_state][jss::currency] = currency;
-        jvParams[jss::ripple_state][jss::accounts] = Json::arrayValue;
-        jvParams[jss::ripple_state][jss::accounts].append(acct_a.human());
-        jvParams[jss::ripple_state][jss::accounts].append(acct_b.human());
+        jvParams[jss::cbc_state][jss::currency] = currency;
+        jvParams[jss::cbc_state][jss::accounts] = Json::arrayValue;
+        jvParams[jss::cbc_state][jss::accounts].append(acct_a.human());
+        jvParams[jss::cbc_state][jss::accounts].append(acct_b.human());
         return env.rpc ("json", "ledger_entry", to_string(jvParams))[jss::result];
     };
 
@@ -162,9 +162,9 @@ class TrustAndBalance_test : public beast::unit_test::suite
     }
 
     void
-    testDirectRipple (FeatureBitset features)
+    testDirectcbc (FeatureBitset features)
     {
-        testcase ("Direct Payment, Ripple");
+        testcase ("Direct Payment, cbc");
         using namespace test::jtx;
 
         Env env {*this, features};
@@ -495,7 +495,7 @@ public:
 
         auto testWithFeatures = [this](FeatureBitset features) {
             testPayNonexistent(features);
-            testDirectRipple(features);
+            testDirectcbc(features);
             testWithTransferFee(false, false, features);
             testWithTransferFee(false, true, features);
             testWithTransferFee(true, false, features);
@@ -516,8 +516,8 @@ public:
     }
 };
 
-BEAST_DEFINE_TESTSUITE (TrustAndBalance, app, ripple);
+BEAST_DEFINE_TESTSUITE (TrustAndBalance, app, cbc);
 
-}  // ripple
+}  // cbc
 
 

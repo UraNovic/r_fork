@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-This file is part of rippled: https://github.com/ripple/rippled
-Copyright (c) 2012, 2013 Ripple Labs Inc.
+This file is part of cbcd: https://github.com/cbc/cbcd
+Copyright (c) 2012, 2013 cbc Labs Inc.
 
 Permission to use, copy, modify, and/or distribute this software for any
 purpose  with  or without fee is hereby granted, provided that the above
@@ -17,10 +17,10 @@ OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 */
 //==============================================================================
 
-#include <ripple/core/impl/Workers.h>
-#include <ripple/beast/unit_test.h>
+#include <cbc/core/impl/Workers.h>
+#include <cbc/beast/unit_test.h>
 
-namespace ripple {
+namespace cbc {
 
 //------------------------------------------------------------------------------
 
@@ -97,6 +97,6 @@ public:
     }
 };
 
-BEAST_DEFINE_TESTSUITE(Workers, core, ripple);
+BEAST_DEFINE_TESTSUITE(Workers, core, cbc);
 
 }

@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
     copyright notice and this permission notice appear in all copies.
@@ -18,13 +18,13 @@
 #include <BeastConfig.h>
 #include <test/jtx.h>
 #include <test/jtx/envconfig.h>
-#include <ripple/app/tx/apply.h>
-#include <ripple/basics/StringUtilities.h>
-#include <ripple/json/json_reader.h>
-#include <ripple/protocol/Feature.h>
-#include <ripple/protocol/JsonFields.h>
+#include <cbc/app/tx/apply.h>
+#include <cbc/basics/StringUtilities.h>
+#include <cbc/json/json_reader.h>
+#include <cbc/protocol/Feature.h>
+#include <cbc/protocol/JsonFields.h>
 
-namespace ripple {
+namespace cbc {
 namespace test {
 
 struct Regression_test : public beast::unit_test::suite
@@ -70,7 +70,7 @@ struct Regression_test : public beast::unit_test::suite
             auto const jt = env.jt(pay(env.master, "alice", aliceAmount));
             OpenView accum(&*next);
 
-            auto const result = ripple::apply(env.app(),
+            auto const result = cbc::apply(env.app(),
                 accum, *jt.stx, tapNONE, env.journal);
             BEAST_EXPECT(result.first == tesSUCCESS);
             BEAST_EXPECT(result.second);
@@ -96,7 +96,7 @@ struct Regression_test : public beast::unit_test::suite
 
             OpenView accum(&*next);
 
-            auto const result = ripple::apply(env.app(),
+            auto const result = cbc::apply(env.app(),
                 accum, *jt.stx, tapNONE, env.journal);
             BEAST_EXPECT(result.first == tecINSUFF_FEE);
             BEAST_EXPECT(result.second);
@@ -227,7 +227,7 @@ struct Regression_test : public beast::unit_test::suite
     }
 };
 
-BEAST_DEFINE_TESTSUITE(Regression,app,ripple);
+BEAST_DEFINE_TESTSUITE(Regression,app,cbc);
 
 } // test
-} // ripple
+} // cbc

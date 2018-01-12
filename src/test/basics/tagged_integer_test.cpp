@@ -1,6 +1,6 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
+    This file is part of cbcd: https://github.com/cbc/cbcd
     Copyright 2014, Nikolaos D. Bougalis <nikb@bougalis.net>
 
 
@@ -19,11 +19,11 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/basics/tagged_integer.h>
-#include <ripple/beast/unit_test.h>
+#include <cbc/basics/tagged_integer.h>
+#include <cbc/beast/unit_test.h>
 #include <type_traits>
 
-namespace ripple {
+namespace cbc {
 namespace test {
 
 class tagged_integer_test
@@ -233,7 +233,7 @@ public:
     }
 };
 
-BEAST_DEFINE_TESTSUITE(tagged_integer,ripple_basics,ripple);
+BEAST_DEFINE_TESTSUITE(tagged_integer,cbc_basics,cbc);
 
 } // test
-} // ripple
+} // cbc
