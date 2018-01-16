@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -17,17 +17,17 @@
 */
 //==============================================================================
 
-#ifndef RIPPLE_NODESTORE_CODEC_H_INCLUDED
-#define RIPPLE_NODESTORE_CODEC_H_INCLUDED
+#ifndef cbc_NODESTORE_CODEC_H_INCLUDED
+#define cbc_NODESTORE_CODEC_H_INCLUDED
 
 // Disable lz4 deprecation warning due to incompatibility with clang attributes
 #define LZ4_DISABLE_DEPRECATE_WARNINGS
 
-#include <ripple/basics/contract.h>
+#include <cbc/basics/contract.h>
 #include <nudb/detail/field.hpp>
-#include <ripple/nodestore/impl/varint.h>
-#include <ripple/nodestore/NodeObject.h>
-#include <ripple/protocol/HashPrefix.h>
+#include <cbc/nodestore/impl/varint.h>
+#include <cbc/nodestore/NodeObject.h>
+#include <cbc/protocol/HashPrefix.h>
 #include <lz4/lib/lz4.h>
 #include <snappy.h>
 #include <cstddef>
@@ -35,7 +35,7 @@
 #include <string>
 #include <utility>
 
-namespace ripple {
+namespace cbc {
 namespace NodeStore {
 
 template <class BufferFactory>
@@ -572,6 +572,6 @@ filter_inner (void* in, std::size_t in_size)
 }
 
 } // NodeStore
-} // ripple
+} // cbc
 
 #endif

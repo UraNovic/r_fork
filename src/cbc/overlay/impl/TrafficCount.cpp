@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,9 +18,9 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/overlay/impl/TrafficCount.h>
+#include <cbc/overlay/impl/TrafficCount.h>
 
-namespace ripple {
+namespace cbc {
 
 const char* TrafficCount::getName (category c)
 {
@@ -132,4 +132,4 @@ TrafficCount::category TrafficCount::categorize (
     return TrafficCount::category::CT_unknown;
 }
 
-} // ripple
+} // cbc

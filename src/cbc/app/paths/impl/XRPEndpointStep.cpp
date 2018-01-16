@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,22 +18,22 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/app/paths/Credit.h>
-#include <ripple/app/paths/impl/AmountSpec.h>
-#include <ripple/app/paths/impl/Steps.h>
-#include <ripple/app/paths/impl/StepChecks.h>
-#include <ripple/basics/Log.h>
-#include <ripple/ledger/PaymentSandbox.h>
-#include <ripple/protocol/IOUAmount.h>
-#include <ripple/protocol/Quality.h>
-#include <ripple/protocol/XRPAmount.h>
+#include <cbc/app/paths/Credit.h>
+#include <cbc/app/paths/impl/AmountSpec.h>
+#include <cbc/app/paths/impl/Steps.h>
+#include <cbc/app/paths/impl/StepChecks.h>
+#include <cbc/basics/Log.h>
+#include <cbc/ledger/PaymentSandbox.h>
+#include <cbc/protocol/IOUAmount.h>
+#include <cbc/protocol/Quality.h>
+#include <cbc/protocol/XRPAmount.h>
 
 #include <boost/container/flat_set.hpp>
 
 #include <numeric>
 #include <sstream>
 
-namespace ripple {
+namespace cbc {
 
 template <class TDerived>
 class XRPEndpointStep : public StepImp<
@@ -120,7 +120,7 @@ protected:
     XRPAmount
     xrpLiquidImpl (ReadView& sb, std::int32_t reserveReduction) const
     {
-        return ripple::xrpLiquid (sb, acc_, reserveReduction, j_);
+        return cbc::xrpLiquid (sb, acc_, reserveReduction, j_);
     }
 
     std::string logStringImpl (char const* name) const
@@ -403,4 +403,4 @@ make_XRPEndpointStep (
     return {tesSUCCESS, std::move (r)};
 }
 
-} // ripple
+} // cbc

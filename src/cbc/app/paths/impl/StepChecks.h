@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2015 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2015 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -17,16 +17,16 @@
 */
 //==============================================================================
 
-#ifndef RIPPLE_APP_PATHS_IMPL_STEP_CHECKS_H_INCLUDED
-#define RIPPLE_APP_PATHS_IMPL_STEP_CHECKS_H_INCLUDED
+#ifndef cbc_APP_PATHS_IMPL_STEP_CHECKS_H_INCLUDED
+#define cbc_APP_PATHS_IMPL_STEP_CHECKS_H_INCLUDED
 
-#include <ripple/basics/Log.h>
-#include <ripple/beast/utility/Journal.h>
-#include <ripple/ledger/ReadView.h>
-#include <ripple/protocol/AccountID.h>
-#include <ripple/protocol/UintTypes.h>
+#include <cbc/basics/Log.h>
+#include <cbc/beast/utility/Journal.h>
+#include <cbc/ledger/ReadView.h>
+#include <cbc/protocol/AccountID.h>
+#include <cbc/protocol/UintTypes.h>
 
-namespace ripple {
+namespace cbc {
 
 inline
 TER
@@ -60,7 +60,7 @@ checkFreeze (
 
 inline
 TER
-checkNoRipple (
+checkNocbc (
     ReadView const& view,
     AccountID const& prev,
     AccountID const& cur,
@@ -69,7 +69,7 @@ checkNoRipple (
     Currency const& currency,
     beast::Journal j)
 {
-    // fetch the ripple lines into and out of this node
+    // fetch the cbc lines into and out of this node
     auto sleIn = view.read (keylet::line (prev, cur, currency));
     auto sleOut = view.read (keylet::line (cur, next, currency));
 
@@ -77,14 +77,14 @@ checkNoRipple (
         return terNO_LINE;
 
     if ((*sleIn)[sfFlags] &
-            ((cur > prev) ? lsfHighNoRipple : lsfLowNoRipple) &&
+            ((cur > prev) ? lsfHighNocbc : lsfLowNocbc) &&
         (*sleOut)[sfFlags] &
-            ((cur > next) ? lsfHighNoRipple : lsfLowNoRipple))
+            ((cur > next) ? lsfHighNocbc : lsfLowNocbc))
     {
-        JLOG (j.info()) << "Path violates noRipple constraint between " << prev
+        JLOG (j.info()) << "Path violates nocbc constraint between " << prev
                       << ", " << cur << " and " << next;
 
-        return terNO_RIPPLE;
+        return terNO_cbc;
     }
     return tesSUCCESS;
 }

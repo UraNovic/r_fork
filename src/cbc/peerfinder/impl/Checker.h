@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -17,10 +17,10 @@
 */
 //==============================================================================
 
-#ifndef RIPPLE_PEERFINDER_CHECKER_H_INCLUDED
-#define RIPPLE_PEERFINDER_CHECKER_H_INCLUDED
+#ifndef cbc_PEERFINDER_CHECKER_H_INCLUDED
+#define cbc_PEERFINDER_CHECKER_H_INCLUDED
 
-#include <ripple/beast/net/IPAddressConversion.h>
+#include <cbc/beast/net/IPAddressConversion.h>
 #include <boost/asio/detail/handler_invoke_helpers.hpp>
 #include <boost/asio/io_service.hpp>
 #include <boost/asio/ip/tcp.hpp>
@@ -31,7 +31,7 @@
 #include <mutex>
 #include <utility>
 
-namespace ripple {
+namespace cbc {
 namespace PeerFinder {
 
 /** Tests remote listening sockets to make sure they are connectible. */

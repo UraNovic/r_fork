@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -17,31 +17,31 @@
 */
 //==============================================================================
 
-#ifndef RIPPLE_APP_LEDGER_LEDGERMASTER_H_INCLUDED
-#define RIPPLE_APP_LEDGER_LEDGERMASTER_H_INCLUDED
+#ifndef cbc_APP_LEDGER_LEDGERMASTER_H_INCLUDED
+#define cbc_APP_LEDGER_LEDGERMASTER_H_INCLUDED
 
-#include <ripple/app/main/Application.h>
-#include <ripple/app/ledger/AbstractFetchPackContainer.h>
-#include <ripple/app/ledger/Ledger.h>
-#include <ripple/app/ledger/LedgerCleaner.h>
-#include <ripple/app/ledger/LedgerHistory.h>
-#include <ripple/app/ledger/LedgerHolder.h>
-#include <ripple/app/misc/CanonicalTXSet.h>
-#include <ripple/basics/chrono.h>
-#include <ripple/basics/RangeSet.h>
-#include <ripple/basics/ScopedLock.h>
-#include <ripple/basics/StringUtilities.h>
-#include <ripple/protocol/RippleLedgerHash.h>
-#include <ripple/protocol/STValidation.h>
-#include <ripple/beast/insight/Collector.h>
-#include <ripple/core/Stoppable.h>
-#include <ripple/protocol/Protocol.h>
-#include <ripple/beast/utility/PropertyStream.h>
+#include <cbc/app/main/Application.h>
+#include <cbc/app/ledger/AbstractFetchPackContainer.h>
+#include <cbc/app/ledger/Ledger.h>
+#include <cbc/app/ledger/LedgerCleaner.h>
+#include <cbc/app/ledger/LedgerHistory.h>
+#include <cbc/app/ledger/LedgerHolder.h>
+#include <cbc/app/misc/CanonicalTXSet.h>
+#include <cbc/basics/chrono.h>
+#include <cbc/basics/RangeSet.h>
+#include <cbc/basics/ScopedLock.h>
+#include <cbc/basics/StringUtilities.h>
+#include <cbc/protocol/cbcLedgerHash.h>
+#include <cbc/protocol/STValidation.h>
+#include <cbc/beast/insight/Collector.h>
+#include <cbc/core/Stoppable.h>
+#include <cbc/protocol/Protocol.h>
+#include <cbc/beast/utility/PropertyStream.h>
 #include <mutex>
 
-#include "ripple.pb.h"
+#include "cbc.pb.h"
 
-namespace ripple {
+namespace cbc {
 
 class Peer;
 class Transaction;
@@ -354,6 +354,6 @@ private:
 
 };
 
-} // ripple
+} // cbc
 
 #endif

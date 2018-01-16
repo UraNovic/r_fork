@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -17,17 +17,17 @@
 */
 //==============================================================================
 
-#ifndef RIPPLE_APP_LEDGER_LEDGERTOJSON_H_INCLUDED
-#define RIPPLE_APP_LEDGER_LEDGERTOJSON_H_INCLUDED
+#ifndef cbc_APP_LEDGER_LEDGERTOJSON_H_INCLUDED
+#define cbc_APP_LEDGER_LEDGERTOJSON_H_INCLUDED
 
-#include <ripple/app/ledger/Ledger.h>
-#include <ripple/app/misc/TxQ.h>
-#include <ripple/basics/StringUtilities.h>
-#include <ripple/protocol/JsonFields.h>
-#include <ripple/protocol/STTx.h>
-#include <ripple/json/Object.h>
+#include <cbc/app/ledger/Ledger.h>
+#include <cbc/app/misc/TxQ.h>
+#include <cbc/basics/StringUtilities.h>
+#include <cbc/protocol/JsonFields.h>
+#include <cbc/protocol/STTx.h>
+#include <cbc/json/Object.h>
 
-namespace ripple {
+namespace cbc {
 
 struct LedgerFill
 {
@@ -80,6 +80,6 @@ std::string serializeHex(STObject const& o)
 {
     return strHex(serializeBlob(o));
 }
-} // ripple
+} // cbc
 
 #endif

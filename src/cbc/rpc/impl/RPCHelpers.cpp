@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012-2014 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012-2014 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,16 +18,16 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/app/ledger/LedgerMaster.h>
-#include <ripple/app/misc/Transaction.h>
-#include <ripple/ledger/View.h>
-#include <ripple/net/RPCErr.h>
-#include <ripple/protocol/AccountID.h>
-#include <ripple/rpc/Context.h>
-#include <ripple/rpc/impl/RPCHelpers.h>
+#include <cbc/app/ledger/LedgerMaster.h>
+#include <cbc/app/misc/Transaction.h>
+#include <cbc/ledger/View.h>
+#include <cbc/net/RPCErr.h>
+#include <cbc/protocol/AccountID.h>
+#include <cbc/rpc/Context.h>
+#include <cbc/rpc/impl/RPCHelpers.h>
 #include <boost/algorithm/string/case_conv.hpp>
 
-namespace ripple {
+namespace cbc {
 namespace RPC {
 
 boost::optional<AccountID>
@@ -680,7 +680,7 @@ chooseLedgerEntryType(Json::Value const& params)
             { jss::hashes,          ltLEDGER_HASHES },
             { jss::offer,           ltOFFER },
             { jss::signer_list,     ltSIGNER_LIST },
-            { jss::state,           ltRIPPLE_STATE },
+            { jss::state,           ltcbc_STATE },
             { jss::ticket,          ltTICKET },
             { jss::escrow,          ltESCROW },
             { jss::payment_channel, ltPAYCHAN }
@@ -718,4 +718,4 @@ beast::SemanticVersion const goodVersion("1.0.0");
 beast::SemanticVersion const lastVersion("1.0.0");
 
 } // RPC
-} // ripple
+} // cbc

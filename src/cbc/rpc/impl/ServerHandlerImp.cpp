@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,28 +18,28 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/app/main/Application.h>
-#include <ripple/app/misc/NetworkOPs.h>
-#include <ripple/beast/rfc2616.h>
-#include <ripple/beast/net/IPAddressConversion.h>
-#include <ripple/json/json_reader.h>
-#include <ripple/rpc/json_body.h>
-#include <ripple/rpc/ServerHandler.h>
-#include <ripple/server/Server.h>
-#include <ripple/server/impl/JSONRPCUtil.h>
-#include <ripple/rpc/impl/ServerHandlerImp.h>
-#include <ripple/basics/contract.h>
-#include <ripple/basics/Log.h>
-#include <ripple/basics/make_SSLContext.h>
-#include <ripple/core/JobQueue.h>
-#include <ripple/json/to_string.h>
-#include <ripple/net/RPCErr.h>
-#include <ripple/overlay/Overlay.h>
-#include <ripple/resource/ResourceManager.h>
-#include <ripple/resource/Fees.h>
-#include <ripple/rpc/impl/Tuning.h>
-#include <ripple/rpc/RPCHandler.h>
-#include <ripple/server/SimpleWriter.h>
+#include <cbc/app/main/Application.h>
+#include <cbc/app/misc/NetworkOPs.h>
+#include <cbc/beast/rfc2616.h>
+#include <cbc/beast/net/IPAddressConversion.h>
+#include <cbc/json/json_reader.h>
+#include <cbc/rpc/json_body.h>
+#include <cbc/rpc/ServerHandler.h>
+#include <cbc/server/Server.h>
+#include <cbc/server/impl/JSONRPCUtil.h>
+#include <cbc/rpc/impl/ServerHandlerImp.h>
+#include <cbc/basics/contract.h>
+#include <cbc/basics/Log.h>
+#include <cbc/basics/make_SSLContext.h>
+#include <cbc/core/JobQueue.h>
+#include <cbc/json/to_string.h>
+#include <cbc/net/RPCErr.h>
+#include <cbc/overlay/Overlay.h>
+#include <cbc/resource/ResourceManager.h>
+#include <cbc/resource/Fees.h>
+#include <cbc/rpc/impl/Tuning.h>
+#include <cbc/rpc/RPCHandler.h>
+#include <cbc/server/SimpleWriter.h>
 #include <beast/core/detail/base64.hpp>
 #include <beast/http/fields.hpp>
 #include <beast/http/string_body.hpp>
@@ -50,7 +50,7 @@
 #include <algorithm>
 #include <stdexcept>
 
-namespace ripple {
+namespace cbc {
 
 static
 bool
@@ -426,8 +426,8 @@ ServerHandlerImp::processSession(
             jr[jss::id]  = jv[jss::id];
         if (jv.isMember(jss::jsonrpc))
             jr[jss::jsonrpc] = jv[jss::jsonrpc];
-        if (jv.isMember(jss::ripplerpc))
-            jr[jss::ripplerpc] = jv[jss::ripplerpc];
+        if (jv.isMember(jss::cbcrpc))
+            jr[jss::cbcrpc] = jv[jss::cbcrpc];
 
         is->getConsumer().charge(Resource::feeInvalidRPC);
         return jr;
@@ -496,8 +496,8 @@ ServerHandlerImp::processSession(
         jr[jss::id] = jv[jss::id];
     if (jv.isMember(jss::jsonrpc))
         jr[jss::jsonrpc] = jv[jss::jsonrpc];
-    if (jv.isMember(jss::ripplerpc))
-        jr[jss::ripplerpc] = jv[jss::ripplerpc];
+    if (jv.isMember(jss::cbcrpc))
+        jr[jss::cbcrpc] = jv[jss::cbcrpc];
     jr[jss::type] = jss::response;
     return jr;
 }
@@ -718,9 +718,9 @@ ServerHandlerImp::processRequest (Port const& port,
             params = jsonRPC;
         }
 
-        std::string ripplerpc = "1.0";
-        if (params.isMember(jss::ripplerpc) && params[jss::ripplerpc] != "1.0")
-            ripplerpc = params[jss::ripplerpc].asString();
+        std::string cbcrpc = "1.0";
+        if (params.isMember(jss::cbcrpc) && params[jss::cbcrpc] != "1.0")
+            cbcrpc = params[jss::cbcrpc].asString();
         /**
          * Clear header-assigned values if not positively identified from a
          * secure_gateway.
@@ -750,7 +750,7 @@ ServerHandlerImp::processRequest (Port const& port,
             result[jss::warning] = jss::load;
 
         Json::Value r(Json::objectValue);
-        if (ripplerpc >= "2.0")
+        if (cbcrpc >= "2.0")
         {
             if (result.isMember(jss::error))
             {
@@ -789,8 +789,8 @@ ServerHandlerImp::processRequest (Port const& port,
 
         if (params.isMember(jss::jsonrpc))
             r[jss::jsonrpc] = params[jss::jsonrpc];
-        if (params.isMember(jss::ripplerpc))
-           r[jss::ripplerpc] = params[jss::ripplerpc];
+        if (params.isMember(jss::cbcrpc))
+           r[jss::cbcrpc] = params[jss::cbcrpc];
         if (params.isMember(jss::id))
             r[jss::id] = params[jss::id];
         if (batch)
@@ -839,8 +839,8 @@ ServerHandlerImp::statusResponse(
     {
         msg.result(beast::http::status::ok);
         msg.body = "<!DOCTYPE html><html><head><title>" + systemName() +
-            " Test page for rippled</title></head><body><h1>" +
-                systemName() + " Test</h1><p>This page shows rippled http(s) "
+            " Test page for cbcd</title></head><body><h1>" +
+                systemName() + " Test</h1><p>This page shows cbcd http(s) "
                     "connectivity is working.</p></body></html>";
     }
     else
@@ -1078,4 +1078,4 @@ make_ServerHandler (Application& app, Stoppable& parent,
         io_service, jobQueue, networkOPs, resourceManager, cm);
 }
 
-} // ripple
+} // cbc

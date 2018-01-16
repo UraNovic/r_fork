@@ -27,7 +27,7 @@
 #include <atomic>
 #include <cassert>
 
-#include <ripple/beast/core/Config.h>
+#include <cbc/beast/core/Config.h>
 
 namespace beast {
 

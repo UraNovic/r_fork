@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012-2015 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012-2015 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -19,7 +19,7 @@
 
 /*  Stub functions for soci dynamic backends.
 
-    Ripple does not use dynamic backends, and inclduing soci's
+    cbc does not use dynamic backends, and inclduing soci's
     dynamic backends compilcates the build (it requires a generated
     header file and some macros to be defined.)
 */
@@ -30,8 +30,8 @@
 #endif
 
 #include <BeastConfig.h>
-#include <ripple/basics/contract.h>
-#include <ripple/core/SociDB.h>
+#include <cbc/basics/contract.h>
+#include <cbc/core/SociDB.h>
 #include <soci/sqlite3/soci-sqlite3.h>
 
 // dummy soci-backend
@@ -40,7 +40,7 @@ namespace dynamic_backends {
 // used internally by session
 backend_factory const& get (std::string const& name)
 {
-    ripple::Throw<std::runtime_error> ("Not Supported");
+    cbc::Throw<std::runtime_error> ("Not Supported");
     return std::ref(soci::sqlite3); // Silence compiler warning.
 };
 

@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,51 +18,51 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/app/main/Application.h>
-#include <ripple/core/DatabaseCon.h>
-#include <ripple/app/consensus/RCLValidations.h>
-#include <ripple/app/main/DBInit.h>
-#include <ripple/app/main/BasicApp.h>
-#include <ripple/app/main/Tuning.h>
-#include <ripple/app/ledger/InboundLedgers.h>
-#include <ripple/app/ledger/LedgerMaster.h>
-#include <ripple/app/ledger/LedgerToJson.h>
-#include <ripple/app/ledger/OpenLedger.h>
-#include <ripple/app/ledger/OrderBookDB.h>
-#include <ripple/app/ledger/PendingSaves.h>
-#include <ripple/app/ledger/InboundTransactions.h>
-#include <ripple/app/ledger/TransactionMaster.h>
-#include <ripple/app/main/LoadManager.h>
-#include <ripple/app/main/NodeIdentity.h>
-#include <ripple/app/main/NodeStoreScheduler.h>
-#include <ripple/app/misc/AmendmentTable.h>
-#include <ripple/app/misc/HashRouter.h>
-#include <ripple/app/misc/LoadFeeTrack.h>
-#include <ripple/app/misc/NetworkOPs.h>
-#include <ripple/app/misc/SHAMapStore.h>
-#include <ripple/app/misc/TxQ.h>
-#include <ripple/app/misc/ValidatorSite.h>
-#include <ripple/app/misc/ValidatorKeys.h>
-#include <ripple/app/paths/PathRequests.h>
-#include <ripple/app/tx/apply.h>
-#include <ripple/basics/ResolverAsio.h>
-#include <ripple/basics/Sustain.h>
-#include <ripple/json/json_reader.h>
-#include <ripple/nodestore/DummyScheduler.h>
-#include <ripple/overlay/Cluster.h>
-#include <ripple/overlay/make_Overlay.h>
-#include <ripple/protocol/Feature.h>
-#include <ripple/protocol/STParsedJSON.h>
-#include <ripple/protocol/Protocol.h>
-#include <ripple/resource/Fees.h>
-#include <ripple/beast/asio/io_latency_probe.h>
-#include <ripple/beast/core/LexicalCast.h>
+#include <cbc/app/main/Application.h>
+#include <cbc/core/DatabaseCon.h>
+#include <cbc/app/consensus/RCLValidations.h>
+#include <cbc/app/main/DBInit.h>
+#include <cbc/app/main/BasicApp.h>
+#include <cbc/app/main/Tuning.h>
+#include <cbc/app/ledger/InboundLedgers.h>
+#include <cbc/app/ledger/LedgerMaster.h>
+#include <cbc/app/ledger/LedgerToJson.h>
+#include <cbc/app/ledger/OpenLedger.h>
+#include <cbc/app/ledger/OrderBookDB.h>
+#include <cbc/app/ledger/PendingSaves.h>
+#include <cbc/app/ledger/InboundTransactions.h>
+#include <cbc/app/ledger/TransactionMaster.h>
+#include <cbc/app/main/LoadManager.h>
+#include <cbc/app/main/NodeIdentity.h>
+#include <cbc/app/main/NodeStoreScheduler.h>
+#include <cbc/app/misc/AmendmentTable.h>
+#include <cbc/app/misc/HashRouter.h>
+#include <cbc/app/misc/LoadFeeTrack.h>
+#include <cbc/app/misc/NetworkOPs.h>
+#include <cbc/app/misc/SHAMapStore.h>
+#include <cbc/app/misc/TxQ.h>
+#include <cbc/app/misc/ValidatorSite.h>
+#include <cbc/app/misc/ValidatorKeys.h>
+#include <cbc/app/paths/PathRequests.h>
+#include <cbc/app/tx/apply.h>
+#include <cbc/basics/ResolverAsio.h>
+#include <cbc/basics/Sustain.h>
+#include <cbc/json/json_reader.h>
+#include <cbc/nodestore/DummyScheduler.h>
+#include <cbc/overlay/Cluster.h>
+#include <cbc/overlay/make_Overlay.h>
+#include <cbc/protocol/Feature.h>
+#include <cbc/protocol/STParsedJSON.h>
+#include <cbc/protocol/Protocol.h>
+#include <cbc/resource/Fees.h>
+#include <cbc/beast/asio/io_latency_probe.h>
+#include <cbc/beast/core/LexicalCast.h>
 #include <boost/asio/steady_timer.hpp>
 #include <fstream>
 #include <sstream>
 #include <iostream>
 
-namespace ripple {
+namespace cbc {
 
 // 204/256 about 80%
 static int const MAJORITY_FRACTION (204);
@@ -354,7 +354,7 @@ public:
     std::size_t
     numberOfThreads(Config const& config)
     {
-    #if RIPPLE_SINGLE_IO_SERVICE_THREAD
+    #if cbc_SINGLE_IO_SERVICE_THREAD
         return 1;
     #else
         return (config.NODE_SIZE >= 2) ? 2 : 1;

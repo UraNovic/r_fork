@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2014 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2014 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,11 +18,11 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/app/tx/impl/Taker.h>
-#include <ripple/basics/contract.h>
-#include <ripple/basics/Log.h>
+#include <cbc/app/tx/impl/Taker.h>
+#include <cbc/basics/contract.h>
+#include <cbc/basics/Log.h>
 
-namespace ripple {
+namespace cbc {
 
 static
 std::string
@@ -586,7 +586,7 @@ TER Taker::transferXRP (
     if (amount == zero)
         return tesSUCCESS;
 
-    return ripple::transferXRP (view_, from, to, amount, journal_);
+    return cbc::transferXRP (view_, from, to, amount, journal_);
 }
 
 TER Taker::redeemIOU (
@@ -609,7 +609,7 @@ TER Taker::redeemIOU (
     if (get_funds (account, amount) <= zero)
         Throw<std::logic_error> ("redeemIOU has no funds to redeem");
 
-    auto ret = ripple::redeemIOU (view_, account, amount, issue, journal_);
+    auto ret = cbc::redeemIOU (view_, account, amount, issue, journal_);
 
     if (get_funds (account, amount) < zero)
         Throw<std::logic_error> ("redeemIOU redeemed more funds than available");
@@ -632,7 +632,7 @@ TER Taker::issueIOU (
     if (amount == zero)
         return tesSUCCESS;
 
-    return ripple::issueIOU (view_, account, amount, issue, journal_);
+    return cbc::issueIOU (view_, account, amount, issue, journal_);
 }
 
 // Performs funds transfers to fill the given offer and adjusts offer.
@@ -771,5 +771,5 @@ Taker::calculateRate (
         : transferRate (view, issuer);
 }
 
-} // ripple
+} // cbc
 

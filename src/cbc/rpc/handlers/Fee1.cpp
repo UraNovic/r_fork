@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012-2015 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012-2015 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,14 +18,14 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/app/ledger/OpenLedger.h>
-#include <ripple/app/main/Application.h>
-#include <ripple/app/misc/TxQ.h>
-#include <ripple/rpc/Context.h>
-#include <ripple/protocol/ErrorCodes.h>
-#include <ripple/protocol/Feature.h>
+#include <cbc/app/ledger/OpenLedger.h>
+#include <cbc/app/main/Application.h>
+#include <cbc/app/misc/TxQ.h>
+#include <cbc/rpc/Context.h>
+#include <cbc/protocol/ErrorCodes.h>
+#include <cbc/protocol/Feature.h>
 
-namespace ripple
+namespace cbc
 {
     Json::Value doFee(RPC::Context& context)
     {
@@ -44,4 +44,4 @@ namespace ripple
         RPC::inject_error(rpcINTERNAL, context.params);
         return context.params;
     }
-} // ripple
+} // cbc

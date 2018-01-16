@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2016 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2016 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -17,11 +17,11 @@
 */
 //==============================================================================
 
-#ifndef RIPPLE_CONDITIONS_UTILS_H
-#define RIPPLE_CONDITIONS_UTILS_H
+#ifndef cbc_CONDITIONS_UTILS_H
+#define cbc_CONDITIONS_UTILS_H
 
-#include <ripple/basics/strHex.h>
-#include <ripple/conditions/impl/error.h>
+#include <cbc/basics/strHex.h>
+#include <cbc/conditions/impl/error.h>
 #include <boost/dynamic_bitset.hpp>
 #include <limits>
 #include <stdexcept>
@@ -31,7 +31,7 @@
 #include <sstream>
 #include <utility>
 
-namespace ripple {
+namespace cbc {
 namespace cryptoconditions {
 
 // A collection of functions to decode binary blobs
@@ -236,6 +236,6 @@ parseInteger(Slice& s, std::size_t count, std::error_code& ec)
 
 } // der
 } // cryptoconditions
-} // ripple
+} // cbc
 
 #endif

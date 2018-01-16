@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,12 +18,12 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/protocol/TER.h>
+#include <cbc/protocol/TER.h>
 #include <boost/range/adaptor/transformed.hpp>
 #include <unordered_map>
 #include <type_traits>
 
-namespace ripple {
+namespace cbc {
 
 namespace detail {
 
@@ -119,7 +119,7 @@ transResults()
         { temBAD_QUORUM,             { "temBAD_QUORUM",            "Malformed: Quorum is unreachable."                                             } },
         { temBAD_SEND_XRP_LIMIT,     { "temBAD_SEND_XRP_LIMIT",    "Malformed: Limit quality is not allowed for XRP to XRP."                       } },
         { temBAD_SEND_XRP_MAX,       { "temBAD_SEND_XRP_MAX",      "Malformed: Send max is not allowed for XRP to XRP."                            } },
-        { temBAD_SEND_XRP_NO_DIRECT, { "temBAD_SEND_XRP_NO_DIRECT","Malformed: No Ripple direct is not allowed for XRP to XRP."                    } },
+        { temBAD_SEND_XRP_NO_DIRECT, { "temBAD_SEND_XRP_NO_DIRECT","Malformed: No cbc direct is not allowed for XRP to XRP."                    } },
         { temBAD_SEND_XRP_PARTIAL,   { "temBAD_SEND_XRP_PARTIAL",  "Malformed: Partial payment is not allowed for XRP to XRP."                     } },
         { temBAD_SEND_XRP_PATHS,     { "temBAD_SEND_XRP_PATHS",    "Malformed: Paths are not allowed for XRP to XRP."                              } },
         { temBAD_SEQUENCE,           { "temBAD_SEQUENCE",          "Malformed: Sequence is not in the past."                                       } },
@@ -133,7 +133,7 @@ transResults()
         { temINVALID,                { "temINVALID",               "The transaction is ill-formed."                                                } },
         { temINVALID_FLAG,           { "temINVALID_FLAG",          "The transaction has an invalid flag."                                          } },
         { temREDUNDANT,              { "temREDUNDANT",             "Sends same currency to self."                                                  } },
-        { temRIPPLE_EMPTY,           { "temRIPPLE_EMPTY",          "PathSet with no paths."                                                        } },
+        { temcbc_EMPTY,           { "temcbc_EMPTY",          "PathSet with no paths."                                                        } },
         { temUNCERTAIN,              { "temUNCERTAIN",             "In process of determining result. Never returned."                             } },
         { temUNKNOWN,                { "temUNKNOWN",               "The transaction requires logic that is not implemented yet."                   } },
         { temDISABLED,               { "temDISABLED",              "The transaction requires logic that is currently disabled."                    } },
@@ -143,7 +143,7 @@ transResults()
         { terFUNDS_SPENT,            { "terFUNDS_SPENT",           "Can't set password, password set funds already spent."                         } },
         { terINSUF_FEE_B,            { "terINSUF_FEE_B",           "Account balance can't pay fee."                                                } },
         { terLAST,                   { "terLAST",                  "Process last."                                                                 } },
-        { terNO_RIPPLE,              { "terNO_RIPPLE",             "Path does not permit rippling."                                                } },
+        { terNO_cbc,              { "terNO_cbc",             "Path does not permit rippling."                                                } },
         { terNO_ACCOUNT,             { "terNO_ACCOUNT",            "The source account does not exist."                                            } },
         { terNO_AUTH,                { "terNO_AUTH",               "Not authorized to hold IOUs."                                                  } },
         { terNO_LINE,                { "terNO_LINE",               "No such line."                                                                 } },
@@ -220,4 +220,4 @@ transCode(std::string const& token)
     return static_cast<TER>(r->second);
 }
 
-} // ripple
+} // cbc

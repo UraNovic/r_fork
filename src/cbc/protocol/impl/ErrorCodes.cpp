@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,8 +18,8 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/basics/contract.h>
-#include <ripple/protocol/ErrorCodes.h>
+#include <cbc/basics/contract.h>
+#include <cbc/protocol/ErrorCodes.h>
 #include <cassert>
 #include <unordered_map>
 #include <utility>
@@ -27,16 +27,16 @@
 namespace std {
 
 template <>
-struct hash <ripple::error_code_i>
+struct hash <cbc::error_code_i>
 {
-    std::size_t operator() (ripple::error_code_i value) const
+    std::size_t operator() (cbc::error_code_i value) const
     {
         return value;
     }
 };
 
 }
-namespace ripple {
+namespace cbc {
 namespace RPC {
 
 namespace detail {
@@ -94,8 +94,8 @@ public:
         add (rpcNO_CLOSED,             "noClosed",          "Closed ledger is unavailable.");
         add (rpcNO_CURRENT,            "noCurrent",         "Current ledger is unavailable.");
         add (rpcNO_EVENTS,             "noEvents",          "Current transport does not support events.");
-        add (rpcNO_NETWORK,            "noNetwork",         "Not synced to Ripple network.");
-        add (rpcNO_PATH,               "noPath",            "Unable to find a ripple path.");
+        add (rpcNO_NETWORK,            "noNetwork",         "Not synced to cbc network.");
+        add (rpcNO_PATH,               "noPath",            "Unable to find a cbc path.");
         add (rpcNO_PERMISSION,         "noPermission",      "You don't have permission for this command.");
         add (rpcNO_PF_REQUEST,         "noPathRequest",     "No pathfinding request in progress.");
         add (rpcPASSWD_CHANGED,        "passwdChanged",     "Wrong key, password changed.");
@@ -188,5 +188,5 @@ std::string rpcErrorString(Json::Value const& jv)
         jv[jss::error_message].asString();
 }
 
-} // ripple
+} // cbc
 

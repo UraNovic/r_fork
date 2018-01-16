@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,16 +18,16 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/app/paths/Flow.h>
-#include <ripple/app/paths/RippleCalc.h>
-#include <ripple/app/paths/Tuning.h>
-#include <ripple/app/paths/cursor/PathCursor.h>
-#include <ripple/app/paths/impl/FlowDebugInfo.h>
-#include <ripple/basics/Log.h>
-#include <ripple/ledger/View.h>
-#include <ripple/protocol/Feature.h>
+#include <cbc/app/paths/Flow.h>
+#include <cbc/app/paths/cbcCalc.h>
+#include <cbc/app/paths/Tuning.h>
+#include <cbc/app/paths/cursor/PathCursor.h>
+#include <cbc/app/paths/impl/FlowDebugInfo.h>
+#include <cbc/basics/Log.h>
+#include <cbc/ledger/View.h>
+#include <cbc/protocol/Feature.h>
 
-namespace ripple {
+namespace cbc {
 namespace path {
 
 static
@@ -42,7 +42,7 @@ deleteOffers (ApplyView& view,
     return tesSUCCESS;
 }
 
-RippleCalc::Output RippleCalc::rippleCalculate (
+cbcCalc::Output cbcCalc::cbcCalculate (
     PaymentSandbox& view,
 
     // Compute paths using this ledger entry set.  Up to caller to actually
@@ -87,7 +87,7 @@ RippleCalc::Output RippleCalc::rippleCalculate (
     if (callFlowV1)
     {
         auto const timeIt = flowV1FlowDebugInfo.timeBlock ("main");
-        RippleCalc rc (
+        cbcCalc rc (
             flowV1SB,
             saMaxAmountReq,
             saDstAmountReq,
@@ -100,7 +100,7 @@ RippleCalc::Output RippleCalc::rippleCalculate (
             rc.inputFlags = *pInputs;
         }
 
-        auto result = rc.rippleCalculate (compareFlowV1V2 ? &flowV1FlowDebugInfo : nullptr);
+        auto result = rc.cbcCalculate (compareFlowV1V2 ? &flowV1FlowDebugInfo : nullptr);
         flowV1Out.setResult (result);
         flowV1Out.actualAmountIn = rc.actualAmountIn_;
         flowV1Out.actualAmountOut = rc.actualAmountOut_;
@@ -151,7 +151,7 @@ RippleCalc::Output RippleCalc::rippleCalculate (
             if (!useFlowV1Output)
             {
                 // return a tec so the tx is stored
-                path::RippleCalc::Output exceptResult;
+                path::cbcCalc::Output exceptResult;
                 exceptResult.setResult(tecINTERNAL);
                 return exceptResult;
             }
@@ -167,7 +167,7 @@ RippleCalc::Output RippleCalc::rippleCalculate (
             boost::optional<BalanceDiffs> const& balanceDiffs,
             bool outputPassInfo,
             bool outputBalanceDiffs) {
-                j.debug () << "RippleCalc Result> " <<
+                j.debug () << "cbcCalc Result> " <<
                 " actualIn: " << result.actualAmountIn <<
                 ", actualOut: " << result.actualAmountOut <<
                 ", result: " << result.result () <<
@@ -222,7 +222,7 @@ RippleCalc::Output RippleCalc::rippleCalculate (
     return flowV1Out;
 }
 
-bool RippleCalc::addPathState(STPath const& path, TER& resultCode)
+bool cbcCalc::addPathState(STPath const& path, TER& resultCode)
 {
     auto pathState = std::make_shared<PathState> (
         view, saDstAmountReq_, saMaxAmountReq_, j_);
@@ -239,7 +239,7 @@ bool RippleCalc::addPathState(STPath const& path, TER& resultCode)
         uSrcAccountID_);
 
     if (pathState->status() == tesSUCCESS)
-        pathState->checkNoRipple (uDstAccountID_, uSrcAccountID_);
+        pathState->checkNocbc (uDstAccountID_, uSrcAccountID_);
 
     if (pathState->status() == tesSUCCESS)
         pathState->checkFreeze ();
@@ -247,7 +247,7 @@ bool RippleCalc::addPathState(STPath const& path, TER& resultCode)
     pathState->setIndex (pathStateList_.size ());
 
     JLOG (j_.debug())
-        << "rippleCalc: Build direct:"
+        << "cbcCalc: Build direct:"
         << " status: " << transToken (pathState->status());
 
     // Return if malformed.
@@ -274,10 +274,10 @@ bool RippleCalc::addPathState(STPath const& path, TER& resultCode)
 // liquidity. No need to revisit path in the future if all liquidity is used.
 
 // <-- TER: Only returns tepPATH_PARTIAL if partialPaymentAllowed.
-TER RippleCalc::rippleCalculate (detail::FlowDebugInfo* flowDebugInfo)
+TER cbcCalc::cbcCalculate (detail::FlowDebugInfo* flowDebugInfo)
 {
     JLOG (j_.trace())
-        << "rippleCalc>"
+        << "cbcCalc>"
         << " saMaxAmountReq_:" << saMaxAmountReq_
         << " saDstAmountReq_:" << saDstAmountReq_;
 
@@ -296,10 +296,10 @@ TER RippleCalc::rippleCalculate (detail::FlowDebugInfo* flowDebugInfo)
     else if (spsPaths_.empty ())
     {
         JLOG (j_.debug())
-            << "rippleCalc: Invalid transaction:"
-            << "No paths and direct ripple not allowed.";
+            << "cbcCalc: Invalid transaction:"
+            << "No paths and direct cbc not allowed.";
 
-        return temRIPPLE_EMPTY;
+        return temcbc_EMPTY;
     }
 
     // Build a default path.  Use saDstAmountReq_ and saMaxAmountReq_ to imply
@@ -307,7 +307,7 @@ TER RippleCalc::rippleCalculate (detail::FlowDebugInfo* flowDebugInfo)
     // XXX Might also make a XRP bridge by default.
 
     JLOG (j_.trace())
-        << "rippleCalc: Paths in set: " << spsPaths_.size ();
+        << "cbcCalc: Paths in set: " << spsPaths_.size ();
 
     // Now expand the path state.
     for (auto const& spPath: spsPaths_)
@@ -366,7 +366,7 @@ TER RippleCalc::rippleCalculate (detail::FlowDebugInfo* flowDebugInfo)
 
                 // Compute increment.
                 JLOG (j_.debug())
-                    << "rippleCalc: AFTER:"
+                    << "cbcCalc: AFTER:"
                     << " mIndex=" << pathState->index()
                     << " uQuality=" << pathState->quality()
                     << " rate=" << amountFromQuality (pathState->quality());
@@ -388,7 +388,7 @@ TER RippleCalc::rippleCalculate (detail::FlowDebugInfo* flowDebugInfo)
                     // This should never happen. Consider the path dry
 
                     JLOG (j_.warn())
-                        << "rippleCalc: Non-dry path moves no funds";
+                        << "cbcCalc: Non-dry path moves no funds";
 
                     assert (false);
 
@@ -400,7 +400,7 @@ TER RippleCalc::rippleCalculate (detail::FlowDebugInfo* flowDebugInfo)
                     if (!pathState->inPass() || !pathState->outPass())
                     {
                         JLOG (j_.debug())
-                            << "rippleCalc: better:"
+                            << "cbcCalc: better:"
                             << " uQuality="
                             << amountFromQuality (pathState->quality())
                             << " inPass()=" << pathState->inPass()
@@ -426,7 +426,7 @@ TER RippleCalc::rippleCalculate (detail::FlowDebugInfo* flowDebugInfo)
                         // Current is better than set.
                     {
                         JLOG (j_.debug())
-                            << "rippleCalc: better:"
+                            << "cbcCalc: better:"
                             << " mIndex=" << pathState->index()
                             << " uQuality=" << pathState->quality()
                             << " rate="
@@ -445,14 +445,14 @@ TER RippleCalc::rippleCalculate (detail::FlowDebugInfo* flowDebugInfo)
         if (auto stream = j_.debug())
         {
             stream
-                << "rippleCalc: Summary:"
+                << "cbcCalc: Summary:"
                 << " Pass: " << iPass
                 << " Dry: " << iDry
                 << " Paths: " << pathStateList_.size ();
             for (auto pathState: pathStateList_)
             {
                 stream
-                    << "rippleCalc: "
+                    << "cbcCalc: "
                     << "Summary: " << pathState->index()
                     << " rate: "
                     << amountFromQuality (pathState->quality())
@@ -472,7 +472,7 @@ TER RippleCalc::rippleCalculate (detail::FlowDebugInfo* flowDebugInfo)
                     pathStateList_.size () - iDry);
 
             JLOG (j_.debug ())
-                << "rippleCalc: best:"
+                << "cbcCalc: best:"
                 << " uQuality=" << amountFromQuality (pathState->quality ())
                 << " inPass()=" << pathState->inPass ()
                 << " saOutPass=" << pathState->outPass () << " iBest=" << iBest;
@@ -491,7 +491,7 @@ TER RippleCalc::rippleCalculate (detail::FlowDebugInfo* flowDebugInfo)
             actualAmountOut_ += pathState->outPass();
 
             JLOG (j_.trace())
-                    << "rippleCalc: best:"
+                    << "cbcCalc: best:"
                     << " uQuality="
                     << amountFromQuality (pathState->quality())
                     << " inPass()=" << pathState->inPass()
@@ -515,7 +515,7 @@ TER RippleCalc::rippleCalculate (detail::FlowDebugInfo* flowDebugInfo)
             else if (actualAmountOut_ > saDstAmountReq_)
             {
                 JLOG (j_.fatal())
-                    << "rippleCalc: TOO MUCH:"
+                    << "cbcCalc: TOO MUCH:"
                     << " actualAmountOut_:" << actualAmountOut_
                     << " saDstAmountReq_:" << saDstAmountReq_;
 
@@ -537,7 +537,7 @@ TER RippleCalc::rippleCalculate (detail::FlowDebugInfo* flowDebugInfo)
                     // This payment is taking too many passes
 
                     JLOG (j_.error())
-                       << "rippleCalc: pass limit";
+                       << "cbcCalc: pass limit";
 
                     resultCode = telFAILED_PROCESSING;
                 }
@@ -590,4 +590,4 @@ TER RippleCalc::rippleCalculate (detail::FlowDebugInfo* flowDebugInfo)
 }
 
 } // path
-} // ripple
+} // cbc

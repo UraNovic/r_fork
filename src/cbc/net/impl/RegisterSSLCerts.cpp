@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2017 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2017 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -17,7 +17,7 @@
 */
 //==============================================================================
 #include <BeastConfig.h>
-#include <ripple/net/RegisterSSLCerts.h>
+#include <cbc/net/RegisterSSLCerts.h>
 #include <boost/predef.h>
 #if BOOST_OS_WINDOWS
 #include <boost/asio/ssl/error.hpp>
@@ -29,7 +29,7 @@
 #include <wincrypt.h>
 #endif
 
-namespace ripple {
+namespace cbc {
 
 void
 registerSSLCerts(
@@ -106,4 +106,4 @@ registerSSLCerts(
 #endif
 }
 
-}  // namespace ripple
+}  // namespace cbc

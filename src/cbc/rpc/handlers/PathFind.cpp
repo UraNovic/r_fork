@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012-2014 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012-2014 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,17 +18,17 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/app/ledger/LedgerMaster.h>
-#include <ripple/app/main/Application.h>
-#include <ripple/app/misc/NetworkOPs.h>
-#include <ripple/app/paths/PathRequests.h>
-#include <ripple/net/RPCErr.h>
-#include <ripple/protocol/ErrorCodes.h>
-#include <ripple/protocol/JsonFields.h>
-#include <ripple/resource/Fees.h>
-#include <ripple/rpc/Context.h>
+#include <cbc/app/ledger/LedgerMaster.h>
+#include <cbc/app/main/Application.h>
+#include <cbc/app/misc/NetworkOPs.h>
+#include <cbc/app/paths/PathRequests.h>
+#include <cbc/net/RPCErr.h>
+#include <cbc/protocol/ErrorCodes.h>
+#include <cbc/protocol/JsonFields.h>
+#include <cbc/resource/Fees.h>
+#include <cbc/rpc/Context.h>
 
-namespace ripple {
+namespace cbc {
 
 Json::Value doPathFind (RPC::Context& context)
 {
@@ -80,4 +80,4 @@ Json::Value doPathFind (RPC::Context& context)
     return rpcError (rpcINVALID_PARAMS);
 }
 
-} // ripple
+} // cbc

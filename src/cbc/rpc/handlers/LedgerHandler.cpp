@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012-2014 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012-2014 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,18 +18,18 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/rpc/handlers/LedgerHandler.h>
-#include <ripple/app/ledger/LedgerToJson.h>
-#include <ripple/app/main/Application.h>
-#include <ripple/app/misc/LoadFeeTrack.h>
-#include <ripple/json/Object.h>
-#include <ripple/protocol/ErrorCodes.h>
-#include <ripple/protocol/JsonFields.h>
-#include <ripple/resource/Fees.h>
-#include <ripple/rpc/impl/RPCHelpers.h>
-#include <ripple/rpc/Role.h>
+#include <cbc/rpc/handlers/LedgerHandler.h>
+#include <cbc/app/ledger/LedgerToJson.h>
+#include <cbc/app/main/Application.h>
+#include <cbc/app/misc/LoadFeeTrack.h>
+#include <cbc/json/Object.h>
+#include <cbc/protocol/ErrorCodes.h>
+#include <cbc/protocol/JsonFields.h>
+#include <cbc/resource/Fees.h>
+#include <cbc/rpc/impl/RPCHelpers.h>
+#include <cbc/rpc/Role.h>
 
-namespace ripple {
+namespace cbc {
 namespace RPC {
 
 LedgerHandler::LedgerHandler (Context& context) : context_ (context)
@@ -99,4 +99,4 @@ Status LedgerHandler::check()
 }
 
 } // RPC
-} // ripple
+} // cbc

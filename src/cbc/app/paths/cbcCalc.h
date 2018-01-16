@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -17,18 +17,18 @@
 */
 //==============================================================================
 
-#ifndef RIPPLE_APP_PATHS_RIPPLECALC_H_INCLUDED
-#define RIPPLE_APP_PATHS_RIPPLECALC_H_INCLUDED
+#ifndef cbc_APP_PATHS_cbcCALC_H_INCLUDED
+#define cbc_APP_PATHS_cbcCALC_H_INCLUDED
 
-#include <ripple/ledger/PaymentSandbox.h>
-#include <ripple/app/paths/PathState.h>
-#include <ripple/basics/Log.h>
-#include <ripple/protocol/STAmount.h>
-#include <ripple/protocol/TER.h>
+#include <cbc/ledger/PaymentSandbox.h>
+#include <cbc/app/paths/PathState.h>
+#include <cbc/basics/Log.h>
+#include <cbc/protocol/STAmount.h>
+#include <cbc/protocol/TER.h>
 
 #include <boost/container/flat_set.hpp>
 
-namespace ripple {
+namespace cbc {
 class Config;
 namespace path {
 
@@ -36,12 +36,12 @@ namespace detail {
 struct FlowDebugInfo;
 }
 
-/** RippleCalc calculates the quality of a payment path.
+/** cbcCalc calculates the quality of a payment path.
 
     Quality is the amount of input required to produce a given output along a
     specified path - another name for this is exchange rate.
 */
-class RippleCalc
+class cbcCalc
 {
 public:
     struct Input
@@ -82,7 +82,7 @@ public:
 
     static
     Output
-    rippleCalculate(
+    cbcCalculate(
         PaymentSandbox& view,
 
         // Compute paths using this ledger entry set.  Up to caller to actually
@@ -127,7 +127,7 @@ public:
     Logs& logs_;
 
 private:
-    RippleCalc (
+    cbcCalc (
         PaymentSandbox& view_,
         STAmount const& saMaxAmountReq,             // --> -1 = no limit.
         STAmount const& saDstAmountReq,
@@ -137,7 +137,7 @@ private:
         STPathSet const& spsPaths,
         Logs& l)
             : view (view_),
-              j_ (l.journal ("RippleCalc")),
+              j_ (l.journal ("cbcCalc")),
               logs_ (l),
               saDstAmountReq_(saDstAmountReq),
               saMaxAmountReq_(saMaxAmountReq),
@@ -148,7 +148,7 @@ private:
     }
 
     /** Compute liquidity through these path sets. */
-    TER rippleCalculate (detail::FlowDebugInfo* flowDebugInfo=nullptr);
+    TER cbcCalculate (detail::FlowDebugInfo* flowDebugInfo=nullptr);
 
     /** Add a single PathState.  Returns true on success.*/
     bool addPathState(STPath const&, TER&);
@@ -174,6 +174,6 @@ private:
 };
 
 } // path
-} // ripple
+} // cbc
 
 #endif

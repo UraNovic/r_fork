@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,13 +18,13 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/app/tx/impl/SignerEntries.h>
-#include <ripple/basics/Log.h>
-#include <ripple/protocol/STObject.h>
-#include <ripple/protocol/STArray.h>
+#include <cbc/app/tx/impl/SignerEntries.h>
+#include <cbc/basics/Log.h>
+#include <cbc/protocol/STObject.h>
+#include <cbc/protocol/STArray.h>
 #include <cstdint>
 
-namespace ripple {
+namespace cbc {
 
 std::pair<std::vector<SignerEntries::SignerEntry>, TER>
 SignerEntries::deserialize (
@@ -65,4 +65,4 @@ SignerEntries::deserialize (
     return s;
 }
 
-} // ripple
+} // cbc

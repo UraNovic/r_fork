@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -17,21 +17,21 @@
 */
 //==============================================================================
 
-#include <ripple/app/misc/Manifest.h>
-#include <ripple/basics/contract.h>
-#include <ripple/basics/Log.h>
-#include <ripple/basics/StringUtilities.h>
-#include <ripple/beast/rfc2616.h>
-#include <ripple/core/DatabaseCon.h>
-#include <ripple/json/json_reader.h>
-#include <ripple/protocol/PublicKey.h>
-#include <ripple/protocol/Sign.h>
+#include <cbc/app/misc/Manifest.h>
+#include <cbc/basics/contract.h>
+#include <cbc/basics/Log.h>
+#include <cbc/basics/StringUtilities.h>
+#include <cbc/beast/rfc2616.h>
+#include <cbc/core/DatabaseCon.h>
+#include <cbc/json/json_reader.h>
+#include <cbc/protocol/PublicKey.h>
+#include <cbc/protocol/Sign.h>
 #include <beast/core/detail/base64.hpp>
 #include <boost/regex.hpp>
 #include <numeric>
 #include <stdexcept>
 
-namespace ripple {
+namespace cbc {
 
 boost::optional<Manifest>
 Manifest::make_Manifest (std::string s)
@@ -122,10 +122,10 @@ bool Manifest::verify () const
 
     // Signing key and signature are not required for
     // master key revocations
-    if (! revoked () && ! ripple::verify (st, HashPrefix::manifest, signingKey))
+    if (! revoked () && ! cbc::verify (st, HashPrefix::manifest, signingKey))
         return false;
 
-    return ripple::verify (
+    return cbc::verify (
         st, HashPrefix::manifest, masterKey, sfMasterSignature);
 }
 

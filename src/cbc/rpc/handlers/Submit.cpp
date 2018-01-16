@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012-2014 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012-2014 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,17 +18,17 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/app/ledger/LedgerMaster.h>
-#include <ripple/app/misc/HashRouter.h>
-#include <ripple/app/misc/Transaction.h>
-#include <ripple/app/tx/apply.h>
-#include <ripple/net/RPCErr.h>
-#include <ripple/protocol/ErrorCodes.h>
-#include <ripple/resource/Fees.h>
-#include <ripple/rpc/Context.h>
-#include <ripple/rpc/impl/TransactionSign.h>
+#include <cbc/app/ledger/LedgerMaster.h>
+#include <cbc/app/misc/HashRouter.h>
+#include <cbc/app/misc/Transaction.h>
+#include <cbc/app/tx/apply.h>
+#include <cbc/net/RPCErr.h>
+#include <cbc/protocol/ErrorCodes.h>
+#include <cbc/resource/Fees.h>
+#include <cbc/rpc/Context.h>
+#include <cbc/rpc/impl/TransactionSign.h>
 
-namespace ripple {
+namespace cbc {
 
 static NetworkOPs::FailHard getFailHard (RPC::Context const& context)
 {
@@ -154,4 +154,4 @@ Json::Value doSubmit (RPC::Context& context)
     }
 }
 
-} // ripple
+} // cbc

@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2015 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2015 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -17,15 +17,15 @@
 */
 //==============================================================================
 
-#include <ripple/app/misc/ValidatorList.h>
-#include <ripple/basics/Slice.h>
-#include <ripple/basics/StringUtilities.h>
-#include <ripple/json/json_reader.h>
-#include <ripple/protocol/JsonFields.h>
+#include <cbc/app/misc/ValidatorList.h>
+#include <cbc/basics/Slice.h>
+#include <cbc/basics/StringUtilities.h>
+#include <cbc/json/json_reader.h>
+#include <cbc/protocol/JsonFields.h>
 #include <beast/core/detail/base64.hpp>
 #include <boost/regex.hpp>
 
-namespace ripple {
+namespace cbc {
 
 std::string
 to_string(ListDisposition disposition)
@@ -344,7 +344,7 @@ ValidatorList::verify (
     auto const sig = strUnHex(signature);
     auto const data = beast::detail::base64_decode (blob);
     if (! sig.second ||
-        ! ripple::verify (
+        ! cbc::verify (
             publisherManifests_.getSigningKey(pubKey),
             makeSlice(data),
             makeSlice(sig.first)))
@@ -597,4 +597,4 @@ ValidatorList::calculateMinimumQuorum (
     return nListedKeys * 2/3 + 1;
 }
 
-} // ripple
+} // cbc

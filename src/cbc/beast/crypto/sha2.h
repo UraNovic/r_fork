@@ -20,8 +20,8 @@
 #ifndef BEAST_CRYPTO_SHA2_H_INCLUDED
 #define BEAST_CRYPTO_SHA2_H_INCLUDED
 
-#include <ripple/beast/crypto/detail/mac_facade.h>
-#include <ripple/beast/crypto/detail/sha2_context.h>
+#include <cbc/beast/crypto/detail/mac_facade.h>
+#include <cbc/beast/crypto/detail/sha2_context.h>
 
 namespace beast {
 

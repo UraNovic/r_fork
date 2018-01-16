@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,17 +18,17 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/app/tx/impl/Payment.h>
-#include <ripple/app/paths/RippleCalc.h>
-#include <ripple/basics/Log.h>
-#include <ripple/core/Config.h>
-#include <ripple/protocol/st.h>
-#include <ripple/protocol/TxFlags.h>
-#include <ripple/protocol/JsonFields.h>
+#include <cbc/app/tx/impl/Payment.h>
+#include <cbc/app/paths/cbcCalc.h>
+#include <cbc/basics/Log.h>
+#include <cbc/core/Config.h>
+#include <cbc/protocol/st.h>
+#include <cbc/protocol/TxFlags.h>
+#include <cbc/protocol/JsonFields.h>
 
-namespace ripple {
+namespace cbc {
 
-// See https://ripple.com/wiki/Transaction_Format#Payment_.280.29
+// See https://cbc.com/wiki/Transaction_Format#Payment_.280.29
 
 XRPAmount
 Payment::calculateMaxSpend(STTx const& tx)
@@ -65,7 +65,7 @@ Payment::preflight (PreflightContext const& ctx)
 
     bool const partialPaymentAllowed = uTxFlags & tfPartialPayment;
     bool const limitQuality = uTxFlags & tfLimitQuality;
-    bool const defaultPathsAllowed = !(uTxFlags & tfNoRippleDirect);
+    bool const defaultPathsAllowed = !(uTxFlags & tfNocbcDirect);
     bool const bPaths = tx.isFieldPresent (sfPaths);
     bool const bMax = tx.isFieldPresent (sfSendMax);
 
@@ -160,7 +160,7 @@ Payment::preflight (PreflightContext const& ctx)
     {
         // Consistent but redundant transaction.
         JLOG(j.trace()) << "Malformed transaction: " <<
-            "No ripple direct specified for XRP to XRP.";
+            "No cbc direct specified for XRP to XRP.";
         return temBAD_SEND_XRP_NO_DIRECT;
     }
 
@@ -204,7 +204,7 @@ Payment::preflight (PreflightContext const& ctx)
 TER
 Payment::preclaim(PreclaimContext const& ctx)
 {
-    // Ripple if source or destination is non-native or if there are paths.
+    // cbc if source or destination is non-native or if there are paths.
     std::uint32_t const uTxFlags = ctx.tx.getFlags();
     bool const partialPaymentAllowed = uTxFlags & tfPartialPayment;
     auto const paths = ctx.tx.isFieldPresent(sfPaths);
@@ -270,7 +270,7 @@ Payment::preclaim(PreclaimContext const& ctx)
 
     if (paths || sendMax || !saDstAmount.native())
     {
-        // Ripple payment with at least one intermediate step and uses
+        // cbc payment with at least one intermediate step and uses
         // transitive balances.
 
         // Copy paths into an editable class.
@@ -301,11 +301,11 @@ Payment::doApply ()
 {
     auto const deliverMin = ctx_.tx[~sfDeliverMin];
 
-    // Ripple if source or destination is non-native or if there are paths.
+    // cbc if source or destination is non-native or if there are paths.
     std::uint32_t const uTxFlags = ctx_.tx.getFlags ();
     bool const partialPaymentAllowed = uTxFlags & tfPartialPayment;
     bool const limitQuality = uTxFlags & tfLimitQuality;
-    bool const defaultPathsAllowed = !(uTxFlags & tfNoRippleDirect);
+    bool const defaultPathsAllowed = !(uTxFlags & tfNocbcDirect);
     auto const paths = ctx_.tx.isFieldPresent(sfPaths);
     auto const sendMax = ctx_.tx[~sfSendMax];
 
@@ -348,29 +348,29 @@ Payment::doApply ()
 
     TER terResult;
 
-    bool const bRipple = paths || sendMax || !saDstAmount.native ();
-    // XXX Should sendMax be sufficient to imply ripple?
+    bool const bcbc = paths || sendMax || !saDstAmount.native ();
+    // XXX Should sendMax be sufficient to imply cbc?
 
-    if (bRipple)
+    if (bcbc)
     {
-        // Ripple payment with at least one intermediate step and uses
+        // cbc payment with at least one intermediate step and uses
         // transitive balances.
 
         // Copy paths into an editable class.
         STPathSet spsPaths = ctx_.tx.getFieldPathSet (sfPaths);
 
-        path::RippleCalc::Input rcInput;
+        path::cbcCalc::Input rcInput;
         rcInput.partialPaymentAllowed = partialPaymentAllowed;
         rcInput.defaultPathsAllowed = defaultPathsAllowed;
         rcInput.limitQuality = limitQuality;
         rcInput.isLedgerOpen = view().open();
 
-        path::RippleCalc::Output rc;
+        path::cbcCalc::Output rc;
         {
             PaymentSandbox pv(&view());
             JLOG(j_.debug())
-                << "Entering RippleCalc in payment: " << ctx_.tx.getTransactionID();
-            rc = path::RippleCalc::rippleCalculate (
+                << "Entering cbcCalc in payment: " << ctx_.tx.getTransactionID();
+            rc = path::cbcCalc::cbcCalculate (
                 pv,
                 maxSourceAmount,
                 saDstAmount,
@@ -399,7 +399,7 @@ Payment::doApply ()
 
         terResult = rc.result ();
 
-        // Because of its overhead, if RippleCalc
+        // Because of its overhead, if cbcCalc
         // fails with a retry code, claim a fee
         // instead. Maybe the user will be more
         // careful with their path spec next time.
@@ -457,4 +457,4 @@ Payment::doApply ()
     return terResult;
 }
 
-}  // ripple
+}  // cbc

@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,11 +18,11 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/protocol/digest.h>
-#include <ripple/protocol/Indexes.h>
+#include <cbc/protocol/digest.h>
+#include <cbc/protocol/Indexes.h>
 #include <cassert>
 
-namespace ripple {
+namespace cbc {
 
 // get the index of the node that holds the last 256 ledgers
 uint256
@@ -156,25 +156,25 @@ getTicketIndex (AccountID const& account, std::uint32_t uSequence)
 }
 
 uint256
-getRippleStateIndex (AccountID const& a, AccountID const& b, Currency const& currency)
+getcbcStateIndex (AccountID const& a, AccountID const& b, Currency const& currency)
 {
     if (a < b)
         return sha512Half(
-            std::uint16_t(spaceRipple),
+            std::uint16_t(spacecbc),
             a,
             b,
             currency);
     return sha512Half(
-        std::uint16_t(spaceRipple),
+        std::uint16_t(spacecbc),
         b,
         a,
         currency);
 }
 
 uint256
-getRippleStateIndex (AccountID const& a, Issue const& issue)
+getcbcStateIndex (AccountID const& a, Issue const& issue)
 {
-    return getRippleStateIndex (a, issue.account, issue.currency);
+    return getcbcStateIndex (a, issue.account, issue.currency);
 }
 
 uint256
@@ -239,15 +239,15 @@ Keylet book_t::operator()(Book const& b) const
 Keylet line_t::operator()(AccountID const& id0,
     AccountID const& id1, Currency const& currency) const
 {
-    return { ltRIPPLE_STATE,
-        getRippleStateIndex(id0, id1, currency) };
+    return { ltcbc_STATE,
+        getcbcStateIndex(id0, id1, currency) };
 }
 
 Keylet line_t::operator()(AccountID const& id,
     Issue const& issue) const
 {
-    return { ltRIPPLE_STATE,
-        getRippleStateIndex(id, issue) };
+    return { ltcbc_STATE,
+        getcbcStateIndex(id, issue) };
 }
 
 Keylet offer_t::operator()(AccountID const& id,
@@ -337,4 +337,4 @@ payChan (AccountID const& source, AccountID const& dst, std::uint32_t seq)
 
 } // keylet
 
-} // ripple
+} // cbc

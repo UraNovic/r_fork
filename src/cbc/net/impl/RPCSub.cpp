@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,15 +18,15 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/net/RPCSub.h>
-#include <ripple/basics/contract.h>
-#include <ripple/basics/Log.h>
-#include <ripple/basics/StringUtilities.h>
-#include <ripple/json/to_string.h>
-#include <ripple/net/RPCCall.h>
+#include <cbc/net/RPCSub.h>
+#include <cbc/basics/contract.h>
+#include <cbc/basics/Log.h>
+#include <cbc/basics/StringUtilities.h>
+#include <cbc/json/to_string.h>
+#include <cbc/net/RPCCall.h>
 #include <deque>
 
-namespace ripple {
+namespace cbc {
 
 // Subscription object for JSON-RPC
 class RPCSubImp
@@ -219,4 +219,4 @@ std::shared_ptr<RPCSub> make_RPCSub (
             strUrl, strUsername, strPassword, logs);
 }
 
-} // ripple
+} // cbc

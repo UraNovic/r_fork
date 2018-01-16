@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,17 +18,17 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/app/ledger/impl/TransactionAcquire.h>
-#include <ripple/app/ledger/ConsensusTransSetSF.h>
-#include <ripple/app/ledger/InboundLedgers.h>
-#include <ripple/app/ledger/InboundTransactions.h>
-#include <ripple/app/main/Application.h>
-#include <ripple/app/misc/NetworkOPs.h>
-#include <ripple/overlay/Overlay.h>
-#include <ripple/basics/make_lock.h>
+#include <cbc/app/ledger/impl/TransactionAcquire.h>
+#include <cbc/app/ledger/ConsensusTransSetSF.h>
+#include <cbc/app/ledger/InboundLedgers.h>
+#include <cbc/app/ledger/InboundTransactions.h>
+#include <cbc/app/main/Application.h>
+#include <cbc/app/misc/NetworkOPs.h>
+#include <cbc/overlay/Overlay.h>
+#include <cbc/basics/make_lock.h>
 #include <memory>
 
-namespace ripple {
+namespace cbc {
 
 using namespace std::chrono_literals;
 
@@ -270,4 +270,4 @@ void TransactionAcquire::stillNeed ()
         mTimeouts = NORM_TIMEOUTS;
 }
 
-} // ripple
+} // cbc

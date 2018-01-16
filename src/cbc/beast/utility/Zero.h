@@ -20,7 +20,7 @@
 #ifndef BEAST_UTILITY_ZERO_H_INCLUDED
 #define BEAST_UTILITY_ZERO_H_INCLUDED
 
-#include <ripple/beast/core/CompilerConfig.h>
+#include <cbc/beast/core/CompilerConfig.h>
 
 // VS2013 SP1 fails with decltype return
 #define BEAST_NO_ZERO_AUTO_RETURN 1

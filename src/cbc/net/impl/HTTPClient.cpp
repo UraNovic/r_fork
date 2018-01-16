@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,20 +18,20 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/basics/contract.h>
-#include <ripple/basics/Log.h>
-#include <ripple/basics/StringUtilities.h>
-#include <ripple/net/HTTPClient.h>
-#include <ripple/net/AutoSocket.h>
-#include <ripple/net/RegisterSSLCerts.h>
-#include <ripple/beast/core/LexicalCast.h>
+#include <cbc/basics/contract.h>
+#include <cbc/basics/Log.h>
+#include <cbc/basics/StringUtilities.h>
+#include <cbc/net/HTTPClient.h>
+#include <cbc/net/AutoSocket.h>
+#include <cbc/net/RegisterSSLCerts.h>
+#include <cbc/beast/core/LexicalCast.h>
 #include <boost/asio.hpp>
 #include <boost/asio/ssl.hpp>
 #include <boost/asio/ip/tcp.hpp>
 #include <boost/regex.hpp>
 #include <boost/optional.hpp>
 
-namespace ripple {
+namespace cbc {
 
 //
 // Fetch a web page via http or https.
@@ -586,4 +586,4 @@ void HTTPClient::request (
     client->request (bSSL, deqSites, setRequest, timeout, complete);
 }
 
-} // ripple
+} // cbc

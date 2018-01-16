@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2014 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2014 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,10 +18,10 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/app/tx/impl/BookTip.h>
-#include <ripple/basics/Log.h>
+#include <cbc/app/tx/impl/BookTip.h>
+#include <cbc/basics/Log.h>
 
-namespace ripple {
+namespace cbc {
 
 BookTip::BookTip (ApplyView& view, Book const& book)
     : view_ (view)

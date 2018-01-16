@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -17,25 +17,25 @@
 */
 //==============================================================================
 
-#ifndef RIPPLE_RPC_HANDLERS_LEDGER_H_INCLUDED
-#define RIPPLE_RPC_HANDLERS_LEDGER_H_INCLUDED
+#ifndef cbc_RPC_HANDLERS_LEDGER_H_INCLUDED
+#define cbc_RPC_HANDLERS_LEDGER_H_INCLUDED
 
-#include <ripple/app/main/Application.h>
-#include <ripple/app/ledger/LedgerToJson.h>
-#include <ripple/app/ledger/LedgerMaster.h>
-#include <ripple/ledger/ReadView.h>
-#include <ripple/json/Object.h>
-#include <ripple/protocol/JsonFields.h>
-#include <ripple/rpc/Context.h>
-#include <ripple/rpc/Status.h>
-#include <ripple/rpc/impl/Handler.h>
-#include <ripple/rpc/Role.h>
+#include <cbc/app/main/Application.h>
+#include <cbc/app/ledger/LedgerToJson.h>
+#include <cbc/app/ledger/LedgerMaster.h>
+#include <cbc/ledger/ReadView.h>
+#include <cbc/json/Object.h>
+#include <cbc/protocol/JsonFields.h>
+#include <cbc/rpc/Context.h>
+#include <cbc/rpc/Status.h>
+#include <cbc/rpc/impl/Handler.h>
+#include <cbc/rpc/Role.h>
 
 namespace Json {
 class Object;
 }
 
-namespace ripple {
+namespace cbc {
 namespace RPC {
 
 struct Context;
@@ -107,6 +107,6 @@ void LedgerHandler::writeResult (Object& value)
 }
 
 } // RPC
-} // ripple
+} // cbc
 
 #endif

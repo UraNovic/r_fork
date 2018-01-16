@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,14 +18,14 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/app/ledger/LedgerCleaner.h>
-#include <ripple/app/ledger/InboundLedgers.h>
-#include <ripple/app/ledger/LedgerMaster.h>
-#include <ripple/app/misc/LoadFeeTrack.h>
-#include <ripple/protocol/JsonFields.h>
-#include <ripple/beast/core/CurrentThreadName.h>
+#include <cbc/app/ledger/LedgerCleaner.h>
+#include <cbc/app/ledger/InboundLedgers.h>
+#include <cbc/app/ledger/LedgerMaster.h>
+#include <cbc/app/misc/LoadFeeTrack.h>
+#include <cbc/protocol/JsonFields.h>
+#include <cbc/beast/core/CurrentThreadName.h>
 
-namespace ripple {
+namespace cbc {
 namespace detail {
 
 /*
@@ -505,4 +505,4 @@ make_LedgerCleaner (Application& app,
 }
 
 } // detail
-} // ripple
+} // cbc

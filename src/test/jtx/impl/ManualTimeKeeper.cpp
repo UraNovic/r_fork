@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012-2015 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012-2015 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -20,7 +20,7 @@
 #include <BeastConfig.h>
 #include <test/jtx/ManualTimeKeeper.h>
 
-namespace ripple {
+namespace cbc {
 namespace test {
 
 using namespace std::chrono_literals;
@@ -101,4 +101,4 @@ ManualTimeKeeper::adjust(
                 days(10957)));
 }
 } // test
-} // ripple
+} // cbc

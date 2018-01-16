@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,8 +18,8 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/protocol/tokens.h>
-#include <ripple/protocol/digest.h>
+#include <cbc/protocol/tokens.h>
+#include <cbc/protocol/digest.h>
 #include <cassert>
 #include <cstring>
 #include <memory>
@@ -27,9 +27,9 @@
 #include <utility>
 #include <vector>
 
-namespace ripple {
+namespace cbc {
 
-static char rippleAlphabet[] =
+static char cbcAlphabet[] =
     "rpshnaf39wBUDNEGHJKLM4PQRST7VWXYZ2bcdeCg65jkm8oFqi1tuvAxyz";
 
 static char bitcoinAlphabet[] =
@@ -175,7 +175,7 @@ encodeToken (std::uint8_t type,
     std::memcpy(temp + 1, token, size);
     checksum(temp + 1 + size, temp, 1 + size);
     return encodeBase58(temp, expanded,
-        temp + expanded, btc ? bitcoinAlphabet : rippleAlphabet);
+        temp + expanded, btc ? bitcoinAlphabet : cbcAlphabet);
 }
 
 std::string
@@ -249,7 +249,7 @@ decodeBase58 (std::string const& s,
     return result;
 }
 
-/*  Base58 decode a Ripple token
+/*  Base58 decode a cbc token
 
     The type and checksum are are checked
     and removed from the returned result.
@@ -309,7 +309,7 @@ public:
     }
 };
 
-static InverseAlphabet rippleInverse(rippleAlphabet);
+static InverseAlphabet cbcInverse(cbcAlphabet);
 
 static InverseAlphabet bitcoinInverse(bitcoinAlphabet);
 
@@ -318,7 +318,7 @@ decodeBase58Token(
     std::string const& s, int type)
 {
     return decodeBase58Token(
-        s, type, rippleInverse);
+        s, type, cbcInverse);
 }
 
 std::string
@@ -329,4 +329,4 @@ decodeBase58TokenBitcoin(
         s, type, bitcoinInverse);
 }
 
-} // ripple
+} // cbc

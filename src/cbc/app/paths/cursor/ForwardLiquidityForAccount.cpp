@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,11 +18,11 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/app/paths/cursor/RippleLiquidity.h>
-#include <ripple/basics/Log.h>
-#include <ripple/protocol/Quality.h>
+#include <cbc/app/paths/cursor/cbcLiquidity.h>
+#include <cbc/basics/Log.h>
+#include <cbc/protocol/Quality.h>
 
-namespace ripple {
+namespace cbc {
 namespace path {
 
 // The reverse pass has been narrowing by credit available and inflating by fees
@@ -44,7 +44,7 @@ TER PathCursor::forwardLiquidityForAccount () const
 {
     TER resultCode   = tesSUCCESS;
     auto const lastNodeIndex       = pathState_.nodes().size () - 1;
-    auto viewJ = rippleCalc_.logs_.journal ("View");
+    auto viewJ = cbcCalc_.logs_.journal ("View");
 
     std::uint64_t uRateMax = 0;
 
@@ -91,7 +91,7 @@ TER PathCursor::forwardLiquidityForAccount () const
         << " node.saRevIssue:" << node().saRevIssue
         << " node.saRevDeliver:" << node().saRevDeliver;
 
-    // Ripple through account.
+    // cbc through account.
 
     if (previousNode().isAccount() && nextNode().isAccount())
     {
@@ -101,7 +101,7 @@ TER PathCursor::forwardLiquidityForAccount () const
         {
             // ^ --> ACCOUNT --> account
 
-            // For the first node, calculate amount to ripple based on what is
+            // For the first node, calculate amount to cbc based on what is
             // available.
             node().saFwdRedeem = node().saRevRedeem;
 
@@ -167,7 +167,7 @@ TER PathCursor::forwardLiquidityForAccount () const
             if (saCurReceive)
             {
                 // Actually receive.
-                resultCode = rippleCredit(view(),
+                resultCode = cbcCredit(view(),
                     previousAccountID,
                     node().account_,
                     previousNode().saFwdRedeem + previousNode().saFwdIssue,
@@ -194,8 +194,8 @@ TER PathCursor::forwardLiquidityForAccount () const
                 // Previous wants to redeem.
             {
                 // Rate : 1.0 : quality out
-                rippleLiquidity (
-                    rippleCalc_,
+                cbcLiquidity (
+                    cbcCalc_,
                     parityRate,
                     qualityOut,
                     previousNode().saFwdRedeem,
@@ -212,8 +212,8 @@ TER PathCursor::forwardLiquidityForAccount () const
                 // Current has more to redeem to next.
             {
                 // Rate: quality in : quality out
-                rippleLiquidity (
-                    rippleCalc_,
+                cbcLiquidity (
+                    cbcCalc_,
                     qualityIn,
                     qualityOut,
                     previousNode().saFwdIssue,
@@ -232,8 +232,8 @@ TER PathCursor::forwardLiquidityForAccount () const
                 // Current wants to issue.
             {
                 // Rate : 1.0 : transfer_rate
-                rippleLiquidity (
-                    rippleCalc_,
+                cbcLiquidity (
+                    cbcCalc_,
                     parityRate,
                     transferRate (view(), node().account_),
                     previousNode().saFwdRedeem,
@@ -252,8 +252,8 @@ TER PathCursor::forwardLiquidityForAccount () const
                 // Current wants to issue.
             {
                 // Rate: quality in : 1.0
-                rippleLiquidity (
-                    rippleCalc_,
+                cbcLiquidity (
+                    cbcCalc_,
                     qualityIn,
                     parityRate,
                     previousNode().saFwdIssue,
@@ -267,7 +267,7 @@ TER PathCursor::forwardLiquidityForAccount () const
 
             // Adjust prv --> cur balance : take all inbound
             resultCode = saProvide
-                ? rippleCredit(view(),
+                ? cbcCredit(view(),
                     previousAccountID,
                     node().account_,
                     previousNode().saFwdRedeem + previousNode().saFwdIssue,
@@ -301,8 +301,8 @@ TER PathCursor::forwardLiquidityForAccount () const
             {
                 // Rate : 1.0 : transfer_rate
                 // XXX Is having the transfer rate here correct?
-                rippleLiquidity (
-                    rippleCalc_,
+                cbcLiquidity (
+                    cbcCalc_,
                     parityRate,
                     transferRate (view(), node().account_),
                     previousNode().saFwdRedeem,
@@ -319,8 +319,8 @@ TER PathCursor::forwardLiquidityForAccount () const
                 // Previous wants to issue. To next must be ok.
             {
                 // Rate: quality in : 1.0
-                rippleLiquidity (
-                    rippleCalc_,
+                cbcLiquidity (
+                    cbcCalc_,
                     qualityIn,
                     parityRate,
                     previousNode().saFwdIssue,
@@ -332,7 +332,7 @@ TER PathCursor::forwardLiquidityForAccount () const
 
             // Adjust prv --> cur balance : take all inbound
             resultCode   = node().saFwdDeliver
-                ? rippleCredit(view(),
+                ? cbcCredit(view(),
                     previousAccountID, node().account_,
                     previousNode().saFwdRedeem + previousNode().saFwdIssue,
                     false, viewJ)
@@ -373,7 +373,7 @@ TER PathCursor::forwardLiquidityForAccount () const
             {
                 // Non-XRP, current node is the issuer.
                 // We could be delivering to multiple accounts, so we don't know
-                // which ripple balance will be adjusted.  Assume just issuing.
+                // which cbc balance will be adjusted.  Assume just issuing.
 
                 JLOG (j_.trace())
                     << "forwardLiquidityForAccount: ^ --> "
@@ -426,8 +426,8 @@ TER PathCursor::forwardLiquidityForAccount () const
                 // Previous wants to deliver and can current redeem.
             {
                 // Rate : 1.0 : quality out
-                rippleLiquidity (
-                    rippleCalc_,
+                cbcLiquidity (
+                    cbcCalc_,
                     parityRate,
                     qualityOut,
                     previousNode().saFwdDeliver,
@@ -447,8 +447,8 @@ TER PathCursor::forwardLiquidityForAccount () const
                 // Current wants issue.
             {
                 // Rate : 1.0 : transfer_rate
-                rippleLiquidity (
-                    rippleCalc_,
+                cbcLiquidity (
+                    cbcCalc_,
                     parityRate,
                     transferRate (view(), node().account_),
                     previousNode().saFwdDeliver,
@@ -478,8 +478,8 @@ TER PathCursor::forwardLiquidityForAccount () const
         if (previousNode().saFwdDeliver && node().saRevDeliver)
         {
             // Rate : 1.0 : transfer_rate
-            rippleLiquidity (
-                rippleCalc_,
+            cbcLiquidity (
+                cbcCalc_,
                 parityRate,
                 transferRate (view(), node().account_),
                 previousNode().saFwdDeliver,
@@ -499,4 +499,4 @@ TER PathCursor::forwardLiquidityForAccount () const
 }
 
 } // path
-} // ripple
+} // cbc

@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,18 +18,18 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/basics/contract.h>
-#include <ripple/beast/crypto/secure_erase.h>
-#include <ripple/crypto/GenerateDeterministicKey.h>
-#include <ripple/crypto/impl/ec_key.h>
-#include <ripple/crypto/impl/openssl.h>
-#include <ripple/protocol/digest.h>
+#include <cbc/basics/contract.h>
+#include <cbc/beast/crypto/secure_erase.h>
+#include <cbc/crypto/GenerateDeterministicKey.h>
+#include <cbc/crypto/impl/ec_key.h>
+#include <cbc/crypto/impl/openssl.h>
+#include <cbc/protocol/digest.h>
 #include <array>
 #include <string>
 #include <openssl/pem.h>
 #include <openssl/sha.h>
 
-namespace ripple {
+namespace cbc {
 
 namespace openssl {
 
@@ -125,7 +125,7 @@ uint256 generateRootDeterministicPrivateKey (uint128 const& seed)
     return uint256_from_bignum_clear (key);
 }
 
-// Take ripple address.
+// Take cbc address.
 // --> root public generator (consumes)
 // <-- root public generator in EC format
 static ec_point generateRootPubKey (bignum&& pubGenerator)
@@ -201,4 +201,4 @@ uint256 generatePrivateDeterministicKey (
     return uint256_from_bignum_clear (privKey);
 }
 
-} // ripple
+} // cbc

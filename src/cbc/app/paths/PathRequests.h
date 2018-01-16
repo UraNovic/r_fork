@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -17,18 +17,18 @@
 */
 //==============================================================================
 
-#ifndef RIPPLE_APP_PATHS_PATHREQUESTS_H_INCLUDED
-#define RIPPLE_APP_PATHS_PATHREQUESTS_H_INCLUDED
+#ifndef cbc_APP_PATHS_PATHREQUESTS_H_INCLUDED
+#define cbc_APP_PATHS_PATHREQUESTS_H_INCLUDED
 
-#include <ripple/app/main/Application.h>
-#include <ripple/app/paths/PathRequest.h>
-#include <ripple/app/paths/RippleLineCache.h>
-#include <ripple/core/Job.h>
+#include <cbc/app/main/Application.h>
+#include <cbc/app/paths/PathRequest.h>
+#include <cbc/app/paths/cbcLineCache.h>
+#include <cbc/core/Job.h>
 #include <atomic>
 #include <mutex>
 #include <vector>
 
-namespace ripple {
+namespace cbc {
 
 class PathRequests
 {
@@ -52,7 +52,7 @@ public:
     void updateAll (std::shared_ptr<ReadView const> const& ledger,
                     Job::CancelCallback shouldCancel);
 
-    std::shared_ptr<RippleLineCache> getLineCache (
+    std::shared_ptr<cbcLineCache> getLineCache (
         std::shared_ptr <ReadView const> const& ledger, bool authoritative);
 
     // Create a new-style path request that pushes
@@ -101,8 +101,8 @@ private:
     // Track all requests
     std::vector<PathRequest::wptr> requests_;
 
-    // Use a RippleLineCache
-    std::shared_ptr<RippleLineCache>         mLineCache;
+    // Use a cbcLineCache
+    std::shared_ptr<cbcLineCache>         mLineCache;
 
     std::atomic<int>                 mLastIdentifier;
 
@@ -111,6 +111,6 @@ private:
 
 };
 
-} // ripple
+} // cbc
 
 #endif

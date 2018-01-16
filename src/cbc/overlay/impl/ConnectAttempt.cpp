@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,12 +18,12 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/overlay/impl/ConnectAttempt.h>
-#include <ripple/overlay/impl/PeerImp.h>
-#include <ripple/overlay/Cluster.h>
-#include <ripple/json/json_reader.h>
+#include <cbc/overlay/impl/ConnectAttempt.h>
+#include <cbc/overlay/impl/PeerImp.h>
+#include <cbc/overlay/Cluster.h>
+#include <cbc/json/json_reader.h>
 
-namespace ripple {
+namespace cbc {
 
 ConnectAttempt::ConnectAttempt (Application& app, boost::asio::io_service& io_service,
     endpoint_type const& remote_endpoint, Resource::Consumer usage,
@@ -391,4 +391,4 @@ ConnectAttempt::processResponse()
     overlay_.add_active (peer);
 }
 
-} // ripple
+} // cbc

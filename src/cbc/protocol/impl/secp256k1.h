@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -17,12 +17,12 @@
 */
 //==============================================================================
 
-#ifndef RIPPLE_PROTOCOL_SECP256K1_H_INCLUDED
-#define RIPPLE_PROTOCOL_SECP256K1_H_INCLUDED
+#ifndef cbc_PROTOCOL_SECP256K1_H_INCLUDED
+#define cbc_PROTOCOL_SECP256K1_H_INCLUDED
 
 #include <secp256k1/include/secp256k1.h>
 
-namespace ripple {
+namespace cbc {
 
 template <class = void>
 secp256k1_context const*
@@ -47,6 +47,6 @@ secp256k1Context()
     return h.impl;
 }
 
-} // ripple
+} // cbc
 
 #endif

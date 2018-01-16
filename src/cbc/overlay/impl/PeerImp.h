@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -17,25 +17,25 @@
 */
 //==============================================================================
 
-#ifndef RIPPLE_OVERLAY_PEERIMP_H_INCLUDED
-#define RIPPLE_OVERLAY_PEERIMP_H_INCLUDED
+#ifndef cbc_OVERLAY_PEERIMP_H_INCLUDED
+#define cbc_OVERLAY_PEERIMP_H_INCLUDED
 
-#include <ripple/app/consensus/RCLCxPeerPos.h>
-#include <ripple/basics/Log.h>
-#include <ripple/beast/core/ByteOrder.h>
-#include <ripple/beast/utility/WrappedSink.h>
-#include <ripple/overlay/impl/ProtocolMessage.h>
-#include <ripple/overlay/impl/OverlayImpl.h>
-#include <ripple/protocol/Protocol.h>
-#include <ripple/protocol/STTx.h>
-#include <ripple/protocol/STValidation.h>
-#include <ripple/resource/Fees.h>
+#include <cbc/app/consensus/RCLCxPeerPos.h>
+#include <cbc/basics/Log.h>
+#include <cbc/beast/core/ByteOrder.h>
+#include <cbc/beast/utility/WrappedSink.h>
+#include <cbc/overlay/impl/ProtocolMessage.h>
+#include <cbc/overlay/impl/OverlayImpl.h>
+#include <cbc/protocol/Protocol.h>
+#include <cbc/protocol/STTx.h>
+#include <cbc/protocol/STValidation.h>
+#include <cbc/resource/Fees.h>
 
 #include <cstdint>
 #include <deque>
 #include <queue>
 
-namespace ripple {
+namespace cbc {
 
 class PeerImp
     : public Peer
@@ -65,7 +65,7 @@ public:
         /** Handshake has been received from this peer */
         ,handshaked
 
-        /** Running the Ripple protocol actively */
+        /** Running the cbc protocol actively */
         ,active
     };
 
@@ -266,7 +266,7 @@ public:
         return publicKey_;
     }
 
-    /** Return the version of rippled that the peer is running, if reported. */
+    /** Return the version of cbcd that the peer is running, if reported. */
     std::string
     getVersion() const;
 

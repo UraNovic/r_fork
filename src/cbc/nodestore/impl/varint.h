@@ -24,7 +24,7 @@
 #include <cstdint>
 #include <type_traits>
 
-namespace ripple {
+namespace cbc {
 namespace NodeStore {
 
 // This is a variant of the base128 varint format from
@@ -147,6 +147,6 @@ write (nudb::detail::ostream& os, std::size_t t)
 }
 
 } // NodeStore
-} // ripple
+} // cbc
 
 #endif

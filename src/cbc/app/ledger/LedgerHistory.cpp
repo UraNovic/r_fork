@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,14 +18,14 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/app/ledger/LedgerHistory.h>
-#include <ripple/app/ledger/LedgerToJson.h>
-#include <ripple/basics/Log.h>
-#include <ripple/basics/chrono.h>
-#include <ripple/basics/contract.h>
-#include <ripple/json/to_string.h>
+#include <cbc/app/ledger/LedgerHistory.h>
+#include <cbc/app/ledger/LedgerToJson.h>
+#include <cbc/basics/Log.h>
+#include <cbc/basics/chrono.h>
+#include <cbc/basics/contract.h>
+#include <cbc/json/to_string.h>
 
-namespace ripple {
+namespace cbc {
 
 // VFALCO TODO replace macros
 
@@ -506,4 +506,4 @@ void LedgerHistory::clearLedgerCachePrior (LedgerIndex seq)
     }
 }
 
-} // ripple
+} // cbc

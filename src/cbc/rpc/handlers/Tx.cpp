@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012-2014 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012-2014 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,18 +18,18 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/app/ledger/LedgerMaster.h>
-#include <ripple/app/ledger/TransactionMaster.h>
-#include <ripple/app/main/Application.h>
-#include <ripple/app/misc/NetworkOPs.h>
-#include <ripple/app/misc/Transaction.h>
-#include <ripple/net/RPCErr.h>
-#include <ripple/protocol/ErrorCodes.h>
-#include <ripple/protocol/JsonFields.h>
-#include <ripple/rpc/Context.h>
-#include <ripple/rpc/impl/RPCHelpers.h>
+#include <cbc/app/ledger/LedgerMaster.h>
+#include <cbc/app/ledger/TransactionMaster.h>
+#include <cbc/app/main/Application.h>
+#include <cbc/app/misc/NetworkOPs.h>
+#include <cbc/app/misc/Transaction.h>
+#include <cbc/net/RPCErr.h>
+#include <cbc/protocol/ErrorCodes.h>
+#include <cbc/protocol/JsonFields.h>
+#include <cbc/rpc/Context.h>
+#include <cbc/rpc/impl/RPCHelpers.h>
 
-namespace ripple {
+namespace cbc {
 
 // {
 //   transaction: <hex>
@@ -144,4 +144,4 @@ Json::Value doTx (RPC::Context& context)
     return ret;
 }
 
-} // ripple
+} // cbc

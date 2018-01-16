@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,27 +18,27 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/app/main/Application.h>
-#include <ripple/app/paths/RippleState.h>
-#include <ripple/protocol/STAmount.h>
+#include <cbc/app/main/Application.h>
+#include <cbc/app/paths/cbcState.h>
+#include <cbc/protocol/STAmount.h>
 #include <cstdint>
 #include <memory>
 
-namespace ripple {
+namespace cbc {
 
-RippleState::pointer
-RippleState::makeItem (
+cbcState::pointer
+cbcState::makeItem (
     AccountID const& accountID,
         std::shared_ptr<SLE const> sle)
 {
     // VFALCO Does this ever happen in practice?
-    if (! sle || sle->getType () != ltRIPPLE_STATE)
+    if (! sle || sle->getType () != ltcbc_STATE)
         return {};
-    return std::make_shared<RippleState>(
+    return std::make_shared<cbcState>(
         std::move(sle), accountID);
 }
 
-RippleState::RippleState (
+cbcState::cbcState (
     std::shared_ptr<SLE const>&& sle,
         AccountID const& viewAccount)
     : sle_ (std::move(sle))
@@ -59,7 +59,7 @@ RippleState::RippleState (
         mBalance.negate ();
 }
 
-Json::Value RippleState::getJson (int)
+Json::Value cbcState::getJson (int)
 {
     Json::Value ret (Json::objectValue);
     ret["low_id"] = to_string (mLowID);
@@ -67,16 +67,16 @@ Json::Value RippleState::getJson (int)
     return ret;
 }
 
-std::vector <RippleState::pointer>
-getRippleStateItems (AccountID const& accountID,
+std::vector <cbcState::pointer>
+getcbcStateItems (AccountID const& accountID,
     ReadView const& view)
 {
-    std::vector <RippleState::pointer> items;
+    std::vector <cbcState::pointer> items;
     forEachItem(view, accountID,
         [&items,&accountID](
         std::shared_ptr<SLE const> const&sleCur)
         {
-             auto ret = RippleState::makeItem (accountID, sleCur);
+             auto ret = cbcState::makeItem (accountID, sleCur);
              if (ret)
                 items.push_back (ret);
         });
@@ -84,4 +84,4 @@ getRippleStateItems (AccountID const& accountID,
     return items;
 }
 
-} // ripple
+} // cbc

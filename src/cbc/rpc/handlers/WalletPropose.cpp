@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012-2014 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012-2014 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,23 +18,23 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/basics/strHex.h>
-#include <ripple/crypto/KeyType.h>
-#include <ripple/net/RPCErr.h>
-#include <ripple/protocol/ErrorCodes.h>
-#include <ripple/protocol/JsonFields.h>
-#include <ripple/protocol/PublicKey.h>
-#include <ripple/protocol/SecretKey.h>
-#include <ripple/protocol/Seed.h>
-#include <ripple/rpc/Context.h>
-#include <ripple/rpc/impl/RPCHelpers.h>
-#include <ripple/rpc/handlers/WalletPropose.h>
+#include <cbc/basics/strHex.h>
+#include <cbc/crypto/KeyType.h>
+#include <cbc/net/RPCErr.h>
+#include <cbc/protocol/ErrorCodes.h>
+#include <cbc/protocol/JsonFields.h>
+#include <cbc/protocol/PublicKey.h>
+#include <cbc/protocol/SecretKey.h>
+#include <cbc/protocol/Seed.h>
+#include <cbc/rpc/Context.h>
+#include <cbc/rpc/impl/RPCHelpers.h>
+#include <cbc/rpc/handlers/WalletPropose.h>
 #include <ed25519-donna/ed25519.h>
 #include <boost/optional.hpp>
 #include <cmath>
 #include <map>
 
-namespace ripple {
+namespace cbc {
 
 double
 estimate_entropy (std::string const& input)
@@ -149,4 +149,4 @@ Json::Value walletPropose (Json::Value const& params)
     return obj;
 }
 
-} // ripple
+} // cbc

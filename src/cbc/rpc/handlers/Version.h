@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -17,12 +17,12 @@
 */
 //==============================================================================
 
-#ifndef RIPPLED_RIPPLE_RPC_HANDLERS_VERSION_H
-#define RIPPLED_RIPPLE_RPC_HANDLERS_VERSION_H
+#ifndef cbcD_cbc_RPC_HANDLERS_VERSION_H
+#define cbcD_cbc_RPC_HANDLERS_VERSION_H
 
-#include <ripple/rpc/impl/RPCHelpers.h>
+#include <cbc/rpc/impl/RPCHelpers.h>
 
-namespace ripple {
+namespace cbc {
 namespace RPC {
 
 class VersionHandler
@@ -58,6 +58,6 @@ public:
 };
 
 } // RPC
-} // ripple
+} // cbc
 
 #endif

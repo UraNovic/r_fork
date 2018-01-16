@@ -21,8 +21,8 @@
 #include "../../BeastConfig.h"
 #endif
 
-#include <ripple/beast/net/IPEndpoint.h>
-#include <ripple/beast/net/detail/Parse.h>
+#include <cbc/beast/net/IPEndpoint.h>
+#include <cbc/beast/net/detail/Parse.h>
 
 namespace beast {
 namespace IP {

@@ -17,7 +17,7 @@
 */
 //==============================================================================
 
-#include <ripple/beast/utility/Journal.h>
+#include <cbc/beast/utility/Journal.h>
 #include <cassert>
 
 namespace beast {

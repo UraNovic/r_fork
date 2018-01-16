@@ -20,10 +20,10 @@
 #ifndef BEAST_NET_IPADDRESS_H_INCLUDED
 #define BEAST_NET_IPADDRESS_H_INCLUDED
 
-#include <ripple/beast/net/IPAddressV4.h>
-#include <ripple/beast/net/IPAddressV6.h>
-#include <ripple/beast/hash/hash_append.h>
-#include <ripple/beast/hash/uhash.h>
+#include <cbc/beast/net/IPAddressV4.h>
+#include <cbc/beast/net/IPAddressV6.h>
+#include <cbc/beast/hash/hash_append.h>
+#include <cbc/beast/hash/uhash.h>
 #include <boost/functional/hash.hpp>
 #include <cassert>
 #include <cstdint>

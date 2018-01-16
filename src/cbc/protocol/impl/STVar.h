@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -17,18 +17,18 @@
 */
 //==============================================================================
 
-#ifndef RIPPLE_PROTOCOL_STVAR_H_INCLUDED
-#define RIPPLE_PROTOCOL_STVAR_H_INCLUDED
+#ifndef cbc_PROTOCOL_STVAR_H_INCLUDED
+#define cbc_PROTOCOL_STVAR_H_INCLUDED
 
-#include <ripple/protocol/Serializer.h>
-#include <ripple/protocol/SField.h>
-#include <ripple/protocol/STBase.h>
+#include <cbc/protocol/Serializer.h>
+#include <cbc/protocol/SField.h>
+#include <cbc/protocol/STBase.h>
 #include <cstddef>
 #include <cstdint>
 #include <utility>
 #include <typeinfo>
 
-namespace ripple {
+namespace cbc {
 namespace detail {
 
 struct defaultObject_t { };
@@ -131,6 +131,6 @@ operator!= (STVar const& lhs, STVar const& rhs)
 }
 
 } // detail
-} // ripple
+} // cbc
 
 #endif

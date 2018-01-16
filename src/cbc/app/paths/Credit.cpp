@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,12 +18,12 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/ledger/ReadView.h>
-#include <ripple/protocol/AmountConversions.h>
-#include <ripple/protocol/STAmount.h>
-#include <ripple/protocol/Indexes.h>
+#include <cbc/ledger/ReadView.h>
+#include <cbc/protocol/AmountConversions.h>
+#include <cbc/protocol/STAmount.h>
+#include <cbc/protocol/Indexes.h>
 
-namespace ripple {
+namespace cbc {
 
 STAmount
 creditLimit (
@@ -34,12 +34,12 @@ creditLimit (
 {
     STAmount result ({currency, account});
 
-    auto sleRippleState = view.read(
+    auto slecbcState = view.read(
         keylet::line(account, issuer, currency));
 
-    if (sleRippleState)
+    if (slecbcState)
     {
-        result = sleRippleState->getFieldAmount (
+        result = slecbcState->getFieldAmount (
             account < issuer ? sfLowLimit : sfHighLimit);
         result.setIssuer (account);
     }
@@ -67,12 +67,12 @@ STAmount creditBalance (
 {
     STAmount result ({currency, account});
 
-    auto sleRippleState = view.read(
+    auto slecbcState = view.read(
         keylet::line(account, issuer, currency));
 
-    if (sleRippleState)
+    if (slecbcState)
     {
-        result = sleRippleState->getFieldAmount (sfBalance);
+        result = slecbcState->getFieldAmount (sfBalance);
         if (account < issuer)
             result.negate ();
         result.setIssuer (account);
@@ -83,4 +83,4 @@ STAmount creditBalance (
     return result;
 }
 
-} // ripple
+} // cbc

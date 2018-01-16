@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012-2017 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012-2017 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -17,18 +17,18 @@
 */
 //==============================================================================
 
-#ifndef RIPPLE_APP_TX_INVARIANTCHECK_H_INCLUDED
-#define RIPPLE_APP_TX_INVARIANTCHECK_H_INCLUDED
+#ifndef cbc_APP_TX_INVARIANTCHECK_H_INCLUDED
+#define cbc_APP_TX_INVARIANTCHECK_H_INCLUDED
 
-#include <ripple/basics/base_uint.h>
-#include <ripple/protocol/STLedgerEntry.h>
-#include <ripple/protocol/STTx.h>
-#include <ripple/protocol/TER.h>
-#include <ripple/beast/utility/Journal.h>
+#include <cbc/basics/base_uint.h>
+#include <cbc/protocol/STLedgerEntry.h>
+#include <cbc/protocol/STTx.h>
+#include <cbc/protocol/TER.h>
+#include <cbc/beast/utility/Journal.h>
 #include <tuple>
 #include <cstdint>
 
-namespace ripple {
+namespace cbc {
 
 #if GENERATING_DOCS
 /**
@@ -255,7 +255,7 @@ using InvariantChecks = std::tuple<
  * @return std::tuple of instances that implement the required invariant check
  * methods
  *
- * @see ripple::InvariantChecker_PROTOTYPE
+ * @see cbc::InvariantChecker_PROTOTYPE
  */
 inline
 InvariantChecks
@@ -264,6 +264,6 @@ getInvariantChecks()
     return InvariantChecks{};
 }
 
-} //ripple
+} //cbc
 
 #endif

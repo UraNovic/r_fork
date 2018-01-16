@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,20 +18,20 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/app/ledger/InboundLedgers.h>
-#include <ripple/app/ledger/LedgerMaster.h>
-#include <ripple/app/main/Application.h>
-#include <ripple/app/misc/NetworkOPs.h>
-#include <ripple/basics/DecayingSample.h>
-#include <ripple/basics/Log.h>
-#include <ripple/core/JobQueue.h>
-#include <ripple/protocol/JsonFields.h>
-#include <ripple/beast/core/LexicalCast.h>
-#include <ripple/beast/container/aged_map.h>
+#include <cbc/app/ledger/InboundLedgers.h>
+#include <cbc/app/ledger/LedgerMaster.h>
+#include <cbc/app/main/Application.h>
+#include <cbc/app/misc/NetworkOPs.h>
+#include <cbc/basics/DecayingSample.h>
+#include <cbc/basics/Log.h>
+#include <cbc/core/JobQueue.h>
+#include <cbc/protocol/JsonFields.h>
+#include <cbc/beast/core/LexicalCast.h>
+#include <cbc/beast/container/aged_map.h>
 #include <memory>
 #include <mutex>
 
-namespace ripple {
+namespace cbc {
 
 class InboundLedgersImp
     : public InboundLedgers
@@ -431,4 +431,4 @@ make_InboundLedgers (Application& app,
     return std::make_unique<InboundLedgersImp> (app, clock, parent, collector);
 }
 
-} // ripple
+} // cbc

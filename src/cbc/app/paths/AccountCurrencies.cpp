@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,13 +18,13 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/app/paths/AccountCurrencies.h>
+#include <cbc/app/paths/AccountCurrencies.h>
 
-namespace ripple {
+namespace cbc {
 
 hash_set<Currency> accountSourceCurrencies (
     AccountID const& account,
-    std::shared_ptr<RippleLineCache> const& lrCache,
+    std::shared_ptr<cbcLineCache> const& lrCache,
     bool includeXRP)
 {
     hash_set<Currency> currencies;
@@ -33,12 +33,12 @@ hash_set<Currency> accountSourceCurrencies (
     if (includeXRP)
         currencies.insert (xrpCurrency());
 
-    // List of ripple lines.
-    auto& rippleLines = lrCache->getRippleLines (account);
+    // List of cbc lines.
+    auto& cbcLines = lrCache->getcbcLines (account);
 
-    for (auto const& item : rippleLines)
+    for (auto const& item : cbcLines)
     {
-        auto rspEntry = (RippleState*) item.get ();
+        auto rspEntry = (cbcState*) item.get ();
         assert (rspEntry);
         if (!rspEntry)
             continue;
@@ -62,7 +62,7 @@ hash_set<Currency> accountSourceCurrencies (
 
 hash_set<Currency> accountDestCurrencies (
     AccountID const& account,
-    std::shared_ptr<RippleLineCache> const& lrCache,
+    std::shared_ptr<cbcLineCache> const& lrCache,
     bool includeXRP)
 {
     hash_set<Currency> currencies;
@@ -71,12 +71,12 @@ hash_set<Currency> accountDestCurrencies (
         currencies.insert (xrpCurrency());
     // Even if account doesn't exist
 
-    // List of ripple lines.
-    auto& rippleLines = lrCache->getRippleLines (account);
+    // List of cbc lines.
+    auto& cbcLines = lrCache->getcbcLines (account);
 
-    for (auto const& item : rippleLines)
+    for (auto const& item : cbcLines)
     {
-        auto rspEntry = (RippleState*) item.get ();
+        auto rspEntry = (cbcState*) item.get ();
         assert (rspEntry);
         if (!rspEntry)
             continue;
@@ -91,4 +91,4 @@ hash_set<Currency> accountDestCurrencies (
     return currencies;
 }
 
-} // ripple
+} // cbc

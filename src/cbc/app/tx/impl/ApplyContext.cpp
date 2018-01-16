@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,16 +18,16 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/app/tx/impl/ApplyContext.h>
-#include <ripple/app/tx/impl/InvariantCheck.h>
-#include <ripple/app/tx/impl/Transactor.h>
-#include <ripple/basics/Log.h>
-#include <ripple/json/to_string.h>
-#include <ripple/protocol/Indexes.h>
-#include <ripple/protocol/Feature.h>
+#include <cbc/app/tx/impl/ApplyContext.h>
+#include <cbc/app/tx/impl/InvariantCheck.h>
+#include <cbc/app/tx/impl/Transactor.h>
+#include <cbc/basics/Log.h>
+#include <cbc/json/to_string.h>
+#include <cbc/protocol/Indexes.h>
+#include <cbc/protocol/Feature.h>
 #include <cassert>
 
-namespace ripple {
+namespace cbc {
 
 ApplyContext::ApplyContext(Application& app_,
     OpenView& base, STTx const& tx_, TER preclaimResult_,
@@ -134,4 +134,4 @@ ApplyContext::checkInvariants(TER terResult)
         terResult, std::make_index_sequence<std::tuple_size<InvariantChecks>::value>{});
 }
 
-} // ripple
+} // cbc

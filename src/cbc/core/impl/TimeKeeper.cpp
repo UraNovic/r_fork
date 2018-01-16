@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,13 +18,13 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/basics/Log.h>
-#include <ripple/core/TimeKeeper.h>
-#include <ripple/core/impl/SNTPClock.h>
+#include <cbc/basics/Log.h>
+#include <cbc/core/TimeKeeper.h>
+#include <cbc/core/impl/SNTPClock.h>
 #include <memory>
 #include <mutex>
 
-namespace ripple {
+namespace cbc {
 
 class TimeKeeperImpl : public TimeKeeper
 {
@@ -132,4 +132,4 @@ make_TimeKeeper (beast::Journal j)
     return std::make_unique<TimeKeeperImpl>(j);
 }
 
-} // ripple
+} // cbc

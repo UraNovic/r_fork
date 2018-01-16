@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012-14 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012-14 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -17,18 +17,18 @@
 */
 //==============================================================================
 
-#ifndef RIPPLE_TXQ_H_INCLUDED
-#define RIPPLE_TXQ_H_INCLUDED
+#ifndef cbc_TXQ_H_INCLUDED
+#define cbc_TXQ_H_INCLUDED
 
-#include <ripple/app/tx/applySteps.h>
-#include <ripple/ledger/OpenView.h>
-#include <ripple/ledger/ApplyView.h>
-#include <ripple/protocol/TER.h>
-#include <ripple/protocol/STTx.h>
+#include <cbc/app/tx/applySteps.h>
+#include <cbc/ledger/OpenView.h>
+#include <cbc/ledger/ApplyView.h>
+#include <cbc/protocol/TER.h>
+#include <cbc/protocol/STTx.h>
 #include <boost/intrusive/set.hpp>
 #include <boost/circular_buffer.hpp>
 
-namespace ripple {
+namespace cbc {
 
 class Application;
 class Config;
@@ -229,7 +229,7 @@ private:
             for use in fee escalation calculations.
 
             @param view View of the LCL that was just closed or received.
-            @param timeLeap Indicates that rippled is under load so fees
+            @param timeLeap Indicates that cbcd is under load so fees
             should grow faster.
         */
         std::size_t
@@ -450,6 +450,6 @@ setup_TxQ(Config const&);
 std::unique_ptr<TxQ>
 make_TxQ(TxQ::Setup const&, beast::Journal);
 
-} // ripple
+} // cbc
 
 #endif

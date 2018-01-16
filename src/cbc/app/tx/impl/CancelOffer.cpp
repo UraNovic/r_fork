@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,12 +18,12 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/app/tx/impl/CancelOffer.h>
-#include <ripple/basics/Log.h>
-#include <ripple/protocol/st.h>
-#include <ripple/ledger/View.h>
+#include <cbc/app/tx/impl/CancelOffer.h>
+#include <cbc/basics/Log.h>
+#include <cbc/protocol/st.h>
+#include <cbc/ledger/View.h>
 
-namespace ripple {
+namespace cbc {
 
 TER
 CancelOffer::preflight (PreflightContext const& ctx)

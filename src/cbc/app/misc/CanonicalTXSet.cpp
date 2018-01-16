@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,10 +18,10 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/app/misc/CanonicalTXSet.h>
+#include <cbc/app/misc/CanonicalTXSet.h>
 #include <boost/range/adaptor/transformed.hpp>
 
-namespace ripple {
+namespace cbc {
 
 bool CanonicalTXSet::Key::operator< (Key const& rhs) const
 {
@@ -132,4 +132,4 @@ CanonicalTXSet::iterator CanonicalTXSet::erase (iterator const& it)
     return tmp;
 }
 
-} // ripple
+} // cbc

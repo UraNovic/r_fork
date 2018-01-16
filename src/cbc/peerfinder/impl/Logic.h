@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -17,30 +17,30 @@
 */
 //==============================================================================
 
-#ifndef RIPPLE_PEERFINDER_LOGIC_H_INCLUDED
-#define RIPPLE_PEERFINDER_LOGIC_H_INCLUDED
+#ifndef cbc_PEERFINDER_LOGIC_H_INCLUDED
+#define cbc_PEERFINDER_LOGIC_H_INCLUDED
 
-#include <ripple/basics/contract.h>
-#include <ripple/basics/Log.h>
-#include <ripple/peerfinder/PeerfinderManager.h>
-#include <ripple/peerfinder/impl/Bootcache.h>
-#include <ripple/peerfinder/impl/Counts.h>
-#include <ripple/peerfinder/impl/Fixed.h>
-#include <ripple/peerfinder/impl/iosformat.h>
-#include <ripple/peerfinder/impl/Handouts.h>
-#include <ripple/peerfinder/impl/Livecache.h>
-#include <ripple/peerfinder/impl/Reporting.h>
-#include <ripple/peerfinder/impl/SlotImp.h>
-#include <ripple/peerfinder/impl/Source.h>
-#include <ripple/peerfinder/impl/Store.h>
-#include <ripple/beast/net/IPAddressConversion.h>
-#include <ripple/beast/container/aged_container_utility.h>
-#include <ripple/beast/core/SharedPtr.h>
+#include <cbc/basics/contract.h>
+#include <cbc/basics/Log.h>
+#include <cbc/peerfinder/PeerfinderManager.h>
+#include <cbc/peerfinder/impl/Bootcache.h>
+#include <cbc/peerfinder/impl/Counts.h>
+#include <cbc/peerfinder/impl/Fixed.h>
+#include <cbc/peerfinder/impl/iosformat.h>
+#include <cbc/peerfinder/impl/Handouts.h>
+#include <cbc/peerfinder/impl/Livecache.h>
+#include <cbc/peerfinder/impl/Reporting.h>
+#include <cbc/peerfinder/impl/SlotImp.h>
+#include <cbc/peerfinder/impl/Source.h>
+#include <cbc/peerfinder/impl/Store.h>
+#include <cbc/beast/net/IPAddressConversion.h>
+#include <cbc/beast/container/aged_container_utility.h>
+#include <cbc/beast/core/SharedPtr.h>
 #include <functional>
 #include <map>
 #include <set>
 
-namespace ripple {
+namespace cbc {
 namespace PeerFinder {
 
 /** The Logic for maintaining the list of Slot addresses.

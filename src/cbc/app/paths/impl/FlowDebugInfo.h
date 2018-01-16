@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -17,13 +17,13 @@
 */
 //==============================================================================
 
-#ifndef RIPPLE_PATH_IMPL_FLOWDEBUGINFO_H_INCLUDED
-#define RIPPLE_PATH_IMPL_FLOWDEBUGINFO_H_INCLUDED
+#ifndef cbc_PATH_IMPL_FLOWDEBUGINFO_H_INCLUDED
+#define cbc_PATH_IMPL_FLOWDEBUGINFO_H_INCLUDED
 
-#include <ripple/app/paths/impl/AmountSpec.h>
-#include <ripple/ledger/PaymentSandbox.h>
-#include <ripple/protocol/IOUAmount.h>
-#include <ripple/protocol/XRPAmount.h>
+#include <cbc/app/paths/impl/AmountSpec.h>
+#include <cbc/ledger/PaymentSandbox.h>
+#include <cbc/protocol/IOUAmount.h>
+#include <cbc/protocol/XRPAmount.h>
 
 #include <boost/container/flat_map.hpp>
 #include <boost/optional.hpp>
@@ -31,7 +31,7 @@
 #include <chrono>
 #include <sstream>
 
-namespace ripple
+namespace cbc
 {
 namespace path
 {
@@ -233,14 +233,14 @@ struct FlowDebugInfo
             auto writeXrpAmtList = [&write_list](
                 std::vector<EitherAmount> const& amts, char delim=';') {
                 auto get_val = [](EitherAmount const& a) -> std::string {
-                    return ripple::to_string (a.xrp);
+                    return cbc::to_string (a.xrp);
                 };
                 write_list (amts, get_val, delim);
             };
             auto writeIouAmtList = [&write_list](
                 std::vector<EitherAmount> const& amts, char delim=';') {
                 auto get_val = [](EitherAmount const& a) -> std::string {
-                    return ripple::to_string (a.iou);
+                    return cbc::to_string (a.iou);
                 };
                 write_list (amts, get_val, delim);
             };
@@ -369,5 +369,5 @@ balanceDiffsToString (boost::optional<BalanceDiffs> const& bd)
 
 }  // detail
 }  // path
-}  // ripple
+}  // cbc
 #endif

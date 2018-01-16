@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -17,15 +17,15 @@
 */
 //==============================================================================
 
-#ifndef RIPPLE_APP_MAIN_NODESTORESCHEDULER_H_INCLUDED
-#define RIPPLE_APP_MAIN_NODESTORESCHEDULER_H_INCLUDED
+#ifndef cbc_APP_MAIN_NODESTORESCHEDULER_H_INCLUDED
+#define cbc_APP_MAIN_NODESTORESCHEDULER_H_INCLUDED
 
-#include <ripple/nodestore/Scheduler.h>
-#include <ripple/core/JobQueue.h>
-#include <ripple/core/Stoppable.h>
+#include <cbc/nodestore/Scheduler.h>
+#include <cbc/core/JobQueue.h>
+#include <cbc/core/Stoppable.h>
 #include <atomic>
 
-namespace ripple {
+namespace cbc {
 
 /** A NodeStore::Scheduler which uses the JobQueue and implements the Stoppable API. */
 class NodeStoreScheduler
@@ -53,6 +53,6 @@ private:
     std::atomic <int> m_taskCount {0};
 };
 
-} // ripple
+} // cbc
 
 #endif

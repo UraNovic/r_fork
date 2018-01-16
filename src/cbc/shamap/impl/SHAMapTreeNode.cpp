@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,19 +18,19 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/shamap/SHAMapTreeNode.h>
-#include <ripple/basics/contract.h>
-#include <ripple/basics/Log.h>
-#include <ripple/protocol/digest.h>
-#include <ripple/basics/Slice.h>
-#include <ripple/basics/StringUtilities.h>
-#include <ripple/protocol/HashPrefix.h>
-#include <ripple/beast/core/LexicalCast.h>
+#include <cbc/shamap/SHAMapTreeNode.h>
+#include <cbc/basics/contract.h>
+#include <cbc/basics/Log.h>
+#include <cbc/protocol/digest.h>
+#include <cbc/basics/Slice.h>
+#include <cbc/basics/StringUtilities.h>
+#include <cbc/protocol/HashPrefix.h>
+#include <cbc/beast/core/LexicalCast.h>
 #include <mutex>
 
 #include <openssl/sha.h>
 
-namespace ripple {
+namespace cbc {
 
 std::mutex SHAMapInnerNode::childLock;
 
@@ -943,4 +943,4 @@ SHAMapTreeNode::invariants(bool, bool) const
     assert(mItem != nullptr);
 }
 
-} // ripple
+} // cbc

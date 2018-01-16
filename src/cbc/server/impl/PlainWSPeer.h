@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -17,13 +17,13 @@
 */
 //==============================================================================
 
-#ifndef RIPPLE_SERVER_PLAINWSPEER_H_INCLUDED
-#define RIPPLE_SERVER_PLAINWSPEER_H_INCLUDED
+#ifndef cbc_SERVER_PLAINWSPEER_H_INCLUDED
+#define cbc_SERVER_PLAINWSPEER_H_INCLUDED
 
-#include <ripple/server/impl/BaseWSPeer.h>
+#include <cbc/server/impl/BaseWSPeer.h>
 #include <memory>
 
-namespace ripple {
+namespace cbc {
 
 template<class Handler>
 class PlainWSPeer
@@ -70,6 +70,6 @@ PlainWSPeer(
 {
 }
 
-} // ripple
+} // cbc
 
 #endif

@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -17,19 +17,19 @@
 */
 //==============================================================================
 
-#ifndef RIPPLE_TX_APPLYCONTEXT_H_INCLUDED
-#define RIPPLE_TX_APPLYCONTEXT_H_INCLUDED
+#ifndef cbc_TX_APPLYCONTEXT_H_INCLUDED
+#define cbc_TX_APPLYCONTEXT_H_INCLUDED
 
-#include <ripple/app/main/Application.h>
-#include <ripple/ledger/ApplyViewImpl.h>
-#include <ripple/core/Config.h>
-#include <ripple/protocol/STTx.h>
-#include <ripple/protocol/XRPAmount.h>
-#include <ripple/beast/utility/Journal.h>
+#include <cbc/app/main/Application.h>
+#include <cbc/ledger/ApplyViewImpl.h>
+#include <cbc/core/Config.h>
+#include <cbc/protocol/STTx.h>
+#include <cbc/protocol/XRPAmount.h>
+#include <cbc/beast/utility/Journal.h>
 #include <boost/optional.hpp>
 #include <utility>
 
-namespace ripple {
+namespace cbc {
 
 // tx_enable_test
 
@@ -113,6 +113,6 @@ private:
     boost::optional<ApplyViewImpl> view_;
 };
 
-} // ripple
+} // cbc
 
 #endif

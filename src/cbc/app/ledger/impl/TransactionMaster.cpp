@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,14 +18,14 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/app/ledger/TransactionMaster.h>
-#include <ripple/app/misc/Transaction.h>
-#include <ripple/app/main/Application.h>
-#include <ripple/protocol/STTx.h>
-#include <ripple/basics/Log.h>
-#include <ripple/basics/chrono.h>
+#include <cbc/app/ledger/TransactionMaster.h>
+#include <cbc/app/misc/Transaction.h>
+#include <cbc/app/main/Application.h>
+#include <cbc/protocol/STTx.h>
+#include <cbc/basics/Log.h>
+#include <cbc/basics/chrono.h>
 
-namespace ripple {
+namespace cbc {
 
 TransactionMaster::TransactionMaster (Application& app)
     : mApp (app)
@@ -119,4 +119,4 @@ TaggedCache <uint256, Transaction>& TransactionMaster::getCache()
     return mCache;
 }
 
-} // ripple
+} // cbc

@@ -21,8 +21,8 @@
 #include "../../BeastConfig.h"
 #endif
 
-#include <ripple/beast/net/IPAddressV4.h>
-#include <ripple/beast/net/detail/Parse.h>
+#include <cbc/beast/net/IPAddressV4.h>
+#include <cbc/beast/net/detail/Parse.h>
 
 #include <sstream>
 #include <stdexcept>

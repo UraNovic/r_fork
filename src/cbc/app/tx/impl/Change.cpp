@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,15 +18,15 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/app/tx/impl/Change.h>
-#include <ripple/app/main/Application.h>
-#include <ripple/app/misc/AmendmentTable.h>
-#include <ripple/app/misc/NetworkOPs.h>
-#include <ripple/basics/Log.h>
-#include <ripple/protocol/Indexes.h>
-#include <ripple/protocol/TxFlags.h>
+#include <cbc/app/tx/impl/Change.h>
+#include <cbc/app/main/Application.h>
+#include <cbc/app/misc/AmendmentTable.h>
+#include <cbc/app/misc/NetworkOPs.h>
+#include <cbc/basics/Log.h>
+#include <cbc/protocol/Indexes.h>
+#include <cbc/protocol/TxFlags.h>
 
-namespace ripple {
+namespace cbc {
 
 TER
 Change::preflight (PreflightContext const& ctx)

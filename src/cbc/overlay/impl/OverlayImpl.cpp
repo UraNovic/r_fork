@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,23 +18,23 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/app/misc/HashRouter.h>
-#include <ripple/app/misc/NetworkOPs.h>
-#include <ripple/app/misc/ValidatorList.h>
-#include <ripple/basics/make_SSLContext.h>
-#include <ripple/beast/core/LexicalCast.h>
-#include <ripple/core/DatabaseCon.h>
-#include <ripple/overlay/Cluster.h>
-#include <ripple/overlay/predicates.h>
-#include <ripple/overlay/impl/ConnectAttempt.h>
-#include <ripple/overlay/impl/PeerImp.h>
-#include <ripple/peerfinder/make_Manager.h>
-#include <ripple/rpc/json_body.h>
-#include <ripple/server/SimpleWriter.h>
+#include <cbc/app/misc/HashRouter.h>
+#include <cbc/app/misc/NetworkOPs.h>
+#include <cbc/app/misc/ValidatorList.h>
+#include <cbc/basics/make_SSLContext.h>
+#include <cbc/beast/core/LexicalCast.h>
+#include <cbc/core/DatabaseCon.h>
+#include <cbc/overlay/Cluster.h>
+#include <cbc/overlay/predicates.h>
+#include <cbc/overlay/impl/ConnectAttempt.h>
+#include <cbc/overlay/impl/PeerImp.h>
+#include <cbc/peerfinder/make_Manager.h>
+#include <cbc/rpc/json_body.h>
+#include <cbc/server/SimpleWriter.h>
 
 #include <boost/utility/in_place_factory.hpp>
 
-namespace ripple {
+namespace cbc {
 
 /** A functor to visit all active peers and retrieve their JSON data */
 struct get_peer_json
@@ -490,7 +490,7 @@ OverlayImpl::onPrepare()
         ? app_.config().IPS_FIXED
         : app_.config().IPS;
     if (bootstrapIps.empty ())
-        bootstrapIps.push_back ("r.ripple.com 51235");
+        bootstrapIps.push_back ("r.cbc.com 51235");
 
     m_resolver.resolve (bootstrapIps,
         [this](std::string const& name,
@@ -514,7 +514,7 @@ OverlayImpl::onPrepare()
                 m_peerFinder->addFallbackStrings (base + name, ips);
         });
 
-    // Add the ips_fixed from the rippled.cfg file
+    // Add the ips_fixed from the cbcd.cfg file
     if (! app_.config().standalone() && !app_.config().IPS_FIXED.empty ())
     {
         m_resolver.resolve (app_.config().IPS_FIXED,
@@ -736,7 +736,7 @@ OverlayImpl::selectPeers (PeerSet& set, std::size_t limit,
 
 /** The number of active peers on the network
     Active peers are only those peers that have completed the handshake
-    and are running the Ripple protocol.
+    and are running the cbc protocol.
 */
 std::size_t
 OverlayImpl::size()

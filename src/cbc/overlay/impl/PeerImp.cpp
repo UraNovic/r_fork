@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,23 +18,23 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/overlay/impl/PeerImp.h>
-#include <ripple/overlay/impl/Tuning.h>
-#include <ripple/app/consensus/RCLValidations.h>
-#include <ripple/app/ledger/InboundLedgers.h>
-#include <ripple/app/ledger/LedgerMaster.h>
-#include <ripple/app/ledger/InboundTransactions.h>
-#include <ripple/app/misc/HashRouter.h>
-#include <ripple/app/misc/LoadFeeTrack.h>
-#include <ripple/app/misc/NetworkOPs.h>
-#include <ripple/app/misc/Transaction.h>
-#include <ripple/app/misc/ValidatorList.h>
-#include <ripple/app/tx/apply.h>
-#include <ripple/basics/random.h>
-#include <ripple/basics/UptimeTimer.h>
-#include <ripple/beast/core/SemanticVersion.h>
-#include <ripple/overlay/Cluster.h>
-#include <ripple/protocol/digest.h>
+#include <cbc/overlay/impl/PeerImp.h>
+#include <cbc/overlay/impl/Tuning.h>
+#include <cbc/app/consensus/RCLValidations.h>
+#include <cbc/app/ledger/InboundLedgers.h>
+#include <cbc/app/ledger/LedgerMaster.h>
+#include <cbc/app/ledger/InboundTransactions.h>
+#include <cbc/app/misc/HashRouter.h>
+#include <cbc/app/misc/LoadFeeTrack.h>
+#include <cbc/app/misc/NetworkOPs.h>
+#include <cbc/app/misc/Transaction.h>
+#include <cbc/app/misc/ValidatorList.h>
+#include <cbc/app/tx/apply.h>
+#include <cbc/basics/random.h>
+#include <cbc/basics/UptimeTimer.h>
+#include <cbc/beast/core/SemanticVersion.h>
+#include <cbc/overlay/Cluster.h>
+#include <cbc/protocol/digest.h>
 
 #include <boost/algorithm/string/predicate.hpp>
 #include <algorithm>
@@ -43,7 +43,7 @@
 
 using namespace std::chrono_literals;
 
-namespace ripple {
+namespace cbc {
 
 PeerImp::PeerImp (Application& app, id_t id, endpoint_type remote_endpoint,
     PeerFinder::Slot::ptr const& slot, http_request_type&& request,
@@ -101,7 +101,7 @@ PeerImp::run()
             &PeerImp::run, shared_from_this()));
     {
         auto s = getVersion();
-        if (boost::starts_with(s, "rippled-"))
+        if (boost::starts_with(s, "cbcd-"))
         {
             s.erase(s.begin(), s.begin() + 8);
             beast::SemanticVersion v;
@@ -2387,4 +2387,4 @@ PeerImp::isHighLatency() const
     return latency_.count() >= Tuning::peerHighLatency;
 }
 
-} // ripple
+} // cbc

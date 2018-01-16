@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,21 +18,21 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/app/tx/impl/PayChan.h>
+#include <cbc/app/tx/impl/PayChan.h>
 
-#include <ripple/basics/chrono.h>
-#include <ripple/basics/Log.h>
-#include <ripple/protocol/digest.h>
-#include <ripple/protocol/st.h>
-#include <ripple/protocol/Feature.h>
-#include <ripple/protocol/Indexes.h>
-#include <ripple/protocol/PayChan.h>
-#include <ripple/protocol/PublicKey.h>
-#include <ripple/protocol/TxFlags.h>
-#include <ripple/protocol/XRPAmount.h>
-#include <ripple/ledger/View.h>
+#include <cbc/basics/chrono.h>
+#include <cbc/basics/Log.h>
+#include <cbc/protocol/digest.h>
+#include <cbc/protocol/st.h>
+#include <cbc/protocol/Feature.h>
+#include <cbc/protocol/Indexes.h>
+#include <cbc/protocol/PayChan.h>
+#include <cbc/protocol/PublicKey.h>
+#include <cbc/protocol/TxFlags.h>
+#include <cbc/protocol/XRPAmount.h>
+#include <cbc/ledger/View.h>
 
-namespace ripple {
+namespace cbc {
 
 /*
     PaymentChannel
@@ -70,13 +70,13 @@ namespace ripple {
             `CancelAfter` time will close it.
         DestinationTag (optional)
             Destination tags allow the different accounts inside of a Hosted
-            Wallet to be mapped back onto the Ripple ledger. The destination tag
+            Wallet to be mapped back onto the cbc ledger. The destination tag
             tells the server to which account in the Hosted Wallet the funds are
             intended to go to. Required if the destination has lsfRequireDestTag
             set.
         SourceTag (optional)
             Source tags allow the different accounts inside of a Hosted Wallet
-            to be mapped back onto the Ripple ledger. Source tags are similar to
+            to be mapped back onto the cbc ledger. Source tags are similar to
             destination tags but are for the channel owner to identify their own
             transactions.
 
@@ -497,5 +497,5 @@ PayChanClaim::doApply()
     return tesSUCCESS;
 }
 
-} // ripple
+} // cbc
 

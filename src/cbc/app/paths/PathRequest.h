@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -17,27 +17,27 @@
 */
 //==============================================================================
 
-#ifndef RIPPLE_APP_PATHS_PATHREQUEST_H_INCLUDED
-#define RIPPLE_APP_PATHS_PATHREQUEST_H_INCLUDED
+#ifndef cbc_APP_PATHS_PATHREQUEST_H_INCLUDED
+#define cbc_APP_PATHS_PATHREQUEST_H_INCLUDED
 
-#include <ripple/app/ledger/Ledger.h>
-#include <ripple/app/paths/Pathfinder.h>
-#include <ripple/app/paths/RippleLineCache.h>
-#include <ripple/json/json_value.h>
-#include <ripple/net/InfoSub.h>
-#include <ripple/protocol/types.h>
+#include <cbc/app/ledger/Ledger.h>
+#include <cbc/app/paths/Pathfinder.h>
+#include <cbc/app/paths/cbcLineCache.h>
+#include <cbc/json/json_value.h>
+#include <cbc/net/InfoSub.h>
+#include <cbc/protocol/types.h>
 #include <boost/optional.hpp>
 #include <map>
 #include <mutex>
 #include <set>
 #include <utility>
 
-namespace ripple {
+namespace cbc {
 
 // A pathfinding request submitted by a client
 // The request issuer must maintain a strong pointer
 
-class RippleLineCache;
+class cbcLineCache;
 class PathRequests;
 
 // Return values from parseJson <0 = invalid, >0 = valid
@@ -69,7 +69,7 @@ public:
         PathRequests&,
         beast::Journal journal);
 
-    // ripple_path_find semantics
+    // cbc_path_find semantics
     // Completion function is called after path update is complete
     PathRequest (
         Application& app,
@@ -88,7 +88,7 @@ public:
     void updateComplete ();
 
     std::pair<bool, Json::Value> doCreate (
-        std::shared_ptr<RippleLineCache> const&,
+        std::shared_ptr<cbcLineCache> const&,
         Json::Value const&);
 
     Json::Value doClose (Json::Value const&);
@@ -96,18 +96,18 @@ public:
 
     // update jvStatus
     Json::Value doUpdate (
-        std::shared_ptr<RippleLineCache> const&, bool fast);
+        std::shared_ptr<cbcLineCache> const&, bool fast);
     InfoSub::pointer getSubscriber ();
     bool hasCompletion ();
 
 private:
     using ScopedLockType = std::lock_guard <std::recursive_mutex>;
 
-    bool isValid (std::shared_ptr<RippleLineCache> const& crCache);
+    bool isValid (std::shared_ptr<cbcLineCache> const& crCache);
     void setValid ();
 
     std::unique_ptr<Pathfinder> const&
-    getPathFinder(std::shared_ptr<RippleLineCache> const&,
+    getPathFinder(std::shared_ptr<cbcLineCache> const&,
         hash_map<Currency, std::unique_ptr<Pathfinder>>&, Currency const&,
             STAmount const&, int const);
 
@@ -115,7 +115,7 @@ private:
         Returns false if the source currencies are inavlid.
     */
     bool
-    findPaths (std::shared_ptr<RippleLineCache> const&, int const, Json::Value&);
+    findPaths (std::shared_ptr<cbcLineCache> const&, int const, Json::Value&);
 
     int parseJson (Json::Value const&);
 
@@ -160,6 +160,6 @@ private:
     static unsigned int const max_paths_ = 4;
 };
 
-} // ripple
+} // cbc
 
 #endif

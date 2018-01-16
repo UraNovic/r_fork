@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -17,25 +17,25 @@
 */
 //==============================================================================
 
-#ifndef RIPPLE_APP_PATHS_RIPPLELINECACHE_H_INCLUDED
-#define RIPPLE_APP_PATHS_RIPPLELINECACHE_H_INCLUDED
+#ifndef cbc_APP_PATHS_cbcLINECACHE_H_INCLUDED
+#define cbc_APP_PATHS_cbcLINECACHE_H_INCLUDED
 
-#include <ripple/app/ledger/Ledger.h>
-#include <ripple/app/paths/RippleState.h>
-#include <ripple/basics/hardened_hash.h>
+#include <cbc/app/ledger/Ledger.h>
+#include <cbc/app/paths/cbcState.h>
+#include <cbc/basics/hardened_hash.h>
 #include <cstddef>
 #include <memory>
 #include <mutex>
 #include <vector>
 
-namespace ripple {
+namespace cbc {
 
 // Used by Pathfinder
-class RippleLineCache
+class cbcLineCache
 {
 public:
     explicit
-    RippleLineCache (
+    cbcLineCache (
         std::shared_ptr <ReadView const> const& l);
 
     std::shared_ptr <ReadView const> const&
@@ -44,13 +44,13 @@ public:
         return mLedger;
     }
 
-    std::vector<RippleState::pointer> const&
-    getRippleLines (AccountID const& accountID);
+    std::vector<cbcState::pointer> const&
+    getcbcLines (AccountID const& accountID);
 
 private:
     std::mutex mLock;
 
-    ripple::hardened_hash<> hasher_;
+    cbc::hardened_hash<> hasher_;
     std::shared_ptr <ReadView const> mLedger;
 
     struct AccountKey
@@ -91,10 +91,10 @@ private:
 
     hash_map <
         AccountKey,
-        std::vector <RippleState::pointer>,
+        std::vector <cbcState::pointer>,
         AccountKey::Hash> lines_;
 };
 
-} // ripple
+} // cbc
 
 #endif

@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,15 +18,15 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/basics/contract.h>
-#include <ripple/basics/impl/CheckLibraryVersionsImpl.h>
-#include <ripple/beast/core/SemanticVersion.h>
+#include <cbc/basics/contract.h>
+#include <cbc/basics/impl/CheckLibraryVersionsImpl.h>
+#include <cbc/beast/core/SemanticVersion.h>
 #include <boost/version.hpp>
 #include <openssl/opensslv.h>
 #include <sstream>
 #include <vector>
 
-namespace ripple {
+namespace cbc {
 namespace version {
 
 std::string
@@ -98,7 +98,7 @@ void checkOpenSSL(std::string version)
         // Use of the 1.0.1 series should be dropped as soon
         // as possible since as of January 2, 2017 it is no
         // longer supported. Unfortunately, a number of
-        // platforms officially supported by Ripple still
+        // platforms officially supported by cbc still
         // use the 1.0.1 branch.
         //
         // Additionally, requiring 1.0.1u (the latest) is
@@ -119,4 +119,4 @@ void checkLibraryVersions()
 }
 
 }  // namespace version
-}  // namespace ripple
+}  // namespace cbc

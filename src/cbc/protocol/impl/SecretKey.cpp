@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,19 +18,19 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/basics/strHex.h>
-#include <ripple/protocol/SecretKey.h>
-#include <ripple/protocol/digest.h>
-#include <ripple/protocol/impl/secp256k1.h>
-#include <ripple/basics/contract.h>
-#include <ripple/crypto/GenerateDeterministicKey.h>
-#include <ripple/crypto/csprng.h>
-#include <ripple/beast/crypto/secure_erase.h>
-#include <ripple/beast/utility/rngfill.h>
+#include <cbc/basics/strHex.h>
+#include <cbc/protocol/SecretKey.h>
+#include <cbc/protocol/digest.h>
+#include <cbc/protocol/impl/secp256k1.h>
+#include <cbc/basics/contract.h>
+#include <cbc/crypto/GenerateDeterministicKey.h>
+#include <cbc/crypto/csprng.h>
+#include <cbc/beast/crypto/secure_erase.h>
+#include <cbc/beast/utility/rngfill.h>
 #include <ed25519-donna/ed25519.h>
 #include <cstring>
 
-namespace ripple {
+namespace cbc {
 
 SecretKey::~SecretKey()
 {
@@ -305,5 +305,5 @@ parseBase58 (TokenType type, std::string const& s)
     return SecretKey(makeSlice(result));
 }
 
-} // ripple
+} // cbc
 

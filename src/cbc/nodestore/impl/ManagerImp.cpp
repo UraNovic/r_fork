@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,10 +18,10 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/nodestore/impl/ManagerImp.h>
-#include <ripple/nodestore/impl/DatabaseRotatingImp.h>
+#include <cbc/nodestore/impl/ManagerImp.h>
+#include <cbc/nodestore/impl/DatabaseRotatingImp.h>
 
-namespace ripple {
+namespace cbc {
 namespace NodeStore {
 
 ManagerImp&
@@ -35,8 +35,8 @@ void
 ManagerImp::missing_backend()
 {
     Throw<std::runtime_error> (
-        "Your rippled.cfg is missing a [node_db] entry, "
-        "please see the rippled-example.cfg file!"
+        "Your cbcd.cfg is missing a [node_db] entry, "
+        "please see the cbcd-example.cfg file!"
         );
 }
 

@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -17,18 +17,18 @@
 */
 //==============================================================================
 
-#ifndef RIPPLE_APP_MISC_SHAMAPSTOREIMP_H_INCLUDED
-#define RIPPLE_APP_MISC_SHAMAPSTOREIMP_H_INCLUDED
+#ifndef cbc_APP_MISC_SHAMAPSTOREIMP_H_INCLUDED
+#define cbc_APP_MISC_SHAMAPSTOREIMP_H_INCLUDED
 
-#include <ripple/app/misc/SHAMapStore.h>
-#include <ripple/app/ledger/LedgerMaster.h>
-#include <ripple/core/DatabaseCon.h>
-#include <ripple/nodestore/DatabaseRotating.h>
+#include <cbc/app/misc/SHAMapStore.h>
+#include <cbc/app/ledger/LedgerMaster.h>
+#include <cbc/core/DatabaseCon.h>
+#include <cbc/nodestore/DatabaseRotating.h>
 #include <condition_variable>
 #include <thread>
 
 
-namespace ripple {
+namespace cbc {
 
 class NetworkOPs;
 
@@ -75,7 +75,7 @@ private:
     // name of state database
     std::string const dbName_ = "state";
     // prefix of on-disk nodestore backend instances
-    std::string const dbPrefix_ = "rippledb";
+    std::string const dbPrefix_ = "cbcdb";
     // check health/stop status as records are copied
     std::uint64_t const checkHealthInterval_ = 1000;
     // minimum # of ledgers to maintain for health of network
@@ -223,7 +223,7 @@ private:
     void freshenCaches();
     void clearPrior (LedgerIndex lastRotated);
 
-    // If rippled is not healthy, defer rotate-delete.
+    // If cbcd is not healthy, defer rotate-delete.
     // If already unhealthy, do not change state on further check.
     // Assume that, once unhealthy, a necessary step has been
     // aborted, so the online-delete process needs to restart

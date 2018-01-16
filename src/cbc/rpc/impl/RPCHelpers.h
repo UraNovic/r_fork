@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012=2014 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012=2014 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -17,21 +17,21 @@
 */
 //==============================================================================
 
-#ifndef RIPPLE_RPC_RPCHELPERS_H_INCLUDED
-#define RIPPLE_RPC_RPCHELPERS_H_INCLUDED
+#ifndef cbc_RPC_RPCHELPERS_H_INCLUDED
+#define cbc_RPC_RPCHELPERS_H_INCLUDED
 
-#include <ripple/beast/core/SemanticVersion.h>
-#include <ripple/ledger/TxMeta.h>
-#include <ripple/protocol/SecretKey.h>
-#include <ripple/rpc/impl/Tuning.h>
-#include <ripple/rpc/Status.h>
+#include <cbc/beast/core/SemanticVersion.h>
+#include <cbc/ledger/TxMeta.h>
+#include <cbc/protocol/SecretKey.h>
+#include <cbc/rpc/impl/Tuning.h>
+#include <cbc/rpc/Status.h>
 #include <boost/optional.hpp>
 
 namespace Json {
 class Value;
 }
 
-namespace ripple {
+namespace cbc {
 
 class ReadView;
 class Transaction;
@@ -133,6 +133,6 @@ std::pair<RPC::Status, LedgerEntryType>
     chooseLedgerEntryType(Json::Value const& params);
 
 } // RPC
-} // ripple
+} // cbc
 
 #endif

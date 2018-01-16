@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2016 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2016 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -20,18 +20,18 @@
 #include <BeastConfig.h>
 #include <test/jtx/WSClient.h>
 #include <test/jtx.h>
-#include <ripple/json/json_reader.h>
-#include <ripple/json/to_string.h>
-#include <ripple/protocol/JsonFields.h>
-#include <ripple/server/Port.h>
+#include <cbc/json/json_reader.h>
+#include <cbc/json/to_string.h>
+#include <cbc/protocol/JsonFields.h>
+#include <cbc/server/Port.h>
 #include <beast/core/multi_buffer.hpp>
 #include <beast/websocket.hpp>
 
 #include <condition_variable>
 
-#include <ripple/beast/unit_test.h>
+#include <cbc/beast/unit_test.h>
 
-namespace ripple {
+namespace cbc {
 namespace test {
 
 class WSClientImpl : public WSClient
@@ -168,7 +168,7 @@ public:
             {
                 jp[jss::method] = cmd;
                 jp[jss::jsonrpc] = "2.0";
-                jp[jss::ripplerpc] = "2.0";
+                jp[jss::cbcrpc] = "2.0";
                 jp[jss::id] = 5;
             }
             else
@@ -298,4 +298,4 @@ makeWSClient(Config const& cfg, bool v2, unsigned rpc_version)
 }
 
 } // test
-} // ripple
+} // cbc

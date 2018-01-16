@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -17,15 +17,15 @@
 */
 //==============================================================================
 
-#ifndef RIPPLE_PEERFINDER_STORESQDB_H_INCLUDED
-#define RIPPLE_PEERFINDER_STORESQDB_H_INCLUDED
+#ifndef cbc_PEERFINDER_STORESQDB_H_INCLUDED
+#define cbc_PEERFINDER_STORESQDB_H_INCLUDED
 
-#include <ripple/basics/contract.h>
-#include <ripple/core/SociDB.h>
-#include <ripple/beast/utility/Debug.h>
+#include <cbc/basics/contract.h>
+#include <cbc/core/SociDB.h>
+#include <cbc/beast/utility/Debug.h>
 #include <boost/optional.hpp>
 
-namespace ripple {
+namespace cbc {
 namespace PeerFinder {
 
 /** Database persistence for PeerFinder using SQLite */

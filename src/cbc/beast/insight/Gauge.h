@@ -20,8 +20,8 @@
 #ifndef BEAST_INSIGHT_GAUGE_H_INCLUDED
 #define BEAST_INSIGHT_GAUGE_H_INCLUDED
 
-#include <ripple/beast/insight/Base.h>
-#include <ripple/beast/insight/GaugeImpl.h>
+#include <cbc/beast/insight/Base.h>
+#include <cbc/beast/insight/GaugeImpl.h>
 
 #include <memory>
 

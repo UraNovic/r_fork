@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -17,22 +17,22 @@
 */
 //==============================================================================
 
-#ifndef RIPPLE_RPC_SERVERHANDLERIMP_H_INCLUDED
-#define RIPPLE_RPC_SERVERHANDLERIMP_H_INCLUDED
+#ifndef cbc_RPC_SERVERHANDLERIMP_H_INCLUDED
+#define cbc_RPC_SERVERHANDLERIMP_H_INCLUDED
 
-#include <ripple/core/JobQueue.h>
-#include <ripple/rpc/impl/WSInfoSub.h>
-#include <ripple/server/Server.h>
-#include <ripple/server/Session.h>
-#include <ripple/server/WSSession.h>
-#include <ripple/rpc/RPCHandler.h>
-#include <ripple/app/main/CollectorManager.h>
-#include <ripple/json/Output.h>
+#include <cbc/core/JobQueue.h>
+#include <cbc/rpc/impl/WSInfoSub.h>
+#include <cbc/server/Server.h>
+#include <cbc/server/Session.h>
+#include <cbc/server/WSSession.h>
+#include <cbc/rpc/RPCHandler.h>
+#include <cbc/app/main/CollectorManager.h>
+#include <cbc/json/Output.h>
 #include <map>
 #include <mutex>
 #include <vector>
 
-namespace ripple {
+namespace cbc {
 
 inline
 bool operator< (Port const& lhs, Port const& rhs)

@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012-2014 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012-2014 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,13 +18,13 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/app/ledger/LedgerToJson.h>
-#include <ripple/basics/strHex.h>
-#include <ripple/ledger/ReadView.h>
-#include <ripple/protocol/JsonFields.h>
-#include <ripple/rpc/impl/RPCHelpers.h>
+#include <cbc/app/ledger/LedgerToJson.h>
+#include <cbc/basics/strHex.h>
+#include <cbc/ledger/ReadView.h>
+#include <cbc/protocol/JsonFields.h>
+#include <cbc/rpc/impl/RPCHelpers.h>
 
-namespace ripple {
+namespace cbc {
 
 // {
 //   ledger_hash : <ledger>
@@ -50,4 +50,4 @@ Json::Value doLedgerHeader (RPC::Context& context)
 }
 
 
-} // ripple
+} // cbc

@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012-2014 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012-2014 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,11 +18,11 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/app/main/Application.h>
-#include <ripple/app/misc/ValidatorSite.h>
-#include <ripple/rpc/Context.h>
+#include <cbc/app/main/Application.h>
+#include <cbc/app/misc/ValidatorSite.h>
+#include <cbc/rpc/Context.h>
 
-namespace ripple {
+namespace cbc {
 
 Json::Value
 doValidatorListSites(RPC::Context& context)
@@ -30,4 +30,4 @@ doValidatorListSites(RPC::Context& context)
     return context.app.validatorSites().getJson();
 }
 
-}  // namespace ripple
+}  // namespace cbc

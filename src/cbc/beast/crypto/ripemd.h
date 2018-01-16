@@ -20,8 +20,8 @@
 #ifndef BEAST_CRYPTO_RIPEMD_H_INCLUDED
 #define BEAST_CRYPTO_RIPEMD_H_INCLUDED
 
-#include <ripple/beast/crypto/detail/mac_facade.h>
-#include <ripple/beast/crypto/detail/ripemd_context.h>
+#include <cbc/beast/crypto/detail/mac_facade.h>
+#include <cbc/beast/crypto/detail/ripemd_context.h>
 
 namespace beast {
 

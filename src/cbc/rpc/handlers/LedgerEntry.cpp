@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012-2014 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012-2014 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,18 +18,18 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/app/main/Application.h>
-#include <ripple/basics/strHex.h>
-#include <ripple/basics/StringUtilities.h>
-#include <ripple/ledger/ReadView.h>
-#include <ripple/net/RPCErr.h>
-#include <ripple/protocol/ErrorCodes.h>
-#include <ripple/protocol/Indexes.h>
-#include <ripple/protocol/JsonFields.h>
-#include <ripple/rpc/Context.h>
-#include <ripple/rpc/impl/RPCHelpers.h>
+#include <cbc/app/main/Application.h>
+#include <cbc/basics/strHex.h>
+#include <cbc/basics/StringUtilities.h>
+#include <cbc/ledger/ReadView.h>
+#include <cbc/net/RPCErr.h>
+#include <cbc/protocol/ErrorCodes.h>
+#include <cbc/protocol/Indexes.h>
+#include <cbc/protocol/JsonFields.h>
+#include <cbc/rpc/Context.h>
+#include <cbc/rpc/impl/RPCHelpers.h>
 
-namespace ripple {
+namespace cbc {
 
 // {
 //   ledger_hash : <ledger>
@@ -135,20 +135,20 @@ Json::Value doLedgerEntry (RPC::Context& context)
                     context.params[jss::offer][jss::seq].asUInt ());
         }
     }
-    else if (context.params.isMember (jss::ripple_state))
+    else if (context.params.isMember (jss::cbc_state))
     {
         Currency         uCurrency;
-        Json::Value     jvRippleState   = context.params[jss::ripple_state];
+        Json::Value     jvcbcState   = context.params[jss::cbc_state];
 
-        if (!jvRippleState.isObject ()
-            || !jvRippleState.isMember (jss::currency)
-            || !jvRippleState.isMember (jss::accounts)
-            || !jvRippleState[jss::accounts].isArray ()
-            || 2 != jvRippleState[jss::accounts].size ()
-            || !jvRippleState[jss::accounts][0u].isString ()
-            || !jvRippleState[jss::accounts][1u].isString ()
-            || (jvRippleState[jss::accounts][0u].asString ()
-                == jvRippleState[jss::accounts][1u].asString ())
+        if (!jvcbcState.isObject ()
+            || !jvcbcState.isMember (jss::currency)
+            || !jvcbcState.isMember (jss::accounts)
+            || !jvcbcState[jss::accounts].isArray ()
+            || 2 != jvcbcState[jss::accounts].size ()
+            || !jvcbcState[jss::accounts][0u].isString ()
+            || !jvcbcState[jss::accounts][1u].isString ()
+            || (jvcbcState[jss::accounts][0u].asString ()
+                == jvcbcState[jss::accounts][1u].asString ())
            )
         {
             jvResult[jss::error]   = "malformedRequest";
@@ -156,21 +156,21 @@ Json::Value doLedgerEntry (RPC::Context& context)
         else
         {
             auto const id1 = parseBase58<AccountID>(
-                jvRippleState[jss::accounts][0u].asString());
+                jvcbcState[jss::accounts][0u].asString());
             auto const id2 = parseBase58<AccountID>(
-                jvRippleState[jss::accounts][1u].asString());
+                jvcbcState[jss::accounts][1u].asString());
             if (! id1 || ! id2)
             {
                 jvResult[jss::error]   = "malformedAddress";
             }
             else if (!to_currency (uCurrency,
-                jvRippleState[jss::currency].asString()))
+                jvcbcState[jss::currency].asString()))
             {
                 jvResult[jss::error]   = "malformedCurrency";
             }
             else
             {
-                uNodeIndex  = getRippleStateIndex(
+                uNodeIndex  = getcbcStateIndex(
                     *id1, *id2, uCurrency);
             }
         }
@@ -212,4 +212,4 @@ Json::Value doLedgerEntry (RPC::Context& context)
     return jvResult;
 }
 
-} // ripple
+} // cbc

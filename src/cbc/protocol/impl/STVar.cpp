@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,20 +18,20 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/basics/contract.h>
-#include <ripple/protocol/STAccount.h>
-#include <ripple/protocol/STAmount.h>
-#include <ripple/protocol/STArray.h>
-#include <ripple/protocol/STBase.h>
-#include <ripple/protocol/STBitString.h>
-#include <ripple/protocol/STBlob.h>
-#include <ripple/protocol/STInteger.h>
-#include <ripple/protocol/STObject.h>
-#include <ripple/protocol/STPathSet.h>
-#include <ripple/protocol/STVector256.h>
-#include <ripple/protocol/impl/STVar.h>
+#include <cbc/basics/contract.h>
+#include <cbc/protocol/STAccount.h>
+#include <cbc/protocol/STAmount.h>
+#include <cbc/protocol/STArray.h>
+#include <cbc/protocol/STBase.h>
+#include <cbc/protocol/STBitString.h>
+#include <cbc/protocol/STBlob.h>
+#include <cbc/protocol/STInteger.h>
+#include <cbc/protocol/STObject.h>
+#include <cbc/protocol/STPathSet.h>
+#include <cbc/protocol/STVector256.h>
+#include <cbc/protocol/impl/STVar.h>
 
-namespace ripple {
+namespace cbc {
 namespace detail {
 
 defaultObject_t defaultObject;
@@ -169,4 +169,4 @@ STVar::destroy()
 }
 
 } // detail
-} // ripple
+} // cbc

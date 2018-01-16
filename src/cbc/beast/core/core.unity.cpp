@@ -27,10 +27,10 @@
 
 //==============================================================================
 
-#include <ripple/beast/core/BasicNativeHeaders.h>
+#include <cbc/beast/core/BasicNativeHeaders.h>
 
 // TargetPlatform.h should not use anything from BeastConfig.h
-#include <ripple/beast/core/Config.h>
+#include <cbc/beast/core/Config.h>
 
 #if BEAST_MSVC
 # pragma warning (disable: 4251) // (DLL build warning, must be disabled before pushing the warning state)
@@ -44,17 +44,17 @@
 //------------------------------------------------------------------------------
 
 // New header-only library modeled more closely according to boost
-#include <ripple/beast/core/ByteOrder.h>
+#include <cbc/beast/core/ByteOrder.h>
 
-#include <ripple/beast/core/StandardIncludes.h>
+#include <cbc/beast/core/StandardIncludes.h>
 
 // Order matters, since headers don't have their own #include lines.
 // Add new includes to the bottom.
 
-#include <ripple/beast/core/LexicalCast.h>
+#include <cbc/beast/core/LexicalCast.h>
 
-#include <ripple/beast/core/SystemStats.h>
-#include <ripple/beast/core/SemanticVersion.h>
+#include <cbc/beast/core/SystemStats.h>
+#include <cbc/beast/core/SemanticVersion.h>
 
 #if BEAST_MSVC
 #pragma warning (pop)
@@ -160,10 +160,10 @@
 #undef _aligned_msize
 #endif
 
-#include <ripple/beast/core/Memory.h>
+#include <cbc/beast/core/Memory.h>
 
 #if BEAST_MAC || BEAST_IOS
-#include <ripple/beast/core/osx_ObjCHelpers.h>
+#include <cbc/beast/core/osx_ObjCHelpers.h>
 #endif
 
 #if BEAST_ANDROID
@@ -171,16 +171,16 @@
 #endif
 
 #if BEAST_MAC || BEAST_IOS
-#include <ripple/beast/core/mac_SystemStats.mm>
+#include <cbc/beast/core/mac_SystemStats.mm>
 
 #elif BEAST_WINDOWS
-#include <ripple/beast/core/win32_SystemStats.cpp>
+#include <cbc/beast/core/win32_SystemStats.cpp>
 
 #elif BEAST_LINUX
-#include <ripple/beast/core/linux_SystemStats.cpp>
+#include <cbc/beast/core/linux_SystemStats.cpp>
 
 #elif BEAST_BSD
-#include <ripple/beast/core/bsd_SystemStats.cpp>
+#include <cbc/beast/core/bsd_SystemStats.cpp>
 
 #elif BEAST_ANDROID
 #include "native/android_Files.cpp"
@@ -190,11 +190,11 @@
 
 #endif
 
-#include <ripple/beast/core/CurrentThreadName.cpp>
-#include <ripple/beast/core/SemanticVersion.cpp>
-#include <ripple/beast/core/SystemStats.cpp>
-#include <ripple/beast/core/Time.cpp>
-#include <ripple/beast/core/WaitableEvent.cpp>
+#include <cbc/beast/core/CurrentThreadName.cpp>
+#include <cbc/beast/core/SemanticVersion.cpp>
+#include <cbc/beast/core/SystemStats.cpp>
+#include <cbc/beast/core/Time.cpp>
+#include <cbc/beast/core/WaitableEvent.cpp>
 
 #ifdef _CRTDBG_MAP_ALLOC
 #pragma pop_macro("calloc")

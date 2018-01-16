@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -17,17 +17,17 @@
 */
 //==============================================================================
 
-#ifndef RIPPLE_NODESTORE_DATABASEIMP_H_INCLUDED
-#define RIPPLE_NODESTORE_DATABASEIMP_H_INCLUDED
+#ifndef cbc_NODESTORE_DATABASEIMP_H_INCLUDED
+#define cbc_NODESTORE_DATABASEIMP_H_INCLUDED
 
-#include <ripple/nodestore/Database.h>
-#include <ripple/nodestore/Scheduler.h>
-#include <ripple/nodestore/impl/Tuning.h>
-#include <ripple/basics/KeyCache.h>
-#include <ripple/basics/chrono.h>
-#include <ripple/beast/core/CurrentThreadName.h>
+#include <cbc/nodestore/Database.h>
+#include <cbc/nodestore/Scheduler.h>
+#include <cbc/nodestore/impl/Tuning.h>
+#include <cbc/basics/KeyCache.h>
+#include <cbc/basics/chrono.h>
+#include <cbc/beast/core/CurrentThreadName.h>
 
-namespace ripple {
+namespace cbc {
 namespace NodeStore {
 
 class DatabaseImp
@@ -276,7 +276,7 @@ public:
                         uint256 const& hash,
                         Backend& backend)
     {
-        #if RIPPLE_VERIFY_NODEOBJECT_KEYS
+        #if cbc_VERIFY_NODEOBJECT_KEYS
         assert (hash == sha512Hash(makeSlice(data)));
         #endif
 

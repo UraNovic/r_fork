@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -17,29 +17,29 @@
 */
 //==============================================================================
 
-#ifndef RIPPLE_APP_PATHS_PATHFINDER_H_INCLUDED
-#define RIPPLE_APP_PATHS_PATHFINDER_H_INCLUDED
+#ifndef cbc_APP_PATHS_PATHFINDER_H_INCLUDED
+#define cbc_APP_PATHS_PATHFINDER_H_INCLUDED
 
-#include <ripple/app/ledger/Ledger.h>
-#include <ripple/app/paths/RippleLineCache.h>
-#include <ripple/core/LoadEvent.h>
-#include <ripple/protocol/STAmount.h>
-#include <ripple/protocol/STPathSet.h>
+#include <cbc/app/ledger/Ledger.h>
+#include <cbc/app/paths/cbcLineCache.h>
+#include <cbc/core/LoadEvent.h>
+#include <cbc/protocol/STAmount.h>
+#include <cbc/protocol/STPathSet.h>
 
-namespace ripple {
+namespace cbc {
 
 /** Calculates payment paths.
 
-    The @ref RippleCalc determines the quality of the found paths.
+    The @ref cbcCalc determines the quality of the found paths.
 
-    @see RippleCalc
+    @see cbcCalc
 */
 class Pathfinder
 {
 public:
     /** Construct a pathfinder without an issuer.*/
     Pathfinder (
-        std::shared_ptr<RippleLineCache> const& cache,
+        std::shared_ptr<cbcLineCache> const& cache,
         AccountID const& srcAccount,
         AccountID const& dstAccount,
         Currency const& uSrcCurrency,
@@ -112,13 +112,13 @@ private:
                   addLink:
                       getPathsOut
                       issueMatchesOrigin
-                      isNoRippleOut:
-                          isNoRipple
+                      isNocbcOut:
+                          isNocbc
 
       computePathRanks:
-          rippleCalculate
+          cbcCalculate
           getPathLiquidity:
-              rippleCalculate
+              cbcCalculate
 
       getBestPaths
      */
@@ -156,11 +156,11 @@ private:
         uint64_t& qualityOut) const;   // OUT: The returned initial quality
 
     // Does this path end on an account-to-account link whose last account has
-    // set the "no ripple" flag on the link?
-    bool isNoRippleOut (STPath const& currentPath);
+    // set the "no cbc" flag on the link?
+    bool isNocbcOut (STPath const& currentPath);
 
-    // Is the "no ripple" flag set from one account to another?
-    bool isNoRipple (
+    // Is the "no cbc" flag set from one account to another?
+    bool isNocbc (
         AccountID const& fromAccount,
         AccountID const& toAccount,
         Currency const& currency);
@@ -184,7 +184,7 @@ private:
 
     std::shared_ptr <ReadView const> mLedger;
     std::unique_ptr<LoadEvent> m_loadEvent;
-    std::shared_ptr<RippleLineCache> mRLCache;
+    std::shared_ptr<cbcLineCache> mRLCache;
 
     STPathElement mSource;
     STPathSet mCompletePaths;
@@ -196,7 +196,7 @@ private:
     Application& app_;
     beast::Journal j_;
 
-    // Add ripple paths
+    // Add cbc paths
     static std::uint32_t const afADD_ACCOUNTS = 0x001;
 
     // Add order books
@@ -212,6 +212,6 @@ private:
     static std::uint32_t const afAC_LAST = 0x080;
 };
 
-} // ripple
+} // cbc
 
 #endif

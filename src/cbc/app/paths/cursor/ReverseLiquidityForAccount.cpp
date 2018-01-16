@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,12 +18,12 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/app/paths/Credit.h>
-#include <ripple/app/paths/cursor/RippleLiquidity.h>
-#include <ripple/basics/Log.h>
-#include <ripple/protocol/Quality.h>
+#include <cbc/app/paths/Credit.h>
+#include <cbc/app/paths/cursor/cbcLiquidity.h>
+#include <cbc/basics/Log.h>
+#include <cbc/protocol/Quality.h>
 
-namespace ripple {
+namespace cbc {
 namespace path {
 
 // Calculate saPrvRedeemReq, saPrvIssueReq, saPrvDeliver from saCur, based on
@@ -175,7 +175,7 @@ TER PathCursor::reverseLiquidityForAccount () const
     }
 
     // The next four cases correspond to the table at the bottom of this Wiki
-    // page section: https://ripple.com/wiki/Transit_Fees#Implementation
+    // page section: https://cbc.com/wiki/Transit_Fees#Implementation
     else if (previousNodeIsAccount && nextNodeIsAccount)
     {
         if (isFinalNode)
@@ -225,8 +225,8 @@ TER PathCursor::reverseLiquidityForAccount () const
 
                 // If we previously redeemed and this has a poorer rate, this
                 // won't be included the current increment.
-                rippleLiquidity (
-                    rippleCalc_,
+                cbcLiquidity (
+                    cbcCalc_,
                     qualityIn,
                     parityRate,
                     saPrvIssueReq,
@@ -264,8 +264,8 @@ TER PathCursor::reverseLiquidityForAccount () const
                 // TODO(tom): add English.
                 // Rate : 1.0 : quality out - we must accept our own IOUs
                 // as 1:1.
-                rippleLiquidity (
-                    rippleCalc_,
+                cbcLiquidity (
+                    cbcCalc_,
                     parityRate,
                     qualityOut,
                     saPrvRedeemReq,
@@ -288,8 +288,8 @@ TER PathCursor::reverseLiquidityForAccount () const
                 // The previous node has no IOUs to redeem remaining, so issues.
             {
                 // Rate: quality in : quality out
-                rippleLiquidity (
-                    rippleCalc_,
+                cbcLiquidity (
+                    cbcCalc_,
                     qualityIn,
                     qualityOut,
                     saPrvIssueReq,
@@ -314,8 +314,8 @@ TER PathCursor::reverseLiquidityForAccount () const
                 // Did not complete redeeming previous IOUs.
             {
                 // Rate : 1.0 : transfer_rate
-                rippleLiquidity (
-                    rippleCalc_,
+                cbcLiquidity (
+                    cbcCalc_,
                     parityRate,
                     transferRate (view(), node().account_),
                     saPrvRedeemReq,
@@ -342,8 +342,8 @@ TER PathCursor::reverseLiquidityForAccount () const
                 // Previous can issue.
             {
                 // Rate: quality in : 1.0
-                rippleLiquidity (
-                    rippleCalc_,
+                cbcLiquidity (
+                    cbcCalc_,
                     qualityIn,
                     parityRate,
                     saPrvIssueReq,
@@ -400,8 +400,8 @@ TER PathCursor::reverseLiquidityForAccount () const
             && node().saRevDeliver)                 // Need some issued.
         {
             // Rate : 1.0 : transfer_rate
-            rippleLiquidity (
-                rippleCalc_,
+            cbcLiquidity (
+                cbcCalc_,
                 parityRate,
                 transferRate (view(), node().account_),
                 saPrvRedeemReq,
@@ -417,8 +417,8 @@ TER PathCursor::reverseLiquidityForAccount () const
             && node().saRevDeliver != saCurDeliverAct)  // Still need some issued.
         {
             // Rate: quality in : 1.0
-            rippleLiquidity (
-                rippleCalc_,
+            cbcLiquidity (
+                cbcCalc_,
                 qualityIn,
                 parityRate,
                 saPrvIssueReq,
@@ -481,8 +481,8 @@ TER PathCursor::reverseLiquidityForAccount () const
             // to a document.
 
             // Rate: quality in : 1.0
-            rippleLiquidity (
-                rippleCalc_,
+            cbcLiquidity (
+                cbcCalc_,
                 qualityIn,
                 parityRate,
                 saPrvDeliverReq,
@@ -515,7 +515,7 @@ TER PathCursor::reverseLiquidityForAccount () const
                 << " node.saRevIssue:" << node().saRevIssue;
 
             // deliver -> redeem
-            // TODO(tom): now we have more checking in nodeRipple, these checks
+            // TODO(tom): now we have more checking in nodecbc, these checks
             // might be redundant.
             if (node().saRevRedeem)  // Next wants us to redeem.
             {
@@ -525,8 +525,8 @@ TER PathCursor::reverseLiquidityForAccount () const
                 // out.
                 //
                 // Rate : 1.0 : quality out
-                rippleLiquidity (
-                    rippleCalc_,
+                cbcLiquidity (
+                    cbcCalc_,
                     parityRate,
                     qualityOut,
                     saPrvDeliverReq,
@@ -543,8 +543,8 @@ TER PathCursor::reverseLiquidityForAccount () const
                 // Need some issued.
             {
                 // Rate : 1.0 : transfer_rate
-                rippleLiquidity (
-                    rippleCalc_,
+                cbcLiquidity (
+                    cbcCalc_,
                     parityRate,
                     transferRate (view(), node().account_),
                     saPrvDeliverReq,
@@ -576,8 +576,8 @@ TER PathCursor::reverseLiquidityForAccount () const
             << "reverseLiquidityForAccount: offer --> ACCOUNT --> offer";
 
         // Rate : 1.0 : transfer_rate
-        rippleLiquidity (
-            rippleCalc_,
+        cbcLiquidity (
+            cbcCalc_,
             parityRate,
             transferRate (view(), node().account_),
             saPrvDeliverReq,
@@ -597,4 +597,4 @@ TER PathCursor::reverseLiquidityForAccount () const
 }
 
 } // path
-} // ripple
+} // cbc

@@ -21,7 +21,7 @@
 */
 //==============================================================================
 
-#include <ripple/beast/core/WaitableEvent.h>
+#include <cbc/beast/core/WaitableEvent.h>
 
 #if BEAST_WINDOWS
 

@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,7 +18,7 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/protocol/SField.h>
+#include <cbc/protocol/SField.h>
 #include <cassert>
 #include <map>
 #include <memory>
@@ -26,7 +26,7 @@
 #include <string>
 #include <utility>
 
-namespace ripple {
+namespace cbc {
 
 // These must stay at the top of this file, and in this order
 // Files-cope statics are preferred here because the SFields must be
@@ -186,7 +186,7 @@ SF_Amount const sfDeliverMin  = make::one<SF_Amount::type>(&sfDeliverMin,  STI_A
 
 // currency amount (uncommon)
 SF_Amount const sfMinimumOffer    = make::one<SF_Amount::type>(&sfMinimumOffer,    STI_AMOUNT, 16, "MinimumOffer");
-SF_Amount const sfRippleEscrow    = make::one<SF_Amount::type>(&sfRippleEscrow,    STI_AMOUNT, 17, "RippleEscrow");
+SF_Amount const sfcbcEscrow    = make::one<SF_Amount::type>(&sfcbcEscrow,    STI_AMOUNT, 17, "cbcEscrow");
 SF_Amount const sfDeliveredAmount = make::one<SF_Amount::type>(&sfDeliveredAmount, STI_AMOUNT, 18, "DeliveredAmount");
 
 // variable length (common)
@@ -403,4 +403,4 @@ SField::getField (std::string const& fieldName)
     return sfInvalid;
 }
 
-} // ripple
+} // cbc

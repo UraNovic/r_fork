@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -17,24 +17,24 @@
 */
 //==============================================================================
 
-#ifndef RIPPLE_APP_LEDGER_LEDGER_H_INCLUDED
-#define RIPPLE_APP_LEDGER_LEDGER_H_INCLUDED
+#ifndef cbc_APP_LEDGER_LEDGER_H_INCLUDED
+#define cbc_APP_LEDGER_LEDGER_H_INCLUDED
 
-#include <ripple/ledger/TxMeta.h>
-#include <ripple/ledger/View.h>
-#include <ripple/ledger/CachedView.h>
-#include <ripple/basics/CountedObject.h>
-#include <ripple/core/TimeKeeper.h>
-#include <ripple/protocol/Indexes.h>
-#include <ripple/protocol/STLedgerEntry.h>
-#include <ripple/protocol/Serializer.h>
-#include <ripple/protocol/Book.h>
-#include <ripple/shamap/SHAMap.h>
-#include <ripple/beast/utility/Journal.h>
+#include <cbc/ledger/TxMeta.h>
+#include <cbc/ledger/View.h>
+#include <cbc/ledger/CachedView.h>
+#include <cbc/basics/CountedObject.h>
+#include <cbc/core/TimeKeeper.h>
+#include <cbc/protocol/Indexes.h>
+#include <cbc/protocol/STLedgerEntry.h>
+#include <cbc/protocol/Serializer.h>
+#include <cbc/protocol/Book.h>
+#include <cbc/shamap/SHAMap.h>
+#include <cbc/beast/utility/Journal.h>
 #include <boost/optional.hpp>
 #include <mutex>
 
-namespace ripple {
+namespace cbc {
 
 class Application;
 class Job;
@@ -411,6 +411,6 @@ cachedRead (ReadView const& ledger, uint256 const& key,
     return ledger.read(keylet::unchecked(key));
 }
 
-} // ripple
+} // cbc
 
 #endif

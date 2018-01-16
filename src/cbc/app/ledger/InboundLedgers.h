@@ -18,14 +18,14 @@
 //==============================================================================
 
 #ifndef cbc_APP_LEDGER_INBOUNDLEDGERS_H_INCLUDED
-#define RIPPLE_APP_LEDGER_INBOUNDLEDGERS_H_INCLUDED
+#define cbc_APP_LEDGER_INBOUNDLEDGERS_H_INCLUDED
 
-#include <ripple/app/ledger/InboundLedger.h>
-#include <ripple/protocol/RippleLedgerHash.h>
-#include <ripple/core/Stoppable.h>
+#include <cbc/app/ledger/InboundLedger.h>
+#include <cbc/protocol/cbcLedgerHash.h>
+#include <cbc/core/Stoppable.h>
 #include <memory>
 
-namespace ripple {
+namespace cbc {
 
 /** Manages the lifetime of inbound ledgers.
 
@@ -86,6 +86,6 @@ make_InboundLedgers (Application& app,
     beast::insight::Collector::ptr const& collector);
 
 
-} // ripple
+} // cbc
 
 #endif

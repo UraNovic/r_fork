@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -19,13 +19,13 @@
 
 #include <BeastConfig.h>
 
-#include <ripple/app/misc/SHAMapStoreImp.h>
-#include <ripple/app/ledger/TransactionMaster.h>
-#include <ripple/app/misc/NetworkOPs.h>
-#include <ripple/core/ConfigSections.h>
-#include <ripple/beast/core/CurrentThreadName.h>
+#include <cbc/app/misc/SHAMapStoreImp.h>
+#include <cbc/app/ledger/TransactionMaster.h>
+#include <cbc/app/misc/NetworkOPs.h>
+#include <cbc/core/ConfigSections.h>
+#include <cbc/beast/core/CurrentThreadName.h>
 
-namespace ripple {
+namespace cbc {
 void SHAMapStoreImp::SavedStateDB::init (BasicConfig const& config,
                                          std::string const& dbName)
 {
@@ -623,7 +623,7 @@ SHAMapStoreImp::clearPrior (LedgerIndex lastRotated)
                Validations with InitialSeq approximately 1080 (exact value
                doesn't matter), and later validated with the matching
                LedgerSeq value.
-            3) rippled participates in ledgers 1091-1100. Validations
+            3) cbcd participates in ledgers 1091-1100. Validations
                 received are created with InitialSeq in that range, and
                 appropriate LedgerSeqs. Maybe some of those ledgers are
                 not accepted, so LedgerSeq stays null.

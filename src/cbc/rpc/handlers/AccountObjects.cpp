@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012-2014 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012-2014 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,23 +18,23 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/json/json_writer.h>
-#include <ripple/app/main/Application.h>
-#include <ripple/ledger/ReadView.h>
-#include <ripple/net/RPCErr.h>
-#include <ripple/protocol/ErrorCodes.h>
-#include <ripple/protocol/Indexes.h>
-#include <ripple/protocol/JsonFields.h>
-#include <ripple/protocol/LedgerFormats.h>
-#include <ripple/resource/Fees.h>
-#include <ripple/rpc/Context.h>
-#include <ripple/rpc/impl/RPCHelpers.h>
-#include <ripple/rpc/impl/Tuning.h>
+#include <cbc/json/json_writer.h>
+#include <cbc/app/main/Application.h>
+#include <cbc/ledger/ReadView.h>
+#include <cbc/net/RPCErr.h>
+#include <cbc/protocol/ErrorCodes.h>
+#include <cbc/protocol/Indexes.h>
+#include <cbc/protocol/JsonFields.h>
+#include <cbc/protocol/LedgerFormats.h>
+#include <cbc/resource/Fees.h>
+#include <cbc/rpc/Context.h>
+#include <cbc/rpc/impl/RPCHelpers.h>
+#include <cbc/rpc/impl/Tuning.h>
 
 #include <string>
 #include <sstream>
 
-namespace ripple {
+namespace cbc {
 
 /** General RPC command that can retrieve objects in the account root.
     {
@@ -119,4 +119,4 @@ Json::Value doAccountObjects (RPC::Context& context)
     return result;
 }
 
-} // ripple
+} // cbc

@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,13 +18,13 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/app/paths/impl/Steps.h>
-#include <ripple/basics/contract.h>
-#include <ripple/json/json_writer.h>
-#include <ripple/ledger/ReadView.h>
-#include <ripple/protocol/Feature.h>
-#include <ripple/protocol/IOUAmount.h>
-#include <ripple/protocol/XRPAmount.h>
+#include <cbc/app/paths/impl/Steps.h>
+#include <cbc/basics/contract.h>
+#include <cbc/json/json_writer.h>
+#include <cbc/ledger/ReadView.h>
+#include <cbc/protocol/Feature.h>
+#include <cbc/protocol/IOUAmount.h>
+#include <cbc/protocol/XRPAmount.h>
 
 #include <boost/range/adaptors.hpp>
 #include <boost/range/algorithm.hpp>
@@ -32,7 +32,7 @@
 #include <numeric>
 #include <sstream>
 
-namespace ripple {
+namespace cbc {
 
 // Check equal with tolerance
 bool checkNear (IOUAmount const& expected, IOUAmount const& actual)
@@ -765,8 +765,8 @@ toStrands (
     else if (paths.empty ())
     {
         JLOG (j.debug())
-            << "Flow: Invalid transaction: No paths and direct ripple not allowed.";
-        return {temRIPPLE_EMPTY, std::vector<Strand>{}};
+            << "Flow: Invalid transaction: No paths and direct cbc not allowed.";
+        return {temcbc_EMPTY, std::vector<Strand>{}};
     }
 
     TER lastFailTer = tesSUCCESS;
@@ -861,4 +861,4 @@ template
 bool
 isDirectXrpToXrp<IOUAmount, IOUAmount> (Strand const& strand);
 
-} // ripple
+} // cbc

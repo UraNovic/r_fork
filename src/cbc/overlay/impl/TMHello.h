@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -17,20 +17,20 @@
 */
 //==============================================================================
 
-#ifndef RIPPLE_OVERLAY_TMHELLO_H_INCLUDED
-#define RIPPLE_OVERLAY_TMHELLO_H_INCLUDED
+#ifndef cbc_OVERLAY_TMHELLO_H_INCLUDED
+#define cbc_OVERLAY_TMHELLO_H_INCLUDED
 
-#include "ripple.pb.h"
-#include <ripple/app/main/Application.h>
-#include <ripple/beast/utility/Journal.h>
-#include <ripple/protocol/BuildInfo.h>
+#include "cbc.pb.h"
+#include <cbc/app/main/Application.h>
+#include <cbc/beast/utility/Journal.h>
+#include <cbc/protocol/BuildInfo.h>
 
 #include <beast/http/message.hpp>
 #include <boost/asio/ssl.hpp>
 #include <boost/optional.hpp>
 #include <utility>
 
-namespace ripple {
+namespace cbc {
 
 enum
 {

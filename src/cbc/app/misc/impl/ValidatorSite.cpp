@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2016 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2016 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -17,17 +17,17 @@
 */
 //==============================================================================
 
-#include <ripple/app/misc/ValidatorList.h>
-#include <ripple/app/misc/ValidatorSite.h>
-#include <ripple/app/misc/detail/WorkPlain.h>
-#include <ripple/app/misc/detail/WorkSSL.h>
-#include <ripple/basics/Slice.h>
-#include <ripple/json/json_reader.h>
-#include <ripple/protocol/JsonFields.h>
+#include <cbc/app/misc/ValidatorList.h>
+#include <cbc/app/misc/ValidatorSite.h>
+#include <cbc/app/misc/detail/WorkPlain.h>
+#include <cbc/app/misc/detail/WorkSSL.h>
+#include <cbc/basics/Slice.h>
+#include <cbc/json/json_reader.h>
+#include <cbc/protocol/JsonFields.h>
 #include <beast/core/detail/base64.hpp>
 #include <boost/regex.hpp>
 
-namespace ripple {
+namespace cbc {
 
 // default site query frequency - 5 minutes
 auto constexpr DEFAULT_REFRESH_INTERVAL = std::chrono::minutes{5};
@@ -346,4 +346,4 @@ ValidatorSite::getJson() const
     }
     return jrr;
 }
-} // ripple
+} // cbc

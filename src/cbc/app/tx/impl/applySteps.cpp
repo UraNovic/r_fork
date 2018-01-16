@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,22 +18,22 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/app/tx/applySteps.h>
-#include <ripple/app/tx/impl/ApplyContext.h>
-#include <ripple/app/tx/impl/CancelOffer.h>
-#include <ripple/app/tx/impl/CancelTicket.h>
-#include <ripple/app/tx/impl/Change.h>
-#include <ripple/app/tx/impl/CreateOffer.h>
-#include <ripple/app/tx/impl/CreateTicket.h>
-#include <ripple/app/tx/impl/Escrow.h>
-#include <ripple/app/tx/impl/Payment.h>
-#include <ripple/app/tx/impl/SetAccount.h>
-#include <ripple/app/tx/impl/SetRegularKey.h>
-#include <ripple/app/tx/impl/SetSignerList.h>
-#include <ripple/app/tx/impl/SetTrust.h>
-#include <ripple/app/tx/impl/PayChan.h>
+#include <cbc/app/tx/applySteps.h>
+#include <cbc/app/tx/impl/ApplyContext.h>
+#include <cbc/app/tx/impl/CancelOffer.h>
+#include <cbc/app/tx/impl/CancelTicket.h>
+#include <cbc/app/tx/impl/Change.h>
+#include <cbc/app/tx/impl/CreateOffer.h>
+#include <cbc/app/tx/impl/CreateTicket.h>
+#include <cbc/app/tx/impl/Escrow.h>
+#include <cbc/app/tx/impl/Payment.h>
+#include <cbc/app/tx/impl/SetAccount.h>
+#include <cbc/app/tx/impl/SetRegularKey.h>
+#include <cbc/app/tx/impl/SetSignerList.h>
+#include <cbc/app/tx/impl/SetTrust.h>
+#include <cbc/app/tx/impl/PayChan.h>
 
-namespace ripple {
+namespace cbc {
 
 static
 TER
@@ -333,4 +333,4 @@ doApply(PreclaimResult const& preclaimResult,
     }
 }
 
-} // ripple
+} // cbc

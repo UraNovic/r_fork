@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -17,21 +17,21 @@
 */
 //==============================================================================
 
-#include <ripple/app/misc/TxQ.h>
-#include <ripple/app/ledger/OpenLedger.h>
-#include <ripple/app/main/Application.h>
-#include <ripple/app/misc/LoadFeeTrack.h>
-#include <ripple/app/tx/apply.h>
-#include <ripple/protocol/st.h>
-#include <ripple/protocol/Feature.h>
-#include <ripple/protocol/JsonFields.h>
-#include <ripple/basics/mulDiv.h>
+#include <cbc/app/misc/TxQ.h>
+#include <cbc/app/ledger/OpenLedger.h>
+#include <cbc/app/main/Application.h>
+#include <cbc/app/misc/LoadFeeTrack.h>
+#include <cbc/app/tx/apply.h>
+#include <cbc/protocol/st.h>
+#include <cbc/protocol/Feature.h>
+#include <cbc/protocol/JsonFields.h>
+#include <cbc/basics/mulDiv.h>
 #include <boost/algorithm/clamp.hpp>
 #include <limits>
 #include <numeric>
 #include <algorithm>
 
-namespace ripple {
+namespace cbc {
 
 //////////////////////////////////////////////////////////////////////////
 
@@ -546,7 +546,7 @@ TxQ::tryClearAccountQueue(Application& app, OpenView& view,
     How the decision to apply, queue, or reject is made:
     0. Is `featureFeeEscalation` enabled?
         Yes: Continue to next step.
-        No: Fallback to `ripple::apply`. Stop.
+        No: Fallback to `cbc::apply`. Stop.
     1. Does `preflight` indicate that the tx is valid?
         No: Return the `TER` from `preflight`. Stop.
         Yes: Continue to next step.
@@ -615,7 +615,7 @@ TxQ::apply(Application& app, OpenView& view,
         (view.rules().enabled(featureFeeEscalation));
     if (!allowEscalation)
     {
-        return ripple::apply(app, view, *tx, flags, j);
+        return cbc::apply(app, view, *tx, flags, j);
     }
 
     auto const account = (*tx)[sfAccount];
@@ -1003,7 +1003,7 @@ TxQ::apply(Application& app, OpenView& view,
         JLOG(j_.trace()) << "Applying transaction " <<
             transactionID <<
             " to open ledger.";
-        ripple::TER txnResult;
+        cbc::TER txnResult;
         bool didApply;
 
         std::tie(txnResult, didApply) = doApply(pcresult, app, view);
@@ -1540,4 +1540,4 @@ make_TxQ(TxQ::Setup const& setup, beast::Journal j)
     return std::make_unique<TxQ>(setup, std::move(j));
 }
 
-} // ripple
+} // cbc

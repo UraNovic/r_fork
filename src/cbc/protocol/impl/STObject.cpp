@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,14 +18,14 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/protocol/STObject.h>
-#include <ripple/protocol/InnerObjectFormats.h>
-#include <ripple/protocol/STAccount.h>
-#include <ripple/protocol/STArray.h>
-#include <ripple/protocol/STBlob.h>
-#include <ripple/basics/Log.h>
+#include <cbc/protocol/STObject.h>
+#include <cbc/protocol/InnerObjectFormats.h>
+#include <cbc/protocol/STAccount.h>
+#include <cbc/protocol/STArray.h>
+#include <cbc/protocol/STBlob.h>
+#include <cbc/basics/Log.h>
 
-namespace ripple {
+namespace cbc {
 
 STObject::~STObject()
 {
@@ -785,4 +785,4 @@ bool STObject::equivalentSTObject (STObject const& obj1, STObject const& obj2)
         });
 }
 
-} // ripple
+} // cbc

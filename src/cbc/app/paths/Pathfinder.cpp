@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,17 +18,17 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/app/main/Application.h>
-#include <ripple/app/paths/Tuning.h>
-#include <ripple/app/paths/Pathfinder.h>
-#include <ripple/app/paths/RippleCalc.h>
-#include <ripple/app/paths/RippleLineCache.h>
-#include <ripple/ledger/PaymentSandbox.h>
-#include <ripple/app/ledger/OrderBookDB.h>
-#include <ripple/basics/Log.h>
-#include <ripple/json/to_string.h>
-#include <ripple/core/JobQueue.h>
-#include <ripple/core/Config.h>
+#include <cbc/app/main/Application.h>
+#include <cbc/app/paths/Tuning.h>
+#include <cbc/app/paths/Pathfinder.h>
+#include <cbc/app/paths/cbcCalc.h>
+#include <cbc/app/paths/cbcLineCache.h>
+#include <cbc/ledger/PaymentSandbox.h>
+#include <cbc/app/ledger/OrderBookDB.h>
+#include <cbc/basics/Log.h>
+#include <cbc/json/to_string.h>
+#include <cbc/core/JobQueue.h>
+#include <cbc/core/Config.h>
 #include <tuple>
 
 /*
@@ -63,7 +63,7 @@ same path request (particularly if the search depth may change).
 
 */
 
-namespace ripple {
+namespace cbc {
 
 namespace {
 
@@ -143,7 +143,7 @@ std::string pathTypeToString (Pathfinder::PathType const& type)
 }  // namespace
 
 Pathfinder::Pathfinder (
-    std::shared_ptr<RippleLineCache> const& cache,
+    std::shared_ptr<cbcLineCache> const& cache,
     AccountID const& uSrcAccount,
     AccountID const& uDstAccount,
     Currency const& uSrcCurrency,
@@ -332,7 +332,7 @@ TER Pathfinder::getPathLiquidity (
     STPathSet pathSet;
     pathSet.push_back (path);
 
-    path::RippleCalc::Input rcInput;
+    path::cbcCalc::Input rcInput;
     rcInput.defaultPathsAllowed = false;
 
     PaymentSandbox sandbox (&*mLedger, tapNONE);
@@ -343,7 +343,7 @@ TER Pathfinder::getPathLiquidity (
         if (convert_all_)
             rcInput.partialPaymentAllowed = true;
 
-        auto rc = path::RippleCalc::rippleCalculate (
+        auto rc = path::cbcCalc::cbcCalculate (
             sandbox,
             mSrcAmount,
             minDstAmount,
@@ -363,7 +363,7 @@ TER Pathfinder::getPathLiquidity (
         {
             // Now try to compute the remaining liquidity.
             rcInput.partialPaymentAllowed = true;
-            rc = path::RippleCalc::rippleCalculate (
+            rc = path::cbcCalc::cbcCalculate (
                 sandbox,
                 mSrcAmount,
                 mDstAmount - amountOut,
@@ -412,9 +412,9 @@ void Pathfinder::computePathRanks (int maxPaths)
     {
         PaymentSandbox sandbox (&*mLedger, tapNONE);
 
-        path::RippleCalc::Input rcInput;
+        path::cbcCalc::Input rcInput;
         rcInput.partialPaymentAllowed = true;
-        auto rc = path::RippleCalc::rippleCalculate (
+        auto rc = path::cbcCalc::cbcCalculate (
             sandbox,
             mSrcAmount,
             mRemainingAmount,
@@ -447,7 +447,7 @@ void Pathfinder::computePathRanks (int maxPaths)
 static bool isDefaultPath (STPath const& path)
 {
     // TODO(tom): default paths can consist of more than just an account:
-    // https://forum.ripple.com/viewtopic.php?f=2&t=8206&start=10#p57713
+    // https://forum.cbc.com/viewtopic.php?f=2&t=8206&start=10#p57713
     //
     // JoelKatz writes:
     // So the test for whether a path is a default path is incorrect. I'm not
@@ -720,9 +720,9 @@ int Pathfinder::getPathsOut (
     {
         count = app_.getOrderBookDB ().getBookSize (issue);
 
-        for (auto const& item : mRLCache->getRippleLines (account))
+        for (auto const& item : mRLCache->getcbcLines (account))
         {
-            RippleState* rspEntry = (RippleState*) item.get ();
+            cbcState* rspEntry = (cbcState*) item.get ();
 
             if (currency != rspEntry->getLimit ().getCurrency ())
             {
@@ -738,7 +738,7 @@ int Pathfinder::getPathsOut (
             {
                 count += 10000; // count a path to the destination extra
             }
-            else if (rspEntry->getNoRipplePeer ())
+            else if (rspEntry->getNocbcPeer ())
             {
                 // This probably isn't a useful path out
             }
@@ -840,23 +840,23 @@ STPathSet& Pathfinder::addPathsForType (PathType const& pathType)
     return pathsOut;
 }
 
-bool Pathfinder::isNoRipple (
+bool Pathfinder::isNocbc (
     AccountID const& fromAccount,
     AccountID const& toAccount,
     Currency const& currency)
 {
-    auto sleRipple = mLedger->read(keylet::line(
+    auto slecbc = mLedger->read(keylet::line(
         toAccount, fromAccount, currency));
 
     auto const flag ((toAccount > fromAccount)
-                     ? lsfHighNoRipple : lsfLowNoRipple);
+                     ? lsfHighNocbc : lsfLowNocbc);
 
-    return sleRipple && (sleRipple->getFieldU32 (sfFlags) & flag);
+    return slecbc && (slecbc->getFieldU32 (sfFlags) & flag);
 }
 
 // Does this path end on an account-to-account link whose last account has
-// set "no ripple" on the link?
-bool Pathfinder::isNoRippleOut (STPath const& currentPath)
+// set "no cbc" on the link?
+bool Pathfinder::isNocbcOut (STPath const& currentPath)
 {
     // Must have at least one link.
     if (currentPath.empty ())
@@ -868,13 +868,13 @@ bool Pathfinder::isNoRippleOut (STPath const& currentPath)
         return false;
 
     // If there's only one item in the path, return true if that item specifies
-    // no ripple on the output. A path with no ripple on its output can't be
-    // followed by a link with no ripple on its input.
+    // no cbc on the output. A path with no cbc on its output can't be
+    // followed by a link with no cbc on its input.
     auto const& fromAccount = (currentPath.size () == 1)
         ? mSrcAccount
         : (currentPath.end () - 2)->getAccountID ();
     auto const& toAccount = endElement.getAccountID ();
-    return isNoRipple (fromAccount, toAccount, endElement.getCurrency ());
+    return isNocbc (fromAccount, toAccount, endElement.getCurrency ());
 }
 
 void addUniquePath (STPathSet& pathSet, STPath const& path)
@@ -932,23 +932,23 @@ void Pathfinder::addLink (
                     sleEnd->getFieldU32 (sfFlags) & lsfRequireAuth);
                 bool const bIsEndCurrency (
                     uEndCurrency == mDstAmount.getCurrency ());
-                bool const bIsNoRippleOut (
-                    isNoRippleOut (currentPath));
+                bool const bIsNocbcOut (
+                    isNocbcOut (currentPath));
                 bool const bDestOnly (
                     addFlags & afAC_LAST);
 
-                auto& rippleLines (mRLCache->getRippleLines (uEndAccount));
+                auto& cbcLines (mRLCache->getcbcLines (uEndAccount));
 
                 AccountCandidates candidates;
-                candidates.reserve (rippleLines.size ());
+                candidates.reserve (cbcLines.size ());
 
-                for (auto const& item : rippleLines)
+                for (auto const& item : cbcLines)
                 {
-                    auto* rs = dynamic_cast<RippleState const *> (item.get ());
+                    auto* rs = dynamic_cast<cbcState const *> (item.get ());
                     if (!rs)
                     {
                         JLOG (j_.error())
-                                << "Couldn't decipher RippleState";
+                                << "Couldn't decipher cbcState";
                         continue;
                     }
                     auto const& acct = rs->getAccountIDPeer ();
@@ -977,7 +977,7 @@ void Pathfinder::addLink (
                         {
                             // path has no credit
                         }
-                        else if (bIsNoRippleOut && rs->getNoRipple ())
+                        else if (bIsNocbcOut && rs->getNocbc ())
                         {
                             // Can't leave on this path
                         }
@@ -1298,4 +1298,4 @@ void Pathfinder::initPathTable ()
         });
 }
 
-} // ripple
+} // cbc

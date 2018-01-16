@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2014 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2014 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -17,15 +17,15 @@
 */
 //==============================================================================
 
-#ifndef RIPPLE_OPENSSL_H
-#define RIPPLE_OPENSSL_H
+#ifndef cbc_OPENSSL_H
+#define cbc_OPENSSL_H
 
-#include <ripple/basics/base_uint.h>
-#include <ripple/crypto/impl/ec_key.h>
+#include <cbc/basics/base_uint.h>
+#include <cbc/crypto/impl/ec_key.h>
 #include <openssl/bn.h>
 #include <openssl/ec.h>
 
-namespace ripple  {
+namespace cbc  {
 namespace openssl {
 
 class bignum
@@ -188,6 +188,6 @@ ec_point bn2point (EC_GROUP const* group, BIGNUM const* number);
 void serialize_ec_point (ec_point const& point, std::uint8_t* ptr);
 
 } // openssl
-} // ripple
+} // cbc
 
 #endif

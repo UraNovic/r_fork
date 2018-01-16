@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -17,16 +17,16 @@
 */
 //==============================================================================
 
-#ifndef RIPPLE_APP_LEDGER_ORDERBOOKDB_H_INCLUDED
-#define RIPPLE_APP_LEDGER_ORDERBOOKDB_H_INCLUDED
+#ifndef cbc_APP_LEDGER_ORDERBOOKDB_H_INCLUDED
+#define cbc_APP_LEDGER_ORDERBOOKDB_H_INCLUDED
 
-#include <ripple/app/ledger/AcceptedLedgerTx.h>
-#include <ripple/app/ledger/BookListeners.h>
-#include <ripple/app/main/Application.h>
-#include <ripple/app/misc/OrderBook.h>
+#include <cbc/app/ledger/AcceptedLedgerTx.h>
+#include <cbc/app/ledger/BookListeners.h>
+#include <cbc/app/main/Application.h>
+#include <cbc/app/misc/OrderBook.h>
 #include <mutex>
 
-namespace ripple {
+namespace cbc {
 
 class OrderBookDB
     : public Stoppable
@@ -85,6 +85,6 @@ private:
     beast::Journal j_;
 };
 
-} // ripple
+} // cbc
 
 #endif

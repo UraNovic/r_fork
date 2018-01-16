@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012 - 2017 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012 - 2017 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,16 +18,16 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/core/TerminateHandler.h>
-#include <ripple/basics/Log.h>
-#include <ripple/beast/core/CurrentThreadName.h>
+#include <cbc/core/TerminateHandler.h>
+#include <cbc/basics/Log.h>
+#include <cbc/beast/core/CurrentThreadName.h>
 
 #include <boost/coroutine/exceptions.hpp>
 #include <exception>
 #include <iostream>
 #include <typeinfo>
 
-namespace ripple {
+namespace cbc {
 
 void terminateHandler()
 {

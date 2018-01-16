@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,21 +18,21 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/app/paths/Credit.h>
-#include <ripple/app/paths/Flow.h>
-#include <ripple/app/paths/impl/AmountSpec.h>
-#include <ripple/app/paths/impl/StrandFlow.h>
-#include <ripple/app/paths/impl/Steps.h>
-#include <ripple/basics/Log.h>
-#include <ripple/protocol/IOUAmount.h>
-#include <ripple/protocol/XRPAmount.h>
+#include <cbc/app/paths/Credit.h>
+#include <cbc/app/paths/Flow.h>
+#include <cbc/app/paths/impl/AmountSpec.h>
+#include <cbc/app/paths/impl/StrandFlow.h>
+#include <cbc/app/paths/impl/Steps.h>
+#include <cbc/basics/Log.h>
+#include <cbc/protocol/IOUAmount.h>
+#include <cbc/protocol/XRPAmount.h>
 
 #include <boost/container/flat_set.hpp>
 
 #include <numeric>
 #include <sstream>
 
-namespace ripple {
+namespace cbc {
 
 template<class FlowResult>
 static
@@ -40,7 +40,7 @@ auto finishFlow (PaymentSandbox& sb,
     Issue const& srcIssue, Issue const& dstIssue,
     FlowResult&& f)
 {
-    path::RippleCalc::Output result;
+    path::cbcCalc::Output result;
     if (f.ter == tesSUCCESS)
         f.sandbox->apply (sb);
     else
@@ -53,7 +53,7 @@ auto finishFlow (PaymentSandbox& sb,
     return result;
 };
 
-path::RippleCalc::Output
+path::cbcCalc::Output
 flow (
     PaymentSandbox& sb,
     STAmount const& deliver,
@@ -90,7 +90,7 @@ flow (
 
     if (sr.first != tesSUCCESS)
     {
-        path::RippleCalc::Output result;
+        path::cbcCalc::Output result;
         result.setResult (sr.first);
         return result;
     }
@@ -152,4 +152,4 @@ flow (
 
 }
 
-} // ripple
+} // cbc

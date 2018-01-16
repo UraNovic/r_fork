@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2014 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2014 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,13 +18,13 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/app/tx/impl/CreateTicket.h>
-#include <ripple/app/ledger/Ledger.h>
-#include <ripple/basics/Log.h>
-#include <ripple/protocol/Feature.h>
-#include <ripple/protocol/Indexes.h>
+#include <cbc/app/tx/impl/CreateTicket.h>
+#include <cbc/app/ledger/Ledger.h>
+#include <cbc/basics/Log.h>
+#include <cbc/protocol/Feature.h>
+#include <cbc/protocol/Indexes.h>
 
-namespace ripple {
+namespace cbc {
 
 TER
 CreateTicket::preflight (PreflightContext const& ctx)

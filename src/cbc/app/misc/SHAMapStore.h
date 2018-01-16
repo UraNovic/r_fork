@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -17,15 +17,15 @@
 */
 //==============================================================================
 
-#ifndef RIPPLE_APP_MISC_SHAMAPSTORE_H_INCLUDED
-#define RIPPLE_APP_MISC_SHAMAPSTORE_H_INCLUDED
+#ifndef cbc_APP_MISC_SHAMAPSTORE_H_INCLUDED
+#define cbc_APP_MISC_SHAMAPSTORE_H_INCLUDED
 
-#include <ripple/app/ledger/Ledger.h>
-#include <ripple/nodestore/Manager.h>
-#include <ripple/protocol/ErrorCodes.h>
-#include <ripple/core/Stoppable.h>
+#include <cbc/app/ledger/Ledger.h>
+#include <cbc/nodestore/Manager.h>
+#include <cbc/protocol/ErrorCodes.h>
+#include <cbc/core/Stoppable.h>
 
-namespace ripple {
+namespace cbc {
 
 class TransactionMaster;
 

@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,13 +18,13 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/protocol/Feature.h>
-#include <ripple/basics/contract.h>
-#include <ripple/protocol/digest.h>
+#include <cbc/protocol/Feature.h>
+#include <cbc/basics/contract.h>
+#include <cbc/protocol/digest.h>
 
 #include <cstring>
 
-namespace ripple {
+namespace cbc {
 
 //------------------------------------------------------------------------------
 
@@ -155,4 +155,4 @@ uint256 const fix1513 = *getRegisteredFeature("fix1513");
 uint256 const fix1523 = *getRegisteredFeature("fix1523");
 uint256 const fix1528 = *getRegisteredFeature("fix1528");
 
-} // ripple
+} // cbc

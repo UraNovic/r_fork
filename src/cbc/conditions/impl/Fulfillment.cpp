@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2016 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2016 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -17,16 +17,16 @@
 */
 //==============================================================================
 
-#include <ripple/conditions/Condition.h>
-#include <ripple/conditions/Fulfillment.h>
-#include <ripple/conditions/impl/PreimageSha256.h>
-#include <ripple/conditions/impl/utils.h>
+#include <cbc/conditions/Condition.h>
+#include <cbc/conditions/Fulfillment.h>
+#include <cbc/conditions/impl/PreimageSha256.h>
+#include <cbc/conditions/impl/utils.h>
 #include <boost/regex.hpp>
 #include <boost/optional.hpp>
 #include <type_traits>
 #include <vector>
 
-namespace ripple {
+namespace cbc {
 namespace cryptoconditions {
 
 bool

@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,12 +18,12 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/basics/Log.h>
-#include <ripple/basics/UptimeTimer.h>
-#include <ripple/beast/clock/chrono_util.h>
-#include <ripple/core/LoadMonitor.h>
+#include <cbc/basics/Log.h>
+#include <cbc/basics/UptimeTimer.h>
+#include <cbc/beast/clock/chrono_util.h>
+#include <cbc/core/LoadMonitor.h>
 
-namespace ripple {
+namespace cbc {
 
 /*
 
@@ -196,4 +196,4 @@ LoadMonitor::Stats LoadMonitor::getStats ()
     return stats;
 }
 
-} // ripple
+} // cbc

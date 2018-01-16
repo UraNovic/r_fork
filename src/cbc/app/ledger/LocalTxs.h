@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -17,14 +17,14 @@
 */
 //==============================================================================
 
-#ifndef RIPPLE_APP_LEDGER_LOCALTXS_H_INCLUDED
-#define RIPPLE_APP_LEDGER_LOCALTXS_H_INCLUDED
+#ifndef cbc_APP_LEDGER_LOCALTXS_H_INCLUDED
+#define cbc_APP_LEDGER_LOCALTXS_H_INCLUDED
 
-#include <ripple/app/misc/CanonicalTXSet.h>
-#include <ripple/ledger/ReadView.h>
+#include <cbc/app/misc/CanonicalTXSet.h>
+#include <cbc/ledger/ReadView.h>
 #include <memory>
 
-namespace ripple {
+namespace cbc {
 
 // Track transactions issued by local clients
 // Ensure we always apply them to our open ledger
@@ -50,6 +50,6 @@ public:
 std::unique_ptr<LocalTxs>
 make_LocalTxs ();
 
-} // ripple
+} // cbc
 
 #endif

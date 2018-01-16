@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,24 +18,24 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/shamap/SHAMapNodeID.h>
-#include <ripple/app/ledger/AccountStateSF.h>
-#include <ripple/app/ledger/InboundLedger.h>
-#include <ripple/app/ledger/InboundLedgers.h>
-#include <ripple/app/ledger/LedgerMaster.h>
-#include <ripple/app/ledger/TransactionStateSF.h>
-#include <ripple/app/main/Application.h>
-#include <ripple/app/misc/NetworkOPs.h>
-#include <ripple/basics/Log.h>
-#include <ripple/core/JobQueue.h>
-#include <ripple/overlay/Overlay.h>
-#include <ripple/resource/Fees.h>
-#include <ripple/protocol/HashPrefix.h>
-#include <ripple/protocol/JsonFields.h>
-#include <ripple/nodestore/Database.h>
+#include <cbc/shamap/SHAMapNodeID.h>
+#include <cbc/app/ledger/AccountStateSF.h>
+#include <cbc/app/ledger/InboundLedger.h>
+#include <cbc/app/ledger/InboundLedgers.h>
+#include <cbc/app/ledger/LedgerMaster.h>
+#include <cbc/app/ledger/TransactionStateSF.h>
+#include <cbc/app/main/Application.h>
+#include <cbc/app/misc/NetworkOPs.h>
+#include <cbc/basics/Log.h>
+#include <cbc/core/JobQueue.h>
+#include <cbc/overlay/Overlay.h>
+#include <cbc/resource/Fees.h>
+#include <cbc/protocol/HashPrefix.h>
+#include <cbc/protocol/JsonFields.h>
+#include <cbc/nodestore/Database.h>
 #include <algorithm>
 
-namespace ripple {
+namespace cbc {
 
 using namespace std::chrono_literals;
 
@@ -1294,4 +1294,4 @@ Json::Value InboundLedger::getJson (int)
     return ret;
 }
 
-} // ripple
+} // cbc

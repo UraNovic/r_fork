@@ -25,7 +25,7 @@
 #define BEAST_CONFIG_COMPILERCONFIG_H_INCLUDED
 
 #include <assert.h>
-#include <ripple/beast/core/PlatformConfig.h>
+#include <cbc/beast/core/PlatformConfig.h>
 
 // This file defines miscellaneous macros for debugging, assertions, etc.
 

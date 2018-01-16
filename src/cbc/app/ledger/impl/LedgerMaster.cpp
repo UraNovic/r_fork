@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,39 +18,39 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/app/ledger/LedgerMaster.h>
-#include <ripple/app/ledger/InboundLedgers.h>
-#include <ripple/app/ledger/OpenLedger.h>
-#include <ripple/app/ledger/OrderBookDB.h>
-#include <ripple/app/ledger/PendingSaves.h>
-#include <ripple/app/tx/apply.h>
-#include <ripple/app/main/Application.h>
-#include <ripple/app/misc/AmendmentTable.h>
-#include <ripple/app/misc/HashRouter.h>
-#include <ripple/app/misc/LoadFeeTrack.h>
-#include <ripple/app/misc/NetworkOPs.h>
-#include <ripple/app/misc/SHAMapStore.h>
-#include <ripple/app/misc/Transaction.h>
-#include <ripple/app/misc/TxQ.h>
-#include <ripple/app/consensus/RCLValidations.h>
-#include <ripple/app/misc/ValidatorList.h>
-#include <ripple/app/paths/PathRequests.h>
-#include <ripple/basics/contract.h>
-#include <ripple/basics/Log.h>
-#include <ripple/basics/TaggedCache.h>
-#include <ripple/basics/UptimeTimer.h>
-#include <ripple/core/TimeKeeper.h>
-#include <ripple/overlay/Overlay.h>
-#include <ripple/overlay/Peer.h>
-#include <ripple/protocol/digest.h>
-#include <ripple/protocol/HashPrefix.h>
-#include <ripple/resource/Fees.h>
+#include <cbc/app/ledger/LedgerMaster.h>
+#include <cbc/app/ledger/InboundLedgers.h>
+#include <cbc/app/ledger/OpenLedger.h>
+#include <cbc/app/ledger/OrderBookDB.h>
+#include <cbc/app/ledger/PendingSaves.h>
+#include <cbc/app/tx/apply.h>
+#include <cbc/app/main/Application.h>
+#include <cbc/app/misc/AmendmentTable.h>
+#include <cbc/app/misc/HashRouter.h>
+#include <cbc/app/misc/LoadFeeTrack.h>
+#include <cbc/app/misc/NetworkOPs.h>
+#include <cbc/app/misc/SHAMapStore.h>
+#include <cbc/app/misc/Transaction.h>
+#include <cbc/app/misc/TxQ.h>
+#include <cbc/app/consensus/RCLValidations.h>
+#include <cbc/app/misc/ValidatorList.h>
+#include <cbc/app/paths/PathRequests.h>
+#include <cbc/basics/contract.h>
+#include <cbc/basics/Log.h>
+#include <cbc/basics/TaggedCache.h>
+#include <cbc/basics/UptimeTimer.h>
+#include <cbc/core/TimeKeeper.h>
+#include <cbc/overlay/Overlay.h>
+#include <cbc/overlay/Peer.h>
+#include <cbc/protocol/digest.h>
+#include <cbc/protocol/HashPrefix.h>
+#include <cbc/resource/Fees.h>
 #include <algorithm>
 #include <cassert>
 #include <memory>
 #include <vector>
 
-namespace ripple {
+namespace cbc {
 
 using namespace std::chrono_literals;
 
@@ -1894,4 +1894,4 @@ LedgerMaster::getFetchPackCacheSize () const
     return fetch_packs_.getCacheSize ();
 }
 
-} // ripple
+} // cbc

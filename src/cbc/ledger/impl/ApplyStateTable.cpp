@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,13 +18,13 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/ledger/detail/ApplyStateTable.h>
-#include <ripple/basics/Log.h>
-#include <ripple/json/to_string.h>
-#include <ripple/protocol/st.h>
+#include <cbc/ledger/detail/ApplyStateTable.h>
+#include <cbc/basics/Log.h>
+#include <cbc/json/to_string.h>
+#include <cbc/protocol/st.h>
 #include <cassert>
 
-namespace ripple {
+namespace cbc {
 namespace detail {
 
 void
@@ -634,7 +634,7 @@ ApplyStateTable::threadOwners (ReadView const& base,
             threadTx (base, meta, (*sle)[sfDestination], mods, j);
             break;
         }
-    case ltRIPPLE_STATE:
+    case ltcbc_STATE:
     {
         threadTx (base, meta, (*sle)[sfLowLimit].getIssuer(), mods, j);
         threadTx (base, meta, (*sle)[sfHighLimit].getIssuer(), mods, j);
@@ -651,4 +651,4 @@ ApplyStateTable::threadOwners (ReadView const& base,
 }
 
 } // detail
-} // ripple
+} // cbc

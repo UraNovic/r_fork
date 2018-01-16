@@ -21,7 +21,7 @@
 */
 //==============================================================================
 
-#include <ripple/beast/core/Time.h>
+#include <cbc/beast/core/Time.h>
 
 namespace beast
 {

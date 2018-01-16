@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -19,10 +19,10 @@
 
 #include <BeastConfig.h>
 #include <test/jtx/memo.h>
-#include <ripple/basics/StringUtilities.h>
-#include <ripple/protocol/JsonFields.h>
+#include <cbc/basics/StringUtilities.h>
+#include <cbc/protocol/JsonFields.h>
 
-namespace ripple {
+namespace cbc {
 namespace test {
 namespace jtx {
 
@@ -104,4 +104,4 @@ memontype::operator()(Env&, JTx& jt) const
 
 } // jtx
 } // test
-} // ripple
+} // cbc

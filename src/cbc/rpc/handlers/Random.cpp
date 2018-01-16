@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012-2014 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012-2014 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,15 +18,15 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/crypto/csprng.h>
-#include <ripple/json/json_value.h>
-#include <ripple/net/RPCErr.h>
-#include <ripple/protocol/ErrorCodes.h>
-#include <ripple/protocol/JsonFields.h>
-#include <ripple/basics/base_uint.h>
-#include <ripple/beast/utility/rngfill.h>
+#include <cbc/crypto/csprng.h>
+#include <cbc/json/json_value.h>
+#include <cbc/net/RPCErr.h>
+#include <cbc/protocol/ErrorCodes.h>
+#include <cbc/protocol/JsonFields.h>
+#include <cbc/basics/base_uint.h>
+#include <cbc/beast/utility/rngfill.h>
 
-namespace ripple {
+namespace cbc {
 
 namespace RPC {
 struct Context;
@@ -58,4 +58,4 @@ Json::Value doRandom (RPC::Context& context)
     }
 }
 
-} // ripple
+} // cbc

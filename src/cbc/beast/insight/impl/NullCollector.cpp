@@ -17,7 +17,7 @@
 */
 //==============================================================================
 
-#include <ripple/beast/insight/NullCollector.h>
+#include <cbc/beast/insight/NullCollector.h>
 
 namespace beast {
 namespace insight {

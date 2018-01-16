@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -17,12 +17,12 @@
 */
 //==============================================================================
 
-#ifndef RIPPLE_OVERLAY_PROTOCOLMESSAGE_H_INCLUDED
-#define RIPPLE_OVERLAY_PROTOCOLMESSAGE_H_INCLUDED
+#ifndef cbc_OVERLAY_PROTOCOLMESSAGE_H_INCLUDED
+#define cbc_OVERLAY_PROTOCOLMESSAGE_H_INCLUDED
 
-#include "ripple.pb.h"
-#include <ripple/overlay/Message.h>
-#include <ripple/overlay/impl/ZeroCopyStream.h>
+#include "cbc.pb.h"
+#include <cbc/overlay/Message.h>
+#include <cbc/overlay/impl/ZeroCopyStream.h>
 #include <boost/asio/buffer.hpp>
 #include <boost/asio/buffers_iterator.hpp>
 #include <boost/system/error_code.hpp>
@@ -32,7 +32,7 @@
 #include <type_traits>
 #include <vector>
 
-namespace ripple {
+namespace cbc {
 
 /** Returns the name of a protocol message given its type. */
 template <class = void>
@@ -161,6 +161,6 @@ write (Streambuf& streambuf,
     m.SerializeToZeroCopyStream(&stream);
 }
 
-} // ripple
+} // cbc
 
 #endif

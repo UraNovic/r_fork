@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,12 +18,12 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/protocol/digest.h>
+#include <cbc/protocol/digest.h>
 #include <type_traits>
 #include <openssl/ripemd.h>
 #include <openssl/sha.h>
 
-namespace ripple {
+namespace cbc {
 
 openssl_ripemd160_hasher::openssl_ripemd160_hasher()
 {
@@ -113,4 +113,4 @@ openssl_sha256_hasher::operator result_type() noexcept
     return digest;
 }
 
-} // ripple
+} // cbc

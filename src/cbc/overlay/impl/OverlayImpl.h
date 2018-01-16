@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -17,21 +17,21 @@
 */
 //==============================================================================
 
-#ifndef RIPPLE_OVERLAY_OVERLAYIMPL_H_INCLUDED
-#define RIPPLE_OVERLAY_OVERLAYIMPL_H_INCLUDED
+#ifndef cbc_OVERLAY_OVERLAYIMPL_H_INCLUDED
+#define cbc_OVERLAY_OVERLAYIMPL_H_INCLUDED
 
-#include <ripple/app/main/Application.h>
-#include <ripple/core/Job.h>
-#include <ripple/overlay/Overlay.h>
-#include <ripple/overlay/impl/TrafficCount.h>
-#include <ripple/server/Handoff.h>
-#include <ripple/rpc/ServerHandler.h>
-#include <ripple/basics/Resolver.h>
-#include <ripple/basics/chrono.h>
-#include <ripple/basics/UnorderedContainers.h>
-#include <ripple/overlay/impl/TMHello.h>
-#include <ripple/peerfinder/PeerfinderManager.h>
-#include <ripple/resource/ResourceManager.h>
+#include <cbc/app/main/Application.h>
+#include <cbc/core/Job.h>
+#include <cbc/overlay/Overlay.h>
+#include <cbc/overlay/impl/TrafficCount.h>
+#include <cbc/server/Handoff.h>
+#include <cbc/rpc/ServerHandler.h>
+#include <cbc/basics/Resolver.h>
+#include <cbc/basics/chrono.h>
+#include <cbc/basics/UnorderedContainers.h>
+#include <cbc/overlay/impl/TMHello.h>
+#include <cbc/peerfinder/PeerfinderManager.h>
+#include <cbc/resource/ResourceManager.h>
 #include <boost/asio/ip/tcp.hpp>
 #include <boost/asio/ssl/context.hpp>
 #include <boost/asio/strand.hpp>
@@ -45,7 +45,7 @@
 #include <mutex>
 #include <unordered_map>
 
-namespace ripple {
+namespace cbc {
 
 class PeerImp;
 class BasicConfig;
@@ -320,7 +320,7 @@ private:
 
     /*  The number of active peers on the network
         Active peers are only those peers that have completed the handshake
-        and are running the Ripple protocol.
+        and are running the cbc protocol.
     */
     std::size_t
     size() override;
@@ -377,6 +377,6 @@ private:
     sendEndpoints();
 };
 
-} // ripple
+} // cbc
 
 #endif

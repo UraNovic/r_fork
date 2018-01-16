@@ -21,6 +21,6 @@
 #include <BeastConfig.h>
 #endif
 
-#include <ripple/beast/utility/src/beast_Debug.cpp>
-#include <ripple/beast/utility/src/beast_Journal.cpp>
-#include <ripple/beast/utility/src/beast_PropertyStream.cpp>
+#include <cbc/beast/utility/src/beast_Debug.cpp>
+#include <cbc/beast/utility/src/beast_Journal.cpp>
+#include <cbc/beast/utility/src/beast_PropertyStream.cpp>

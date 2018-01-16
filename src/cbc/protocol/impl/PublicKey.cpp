@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,17 +18,17 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/protocol/PublicKey.h>
-#include <ripple/protocol/digest.h>
-#include <ripple/protocol/impl/secp256k1.h>
-#include <ripple/basics/contract.h>
-#include <ripple/basics/strHex.h>
-#include <ripple/beast/core/ByteOrder.h>
+#include <cbc/protocol/PublicKey.h>
+#include <cbc/protocol/digest.h>
+#include <cbc/protocol/impl/secp256k1.h>
+#include <cbc/basics/contract.h>
+#include <cbc/basics/strHex.h>
+#include <cbc/beast/core/ByteOrder.h>
 #include <boost/multiprecision/cpp_int.hpp>
 #include <ed25519-donna/ed25519.h>
 #include <type_traits>
 
-namespace ripple {
+namespace cbc {
 
 std::ostream&
 operator<<(std::ostream& os, PublicKey const& pk)
@@ -118,7 +118,7 @@ sliceToHex (Slice const& slice)
     @param strict_param whether to enforce strictly canonical semantics
 
     @note For more details please see:
-    https://ripple.com/wiki/Transaction_Malleability
+    https://cbc.com/wiki/Transaction_Malleability
     https://bitcointalk.org/index.php?topic=8392.msg127623#msg127623
     https://github.com/sipa/bitcoin/commit/58bc86e37fda1aec270bccb3df6c20fbd2a6591c
 */
@@ -319,5 +319,5 @@ calcNodeID (PublicKey const& pk)
     return result;
 }
 
-} // ripple
+} // cbc
 

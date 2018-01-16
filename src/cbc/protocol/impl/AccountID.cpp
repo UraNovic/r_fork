@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,13 +18,13 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/protocol/AccountID.h>
-#include <ripple/protocol/PublicKey.h>
-#include <ripple/protocol/digest.h>
-#include <ripple/protocol/tokens.h>
+#include <cbc/protocol/AccountID.h>
+#include <cbc/protocol/PublicKey.h>
+#include <cbc/protocol/digest.h>
+#include <cbc/protocol/tokens.h>
 #include <cstring>
 
-namespace ripple {
+namespace cbc {
 
 std::string
 toBase58 (AccountID const& v)
@@ -126,7 +126,7 @@ parseHexOrBase58 (std::string const& s)
 
         The short answer is that we kept Bitcoin's behavior.
         The longer answer was that:
-            1) Using a single hash could leave ripple
+            1) Using a single hash could leave cbc
                vulnerable to length extension attacks.
             2) Only RIPEMD160 is generally considered safe at 160 bits.
 
@@ -223,7 +223,7 @@ AccountIDCache::toBase58(
     else
     {
         result =
-            ripple::toBase58(id);
+            cbc::toBase58(id);
     }
     if (m1_.size() >= capacity_)
     {
@@ -235,4 +235,4 @@ AccountIDCache::toBase58(
     return result;
 }
 
-} // ripple
+} // cbc

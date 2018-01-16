@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,19 +18,19 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/app/ledger/InboundTransactions.h>
-#include <ripple/app/ledger/InboundLedgers.h>
-#include <ripple/app/ledger/impl/TransactionAcquire.h>
-#include <ripple/app/main/Application.h>
-#include <ripple/app/misc/NetworkOPs.h>
-#include <ripple/basics/Log.h>
-#include <ripple/core/JobQueue.h>
-#include <ripple/protocol/RippleLedgerHash.h>
-#include <ripple/resource/Fees.h>
+#include <cbc/app/ledger/InboundTransactions.h>
+#include <cbc/app/ledger/InboundLedgers.h>
+#include <cbc/app/ledger/impl/TransactionAcquire.h>
+#include <cbc/app/main/Application.h>
+#include <cbc/app/misc/NetworkOPs.h>
+#include <cbc/basics/Log.h>
+#include <cbc/core/JobQueue.h>
+#include <cbc/protocol/cbcLedgerHash.h>
+#include <cbc/resource/Fees.h>
 #include <memory>
 #include <mutex>
 
-namespace ripple {
+namespace cbc {
 
 enum
 {
@@ -305,4 +305,4 @@ make_InboundTransactions (
         (app, clock, parent, collector, std::move (gotSet));
 }
 
-} // ripple
+} // cbc

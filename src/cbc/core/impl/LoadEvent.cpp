@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,12 +18,12 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/core/LoadEvent.h>
-#include <ripple/core/LoadMonitor.h>
+#include <cbc/core/LoadEvent.h>
+#include <cbc/core/LoadMonitor.h>
 #include <cassert>
 #include <iomanip>
 
-namespace ripple {
+namespace cbc {
 
 LoadEvent::LoadEvent (
         LoadMonitor& monitor,
@@ -91,4 +91,4 @@ void LoadEvent::stop ()
     monitor_.addLoadSample (*this);
 }
 
-} // ripple
+} // cbc

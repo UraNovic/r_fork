@@ -17,14 +17,14 @@
 */
 //==============================================================================
 
-#include <ripple/beast/core/Config.h>
+#include <cbc/beast/core/Config.h>
 
-#include <ripple/beast/insight/Insight.h>
+#include <cbc/beast/insight/Insight.h>
 
-#include <ripple/beast/insight/impl/Collector.cpp>
-#include <ripple/beast/insight/impl/Group.cpp>
-#include <ripple/beast/insight/impl/Groups.cpp>
-#include <ripple/beast/insight/impl/Hook.cpp>
-#include <ripple/beast/insight/impl/Metric.cpp>
-#include <ripple/beast/insight/impl/NullCollector.cpp>
-#include <ripple/beast/insight/impl/StatsDCollector.cpp>
+#include <cbc/beast/insight/impl/Collector.cpp>
+#include <cbc/beast/insight/impl/Group.cpp>
+#include <cbc/beast/insight/impl/Groups.cpp>
+#include <cbc/beast/insight/impl/Hook.cpp>
+#include <cbc/beast/insight/impl/Metric.cpp>
+#include <cbc/beast/insight/impl/NullCollector.cpp>
+#include <cbc/beast/insight/impl/StatsDCollector.cpp>

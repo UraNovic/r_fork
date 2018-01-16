@@ -17,12 +17,12 @@
 */
 //==============================================================================
 
-#include <ripple/beast/insight/Base.h>
-#include <ripple/beast/insight/BaseImpl.h>
-#include <ripple/beast/insight/CounterImpl.h>
-#include <ripple/beast/insight/EventImpl.h>
-#include <ripple/beast/insight/GaugeImpl.h>
-#include <ripple/beast/insight/MeterImpl.h>
+#include <cbc/beast/insight/Base.h>
+#include <cbc/beast/insight/BaseImpl.h>
+#include <cbc/beast/insight/CounterImpl.h>
+#include <cbc/beast/insight/EventImpl.h>
+#include <cbc/beast/insight/GaugeImpl.h>
+#include <cbc/beast/insight/MeterImpl.h>
 
 namespace beast {
 namespace insight {

@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -23,11 +23,11 @@
 // file license.txt or http://www.opensource.org/licenses/mit-license.php.
 
 #include <BeastConfig.h>
-#include <ripple/basics/contract.h>
-#include <ripple/crypto/impl/ec_key.h>
+#include <cbc/basics/contract.h>
+#include <cbc/crypto/impl/ec_key.h>
 #include <openssl/ec.h>
 
-namespace ripple  {
+namespace cbc  {
 namespace openssl {
 
 static inline EC_KEY* get_EC_KEY (const ec_key& that)
@@ -61,4 +61,4 @@ void ec_key::destroy()
 }
 
 } // openssl
-} // ripple
+} // cbc

@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,8 +18,8 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/basics/contract.h>
-#include <ripple/json/json_reader.h>
+#include <cbc/basics/contract.h>
+#include <cbc/json/json_reader.h>
 #include <algorithm>
 #include <string>
 #include <cctype>
@@ -952,7 +952,7 @@ std::istream& operator>> ( std::istream& sin, Value& root )
 
     //JSON_ASSERT( ok );
     if (! ok)
-        ripple::Throw<std::runtime_error> (reader.getFormatedErrorMessages ());
+        cbc::Throw<std::runtime_error> (reader.getFormatedErrorMessages ());
 
     return sin;
 }

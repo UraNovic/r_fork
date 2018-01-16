@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,48 +18,48 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/app/misc/NetworkOPs.h>
-#include <ripple/consensus/Consensus.h>
-#include <ripple/app/consensus/RCLConsensus.h>
-#include <ripple/app/consensus/RCLValidations.h>
-#include <ripple/app/ledger/AcceptedLedger.h>
-#include <ripple/app/ledger/InboundLedgers.h>
-#include <ripple/app/ledger/LedgerMaster.h>
-#include <ripple/consensus/ConsensusParms.h>
-#include <ripple/app/ledger/LedgerToJson.h>
-#include <ripple/app/ledger/LocalTxs.h>
-#include <ripple/app/ledger/OpenLedger.h>
-#include <ripple/app/ledger/OrderBookDB.h>
-#include <ripple/app/ledger/TransactionMaster.h>
-#include <ripple/app/main/LoadManager.h>
-#include <ripple/app/misc/HashRouter.h>
-#include <ripple/app/misc/LoadFeeTrack.h>
-#include <ripple/app/misc/Transaction.h>
-#include <ripple/app/misc/TxQ.h>
-#include <ripple/app/misc/ValidatorKeys.h>
-#include <ripple/app/misc/ValidatorList.h>
-#include <ripple/app/misc/impl/AccountTxPaging.h>
-#include <ripple/app/tx/apply.h>
-#include <ripple/basics/mulDiv.h>
-#include <ripple/basics/UptimeTimer.h>
-#include <ripple/core/ConfigSections.h>
-#include <ripple/crypto/csprng.h>
-#include <ripple/crypto/RFC1751.h>
-#include <ripple/json/to_string.h>
-#include <ripple/overlay/Cluster.h>
-#include <ripple/overlay/Overlay.h>
-#include <ripple/overlay/predicates.h>
-#include <ripple/protocol/BuildInfo.h>
-#include <ripple/resource/ResourceManager.h>
-#include <ripple/beast/rfc2616.h>
-#include <ripple/beast/core/LexicalCast.h>
-#include <ripple/beast/core/SystemStats.h>
-#include <ripple/beast/utility/rngfill.h>
-#include <ripple/basics/make_lock.h>
+#include <cbc/app/misc/NetworkOPs.h>
+#include <cbc/consensus/Consensus.h>
+#include <cbc/app/consensus/RCLConsensus.h>
+#include <cbc/app/consensus/RCLValidations.h>
+#include <cbc/app/ledger/AcceptedLedger.h>
+#include <cbc/app/ledger/InboundLedgers.h>
+#include <cbc/app/ledger/LedgerMaster.h>
+#include <cbc/consensus/ConsensusParms.h>
+#include <cbc/app/ledger/LedgerToJson.h>
+#include <cbc/app/ledger/LocalTxs.h>
+#include <cbc/app/ledger/OpenLedger.h>
+#include <cbc/app/ledger/OrderBookDB.h>
+#include <cbc/app/ledger/TransactionMaster.h>
+#include <cbc/app/main/LoadManager.h>
+#include <cbc/app/misc/HashRouter.h>
+#include <cbc/app/misc/LoadFeeTrack.h>
+#include <cbc/app/misc/Transaction.h>
+#include <cbc/app/misc/TxQ.h>
+#include <cbc/app/misc/ValidatorKeys.h>
+#include <cbc/app/misc/ValidatorList.h>
+#include <cbc/app/misc/impl/AccountTxPaging.h>
+#include <cbc/app/tx/apply.h>
+#include <cbc/basics/mulDiv.h>
+#include <cbc/basics/UptimeTimer.h>
+#include <cbc/core/ConfigSections.h>
+#include <cbc/crypto/csprng.h>
+#include <cbc/crypto/RFC1751.h>
+#include <cbc/json/to_string.h>
+#include <cbc/overlay/Cluster.h>
+#include <cbc/overlay/Overlay.h>
+#include <cbc/overlay/predicates.h>
+#include <cbc/protocol/BuildInfo.h>
+#include <cbc/resource/ResourceManager.h>
+#include <cbc/beast/rfc2616.h>
+#include <cbc/beast/core/LexicalCast.h>
+#include <cbc/beast/core/SystemStats.h>
+#include <cbc/beast/utility/rngfill.h>
+#include <cbc/basics/make_lock.h>
 #include <beast/core/detail/base64.hpp>
 #include <boost/asio/steady_timer.hpp>
 
-namespace ripple {
+namespace cbc {
 
 class NetworkOPsImp final
     : public NetworkOPs
@@ -1211,14 +1211,14 @@ Json::Value NetworkOPsImp::getOwnerInfo (
                     jvObjects[jss::offers].append (sleCur->getJson (0));
                     break;
 
-                case ltRIPPLE_STATE:
-                    if (!jvObjects.isMember (jss::ripple_lines))
+                case ltcbc_STATE:
+                    if (!jvObjects.isMember (jss::cbc_lines))
                     {
-                        jvObjects[jss::ripple_lines] =
+                        jvObjects[jss::cbc_lines] =
                                 Json::Value (Json::arrayValue);
                     }
 
-                    jvObjects[jss::ripple_lines].append (sleCur->getJson (0));
+                    jvObjects[jss::cbc_lines].append (sleCur->getJson (0));
                     break;
 
                 case ltACCOUNT_ROOT:
@@ -3385,4 +3385,4 @@ make_NetworkOPs (Application& app, NetworkOPs::clock_type& clock,
         validatorKeys, io_svc, journal);
 }
 
-} // ripple
+} // cbc

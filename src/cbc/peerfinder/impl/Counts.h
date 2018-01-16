@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -17,15 +17,15 @@
 */
 //==============================================================================
 
-#ifndef RIPPLE_PEERFINDER_COUNTS_H_INCLUDED
-#define RIPPLE_PEERFINDER_COUNTS_H_INCLUDED
+#ifndef cbc_PEERFINDER_COUNTS_H_INCLUDED
+#define cbc_PEERFINDER_COUNTS_H_INCLUDED
 
-#include <ripple/basics/random.h>
-#include <ripple/peerfinder/PeerfinderManager.h>
-#include <ripple/peerfinder/Slot.h>
-#include <ripple/peerfinder/impl/Tuning.h>
+#include <cbc/basics/random.h>
+#include <cbc/peerfinder/PeerfinderManager.h>
+#include <cbc/peerfinder/Slot.h>
+#include <cbc/peerfinder/impl/Tuning.h>
 
-namespace ripple {
+namespace cbc {
 namespace PeerFinder {
 
 /** Manages the count of available connections for the various slots. */

@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,15 +18,15 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/core/Config.h>
-#include <ripple/core/ConfigSections.h>
-#include <ripple/basics/contract.h>
-#include <ripple/basics/Log.h>
-#include <ripple/json/json_reader.h>
-#include <ripple/protocol/Feature.h>
-#include <ripple/protocol/SystemParameters.h>
-#include <ripple/net/HTTPClient.h>
-#include <ripple/beast/core/LexicalCast.h>
+#include <cbc/core/Config.h>
+#include <cbc/core/ConfigSections.h>
+#include <cbc/basics/contract.h>
+#include <cbc/basics/Log.h>
+#include <cbc/json/json_reader.h>
+#include <cbc/protocol/Feature.h>
+#include <cbc/protocol/SystemParameters.h>
+#include <cbc/net/HTTPClient.h>
+#include <cbc/beast/core/LexicalCast.h>
 #include <beast/core/string.hpp>
 #include <boost/algorithm/string.hpp>
 #include <boost/format.hpp>
@@ -35,7 +35,7 @@
 #include <iostream>
 #include <iterator>
 
-namespace ripple {
+namespace cbc {
 
 //
 // TODO: Check permissions on config file before using it.
@@ -132,7 +132,7 @@ bool getSingleSection (IniFileSections& secSource,
 //
 //------------------------------------------------------------------------------
 
-char const* const Config::configFileName = "rippled.cfg";
+char const* const Config::configFileName = "cbcd.cfg";
 char const* const Config::databaseDirName = "db";
 char const* const Config::validatorsFileName = "validators.txt";
 
@@ -615,4 +615,4 @@ boost::filesystem::path Config::getDebugLogFile () const
     return log_file;
 }
 
-} // ripple
+} // cbc

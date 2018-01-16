@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,8 +18,8 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/basics/Sustain.h>
-#include <ripple/beast/core/CurrentThreadName.h>
+#include <cbc/basics/Sustain.h>
+#include <cbc/beast/core/CurrentThreadName.h>
 #include <boost/format.hpp>
 
 // For Sustain Linux variants
@@ -35,7 +35,7 @@
 #include <sys/wait.h>
 #endif
 
-namespace ripple {
+namespace cbc {
 
 #ifdef __unix__
 
@@ -103,7 +103,7 @@ std::string DoSustain ()
         auto cc = std::to_string (childCount);
         if (pChild == 0)
         {
-            beast::setCurrentThreadName ("rippled: main");
+            beast::setCurrentThreadName ("cbcd: main");
             signal (SIGINT, SIG_DFL);
             signal (SIGHUP, SIG_DFL);
             signal (SIGUSR1, SIG_DFL);
@@ -111,7 +111,7 @@ std::string DoSustain ()
             return "Launching child " + cc;
         }
 
-        beast::setCurrentThreadName (("rippled: #" + cc).c_str());
+        beast::setCurrentThreadName (("cbcd: #" + cc).c_str());
 
         sleep (sleepBeforeWaiting);
 
@@ -155,4 +155,4 @@ std::string StopSustain ()
 
 #endif
 
-} // ripple
+} // cbc

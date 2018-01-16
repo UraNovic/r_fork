@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -20,10 +20,10 @@
 #include <BeastConfig.h>
 #include <test/jtx/jtx_json.h>
 #include <test/jtx/utility.h>
-#include <ripple/json/json_reader.h>
-#include <ripple/basics/contract.h>
+#include <cbc/json/json_reader.h>
+#include <cbc/basics/contract.h>
 
-namespace ripple {
+namespace cbc {
 namespace test {
 namespace jtx {
 
@@ -53,4 +53,4 @@ json::operator()(Env&, JTx& jt) const
 
 } // jtx
 } // test
-} // ripple
+} // cbc

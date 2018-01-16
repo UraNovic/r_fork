@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -17,16 +17,16 @@
 */
 //==============================================================================
 
-#ifndef RIPPLE_CORE_LOADFEETRACK_H_INCLUDED
-#define RIPPLE_CORE_LOADFEETRACK_H_INCLUDED
+#ifndef cbc_CORE_LOADFEETRACK_H_INCLUDED
+#define cbc_CORE_LOADFEETRACK_H_INCLUDED
 
-#include <ripple/json/json_value.h>
-#include <ripple/beast/utility/Journal.h>
+#include <cbc/json/json_value.h>
+#include <cbc/beast/utility/Journal.h>
 #include <algorithm>
 #include <cstdint>
 #include <mutex>
 
-namespace ripple {
+namespace cbc {
 
 struct Fees;
 
@@ -142,6 +142,6 @@ private:
 std::uint64_t scaleFeeLoad(std::uint64_t fee, LoadFeeTrack const& feeTrack,
     Fees const& fees, bool bUnlimited);
 
-} // ripple
+} // cbc
 
 #endif

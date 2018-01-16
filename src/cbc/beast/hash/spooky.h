@@ -21,8 +21,8 @@
 #ifndef BEAST_HASH_SPOOKY_H_INCLUDED
 #define BEAST_HASH_SPOOKY_H_INCLUDED
 
-#include <ripple/beast/hash/endian.h>
-#include <ripple/beast/hash/impl/spookyv2.h>
+#include <cbc/beast/hash/endian.h>
+#include <cbc/beast/hash/impl/spookyv2.h>
 
 namespace beast {
 

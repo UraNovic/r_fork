@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,25 +18,25 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/app/paths/AccountCurrencies.h>
-#include <ripple/app/paths/RippleCalc.h>
-#include <ripple/app/paths/PathRequest.h>
-#include <ripple/app/paths/PathRequests.h>
-#include <ripple/app/main/Application.h>
-#include <ripple/app/misc/LoadFeeTrack.h>
-#include <ripple/app/misc/NetworkOPs.h>
-#include <ripple/basics/Log.h>
-#include <ripple/core/Config.h>
-#include <ripple/net/RPCErr.h>
-#include <ripple/protocol/ErrorCodes.h>
-#include <ripple/protocol/UintTypes.h>
-#include <ripple/rpc/impl/Tuning.h>
-#include <ripple/beast/core/LexicalCast.h>
+#include <cbc/app/paths/AccountCurrencies.h>
+#include <cbc/app/paths/cbcCalc.h>
+#include <cbc/app/paths/PathRequest.h>
+#include <cbc/app/paths/PathRequests.h>
+#include <cbc/app/main/Application.h>
+#include <cbc/app/misc/LoadFeeTrack.h>
+#include <cbc/app/misc/NetworkOPs.h>
+#include <cbc/basics/Log.h>
+#include <cbc/core/Config.h>
+#include <cbc/net/RPCErr.h>
+#include <cbc/protocol/ErrorCodes.h>
+#include <cbc/protocol/UintTypes.h>
+#include <cbc/rpc/impl/Tuning.h>
+#include <cbc/beast/core/LexicalCast.h>
 #include <boost/algorithm/clamp.hpp>
 #include <boost/optional.hpp>
 #include <tuple>
 
-namespace ripple {
+namespace cbc {
 
 PathRequest::PathRequest (
     Application& app,
@@ -164,7 +164,7 @@ void PathRequest::updateComplete ()
     }
 }
 
-bool PathRequest::isValid (std::shared_ptr<RippleLineCache> const& crCache)
+bool PathRequest::isValid (std::shared_ptr<cbcLineCache> const& crCache)
 {
     if (! raSrcAccount || ! raDstAccount)
         return false;
@@ -239,7 +239,7 @@ bool PathRequest::isValid (std::shared_ptr<RippleLineCache> const& crCache)
 */
 std::pair<bool, Json::Value>
 PathRequest::doCreate (
-    std::shared_ptr<RippleLineCache> const& cache,
+    std::shared_ptr<cbcLineCache> const& cache,
     Json::Value const& value)
 {
     bool valid = false;
@@ -456,7 +456,7 @@ Json::Value PathRequest::doStatus (Json::Value const&)
 }
 
 std::unique_ptr<Pathfinder> const&
-PathRequest::getPathFinder(std::shared_ptr<RippleLineCache> const& cache,
+PathRequest::getPathFinder(std::shared_ptr<cbcLineCache> const& cache,
     hash_map<Currency, std::unique_ptr<Pathfinder>>& currency_map,
         Currency const& currency, STAmount const& dst_amount,
             int const level)
@@ -475,7 +475,7 @@ PathRequest::getPathFinder(std::shared_ptr<RippleLineCache> const& cache,
 }
 
 bool
-PathRequest::findPaths (std::shared_ptr<RippleLineCache> const& cache,
+PathRequest::findPaths (std::shared_ptr<cbcLineCache> const& cache,
     int const level, Json::Value& jvArray)
 {
     auto sourceCurrencies = sciSourceCurrencies;
@@ -529,14 +529,14 @@ PathRequest::findPaths (std::shared_ptr<RippleLineCache> const& cache,
             STAmount({issue.currency, sourceAccount}, 1u, 0, true));
 
         JLOG(m_journal.debug()) << iIdentifier
-            << " Paths found, calling rippleCalc";
+            << " Paths found, calling cbcCalc";
 
-        path::RippleCalc::Input rcInput;
+        path::cbcCalc::Input rcInput;
         if (convert_all_)
             rcInput.partialPaymentAllowed = true;
         auto sandbox = std::make_unique<PaymentSandbox>
             (&*cache->getLedger(), tapNONE);
-        auto rc = path::RippleCalc::rippleCalculate(
+        auto rc = path::cbcCalc::cbcCalculate(
             *sandbox,
             saMaxAmount,    // --> Amount to send is unlimited
                             //     to get an estimate.
@@ -557,7 +557,7 @@ PathRequest::findPaths (std::shared_ptr<RippleLineCache> const& cache,
             ps.push_back(fullLiquidityPath);
             sandbox = std::make_unique<PaymentSandbox>
                 (&*cache->getLedger(), tapNONE);
-            rc = path::RippleCalc::rippleCalculate(
+            rc = path::cbcCalc::cbcCalculate(
                 *sandbox,
                 saMaxAmount,    // --> Amount to send is unlimited
                                 //     to get an estimate.
@@ -593,7 +593,7 @@ PathRequest::findPaths (std::shared_ptr<RippleLineCache> const& cache,
 
             if (hasCompletion ())
             {
-                // Old ripple_path_find API requires this
+                // Old cbc_path_find API requires this
                 jvEntry[jss::paths_canonical] = Json::arrayValue;
             }
 
@@ -601,7 +601,7 @@ PathRequest::findPaths (std::shared_ptr<RippleLineCache> const& cache,
         }
         else
         {
-            JLOG(m_journal.debug()) << iIdentifier << " rippleCalc returns "
+            JLOG(m_journal.debug()) << iIdentifier << " cbcCalc returns "
                 << transHuman(rc.result());
         }
     }
@@ -617,7 +617,7 @@ PathRequest::findPaths (std::shared_ptr<RippleLineCache> const& cache,
 }
 
 Json::Value PathRequest::doUpdate(
-    std::shared_ptr<RippleLineCache> const& cache, bool fast)
+    std::shared_ptr<cbcLineCache> const& cache, bool fast)
 {
     using namespace std::chrono;
     JLOG(m_journal.debug()) << iIdentifier
@@ -634,7 +634,7 @@ Json::Value PathRequest::doUpdate(
 
     if (hasCompletion ())
     {
-        // Old ripple_path_find API gives destination_currencies
+        // Old cbc_path_find API gives destination_currencies
         auto& destCurrencies = (newStatus[jss::destination_currencies] = Json::arrayValue);
         auto usCurrencies = accountDestCurrencies (*raDstAccount, cache, true);
         for (auto const& c : usCurrencies)
@@ -721,4 +721,4 @@ InfoSub::pointer PathRequest::getSubscriber ()
     return wpSubscriber.lock ();
 }
 
-} // ripple
+} // cbc

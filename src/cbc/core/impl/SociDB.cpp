@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012-2015 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012-2015 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -24,15 +24,15 @@
 
 #include <BeastConfig.h>
 
-#include <ripple/basics/contract.h>
-#include <ripple/core/ConfigSections.h>
-#include <ripple/core/SociDB.h>
-#include <ripple/core/Config.h>
+#include <cbc/basics/contract.h>
+#include <cbc/core/ConfigSections.h>
+#include <cbc/core/SociDB.h>
+#include <cbc/core/Config.h>
 #include <memory>
 #include <soci/sqlite3/soci-sqlite3.h>
 #include <boost/filesystem.hpp>
 
-namespace ripple {
+namespace cbc {
 
 static auto checkpointPageCount = 1000;
 

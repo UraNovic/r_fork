@@ -1,7 +1,6 @@
-//------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -17,21 +16,21 @@
 */
 //==============================================================================
 
-#ifndef RIPPLE_APP_MAIN_APPLICATION_H_INCLUDED
-#define RIPPLE_APP_MAIN_APPLICATION_H_INCLUDED
+#ifndef cbc_APP_MAIN_APPLICATION_H_INCLUDED
+#define cbc_APP_MAIN_APPLICATION_H_INCLUDED
 
-#include <ripple/shamap/FullBelowCache.h>
-#include <ripple/shamap/TreeNodeCache.h>
-#include <ripple/basics/TaggedCache.h>
-#include <ripple/core/Config.h>
-#include <ripple/protocol/Protocol.h>
-#include <ripple/beast/utility/PropertyStream.h>
+#include <cbc/shamap/FullBelowCache.h>
+#include <cbc/shamap/TreeNodeCache.h>
+#include <cbc/basics/TaggedCache.h>
+#include <cbc/core/Config.h>
+#include <cbc/protocol/Protocol.h>
+#include <cbc/beast/utility/PropertyStream.h>
 #include <memory>
 #include <mutex>
 
 namespace boost { namespace asio { class io_service; } }
 
-namespace ripple {
+namespace cbc {
 
 namespace unl { class Manager; }
 namespace Resource { class Manager; }

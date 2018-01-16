@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,27 +18,27 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/app/main/Application.h>
-#include <ripple/rpc/RPCHandler.h>
-#include <ripple/rpc/impl/Tuning.h>
-#include <ripple/rpc/impl/Handler.h>
-#include <ripple/app/main/Application.h>
-#include <ripple/app/ledger/LedgerMaster.h>
-#include <ripple/app/misc/NetworkOPs.h>
-#include <ripple/basics/contract.h>
-#include <ripple/basics/Log.h>
-#include <ripple/core/Config.h>
-#include <ripple/core/JobQueue.h>
-#include <ripple/json/Object.h>
-#include <ripple/json/to_string.h>
-#include <ripple/net/InfoSub.h>
-#include <ripple/net/RPCErr.h>
-#include <ripple/protocol/JsonFields.h>
-#include <ripple/resource/Fees.h>
-#include <ripple/rpc/Role.h>
-#include <ripple/resource/Fees.h>
+#include <cbc/app/main/Application.h>
+#include <cbc/rpc/RPCHandler.h>
+#include <cbc/rpc/impl/Tuning.h>
+#include <cbc/rpc/impl/Handler.h>
+#include <cbc/app/main/Application.h>
+#include <cbc/app/ledger/LedgerMaster.h>
+#include <cbc/app/misc/NetworkOPs.h>
+#include <cbc/basics/contract.h>
+#include <cbc/basics/Log.h>
+#include <cbc/core/Config.h>
+#include <cbc/core/JobQueue.h>
+#include <cbc/json/Object.h>
+#include <cbc/json/to_string.h>
+#include <cbc/net/InfoSub.h>
+#include <cbc/net/RPCErr.h>
+#include <cbc/protocol/JsonFields.h>
+#include <cbc/resource/Fees.h>
+#include <cbc/rpc/Role.h>
+#include <cbc/resource/Fees.h>
 
-namespace ripple {
+namespace cbc {
 namespace RPC {
 
 namespace {
@@ -67,7 +67,7 @@ namespace {
            "result" : {
               "error" : "noNetwork",
               "error_code" : 16,
-              "error_message" : "Not synced to Ripple network.",
+              "error_message" : "Not synced to cbc network.",
               "request" : {
                  "command" : "ledger",
                  "ledger_index" : 10300865
@@ -97,7 +97,7 @@ namespace {
         {
           "error" : "noNetwork",
           "error_code" : 16,
-          "error_message" : "Not synced to Ripple network.",
+          "error_message" : "Not synced to cbc network.",
           "request" : {
              "command" : "ledger",
              "ledger_index" : 10300865
@@ -282,4 +282,4 @@ Role roleRequired (std::string const& method)
 }
 
 } // RPC
-} // ripple
+} // cbc

@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,15 +18,15 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/app/tx/impl/SetTrust.h>
-#include <ripple/basics/Log.h>
-#include <ripple/protocol/Feature.h>
-#include <ripple/protocol/Quality.h>
-#include <ripple/protocol/Indexes.h>
-#include <ripple/protocol/st.h>
-#include <ripple/ledger/View.h>
+#include <cbc/app/tx/impl/SetTrust.h>
+#include <cbc/basics/Log.h>
+#include <cbc/protocol/Feature.h>
+#include <cbc/protocol/Quality.h>
+#include <cbc/protocol/Indexes.h>
+#include <cbc/protocol/st.h>
+#include <cbc/ledger/View.h>
 
-namespace ripple {
+namespace cbc {
 
 TER
 SetTrust::preflight (PreflightContext const& ctx)
@@ -157,7 +157,7 @@ SetTrust::doApply ()
     // items.
     //
     // We do this because being able to exchange currencies,
-    // which needs trust lines, is a powerful Ripple feature.
+    // which needs trust lines, is a powerful cbc feature.
     // So we want to make it easy for a gateway to fund the
     // accounts of its users without fear of being tricked.
     //
@@ -181,8 +181,8 @@ SetTrust::doApply ()
     std::uint32_t const uTxFlags = ctx_.tx.getFlags ();
 
     bool const bSetAuth = (uTxFlags & tfSetfAuth);
-    bool const bSetNoRipple = (uTxFlags & tfSetNoRipple);
-    bool const bClearNoRipple  = (uTxFlags & tfClearNoRipple);
+    bool const bSetNocbc = (uTxFlags & tfSetNocbc);
+    bool const bClearNocbc  = (uTxFlags & tfClearNocbc);
     bool const bSetFreeze = (uTxFlags & tfSetFreeze);
     bool const bClearFreeze = (uTxFlags & tfClearFreeze);
 
@@ -217,10 +217,10 @@ SetTrust::doApply ()
     STAmount saLimitAllow = saLimitAmount;
     saLimitAllow.setIssuer (account_);
 
-    SLE::pointer sleRippleState = view().peek (
+    SLE::pointer slecbcState = view().peek (
         keylet::line(account_, uDstAccountID, currency));
 
-    if (sleRippleState)
+    if (slecbcState)
     {
         STAmount        saLowBalance;
         STAmount        saLowLimit;
@@ -239,17 +239,17 @@ SetTrust::doApply ()
         // Balances
         //
 
-        saLowBalance    = sleRippleState->getFieldAmount (sfBalance);
+        saLowBalance    = slecbcState->getFieldAmount (sfBalance);
         saHighBalance   = -saLowBalance;
 
         //
         // Limits
         //
 
-        sleRippleState->setFieldAmount (!bHigh ? sfLowLimit : sfHighLimit, saLimitAllow);
+        slecbcState->setFieldAmount (!bHigh ? sfLowLimit : sfHighLimit, saLimitAllow);
 
-        saLowLimit  = !bHigh ? saLimitAllow : sleRippleState->getFieldAmount (sfLowLimit);
-        saHighLimit =  bHigh ? saLimitAllow : sleRippleState->getFieldAmount (sfHighLimit);
+        saLowLimit  = !bHigh ? saLimitAllow : slecbcState->getFieldAmount (sfLowLimit);
+        saHighLimit =  bHigh ? saLimitAllow : slecbcState->getFieldAmount (sfHighLimit);
 
         //
         // Quality in
@@ -259,26 +259,26 @@ SetTrust::doApply ()
         {
             // Not setting. Just get it.
 
-            uLowQualityIn   = sleRippleState->getFieldU32 (sfLowQualityIn);
-            uHighQualityIn  = sleRippleState->getFieldU32 (sfHighQualityIn);
+            uLowQualityIn   = slecbcState->getFieldU32 (sfLowQualityIn);
+            uHighQualityIn  = slecbcState->getFieldU32 (sfHighQualityIn);
         }
         else if (uQualityIn)
         {
             // Setting.
 
-            sleRippleState->setFieldU32 (!bHigh ? sfLowQualityIn : sfHighQualityIn, uQualityIn);
+            slecbcState->setFieldU32 (!bHigh ? sfLowQualityIn : sfHighQualityIn, uQualityIn);
 
-            uLowQualityIn   = !bHigh ? uQualityIn : sleRippleState->getFieldU32 (sfLowQualityIn);
-            uHighQualityIn  =  bHigh ? uQualityIn : sleRippleState->getFieldU32 (sfHighQualityIn);
+            uLowQualityIn   = !bHigh ? uQualityIn : slecbcState->getFieldU32 (sfLowQualityIn);
+            uHighQualityIn  =  bHigh ? uQualityIn : slecbcState->getFieldU32 (sfHighQualityIn);
         }
         else
         {
             // Clearing.
 
-            sleRippleState->makeFieldAbsent (!bHigh ? sfLowQualityIn : sfHighQualityIn);
+            slecbcState->makeFieldAbsent (!bHigh ? sfLowQualityIn : sfHighQualityIn);
 
-            uLowQualityIn   = !bHigh ? 0 : sleRippleState->getFieldU32 (sfLowQualityIn);
-            uHighQualityIn  =  bHigh ? 0 : sleRippleState->getFieldU32 (sfHighQualityIn);
+            uLowQualityIn   = !bHigh ? 0 : slecbcState->getFieldU32 (sfLowQualityIn);
+            uHighQualityIn  =  bHigh ? 0 : slecbcState->getFieldU32 (sfHighQualityIn);
         }
 
         if (QUALITY_ONE == uLowQualityIn)   uLowQualityIn   = 0;
@@ -293,38 +293,38 @@ SetTrust::doApply ()
         {
             // Not setting. Just get it.
 
-            uLowQualityOut  = sleRippleState->getFieldU32 (sfLowQualityOut);
-            uHighQualityOut = sleRippleState->getFieldU32 (sfHighQualityOut);
+            uLowQualityOut  = slecbcState->getFieldU32 (sfLowQualityOut);
+            uHighQualityOut = slecbcState->getFieldU32 (sfHighQualityOut);
         }
         else if (uQualityOut)
         {
             // Setting.
 
-            sleRippleState->setFieldU32 (!bHigh ? sfLowQualityOut : sfHighQualityOut, uQualityOut);
+            slecbcState->setFieldU32 (!bHigh ? sfLowQualityOut : sfHighQualityOut, uQualityOut);
 
-            uLowQualityOut  = !bHigh ? uQualityOut : sleRippleState->getFieldU32 (sfLowQualityOut);
-            uHighQualityOut =  bHigh ? uQualityOut : sleRippleState->getFieldU32 (sfHighQualityOut);
+            uLowQualityOut  = !bHigh ? uQualityOut : slecbcState->getFieldU32 (sfLowQualityOut);
+            uHighQualityOut =  bHigh ? uQualityOut : slecbcState->getFieldU32 (sfHighQualityOut);
         }
         else
         {
             // Clearing.
 
-            sleRippleState->makeFieldAbsent (!bHigh ? sfLowQualityOut : sfHighQualityOut);
+            slecbcState->makeFieldAbsent (!bHigh ? sfLowQualityOut : sfHighQualityOut);
 
-            uLowQualityOut  = !bHigh ? 0 : sleRippleState->getFieldU32 (sfLowQualityOut);
-            uHighQualityOut =  bHigh ? 0 : sleRippleState->getFieldU32 (sfHighQualityOut);
+            uLowQualityOut  = !bHigh ? 0 : slecbcState->getFieldU32 (sfLowQualityOut);
+            uHighQualityOut =  bHigh ? 0 : slecbcState->getFieldU32 (sfHighQualityOut);
         }
 
-        std::uint32_t const uFlagsIn (sleRippleState->getFieldU32 (sfFlags));
+        std::uint32_t const uFlagsIn (slecbcState->getFieldU32 (sfFlags));
         std::uint32_t uFlagsOut (uFlagsIn);
 
-        if (bSetNoRipple && !bClearNoRipple && (bHigh ? saHighBalance : saLowBalance) >= zero)
+        if (bSetNocbc && !bClearNocbc && (bHigh ? saHighBalance : saLowBalance) >= zero)
         {
-            uFlagsOut |= (bHigh ? lsfHighNoRipple : lsfLowNoRipple);
+            uFlagsOut |= (bHigh ? lsfHighNocbc : lsfLowNocbc);
         }
-        else if (bClearNoRipple && !bSetNoRipple)
+        else if (bClearNocbc && !bSetNocbc)
         {
-            uFlagsOut &= ~(bHigh ? lsfHighNoRipple : lsfLowNoRipple);
+            uFlagsOut &= ~(bHigh ? lsfHighNocbc : lsfLowNocbc);
         }
 
         if (bSetFreeze && !bClearFreeze && !sle->isFlag  (lsfNoFreeze))
@@ -340,17 +340,17 @@ SetTrust::doApply ()
 
         if (QUALITY_ONE == uHighQualityOut) uHighQualityOut = 0;
 
-        bool const bLowDefRipple        = sleLowAccount->getFlags() & lsfDefaultRipple;
-        bool const bHighDefRipple       = sleHighAccount->getFlags() & lsfDefaultRipple;
+        bool const bLowDefcbc        = sleLowAccount->getFlags() & lsfDefaultcbc;
+        bool const bHighDefcbc       = sleHighAccount->getFlags() & lsfDefaultcbc;
 
         bool const  bLowReserveSet      = uLowQualityIn || uLowQualityOut ||
-                                            ((uFlagsOut & lsfLowNoRipple) == 0) != bLowDefRipple ||
+                                            ((uFlagsOut & lsfLowNocbc) == 0) != bLowDefcbc ||
                                             (uFlagsOut & lsfLowFreeze) ||
                                             saLowLimit || saLowBalance > zero;
         bool const  bLowReserveClear    = !bLowReserveSet;
 
         bool const  bHighReserveSet     = uHighQualityIn || uHighQualityOut ||
-                                            ((uFlagsOut & lsfHighNoRipple) == 0) != bHighDefRipple ||
+                                            ((uFlagsOut & lsfHighNocbc) == 0) != bHighDefcbc ||
                                             (uFlagsOut & lsfHighFreeze) ||
                                             saHighLimit || saHighBalance > zero;
         bool const  bHighReserveClear   = !bHighReserveSet;
@@ -406,14 +406,14 @@ SetTrust::doApply ()
         }
 
         if (uFlagsIn != uFlagsOut)
-            sleRippleState->setFieldU32 (sfFlags, uFlagsOut);
+            slecbcState->setFieldU32 (sfFlags, uFlagsOut);
 
         if (bDefault || badCurrency() == currency)
         {
             // Delete.
 
             terResult = trustDelete (view(),
-                sleRippleState, uLowAccountID, uHighAccountID, viewJ);
+                slecbcState, uLowAccountID, uHighAccountID, viewJ);
         }
         // Reserve is not scaled by load.
         else if (bReserveIncrease && mPriorBalance < reserveCreate)
@@ -427,9 +427,9 @@ SetTrust::doApply ()
         }
         else
         {
-            view().update (sleRippleState);
+            view().update (slecbcState);
 
-            JLOG(j_.trace()) << "Modify ripple line";
+            JLOG(j_.trace()) << "Modify cbc line";
         }
     }
     // Line does not exist.
@@ -439,7 +439,7 @@ SetTrust::doApply ()
         (! (view().rules().enabled(featureTrustSetAuth)) || ! bSetAuth))
     {
         JLOG(j_.trace()) <<
-            "Redundant: Setting non-existent ripple line to defaults.";
+            "Redundant: Setting non-existent cbc line to defaults.";
         return tecNO_LINE_REDUNDANT;
     }
     else if (mPriorBalance < reserveCreate) // Reserve is not scaled by load.
@@ -455,14 +455,14 @@ SetTrust::doApply ()
         // Zero balance in currency.
         STAmount saBalance ({currency, noAccount()});
 
-        uint256 index (getRippleStateIndex (
+        uint256 index (getcbcStateIndex (
             account_, uDstAccountID, currency));
 
         JLOG(j_.trace()) <<
-            "doTrustSet: Creating ripple line: " <<
+            "doTrustSet: Creating cbc line: " <<
             to_string (index);
 
-        // Create a new ripple line.
+        // Create a new cbc line.
         terResult = trustCreate (view(),
             bHigh,
             account_,
@@ -470,7 +470,7 @@ SetTrust::doApply ()
             index,
             sle,
             bSetAuth,
-            bSetNoRipple && !bClearNoRipple,
+            bSetNocbc && !bClearNocbc,
             bSetFreeze && !bClearFreeze,
             saBalance,
             saLimitAllow,       // Limit for who is being charged.

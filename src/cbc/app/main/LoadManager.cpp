@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,18 +18,18 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/app/main/LoadManager.h>
-#include <ripple/app/main/Application.h>
-#include <ripple/app/misc/LoadFeeTrack.h>
-#include <ripple/app/misc/NetworkOPs.h>
-#include <ripple/basics/UptimeTimer.h>
-#include <ripple/json/to_string.h>
-#include <ripple/beast/core/CurrentThreadName.h>
+#include <cbc/app/main/LoadManager.h>
+#include <cbc/app/main/Application.h>
+#include <cbc/app/misc/LoadFeeTrack.h>
+#include <cbc/app/misc/NetworkOPs.h>
+#include <cbc/basics/UptimeTimer.h>
+#include <cbc/json/to_string.h>
+#include <cbc/beast/core/CurrentThreadName.h>
 #include <memory>
 #include <mutex>
 #include <thread>
 
-namespace ripple {
+namespace cbc {
 
 LoadManager::LoadManager (
     Application& app, Stoppable& parent, beast::Journal journal)
@@ -206,4 +206,4 @@ make_LoadManager (Application& app,
     return std::make_unique<LoadManager>(app, parent, journal);
 }
 
-} // ripple
+} // cbc

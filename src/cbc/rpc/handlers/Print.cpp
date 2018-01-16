@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012-2014 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012-2014 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,13 +18,13 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/app/main/Application.h>
-#include <ripple/json/JsonPropertyStream.h>
-#include <ripple/json/json_value.h>
-#include <ripple/protocol/JsonFields.h>
-#include <ripple/rpc/Context.h>
+#include <cbc/app/main/Application.h>
+#include <cbc/json/JsonPropertyStream.h>
+#include <cbc/json/json_value.h>
+#include <cbc/protocol/JsonFields.h>
+#include <cbc/rpc/Context.h>
 
-namespace ripple {
+namespace cbc {
 
 Json::Value doPrint (RPC::Context& context)
 {
@@ -43,4 +43,4 @@ Json::Value doPrint (RPC::Context& context)
     return stream.top();
 }
 
-} // ripple
+} // cbc

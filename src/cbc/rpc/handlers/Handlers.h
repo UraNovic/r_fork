@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -17,12 +17,12 @@
 */
 //==============================================================================
 
-#ifndef RIPPLE_RPC_HANDLERS_HANDLERS_H_INCLUDED
-#define RIPPLE_RPC_HANDLERS_HANDLERS_H_INCLUDED
+#ifndef cbc_RPC_HANDLERS_HANDLERS_H_INCLUDED
+#define cbc_RPC_HANDLERS_HANDLERS_H_INCLUDED
 
-#include <ripple/rpc/handlers/LedgerHandler.h>
+#include <cbc/rpc/handlers/LedgerHandler.h>
 
-namespace ripple {
+namespace cbc {
 
 Json::Value doAccountCurrencies     (RPC::Context&);
 Json::Value doAccountInfo           (RPC::Context&);
@@ -55,14 +55,14 @@ Json::Value doLedgerHeader          (RPC::Context&);
 Json::Value doLedgerRequest         (RPC::Context&);
 Json::Value doLogLevel              (RPC::Context&);
 Json::Value doLogRotate             (RPC::Context&);
-Json::Value doNoRippleCheck         (RPC::Context&);
+Json::Value doNocbcCheck         (RPC::Context&);
 Json::Value doOwnerInfo             (RPC::Context&);
 Json::Value doPathFind              (RPC::Context&);
 Json::Value doPeers                 (RPC::Context&);
 Json::Value doPing                  (RPC::Context&);
 Json::Value doPrint                 (RPC::Context&);
 Json::Value doRandom                (RPC::Context&);
-Json::Value doRipplePathFind        (RPC::Context&);
+Json::Value docbcPathFind        (RPC::Context&);
 Json::Value doServerInfo            (RPC::Context&); // for humans
 Json::Value doServerState           (RPC::Context&); // for machines
 Json::Value doSessionClose          (RPC::Context&);
@@ -87,6 +87,6 @@ Json::Value doWalletUnlock          (RPC::Context&);
 Json::Value doWalletVerify          (RPC::Context&);
 Json::Value doValidators            (RPC::Context&);
 Json::Value doValidatorListSites    (RPC::Context&);
-} // ripple
+} // cbc
 
 #endif

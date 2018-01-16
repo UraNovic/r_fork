@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,21 +18,21 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/app/paths/Credit.h>
-#include <ripple/app/paths/PathState.h>
-#include <ripple/basics/Log.h>
-#include <ripple/json/to_string.h>
-#include <ripple/protocol/Indexes.h>
-#include <ripple/protocol/JsonFields.h>
+#include <cbc/app/paths/Credit.h>
+#include <cbc/app/paths/PathState.h>
+#include <cbc/basics/Log.h>
+#include <cbc/json/to_string.h>
+#include <cbc/protocol/Indexes.h>
+#include <cbc/protocol/JsonFields.h>
 #include <boost/lexical_cast.hpp>
 
-namespace ripple {
+namespace cbc {
 
 // OPTIMIZE: When calculating path increment, note if increment consumes all
 // liquidity. No need to revisit path in the future if all liquidity is used.
 //
 
-class RippleCalc; // for logging
+class cbcCalc; // for logging
 
 void PathState::clear()
 {
@@ -56,7 +56,7 @@ void PathState::reset(STAmount const& in, STAmount const& out)
     if (inReq() > zero && inAct() >= inReq())
     {
         JLOG (j_.warn())
-            <<  "rippleCalc: DONE:"
+            <<  "cbcCalc: DONE:"
             << " inAct()=" << inAct()
             << " inReq()=" << inReq();
     }
@@ -67,7 +67,7 @@ void PathState::reset(STAmount const& in, STAmount const& out)
     if (outAct() >= outReq())
     {
         JLOG (j_.warn())
-            << "rippleCalc: ALREADY DONE:"
+            << "cbcCalc: ALREADY DONE:"
             << " saOutAct=" << outAct()
             << " saOutReq=" << outReq();
     }
@@ -101,7 +101,7 @@ bool PathState::lessPriority (PathState const& lhs, PathState const& rhs)
 // - Currencies must be converted via an offer.
 // - A node names its output.
 
-// - A ripple nodes output issuer must be the node's account or the next node's
+// - A cbc nodes output issuer must be the node's account or the next node's
 //   account.
 // - Offers can only go directly to another offer if the currency and issuer are
 //   an exact match.
@@ -136,7 +136,7 @@ TER PathState::pushImpliedNodes (
     }
 
 
-    // For ripple, non-XRP, ensure the issuer is on at least one side of the
+    // For cbc, non-XRP, ensure the issuer is on at least one side of the
     // transaction.
     if (resultCode == tesSUCCESS
         && !isXRP(currency)
@@ -145,7 +145,7 @@ TER PathState::pushImpliedNodes (
         && account != issuer)
         // Current is not receiving own IOUs.
     {
-        // Need to ripple through issuer's account.
+        // Need to cbc through issuer's account.
         // Case "Implies an another node: (pushImpliedNodes)" in the document.
         // Intermediate account is the needed issuer.
         resultCode = pushNode (
@@ -179,7 +179,7 @@ TER PathState::pushNode (
 
     auto const& backNode = pathIsEmpty ? path::Node () : nodes_.back ();
 
-    // true, iff node is a ripple account. false, iff node is an offer node.
+    // true, iff node is a cbc account. false, iff node is an offer node.
     const bool hasAccount = (iType & STPathElement::typeAccount);
 
     // Is currency specified for the output of the current node?
@@ -272,12 +272,12 @@ TER PathState::pushNode (
             auto const& backNode = nodes_.back ();
             if (backNode.isAccount())
             {
-                auto sleRippleState = view().peek(
+                auto slecbcState = view().peek(
                     keylet::line(backNode.account_, node.account_, backNode.issue_.currency));
 
-                // A "RippleState" means a balance betweeen two accounts for a
+                // A "cbcState" means a balance betweeen two accounts for a
                 // specific currency.
-                if (!sleRippleState)
+                if (!slecbcState)
                 {
                     JLOG (j_.trace())
                             << "pushNode: No credit line between "
@@ -309,9 +309,9 @@ TER PathState::pushNode (
                         resultCode   = terNO_ACCOUNT;
                     }
                     else if ((sleBck->getFieldU32 (sfFlags) & lsfRequireAuth) &&
-                             !(sleRippleState->getFieldU32 (sfFlags) &
+                             !(slecbcState->getFieldU32 (sfFlags) &
                                   (bHigh ? lsfHighAuth : lsfLowAuth)) &&
-                             sleRippleState->getFieldAmount(sfBalance) == zero)
+                             slecbcState->getFieldAmount(sfBalance) == zero)
                     {
                         JLOG (j_.warn())
                                 << "pushNode: delay: can't receive IOUs from "
@@ -668,19 +668,19 @@ void PathState::checkFreeze()
     }
 }
 
-/** Check if a sequence of three accounts violates the no ripple constrains
+/** Check if a sequence of three accounts violates the no cbc constrains
     [first] -> [second] -> [third]
-    Disallowed if 'second' set no ripple on [first]->[second] and
+    Disallowed if 'second' set no cbc on [first]->[second] and
     [second]->[third]
 */
-TER PathState::checkNoRipple (
+TER PathState::checkNocbc (
     AccountID const& firstAccount,
     AccountID const& secondAccount,
     // This is the account whose constraints we are checking
     AccountID const& thirdAccount,
     Currency const& currency)
 {
-    // fetch the ripple lines into and out of this node
+    // fetch the cbc lines into and out of this node
     SLE::pointer sleIn = view().peek (
         keylet::line(firstAccount, secondAccount, currency));
     SLE::pointer sleOut = view().peek (
@@ -692,28 +692,28 @@ TER PathState::checkNoRipple (
     }
     else if (
         sleIn->getFieldU32 (sfFlags) &
-            ((secondAccount > firstAccount) ? lsfHighNoRipple : lsfLowNoRipple) &&
+            ((secondAccount > firstAccount) ? lsfHighNocbc : lsfLowNocbc) &&
         sleOut->getFieldU32 (sfFlags) &
-            ((secondAccount > thirdAccount) ? lsfHighNoRipple : lsfLowNoRipple))
+            ((secondAccount > thirdAccount) ? lsfHighNocbc : lsfLowNocbc))
     {
         JLOG (j_.info())
-            << "Path violates noRipple constraint between "
+            << "Path violates nocbc constraint between "
             << firstAccount << ", "
             << secondAccount << " and "
             << thirdAccount;
 
-        terStatus = terNO_RIPPLE;
+        terStatus = terNO_cbc;
     }
     return terStatus;
 }
 
-// Check a fully-expanded path to make sure it doesn't violate no-Ripple
+// Check a fully-expanded path to make sure it doesn't violate no-cbc
 // settings.
-TER PathState::checkNoRipple (
+TER PathState::checkNocbc (
     AccountID const& uDstAccountID,
     AccountID const& uSrcAccountID)
 {
-    // There must be at least one node for there to be two consecutive ripple
+    // There must be at least one node for there to be two consecutive cbc
     // lines.
     if (nodes_.size() == 0)
        return terStatus;
@@ -732,7 +732,7 @@ TER PathState::checkNoRipple (
             }
             else
             {
-                terStatus = checkNoRipple (
+                terStatus = checkNocbc (
                     uSrcAccountID, nodes_[0].account_, uDstAccountID,
                     nodes_[0].issue_.currency);
             }
@@ -752,7 +752,7 @@ TER PathState::checkNoRipple (
         }
         else
         {
-            terStatus = checkNoRipple (
+            terStatus = checkNocbc (
                 uSrcAccountID, nodes_[0].account_, nodes_[1].account_,
                 nodes_[0].issue_.currency);
             if (terStatus != tesSUCCESS)
@@ -773,7 +773,7 @@ TER PathState::checkNoRipple (
         }
         else
         {
-            terStatus = checkNoRipple (
+            terStatus = checkNocbc (
                 nodes_[s].account_, nodes_[s+1].account_,
                 uDstAccountID, nodes_[s].issue_.currency);
             if (tesSUCCESS != terStatus)
@@ -782,7 +782,7 @@ TER PathState::checkNoRipple (
     }
 
     // Loop through all nodes that have a prior node and successor nodes
-    // These are the nodes whose no ripple constraints could be violated
+    // These are the nodes whose no cbc constraints could be violated
     for (int i = 1; i < nodes_.size() - 1; ++i)
     {
         if (nodes_[i - 1].isAccount() &&
@@ -797,7 +797,7 @@ TER PathState::checkNoRipple (
                 terStatus = temBAD_PATH;
                 return terStatus;
             }
-            terStatus = checkNoRipple (
+            terStatus = checkNocbc (
                 nodes_[i-1].account_, nodes_[i].account_, nodes_[i+1].account_,
                 currencyID);
             if (terStatus != tesSUCCESS)
@@ -810,7 +810,7 @@ TER PathState::checkNoRipple (
             nodes_[i -1].issue_.account != nodes_[i].account_)
         { // offer -> account -> account
             auto const& currencyID = nodes_[i].issue_.currency;
-            terStatus = checkNoRipple (
+            terStatus = checkNocbc (
                 nodes_[i-1].issue_.account, nodes_[i].account_, nodes_[i+1].account_,
                 currencyID);
             if (terStatus != tesSUCCESS)
@@ -859,4 +859,4 @@ Json::Value PathState::getJson () const
     return jvPathState;
 }
 
-} // ripple
+} // cbc

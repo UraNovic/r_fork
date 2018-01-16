@@ -20,10 +20,10 @@
 #ifndef BEAST_INSIGHT_EVENT_H_INCLUDED
 #define BEAST_INSIGHT_EVENT_H_INCLUDED
 
-#include <ripple/beast/insight/Base.h>
-#include <ripple/beast/insight/EventImpl.h>
+#include <cbc/beast/insight/Base.h>
+#include <cbc/beast/insight/EventImpl.h>
 
-#include <ripple/beast/clock/chrono_util.h>
+#include <cbc/beast/clock/chrono_util.h>
 
 #include <chrono>
 #include <memory>

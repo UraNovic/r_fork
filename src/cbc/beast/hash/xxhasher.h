@@ -26,8 +26,8 @@
 
 #if ! BEAST_NO_XXHASH
 
-#include <ripple/beast/hash/endian.h>
-#include <ripple/beast/hash/impl/xxhash.h>
+#include <cbc/beast/hash/endian.h>
+#include <cbc/beast/hash/impl/xxhash.h>
 #include <type_traits>
 #include <cstddef>
 

@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,11 +18,11 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/app/paths/Pathfinder.h>
+#include <cbc/app/paths/Pathfinder.h>
 #include <test/jtx/paths.h>
-#include <ripple/protocol/JsonFields.h>
+#include <cbc/protocol/JsonFields.h>
 
-namespace ripple {
+namespace cbc {
 namespace test {
 namespace jtx {
 
@@ -37,7 +37,7 @@ paths::operator()(Env& env, JTx& jt) const
     auto const amount = amountFromJson(
         sfAmount, jv[jss::Amount]);
     Pathfinder pf (
-        std::make_shared<RippleLineCache>(env.current()),
+        std::make_shared<cbcLineCache>(env.current()),
             from, to, in_.currency, in_.account,
                 amount, boost::none, env.app());
     if (! pf.findPaths(depth_))
@@ -93,4 +93,4 @@ path::operator()(Env& env, JTx& jt) const
 
 } // jtx
 } // test
-} // ripple
+} // cbc

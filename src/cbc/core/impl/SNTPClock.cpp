@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,10 +18,10 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/core/impl/SNTPClock.h>
-#include <ripple/basics/Log.h>
-#include <ripple/basics/random.h>
-#include <ripple/beast/core/CurrentThreadName.h>
+#include <cbc/core/impl/SNTPClock.h>
+#include <cbc/basics/Log.h>
+#include <cbc/basics/random.h>
+#include <cbc/beast/core/CurrentThreadName.h>
 #include <boost/asio.hpp>
 #include <boost/optional.hpp>
 #include <cmath>
@@ -31,7 +31,7 @@
 #include <mutex>
 #include <thread>
 
-namespace ripple {
+namespace cbc {
 
 // #define SNTP_DEBUG
 
@@ -200,7 +200,7 @@ public:
 
     void doRun ()
     {
-        beast::setCurrentThreadName("rippled: SNTPClock");
+        beast::setCurrentThreadName("cbcd: SNTPClock");
         io_service_.run();
     }
 
@@ -481,4 +481,4 @@ make_SNTPClock (beast::Journal j)
     return std::make_unique<SNTPClientImp>(j);
 }
 
-} // ripple
+} // cbc

@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -17,15 +17,15 @@
 */
 //==============================================================================
 
-#ifndef RIPPLE_TX_SETREGULARKEY_H_INCLUDED
-#define RIPPLE_TX_SETREGULARKEY_H_INCLUDED
+#ifndef cbc_TX_SETREGULARKEY_H_INCLUDED
+#define cbc_TX_SETREGULARKEY_H_INCLUDED
 
-#include <ripple/app/tx/impl/Transactor.h>
-#include <ripple/basics/Log.h>
-#include <ripple/protocol/TxFlags.h>
-#include <ripple/protocol/types.h>
+#include <cbc/app/tx/impl/Transactor.h>
+#include <cbc/basics/Log.h>
+#include <cbc/protocol/TxFlags.h>
+#include <cbc/protocol/types.h>
 
-namespace ripple {
+namespace cbc {
 
 class SetRegularKey
     : public Transactor
@@ -55,7 +55,7 @@ public:
     TER doApply () override;
 };
 
-} // ripple
+} // cbc
 
 #endif
 

@@ -21,7 +21,7 @@
 #include "../../BeastConfig.h"
 #endif
 
-#include <ripple/beast/net/IPAddressV6.h>
+#include <cbc/beast/net/IPAddressV6.h>
 
 namespace beast {
 namespace IP {

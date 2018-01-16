@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -17,11 +17,11 @@
 */
 //==============================================================================
 
-#include <ripple/core/impl/Workers.h>
-#include <ripple/beast/core/CurrentThreadName.h>
+#include <cbc/core/impl/Workers.h>
+#include <cbc/beast/core/CurrentThreadName.h>
 #include <cassert>
 
-namespace ripple {
+namespace cbc {
 
 Workers::Workers (
     Callback& callback,
@@ -251,4 +251,4 @@ void Workers::Worker::run ()
     } while (! shouldExit);
 }
 
-} // ripple
+} // cbc

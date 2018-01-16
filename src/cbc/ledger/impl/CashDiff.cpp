@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2016 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2016 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,14 +18,14 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/ledger/CashDiff.h>
-#include <ripple/ledger/detail/ApplyStateTable.h>
-#include <ripple/protocol/st.h>
+#include <cbc/ledger/CashDiff.h>
+#include <cbc/ledger/detail/ApplyStateTable.h>
+#include <cbc/protocol/st.h>
 #include <boost/container/static_vector.hpp>
 #include <cassert>
 #include <cstdlib>                                  // std::abs()
 
-namespace ripple {
+namespace cbc {
 namespace detail {
 
 // Data structure that summarize cash changes in a single ApplyStateTable.
@@ -165,7 +165,7 @@ static bool getBasicCashFlow (CashSummary& result, bool isDelete,
                 std::make_pair (prev[sfAccount], XRPAmount {0}));
             return true;
 
-        case ltRIPPLE_STATE:
+        case ltcbc_STATE:
             result.trustDeletions.push_back(
                 std::make_pair (
                     std::make_tuple (
@@ -207,7 +207,7 @@ static bool getBasicCashFlow (CashSummary& result, bool isDelete,
                     std::make_pair (cur[sfAccount], curXrp));
             return true;
         }
-        case ltRIPPLE_STATE:
+        case ltcbc_STATE:
         {
             auto const curBalance = cur[sfBalance];
             if (!before || (*before)[sfBalance] != curBalance)
@@ -730,4 +730,4 @@ bool diffIsDust (STAmount const& v1, STAmount const& v2, std::uint8_t e10)
     return ratioExp >= e10;
 };
 
-} // ripple
+} // cbc

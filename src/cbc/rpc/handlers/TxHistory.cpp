@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012-2014 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012-2014 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,19 +18,19 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/app/main/Application.h>
-#include <ripple/app/misc/Transaction.h>
-#include <ripple/core/DatabaseCon.h>
-#include <ripple/core/SociDB.h>
-#include <ripple/net/RPCErr.h>
-#include <ripple/protocol/JsonFields.h>
-#include <ripple/protocol/ErrorCodes.h>
-#include <ripple/resource/Fees.h>
-#include <ripple/rpc/Context.h>
-#include <ripple/rpc/Role.h>
+#include <cbc/app/main/Application.h>
+#include <cbc/app/misc/Transaction.h>
+#include <cbc/core/DatabaseCon.h>
+#include <cbc/core/SociDB.h>
+#include <cbc/net/RPCErr.h>
+#include <cbc/protocol/JsonFields.h>
+#include <cbc/protocol/ErrorCodes.h>
+#include <cbc/resource/Fees.h>
+#include <cbc/rpc/Context.h>
+#include <cbc/rpc/Role.h>
 #include <boost/format.hpp>
 
-namespace ripple {
+namespace cbc {
 
 // {
 //   start: <index>
@@ -91,4 +91,4 @@ Json::Value doTxHistory (RPC::Context& context)
     return obj;
 }
 
-} // ripple
+} // cbc

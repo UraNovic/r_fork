@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,22 +18,22 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/app/main/Application.h>
-#include <ripple/app/misc/LoadFeeTrack.h>
-#include <ripple/app/tx/apply.h>
-#include <ripple/app/tx/impl/Transactor.h>
-#include <ripple/app/tx/impl/SignerEntries.h>
-#include <ripple/basics/contract.h>
-#include <ripple/basics/Log.h>
-#include <ripple/core/Config.h>
-#include <ripple/json/to_string.h>
-#include <ripple/ledger/View.h>
-#include <ripple/protocol/Feature.h>
-#include <ripple/protocol/Indexes.h>
-#include <ripple/protocol/types.h>
-#include <ripple/protocol/Protocol.h>
+#include <cbc/app/main/Application.h>
+#include <cbc/app/misc/LoadFeeTrack.h>
+#include <cbc/app/tx/apply.h>
+#include <cbc/app/tx/impl/Transactor.h>
+#include <cbc/app/tx/impl/SignerEntries.h>
+#include <cbc/basics/contract.h>
+#include <cbc/basics/Log.h>
+#include <cbc/core/Config.h>
+#include <cbc/json/to_string.h>
+#include <cbc/ledger/View.h>
+#include <cbc/protocol/Feature.h>
+#include <cbc/protocol/Indexes.h>
+#include <cbc/protocol/types.h>
+#include <cbc/protocol/Protocol.h>
 
-namespace ripple {
+namespace cbc {
 
 /** Performs early sanity checks on the txid */
 TER
@@ -172,7 +172,7 @@ Transactor::checkFee (PreclaimContext const& ctx, std::uint64_t baseFee)
     if (!isLegalAmount (feePaid) || feePaid < beast::zero)
         return temBAD_FEE;
 
-    auto const feeDue = ripple::calculateFee(ctx.app,
+    auto const feeDue = cbc::calculateFee(ctx.app,
         baseFee, ctx.view.fees(), ctx.flags);
 
     // Only check fee is sufficient when the ledger is open.

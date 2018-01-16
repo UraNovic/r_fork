@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -17,18 +17,18 @@
 */
 //==============================================================================
 
-#ifndef RIPPLE_APP_PATHS_IMPL_STRANDFLOW_H_INCLUDED
-#define RIPPLE_APP_PATHS_IMPL_STRANDFLOW_H_INCLUDED
+#ifndef cbc_APP_PATHS_IMPL_STRANDFLOW_H_INCLUDED
+#define cbc_APP_PATHS_IMPL_STRANDFLOW_H_INCLUDED
 
 #include <BeastConfig.h>
-#include <ripple/app/paths/Credit.h>
-#include <ripple/app/paths/Flow.h>
-#include <ripple/app/paths/impl/AmountSpec.h>
-#include <ripple/app/paths/impl/FlowDebugInfo.h>
-#include <ripple/app/paths/impl/Steps.h>
-#include <ripple/basics/Log.h>
-#include <ripple/protocol/IOUAmount.h>
-#include <ripple/protocol/XRPAmount.h>
+#include <cbc/app/paths/Credit.h>
+#include <cbc/app/paths/Flow.h>
+#include <cbc/app/paths/impl/AmountSpec.h>
+#include <cbc/app/paths/impl/FlowDebugInfo.h>
+#include <cbc/app/paths/impl/Steps.h>
+#include <cbc/basics/Log.h>
+#include <cbc/protocol/IOUAmount.h>
+#include <cbc/protocol/XRPAmount.h>
 
 #include <boost/container/flat_set.hpp>
 
@@ -37,7 +37,7 @@
 #include <numeric>
 #include <sstream>
 
-namespace ripple {
+namespace cbc {
 
 /** Result of flow() execution of a single Strand. */
 template<class TInAmt, class TOutAmt>
@@ -74,7 +74,7 @@ struct StrandResult
    Request `out` amount from a strand
 
    @param baseView Trust lines and balances
-   @param strand Steps of Accounts to ripple through and offer books to use
+   @param strand Steps of Accounts to cbc through and offer books to use
    @param maxIn Max amount of input allowed
    @param out Amount of output requested from the strand
    @param j Journal to write log messages to
@@ -368,7 +368,7 @@ qualityUpperBound(ReadView const& v, Strand const& strand)
    from least expensive to most expensive
 
    @param baseView Trust lines and balances
-   @param strands Each strand contains the steps of accounts to ripple through
+   @param strands Each strand contains the steps of accounts to cbc through
                   and offer books to use
    @param outReq Amount of output requested from the strand
    @param partialPayment If true allow less than the full payment
@@ -602,6 +602,6 @@ flow (PaymentSandbox const& baseView,
     return {actualIn, actualOut, std::move (sb), std::move(ofrsToRmOnFail)};
 }
 
-} // ripple
+} // cbc
 
 #endif

@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2014 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2014 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,18 +18,18 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/app/tx/impl/SetSignerList.h>
-#include <ripple/app/ledger/Ledger.h>
-#include <ripple/protocol/Feature.h>
-#include <ripple/protocol/STObject.h>
-#include <ripple/protocol/STArray.h>
-#include <ripple/protocol/STTx.h>
-#include <ripple/protocol/Indexes.h>
-#include <ripple/basics/Log.h>
+#include <cbc/app/tx/impl/SetSignerList.h>
+#include <cbc/app/ledger/Ledger.h>
+#include <cbc/protocol/Feature.h>
+#include <cbc/protocol/STObject.h>
+#include <cbc/protocol/STArray.h>
+#include <cbc/protocol/STTx.h>
+#include <cbc/protocol/Indexes.h>
+#include <cbc/basics/Log.h>
 #include <cstdint>
 #include <algorithm>
 
-namespace ripple {
+namespace cbc {
 
 // We're prepared for there to be multiple signer lists in the future,
 // but we don't need them yet.  So for the time being we're manually
@@ -349,4 +349,4 @@ SetSignerList::ownerCountDelta (std::size_t entryCount)
     return 2 + static_cast<int>(entryCount);
 }
 
-} // namespace ripple
+} // namespace cbc

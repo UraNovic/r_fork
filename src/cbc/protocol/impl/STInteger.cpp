@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,15 +18,15 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/basics/Log.h>
-#include <ripple/basics/StringUtilities.h>
-#include <ripple/protocol/LedgerFormats.h>
-#include <ripple/protocol/STInteger.h>
-#include <ripple/protocol/TxFormats.h>
-#include <ripple/protocol/TER.h>
-#include <ripple/beast/core/LexicalCast.h>
+#include <cbc/basics/Log.h>
+#include <cbc/basics/StringUtilities.h>
+#include <cbc/protocol/LedgerFormats.h>
+#include <cbc/protocol/STInteger.h>
+#include <cbc/protocol/TxFormats.h>
+#include <cbc/protocol/TER.h>
+#include <cbc/beast/core/LexicalCast.h>
 
-namespace ripple {
+namespace cbc {
 
 template<>
 STInteger<unsigned char>::STInteger(SerialIter& sit, SField const& name)
@@ -200,4 +200,4 @@ STUInt64::getJson (int) const
     return strHex (value_);
 }
 
-} // ripple
+} // cbc

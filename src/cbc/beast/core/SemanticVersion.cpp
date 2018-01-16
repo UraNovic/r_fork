@@ -17,7 +17,7 @@
 */
 //==============================================================================
 
-#include <ripple/beast/core/LexicalCast.h>
+#include <cbc/beast/core/LexicalCast.h>
 
 #include <algorithm>
 #include <cassert>

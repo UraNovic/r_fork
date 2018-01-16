@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2016 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2016 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -19,10 +19,10 @@
 
 #include <BeastConfig.h>
 #include <test/jtx/quality.h>
-#include <ripple/protocol/SField.h>
-#include <ripple/protocol/Quality.h>
+#include <cbc/protocol/SField.h>
+#include <cbc/protocol/Quality.h>
 
-namespace ripple {
+namespace cbc {
 namespace test {
 namespace jtx {
 
@@ -70,4 +70,4 @@ qualityOutPercent::operator()(Env&, JTx& jt) const
 
 } // jtx
 } // test
-} // ripple
+} // cbc

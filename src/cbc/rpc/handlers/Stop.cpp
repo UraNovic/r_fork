@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012-2014 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012-2014 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,12 +18,12 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/app/main/Application.h>
-#include <ripple/json/json_value.h>
-#include <ripple/rpc/impl/Handler.h>
-#include <ripple/basics/make_lock.h>
+#include <cbc/app/main/Application.h>
+#include <cbc/json/json_value.h>
+#include <cbc/rpc/impl/Handler.h>
+#include <cbc/basics/make_lock.h>
 
-namespace ripple {
+namespace cbc {
 
 namespace RPC {
 struct Context;
@@ -37,4 +37,4 @@ Json::Value doStop (RPC::Context& context)
     return RPC::makeObjectValue (systemName () + " server stopping");
 }
 
-} // ripple
+} // cbc

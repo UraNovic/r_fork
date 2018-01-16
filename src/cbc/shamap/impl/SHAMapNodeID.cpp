@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,15 +18,15 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/shamap/SHAMapNodeID.h>
-#include <ripple/crypto/csprng.h>
-#include <ripple/basics/Log.h>
-#include <ripple/beast/core/LexicalCast.h>
+#include <cbc/shamap/SHAMapNodeID.h>
+#include <cbc/crypto/csprng.h>
+#include <cbc/basics/Log.h>
+#include <cbc/beast/core/LexicalCast.h>
 #include <boost/format.hpp>
 #include <cassert>
 #include <cstring>
 
-namespace ripple {
+namespace cbc {
 
 uint256 const&
 SHAMapNodeID::Masks (int depth)
@@ -113,7 +113,7 @@ SHAMapNodeID SHAMapNodeID::getChildNodeID (int m) const
 // Which branch would contain the specified hash
 int SHAMapNodeID::selectBranch (uint256 const& hash) const
 {
-#if RIPPLE_VERIFY_NODEOBJECT_KEYS
+#if cbc_VERIFY_NODEOBJECT_KEYS
 
     if (mDepth >= 64)
     {
@@ -168,4 +168,4 @@ void SHAMapNodeID::dump (beast::Journal journal) const
         getString ();
 }
 
-} // ripple
+} // cbc

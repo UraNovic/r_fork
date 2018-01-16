@@ -1,7 +1,7 @@
 //------------  ------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2015 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2015 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,11 +18,11 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/ledger/BookDirs.h>
-#include <ripple/ledger/View.h>
-#include <ripple/protocol/Indexes.h>
+#include <cbc/ledger/BookDirs.h>
+#include <cbc/ledger/View.h>
+#include <cbc/protocol/Indexes.h>
 
-namespace ripple {
+namespace cbc {
 
 BookDirs::BookDirs(ReadView const& view, Book const& book)
     : view_(&view)
@@ -122,4 +122,4 @@ BookDirs::const_iterator::operator++(int)
     return tmp;
 }
 
-} // ripple
+} // cbc

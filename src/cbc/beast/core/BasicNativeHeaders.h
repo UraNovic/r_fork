@@ -24,7 +24,7 @@
 #ifndef BEAST_MODULE_CORE_NATIVE_BASICNATIVEHEADERS_H_INCLUDED
 #define BEAST_MODULE_CORE_NATIVE_BASICNATIVEHEADERS_H_INCLUDED
 
-#include <ripple/beast/core/Config.h>
+#include <cbc/beast/core/Config.h>
 
 #undef T
 

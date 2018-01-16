@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012-2014 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012-2014 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,32 +18,32 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/rpc/impl/TransactionSign.h>
-#include <ripple/app/ledger/LedgerMaster.h>
-#include <ripple/app/ledger/OpenLedger.h>
-#include <ripple/app/main/Application.h>
-#include <ripple/app/misc/LoadFeeTrack.h>
-#include <ripple/app/misc/Transaction.h>
-#include <ripple/app/misc/TxQ.h>
-#include <ripple/app/paths/Pathfinder.h>
-#include <ripple/app/tx/apply.h>              // Validity::Valid
-#include <ripple/basics/Log.h>
-#include <ripple/basics/mulDiv.h>
-#include <ripple/json/json_writer.h>
-#include <ripple/net/RPCErr.h>
-#include <ripple/protocol/Sign.h>
-#include <ripple/protocol/ErrorCodes.h>
-#include <ripple/protocol/Feature.h>
-#include <ripple/protocol/STAccount.h>
-#include <ripple/protocol/STParsedJSON.h>
-#include <ripple/protocol/TxFlags.h>
-#include <ripple/rpc/impl/LegacyPathFind.h>
-#include <ripple/rpc/impl/RPCHelpers.h>
-#include <ripple/rpc/impl/Tuning.h>
+#include <cbc/rpc/impl/TransactionSign.h>
+#include <cbc/app/ledger/LedgerMaster.h>
+#include <cbc/app/ledger/OpenLedger.h>
+#include <cbc/app/main/Application.h>
+#include <cbc/app/misc/LoadFeeTrack.h>
+#include <cbc/app/misc/Transaction.h>
+#include <cbc/app/misc/TxQ.h>
+#include <cbc/app/paths/Pathfinder.h>
+#include <cbc/app/tx/apply.h>              // Validity::Valid
+#include <cbc/basics/Log.h>
+#include <cbc/basics/mulDiv.h>
+#include <cbc/json/json_writer.h>
+#include <cbc/net/RPCErr.h>
+#include <cbc/protocol/Sign.h>
+#include <cbc/protocol/ErrorCodes.h>
+#include <cbc/protocol/Feature.h>
+#include <cbc/protocol/STAccount.h>
+#include <cbc/protocol/STParsedJSON.h>
+#include <cbc/protocol/TxFlags.h>
+#include <cbc/rpc/impl/LegacyPathFind.h>
+#include <cbc/rpc/impl/RPCHelpers.h>
+#include <cbc/rpc/impl/Tuning.h>
 #include <algorithm>
 #include <iterator>
 
-namespace ripple {
+namespace cbc {
 namespace RPC {
 namespace detail {
 
@@ -206,7 +206,7 @@ static Json::Value checkPayment(
             STPathSet result;
             if (ledger)
             {
-                Pathfinder pf(std::make_shared<RippleLineCache>(ledger),
+                Pathfinder pf(std::make_shared<cbcLineCache>(ledger),
                     srcAddressID, *dstAccountID, sendMax.issue().currency,
                         sendMax.issue().account, amount, boost::none, app);
                 if (pf.findPaths(app.config().PATH_SEARCH_OLD))
@@ -514,7 +514,7 @@ transactionPreProcessImpl (
         Serializer s = buildMultiSigningData (*stpTrans,
             signingArgs.getSigner ());
 
-        auto multisig = ripple::sign (
+        auto multisig = cbc::sign (
             keypair.first,
             keypair.second,
             s.slice());
@@ -1212,4 +1212,4 @@ Json::Value transactionSubmitMultiSigned (
 }
 
 } // RPC
-} // ripple
+} // cbc

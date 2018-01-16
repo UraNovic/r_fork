@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-  This file is part of rippled: https://github.com/ripple/rippled
-  Copyright (c) 2012-2016 Ripple Labs Inc.
+  This file is part of cbcd: https://github.com/cbc/cbcd
+  Copyright (c) 2012-2016 cbc Labs Inc.
 
   Permission to use, copy, modify, and/or distribute this software for any
   purpose  with  or without fee is hereby granted, provided that the above
@@ -17,10 +17,10 @@
 */
 //==============================================================================
 
-#include <ripple/app/tx/impl/InvariantCheck.h>
-#include <ripple/basics/Log.h>
+#include <cbc/app/tx/impl/InvariantCheck.h>
+#include <cbc/basics/Log.h>
 
-namespace ripple {
+namespace cbc {
 
 void
 XRPNotCreated::visitEntry(
@@ -251,7 +251,7 @@ LedgerEntryTypesMatch::visitEntry(
         {
         case ltACCOUNT_ROOT:
         case ltDIR_NODE:
-        case ltRIPPLE_STATE:
+        case ltcbc_STATE:
         case ltTICKET:
         case ltSIGNER_LIST:
         case ltOFFER:
@@ -296,7 +296,7 @@ NoXRPTrustLines::visitEntry(
     std::shared_ptr <SLE const> const&,
     std::shared_ptr <SLE const> const& after)
 {
-    if (after && after->getType() == ltRIPPLE_STATE)
+    if (after && after->getType() == ltcbc_STATE)
     {
         // checking the issue directly here instead of
         // relying on .native() just in case native somehow
@@ -317,5 +317,5 @@ NoXRPTrustLines::finalize(STTx const&, TER, beast::Journal const& j)
     return false;
 }
 
-}  // ripple
+}  // cbc
 

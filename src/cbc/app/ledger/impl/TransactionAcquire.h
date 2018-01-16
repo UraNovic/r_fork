@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -17,14 +17,14 @@
 */
 //==============================================================================
 
-#ifndef RIPPLE_APP_LEDGER_TRANSACTIONACQUIRE_H_INCLUDED
-#define RIPPLE_APP_LEDGER_TRANSACTIONACQUIRE_H_INCLUDED
+#ifndef cbc_APP_LEDGER_TRANSACTIONACQUIRE_H_INCLUDED
+#define cbc_APP_LEDGER_TRANSACTIONACQUIRE_H_INCLUDED
 
-#include <ripple/app/main/Application.h>
-#include <ripple/overlay/PeerSet.h>
-#include <ripple/shamap/SHAMap.h>
+#include <cbc/app/main/Application.h>
+#include <cbc/overlay/PeerSet.h>
+#include <cbc/shamap/SHAMap.h>
 
-namespace ripple {
+namespace cbc {
 
 // VFALCO TODO rename to PeerTxRequest
 // A transaction set we are trying to acquire
@@ -79,6 +79,6 @@ private:
     std::weak_ptr<PeerSet> pmDowncast () override;
 };
 
-} // ripple
+} // cbc
 
 #endif

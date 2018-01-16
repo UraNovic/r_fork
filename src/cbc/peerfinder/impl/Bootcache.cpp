@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,12 +18,12 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/peerfinder/impl/Bootcache.h>
-#include <ripple/peerfinder/impl/iosformat.h>
-#include <ripple/peerfinder/impl/Tuning.h>
-#include <ripple/basics/Log.h>
+#include <cbc/peerfinder/impl/Bootcache.h>
+#include <cbc/peerfinder/impl/iosformat.h>
+#include <cbc/peerfinder/impl/Tuning.h>
+#include <cbc/basics/Log.h>
 
-namespace ripple {
+namespace cbc {
 namespace PeerFinder {
 
 Bootcache::Bootcache (

@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -17,19 +17,19 @@
 */
 //==============================================================================
 
-#ifndef RIPPLE_APP_PATHS_IMPL_PAYSTEPS_H_INCLUDED
-#define RIPPLE_APP_PATHS_IMPL_PAYSTEPS_H_INCLUDED
+#ifndef cbc_APP_PATHS_IMPL_PAYSTEPS_H_INCLUDED
+#define cbc_APP_PATHS_IMPL_PAYSTEPS_H_INCLUDED
 
-#include <ripple/app/paths/impl/AmountSpec.h>
-#include <ripple/basics/Log.h>
-#include <ripple/protocol/Quality.h>
-#include <ripple/protocol/STLedgerEntry.h>
-#include <ripple/protocol/TER.h>
+#include <cbc/app/paths/impl/AmountSpec.h>
+#include <cbc/basics/Log.h>
+#include <cbc/protocol/Quality.h>
+#include <cbc/protocol/STLedgerEntry.h>
+#include <cbc/protocol/TER.h>
 
 #include <boost/container/flat_set.hpp>
 #include <boost/optional.hpp>
 
-namespace ripple {
+namespace cbc {
 class PaymentSandbox;
 class ReadView;
 class ApplyView;
@@ -122,7 +122,7 @@ public:
 
     /**
        If this step is DirectStepI (IOU->IOU direct step), return the src
-       account. This is needed for checkNoRipple.
+       account. This is needed for checkNocbc.
     */
     virtual boost::optional<AccountID>
     directStepSrcAcct () const
@@ -291,7 +291,7 @@ bool operator==(Strand const& lhs, Strand const& rhs)
    @param sendMax Optional asset to send.
    @param path Liquidity sources to use for this strand of the payment. The path
                contains an ordered collection of the offer books to use and
-               accounts to ripple through.
+               accounts to cbc through.
    @return error code and normalized path
 */
 std::pair<TER, STPath>
@@ -316,7 +316,7 @@ normalizePath(AccountID const& src,
    @param sendMaxIssue Optional asset to send.
    @param path Liquidity sources to use for this strand of the payment. The path
                contains an ordered collection of the offer books to use and
-               accounts to ripple through.
+               accounts to cbc through.
    @param ownerPaysTransferFee false -> charge sender; true -> charge offer owner
    @param offerCrossing false -> payment; true -> offer crossing
    @param j Journal for logging messages
@@ -351,7 +351,7 @@ toStrand (
    @param sendMax Optional asset to send.
    @param paths Paths to use to fullfill the payment. Each path in the pathset
                 contains an ordered collection of the offer books to use and
-                accounts to ripple through.
+                accounts to cbc through.
    @param addDefaultPath Determines if the default path should be included
    @param ownerPaysTransferFee false -> charge sender; true -> charge offer owner
    @param offerCrossing false -> payment; true -> offer crossing
@@ -466,7 +466,7 @@ struct StrandContext
     bool const offerCrossing;          ///< true if offer crossing, not payment
     bool const isDefaultPath;          ///< true if Strand is default path
     size_t const strandSize;           ///< Length of Strand
-    /** The previous step in the strand. Needed to check the no ripple
+    /** The previous step in the strand. Needed to check the no cbc
         constraint
      */
     Step const* const prevStep = nullptr;
@@ -511,7 +511,7 @@ bool directStepEqual (Step const& step,
 
 bool xrpEndpointStepEqual (Step const& step, AccountID const& acc);
 
-bool bookStepEqual (Step const& step, ripple::Book const& book);
+bool bookStepEqual (Step const& step, cbc::Book const& book);
 }
 
 std::pair<TER, std::unique_ptr<Step>>
@@ -547,6 +547,6 @@ bool
 isDirectXrpToXrp(Strand const& strand);
 /// @endcond
 
-} // ripple
+} // cbc
 
 #endif

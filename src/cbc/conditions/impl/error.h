@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2016 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2016 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -17,13 +17,13 @@
 */
 //==============================================================================
 
-#ifndef RIPPLE_CONDITIONS_ERROR_H
-#define RIPPLE_CONDITIONS_ERROR_H
+#ifndef cbc_CONDITIONS_ERROR_H
+#define cbc_CONDITIONS_ERROR_H
 
 #include <system_error>
 #include <string>
 
-namespace ripple {
+namespace cbc {
 namespace cryptoconditions {
 
 enum class error
@@ -51,13 +51,13 @@ std::error_code
 make_error_code(error ev);
 
 } // cryptoconditions
-} // ripple
+} // cbc
 
 namespace std
 {
 
 template<>
-struct is_error_code_enum<ripple::cryptoconditions::error>
+struct is_error_code_enum<cbc::cryptoconditions::error>
 {
     static bool const value = true;
 };

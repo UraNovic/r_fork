@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,13 +18,13 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/protocol/STValidation.h>
-#include <ripple/protocol/HashPrefix.h>
-#include <ripple/basics/contract.h>
-#include <ripple/basics/Log.h>
-#include <ripple/json/to_string.h>
+#include <cbc/protocol/STValidation.h>
+#include <cbc/protocol/HashPrefix.h>
+#include <cbc/basics/contract.h>
+#include <cbc/basics/Log.h>
+#include <cbc/json/to_string.h>
 
-namespace ripple {
+namespace cbc {
 
 STValidation::STValidation (SerialIter& sit, bool checkSignature)
     : STObject (getFormat (), sit, sfValidation)
@@ -170,4 +170,4 @@ SOTemplate const& STValidation::getFormat ()
     return holder.format;
 }
 
-} // ripple
+} // cbc

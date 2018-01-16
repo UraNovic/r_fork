@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,17 +18,17 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/app/tx/impl/CreateOffer.h>
-#include <ripple/app/ledger/OrderBookDB.h>
-#include <ripple/app/paths/Flow.h>
-#include <ripple/ledger/CashDiff.h>
-#include <ripple/ledger/PaymentSandbox.h>
-#include <ripple/protocol/Feature.h>
-#include <ripple/protocol/st.h>
-#include <ripple/protocol/Quality.h>
-#include <ripple/beast/utility/WrappedSink.h>
+#include <cbc/app/tx/impl/CreateOffer.h>
+#include <cbc/app/ledger/OrderBookDB.h>
+#include <cbc/app/paths/Flow.h>
+#include <cbc/ledger/CashDiff.h>
+#include <cbc/ledger/PaymentSandbox.h>
+#include <cbc/protocol/Feature.h>
+#include <cbc/protocol/st.h>
+#include <cbc/protocol/Quality.h>
+#include <cbc/beast/utility/WrappedSink.h>
 
-namespace ripple {
+namespace cbc {
 
 XRPAmount
 CreateOffer::calculateMaxSpend(STTx const& tx)
@@ -322,7 +322,7 @@ CreateOffer::reachedOfferCrossingLimit (Taker const& taker) const
         taker.get_direct_crossings () +
         (2 * taker.get_bridge_crossings ());
 
-    // The crossing limit is part of the Ripple protocol and
+    // The crossing limit is part of the cbc protocol and
     // changing it is a transaction-processing change.
     return crossings >= 850;
 }

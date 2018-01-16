@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2016 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2016 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,10 +18,10 @@
 //==============================================================================
 #include <BeastConfig.h>
 #include <test/jtx/JSONRPCClient.h>
-#include <ripple/json/json_reader.h>
-#include <ripple/json/to_string.h>
-#include <ripple/protocol/JsonFields.h>
-#include <ripple/server/Port.h>
+#include <cbc/json/json_reader.h>
+#include <cbc/json/to_string.h>
+#include <cbc/protocol/JsonFields.h>
+#include <cbc/server/Port.h>
 #include <beast/http/message.hpp>
 #include <beast/http/dynamic_body.hpp>
 #include <beast/http/string_body.hpp>
@@ -30,7 +30,7 @@
 #include <boost/asio.hpp>
 #include <string>
 
-namespace ripple {
+namespace cbc {
 namespace test {
 
 class JSONRPCClient : public AbstractClient
@@ -120,7 +120,7 @@ public:
             if (rpc_version_ == 2)
             {
                 jr[jss::jsonrpc] = "2.0";
-                jr[jss::ripplerpc] = "2.0";
+                jr[jss::cbcrpc] = "2.0";
                 jr[jss::id] = 5;
             }
             if(params)
@@ -159,4 +159,4 @@ makeJSONRPCClient(Config const& cfg, unsigned rpc_version)
 }
 
 } // test
-} // ripple
+} // cbc

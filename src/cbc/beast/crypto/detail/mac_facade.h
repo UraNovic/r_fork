@@ -20,8 +20,8 @@
 #ifndef BEAST_CRYPTO_MAC_FACADE_H_INCLUDED
 #define BEAST_CRYPTO_MAC_FACADE_H_INCLUDED
 
-#include <ripple/beast/crypto/secure_erase.h>
-#include <ripple/beast/hash/endian.h>
+#include <cbc/beast/crypto/secure_erase.h>
+#include <cbc/beast/hash/endian.h>
 #include <type_traits>
 #include <array>
 

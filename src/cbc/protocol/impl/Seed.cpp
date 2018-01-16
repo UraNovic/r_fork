@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,22 +18,22 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/protocol/Seed.h>
-#include <ripple/basics/Buffer.h>
-#include <ripple/protocol/AccountID.h>
-#include <ripple/protocol/PublicKey.h>
-#include <ripple/protocol/SecretKey.h>
-#include <ripple/protocol/digest.h>
-#include <ripple/basics/contract.h>
-#include <ripple/crypto/RFC1751.h>
-#include <ripple/crypto/csprng.h>
-#include <ripple/beast/crypto/secure_erase.h>
-#include <ripple/beast/utility/rngfill.h>
+#include <cbc/protocol/Seed.h>
+#include <cbc/basics/Buffer.h>
+#include <cbc/protocol/AccountID.h>
+#include <cbc/protocol/PublicKey.h>
+#include <cbc/protocol/SecretKey.h>
+#include <cbc/protocol/digest.h>
+#include <cbc/basics/contract.h>
+#include <cbc/crypto/RFC1751.h>
+#include <cbc/crypto/csprng.h>
+#include <cbc/beast/crypto/secure_erase.h>
+#include <cbc/beast/utility/rngfill.h>
 #include <algorithm>
 #include <cstring>
 #include <iterator>
 
-namespace ripple {
+namespace cbc {
 
 Seed::~Seed()
 {

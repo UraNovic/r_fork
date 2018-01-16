@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,19 +18,19 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/app/tx/impl/Escrow.h>
-#include <ripple/app/misc/HashRouter.h>
-#include <ripple/basics/chrono.h>
-#include <ripple/basics/Log.h>
-#include <ripple/conditions/Condition.h>
-#include <ripple/conditions/Fulfillment.h>
-#include <ripple/protocol/digest.h>
-#include <ripple/protocol/st.h>
-#include <ripple/protocol/Feature.h>
-#include <ripple/protocol/Indexes.h>
-#include <ripple/protocol/TxFlags.h>
-#include <ripple/protocol/XRPAmount.h>
-#include <ripple/ledger/View.h>
+#include <cbc/app/tx/impl/Escrow.h>
+#include <cbc/app/misc/HashRouter.h>
+#include <cbc/basics/chrono.h>
+#include <cbc/basics/Log.h>
+#include <cbc/conditions/Condition.h>
+#include <cbc/conditions/Fulfillment.h>
+#include <cbc/protocol/digest.h>
+#include <cbc/protocol/st.h>
+#include <cbc/protocol/Feature.h>
+#include <cbc/protocol/Indexes.h>
+#include <cbc/protocol/TxFlags.h>
+#include <cbc/protocol/XRPAmount.h>
+#include <cbc/ledger/View.h>
 
 // During an EscrowFinish, the transaction must specify both
 // a condition and a fulfillment. We track whether that
@@ -38,7 +38,7 @@
 #define SF_CF_INVALID  SF_PRIVATE5
 #define SF_CF_VALID    SF_PRIVATE6
 
-namespace ripple {
+namespace cbc {
 
 /*
     Escrow allows an account holder to sequester any amount
@@ -75,7 +75,7 @@ namespace ripple {
 
             sfCancelAfter
                 If present, escrow may be canceled after the
-                specified time (seconds after the Ripple epoch).
+                specified time (seconds after the cbc epoch).
 
             sfFinishAfter
                 If present, must be prior to sfCancelAfter.
@@ -166,7 +166,7 @@ EscrowCreate::preflight (PreflightContext const& ctx)
 
     if (auto const cb = ctx.tx[~sfCondition])
     {
-        using namespace ripple::cryptoconditions;
+        using namespace cbc::cryptoconditions;
 
         std::error_code ec;
 
@@ -291,7 +291,7 @@ static
 bool
 checkCondition (Slice f, Slice c)
 {
-    using namespace ripple::cryptoconditions;
+    using namespace cbc::cryptoconditions;
 
     std::error_code ec;
 
@@ -548,5 +548,5 @@ EscrowCancel::doApply()
     return tesSUCCESS;
 }
 
-} // ripple
+} // cbc
 

@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -20,13 +20,13 @@
 #include <BeastConfig.h>
 #include <test/jtx/multisign.h>
 #include <test/jtx/utility.h>
-#include <ripple/protocol/HashPrefix.h>
-#include <ripple/protocol/JsonFields.h>
-#include <ripple/protocol/Sign.h>
-#include <ripple/protocol/types.h>
-#include <ripple/basics/contract.h>
+#include <cbc/protocol/HashPrefix.h>
+#include <cbc/protocol/JsonFields.h>
+#include <cbc/protocol/Sign.h>
+#include <cbc/protocol/types.h>
+#include <cbc/basics/contract.h>
 
-namespace ripple {
+namespace cbc {
 namespace test {
 namespace jtx {
 
@@ -101,7 +101,7 @@ msig::operator()(Env& env, JTx& jt) const
             jo[jss::SigningPubKey] = strHex(e.sig.pk().slice());
 
             Serializer ss {buildMultiSigningData (*st, e.acct.id())};
-            auto const sig = ripple::sign (
+            auto const sig = cbc::sign (
                 *publicKeyType(e.sig.pk().slice()), e.sig.sk(), ss.slice());
             jo[sfTxnSignature.getJsonName()] =
                 strHex(Slice{ sig.data(), sig.size() });
@@ -111,4 +111,4 @@ msig::operator()(Env& env, JTx& jt) const
 
 } // jtx
 } // test
-} // ripple
+} // cbc

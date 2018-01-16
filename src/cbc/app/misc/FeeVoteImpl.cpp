@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,14 +18,14 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/protocol/st.h>
-#include <ripple/app/misc/FeeVote.h>
-#include <ripple/app/main/Application.h>
-#include <ripple/protocol/STValidation.h>
-#include <ripple/basics/BasicConfig.h>
-#include <ripple/beast/utility/Journal.h>
+#include <cbc/protocol/st.h>
+#include <cbc/app/misc/FeeVote.h>
+#include <cbc/app/main/Application.h>
+#include <cbc/protocol/STValidation.h>
+#include <cbc/basics/BasicConfig.h>
+#include <cbc/beast/utility/Journal.h>
 
-namespace ripple {
+namespace cbc {
 
 namespace detail {
 
@@ -261,4 +261,4 @@ make_FeeVote (FeeVote::Setup const& setup, beast::Journal journal)
     return std::make_unique<FeeVoteImpl> (setup, journal);
 }
 
-} // ripple
+} // cbc

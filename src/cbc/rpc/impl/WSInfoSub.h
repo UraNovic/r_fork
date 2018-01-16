@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -17,18 +17,18 @@
 */
 //==============================================================================
 
-#ifndef RIPPLE_RPC_WSINFOSUB_H
-#define RIPPLE_RPC_WSINFOSUB_H
+#ifndef cbc_RPC_WSINFOSUB_H
+#define cbc_RPC_WSINFOSUB_H
 
-#include <ripple/server/WSSession.h>
-#include <ripple/net/InfoSub.h>
-#include <ripple/beast/net/IPAddressConversion.h>
-#include <ripple/json/json_writer.h>
-#include <ripple/rpc/Role.h>
+#include <cbc/server/WSSession.h>
+#include <cbc/net/InfoSub.h>
+#include <cbc/beast/net/IPAddressConversion.h>
+#include <cbc/json/json_writer.h>
+#include <cbc/rpc/Role.h>
 #include <memory>
 #include <string>
 
-namespace ripple {
+namespace cbc {
 
 class WSInfoSub : public InfoSub
 {
@@ -87,6 +87,6 @@ public:
     }
 };
 
-} // ripple
+} // cbc
 
 #endif

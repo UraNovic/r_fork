@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2016 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2016 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -17,18 +17,18 @@
 */
 //==============================================================================
 
-#ifndef RIPPLE_CONDITIONS_PREIMAGE_SHA256_H
-#define RIPPLE_CONDITIONS_PREIMAGE_SHA256_H
+#ifndef cbc_CONDITIONS_PREIMAGE_SHA256_H
+#define cbc_CONDITIONS_PREIMAGE_SHA256_H
 
-#include <ripple/basics/Buffer.h>
-#include <ripple/basics/Slice.h>
-#include <ripple/conditions/Condition.h>
-#include <ripple/conditions/Fulfillment.h>
-#include <ripple/conditions/impl/error.h>
-#include <ripple/protocol/digest.h>
+#include <cbc/basics/Buffer.h>
+#include <cbc/basics/Slice.h>
+#include <cbc/conditions/Condition.h>
+#include <cbc/conditions/Fulfillment.h>
+#include <cbc/conditions/impl/error.h>
+#include <cbc/protocol/digest.h>
 #include <memory>
 
-namespace ripple {
+namespace cbc {
 namespace cryptoconditions {
 
 class PreimageSha256 final

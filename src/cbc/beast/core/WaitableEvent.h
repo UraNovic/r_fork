@@ -24,7 +24,7 @@
 #ifndef BEAST_THREADS_WAITABLEEVENT_H_INCLUDED
 #define BEAST_THREADS_WAITABLEEVENT_H_INCLUDED
 
-#include <ripple/beast/core/Config.h>
+#include <cbc/beast/core/Config.h>
 
 #if ! BEAST_WINDOWS
 #include <pthread.h>

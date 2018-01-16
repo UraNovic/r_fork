@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -17,15 +17,15 @@
 */
 //==============================================================================
 
-#ifndef RIPPLE_APP_TX_TRANSACTOR_H_INCLUDED
-#define RIPPLE_APP_TX_TRANSACTOR_H_INCLUDED
+#ifndef cbc_APP_TX_TRANSACTOR_H_INCLUDED
+#define cbc_APP_TX_TRANSACTOR_H_INCLUDED
 
-#include <ripple/app/tx/impl/ApplyContext.h>
-#include <ripple/protocol/XRPAmount.h>
-#include <ripple/beast/utility/Journal.h>
+#include <cbc/app/tx/impl/ApplyContext.h>
+#include <cbc/protocol/XRPAmount.h>
+#include <cbc/beast/utility/Journal.h>
 #include <boost/optional.hpp>
 
-namespace ripple {
+namespace cbc {
 
 /** State information when preflighting a tx. */
 struct PreflightContext

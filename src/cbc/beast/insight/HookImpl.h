@@ -20,7 +20,7 @@
 #ifndef BEAST_INSIGHT_HOOKIMPL_H_INCLUDED
 #define BEAST_INSIGHT_HOOKIMPL_H_INCLUDED
 
-#include <ripple/beast/insight/BaseImpl.h>
+#include <cbc/beast/insight/BaseImpl.h>
 
 namespace beast {
 namespace insight {

@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -29,29 +29,29 @@
 #include <test/jtx/sig.h>
 #include <test/jtx/utility.h>
 #include <test/jtx/JSONRPCClient.h>
-#include <ripple/app/ledger/LedgerMaster.h>
-#include <ripple/consensus/LedgerTiming.h>
-#include <ripple/app/misc/NetworkOPs.h>
-#include <ripple/app/misc/TxQ.h>
-#include <ripple/basics/contract.h>
-#include <ripple/basics/Slice.h>
-#include <ripple/json/to_string.h>
-#include <ripple/net/HTTPClient.h>
-#include <ripple/net/RPCCall.h>
-#include <ripple/protocol/ErrorCodes.h>
-#include <ripple/protocol/HashPrefix.h>
-#include <ripple/protocol/Indexes.h>
-#include <ripple/protocol/JsonFields.h>
-#include <ripple/protocol/LedgerFormats.h>
-#include <ripple/protocol/Serializer.h>
-#include <ripple/protocol/SystemParameters.h>
-#include <ripple/protocol/TER.h>
-#include <ripple/protocol/TxFlags.h>
-#include <ripple/protocol/types.h>
-#include <ripple/protocol/Feature.h>
+#include <cbc/app/ledger/LedgerMaster.h>
+#include <cbc/consensus/LedgerTiming.h>
+#include <cbc/app/misc/NetworkOPs.h>
+#include <cbc/app/misc/TxQ.h>
+#include <cbc/basics/contract.h>
+#include <cbc/basics/Slice.h>
+#include <cbc/json/to_string.h>
+#include <cbc/net/HTTPClient.h>
+#include <cbc/net/RPCCall.h>
+#include <cbc/protocol/ErrorCodes.h>
+#include <cbc/protocol/HashPrefix.h>
+#include <cbc/protocol/Indexes.h>
+#include <cbc/protocol/JsonFields.h>
+#include <cbc/protocol/LedgerFormats.h>
+#include <cbc/protocol/Serializer.h>
+#include <cbc/protocol/SystemParameters.h>
+#include <cbc/protocol/TER.h>
+#include <cbc/protocol/TxFlags.h>
+#include <cbc/protocol/types.h>
+#include <cbc/protocol/Feature.h>
 #include <memory>
 
-namespace ripple {
+namespace cbc {
 namespace test {
 namespace jtx {
 
@@ -226,12 +226,12 @@ Env::le (Keylet const& k) const
 }
 
 void
-Env::fund (bool setDefaultRipple,
+Env::fund (bool setDefaultcbc,
     STAmount const& amount,
         Account const& account)
 {
     memoize(account);
-    if (setDefaultRipple)
+    if (setDefaultcbc)
     {
         // VFALCO NOTE Is the fee formula correct?
         apply(pay(master, account, amount +
@@ -239,11 +239,11 @@ Env::fund (bool setDefaultRipple,
                 jtx::seq(jtx::autofill),
                     fee(jtx::autofill),
                         sig(jtx::autofill));
-        apply(fset(account, asfDefaultRipple),
+        apply(fset(account, asfDefaultcbc),
             jtx::seq(jtx::autofill),
                 fee(jtx::autofill),
                     sig(jtx::autofill));
-        require(flags(account, asfDefaultRipple));
+        require(flags(account, asfDefaultcbc));
     }
     else
     {
@@ -251,7 +251,7 @@ Env::fund (bool setDefaultRipple,
             jtx::seq(jtx::autofill),
                 fee(jtx::autofill),
                     sig(jtx::autofill));
-        require(nflags(account, asfDefaultRipple));
+        require(nflags(account, asfDefaultcbc));
     }
     require(jtx::balance(account, amount));
 }
@@ -479,4 +479,4 @@ Env::enableFeature(uint256 const feature)
 } // jtx
 
 } // test
-} // ripple
+} // cbc

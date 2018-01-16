@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,26 +18,26 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/app/paths/impl/Steps.h>
-#include <ripple/app/paths/Credit.h>
-#include <ripple/app/paths/NodeDirectory.h>
-#include <ripple/app/tx/impl/OfferStream.h>
-#include <ripple/basics/contract.h>
-#include <ripple/basics/Log.h>
-#include <ripple/ledger/Directory.h>
-#include <ripple/ledger/PaymentSandbox.h>
-#include <ripple/protocol/Book.h>
-#include <ripple/protocol/Feature.h>
-#include <ripple/protocol/IOUAmount.h>
-#include <ripple/protocol/Quality.h>
-#include <ripple/protocol/XRPAmount.h>
+#include <cbc/app/paths/impl/Steps.h>
+#include <cbc/app/paths/Credit.h>
+#include <cbc/app/paths/NodeDirectory.h>
+#include <cbc/app/tx/impl/OfferStream.h>
+#include <cbc/basics/contract.h>
+#include <cbc/basics/Log.h>
+#include <cbc/ledger/Directory.h>
+#include <cbc/ledger/PaymentSandbox.h>
+#include <cbc/protocol/Book.h>
+#include <cbc/protocol/Feature.h>
+#include <cbc/protocol/IOUAmount.h>
+#include <cbc/protocol/Quality.h>
+#include <cbc/protocol/XRPAmount.h>
 
 #include <boost/container/flat_set.hpp>
 
 #include <numeric>
 #include <sstream>
 
-namespace ripple {
+namespace cbc {
 
 template<class TIn, class TOut, class TDerived>
 class BookStep : public StepImp<TIn, TOut, BookStep<TIn, TOut, TDerived>>
@@ -985,8 +985,8 @@ BookStep<TIn, TOut, TDerived>::check(StrandContext const& ctx) const
                 if (!sle)
                     return terNO_LINE;
                 if ((*sle)[sfFlags] &
-                    ((cur > *prev) ? lsfHighNoRipple : lsfLowNoRipple))
-                    return terNO_RIPPLE;
+                    ((cur > *prev) ? lsfHighNocbc : lsfLowNocbc))
+                    return terNO_cbc;
             }
         }
     }
@@ -1002,14 +1002,14 @@ namespace test
 
 template <class TIn, class TOut, class TDerived>
 static
-bool equalHelper (Step const& step, ripple::Book const& book)
+bool equalHelper (Step const& step, cbc::Book const& book)
 {
     if (auto bs = dynamic_cast<BookStep<TIn, TOut, TDerived> const*> (&step))
         return book == bs->book ();
     return false;
 }
 
-bool bookStepEqual (Step const& step, ripple::Book const& book)
+bool bookStepEqual (Step const& step, cbc::Book const& book)
 {
     bool const inXRP = isXRP (book.in.currency);
     bool const outXRP = isXRP (book.out.currency);
@@ -1086,4 +1086,4 @@ make_BookStepXI (
     return make_BookStepHelper<XRPAmount, IOUAmount> (ctx, xrpIssue(), out);
 }
 
-} // ripple
+} // cbc

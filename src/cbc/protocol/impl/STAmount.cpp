@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -19,13 +19,13 @@
 
 #include <BeastConfig.h>
 
-#include <ripple/basics/contract.h>
-#include <ripple/basics/Log.h>
-#include <ripple/protocol/JsonFields.h>
-#include <ripple/protocol/SystemParameters.h>
-#include <ripple/protocol/STAmount.h>
-#include <ripple/protocol/UintTypes.h>
-#include <ripple/beast/core/LexicalCast.h>
+#include <cbc/basics/contract.h>
+#include <cbc/basics/Log.h>
+#include <cbc/protocol/JsonFields.h>
+#include <cbc/protocol/SystemParameters.h>
+#include <cbc/protocol/STAmount.h>
+#include <cbc/protocol/UintTypes.h>
+#include <cbc/beast/core/LexicalCast.h>
 #include <boost/regex.hpp>
 #include <boost/algorithm/string.hpp>
 #include <boost/multiprecision/cpp_int.hpp>
@@ -33,7 +33,7 @@
 #include <memory>
 #include <iostream>
 
-namespace ripple {
+namespace cbc {
 
 LocalValue<bool> stAmountCalcSwitchover(true);
 LocalValue<bool> stAmountCalcSwitchover2(true);
@@ -1315,4 +1315,4 @@ divRound (STAmount const& num, STAmount const& den,
     return result;
 }
 
-} // ripple
+} // cbc

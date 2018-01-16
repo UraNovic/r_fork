@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012-2014 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012-2014 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,28 +18,28 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/app/main/Application.h>
-#include <ripple/app/paths/RippleState.h>
-#include <ripple/ledger/ReadView.h>
-#include <ripple/net/RPCErr.h>
-#include <ripple/protocol/ErrorCodes.h>
-#include <ripple/protocol/JsonFields.h>
-#include <ripple/resource/Fees.h>
-#include <ripple/rpc/Context.h>
-#include <ripple/rpc/impl/RPCHelpers.h>
-#include <ripple/rpc/impl/Tuning.h>
+#include <cbc/app/main/Application.h>
+#include <cbc/app/paths/cbcState.h>
+#include <cbc/ledger/ReadView.h>
+#include <cbc/net/RPCErr.h>
+#include <cbc/protocol/ErrorCodes.h>
+#include <cbc/protocol/JsonFields.h>
+#include <cbc/resource/Fees.h>
+#include <cbc/rpc/Context.h>
+#include <cbc/rpc/impl/RPCHelpers.h>
+#include <cbc/rpc/impl/Tuning.h>
 
-namespace ripple {
+namespace cbc {
 
 struct VisitData
 {
-    std::vector <RippleState::pointer> items;
+    std::vector <cbcState::pointer> items;
     AccountID const& accountID;
     bool hasPeer;
     AccountID const& raPeerAccount;
 };
 
-void addLine (Json::Value& jsonLines, RippleState const& line)
+void addLine (Json::Value& jsonLines, cbcState const& line)
 {
     STAmount const& saBalance (line.getBalance ());
     STAmount const& saLimit (line.getLimit ());
@@ -62,10 +62,10 @@ void addLine (Json::Value& jsonLines, RippleState const& line)
         jPeer[jss::authorized] = true;
     if (line.getAuthPeer ())
         jPeer[jss::peer_authorized] = true;
-    if (line.getNoRipple ())
-        jPeer[jss::no_ripple] = true;
-    if (line.getNoRipplePeer ())
-        jPeer[jss::no_ripple_peer] = true;
+    if (line.getNocbc ())
+        jPeer[jss::no_cbc] = true;
+    if (line.getNocbcPeer ())
+        jPeer[jss::no_cbc_peer] = true;
     if (line.getFreeze ())
         jPeer[jss::freeze] = true;
     if (line.getFreezePeer ())
@@ -139,7 +139,7 @@ Json::Value doAccountLines (RPC::Context& context)
             return RPC::expected_field_error (jss::marker, "string");
 
         startAfter.SetHex (marker.asString ());
-        auto const sleLine = ledger->read({ltRIPPLE_STATE, startAfter});
+        auto const sleLine = ledger->read({ltcbc_STATE, startAfter});
 
         if (! sleLine)
             return rpcError (rpcINVALID_PARAMS);
@@ -152,7 +152,7 @@ Json::Value doAccountLines (RPC::Context& context)
             return rpcError (rpcINVALID_PARAMS);
 
         // Caller provided the first line (startAfter), add it as first result
-        auto const line = RippleState::makeItem (accountID, sleLine);
+        auto const line = cbcState::makeItem (accountID, sleLine);
         if (line == nullptr)
             return rpcError (rpcINVALID_PARAMS);
 
@@ -172,7 +172,7 @@ Json::Value doAccountLines (RPC::Context& context)
             [&visitData](std::shared_ptr<SLE const> const& sleCur)
             {
                 auto const line =
-                    RippleState::makeItem (visitData.accountID, sleCur);
+                    cbcState::makeItem (visitData.accountID, sleCur);
                 if (line != nullptr &&
                     (! visitData.hasPeer ||
                      visitData.raPeerAccount == line->getAccountIDPeer ()))
@@ -192,7 +192,7 @@ Json::Value doAccountLines (RPC::Context& context)
     {
         result[jss::limit] = limit;
 
-        RippleState::pointer line (visitData.items.back ());
+        cbcState::pointer line (visitData.items.back ());
         result[jss::marker] = to_string (line->key());
         visitData.items.pop_back ();
     }
@@ -206,4 +206,4 @@ Json::Value doAccountLines (RPC::Context& context)
     return result;
 }
 
-} // ripple
+} // cbc

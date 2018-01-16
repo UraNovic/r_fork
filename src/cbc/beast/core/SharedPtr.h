@@ -24,8 +24,8 @@
 #ifndef BEAST_SMART_PTR_SHAREDPTR_H_INCLUDED
 #define BEAST_SMART_PTR_SHAREDPTR_H_INCLUDED
 
-#include <ripple/beast/core/Config.h>
-#include <ripple/beast/core/SharedObject.h>
+#include <cbc/beast/core/Config.h>
+#include <cbc/beast/core/SharedObject.h>
 
 namespace beast {
 

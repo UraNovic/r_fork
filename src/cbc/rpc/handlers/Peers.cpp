@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012-2014 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012-2014 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,16 +18,16 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/app/main/Application.h>
-#include <ripple/app/misc/LoadFeeTrack.h>
-#include <ripple/core/TimeKeeper.h>
-#include <ripple/overlay/Cluster.h>
-#include <ripple/overlay/Overlay.h>
-#include <ripple/protocol/JsonFields.h>
-#include <ripple/rpc/Context.h>
-#include <ripple/basics/make_lock.h>
+#include <cbc/app/main/Application.h>
+#include <cbc/app/misc/LoadFeeTrack.h>
+#include <cbc/core/TimeKeeper.h>
+#include <cbc/overlay/Cluster.h>
+#include <cbc/overlay/Overlay.h>
+#include <cbc/protocol/JsonFields.h>
+#include <cbc/rpc/Context.h>
+#include <cbc/basics/make_lock.h>
 
-namespace ripple {
+namespace cbc {
 
 Json::Value doPeers (RPC::Context& context)
 {
@@ -71,4 +71,4 @@ Json::Value doPeers (RPC::Context& context)
     return jvResult;
 }
 
-} // ripple
+} // cbc

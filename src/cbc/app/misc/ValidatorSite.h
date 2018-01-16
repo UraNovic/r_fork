@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2016 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2016 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -17,18 +17,18 @@
 */
 //==============================================================================
 
-#ifndef RIPPLE_APP_MISC_VALIDATORSITE_H_INCLUDED
-#define RIPPLE_APP_MISC_VALIDATORSITE_H_INCLUDED
+#ifndef cbc_APP_MISC_VALIDATORSITE_H_INCLUDED
+#define cbc_APP_MISC_VALIDATORSITE_H_INCLUDED
 
-#include <ripple/app/misc/ValidatorList.h>
-#include <ripple/app/misc/detail/Work.h>
-#include <ripple/basics/Log.h>
-#include <ripple/basics/StringUtilities.h>
-#include <ripple/json/json_value.h>
+#include <cbc/app/misc/ValidatorList.h>
+#include <cbc/app/misc/detail/Work.h>
+#include <cbc/basics/Log.h>
+#include <cbc/basics/StringUtilities.h>
+#include <cbc/json/json_value.h>
 #include <boost/asio.hpp>
 #include <mutex>
 
-namespace ripple {
+namespace cbc {
 
 /**
     Validator Sites
@@ -43,7 +43,7 @@ namespace ripple {
 
     @li @c "blob": Base64-encoded JSON string containing a @c "sequence", @c
         "expiration", and @c "validators" field. @c "expiration" contains the
-        Ripple timestamp (seconds since January 1st, 2000 (00:00 UTC)) for when
+        cbc timestamp (seconds since January 1st, 2000 (00:00 UTC)) for when
         the list expires. @c "validators" contains an array of objects with a
         @c "validation_public_key" and optional @c "manifest" field.
         @c "validation_public_key" should be the hex-encoded master public key.
@@ -178,6 +178,6 @@ private:
         std::size_t siteIdx);
 };
 
-} // ripple
+} // cbc
 
 #endif

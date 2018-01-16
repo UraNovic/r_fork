@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,13 +18,13 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/core/DatabaseCon.h>
-#include <ripple/core/SociDB.h>
-#include <ripple/basics/contract.h>
-#include <ripple/basics/Log.h>
+#include <cbc/core/DatabaseCon.h>
+#include <cbc/core/SociDB.h>
+#include <cbc/basics/contract.h>
+#include <cbc/basics/Log.h>
 #include <memory>
 
-namespace ripple {
+namespace cbc {
 
 DatabaseCon::DatabaseCon (
     Setup const& setup,
@@ -80,4 +80,4 @@ void DatabaseCon::setupCheckpointing (JobQueue* q, Logs& l)
     checkpointer_ = makeCheckpointer (session_, *q, l);
 }
 
-} // ripple
+} // cbc

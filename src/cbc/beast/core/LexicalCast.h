@@ -20,7 +20,7 @@
 #ifndef BEAST_MODULE_CORE_TEXT_LEXICALCAST_H_INCLUDED
 #define BEAST_MODULE_CORE_TEXT_LEXICALCAST_H_INCLUDED
 
-#include <ripple/beast/core/Config.h>
+#include <cbc/beast/core/Config.h>
 #include <algorithm>
 #include <cerrno>
 #include <cstdlib>

@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -18,20 +18,20 @@
 //==============================================================================
 
 #include <BeastConfig.h>
-#include <ripple/app/paths/Credit.h>
-#include <ripple/app/paths/impl/StepChecks.h>
-#include <ripple/app/paths/impl/Steps.h>
-#include <ripple/basics/Log.h>
-#include <ripple/ledger/PaymentSandbox.h>
-#include <ripple/protocol/IOUAmount.h>
-#include <ripple/protocol/Quality.h>
+#include <cbc/app/paths/Credit.h>
+#include <cbc/app/paths/impl/StepChecks.h>
+#include <cbc/app/paths/impl/Steps.h>
+#include <cbc/basics/Log.h>
+#include <cbc/ledger/PaymentSandbox.h>
+#include <cbc/protocol/IOUAmount.h>
+#include <cbc/protocol/Quality.h>
 
 #include <boost/container/flat_set.hpp>
 
 #include <numeric>
 #include <sstream>
 
-namespace ripple {
+namespace cbc {
 
 template <class TDerived>
 class DirectStepI : public StepImp<IOUAmount, IOUAmount, DirectStepI<TDerived>>
@@ -423,11 +423,11 @@ DirectIPaymentStep::check (
         {
             if (ctx.prevStep->bookStepBook())
             {
-                auto const noRippleSrcToDst =
+                auto const nocbcSrcToDst =
                     ((*sleLine)[sfFlags] &
-                     ((src_ > dst_) ? lsfHighNoRipple : lsfLowNoRipple));
-                if (noRippleSrcToDst)
-                    return terNO_RIPPLE;
+                     ((src_ > dst_) ? lsfHighNocbc : lsfLowNocbc));
+                if (nocbcSrcToDst)
+                    return terNO_cbc;
             }
         }
     }
@@ -535,7 +535,7 @@ DirectStepI<TDerived>::revImp (
         IOUAmount const in = mulRatio (
             srcToDst, srcQOut, QUALITY_ONE, /*roundUp*/ true);
         cache_.emplace (in, srcToDst, out, srcRedeems);
-        rippleCredit (sb,
+        cbcCredit (sb,
                       src_, dst_, toSTAmount (srcToDst, srcToDstIss),
                       /*checkIssuer*/ true, j_);
         JLOG (j_.trace()) <<
@@ -553,7 +553,7 @@ DirectStepI<TDerived>::revImp (
     IOUAmount const actualOut = mulRatio (
         maxSrcToDst, dstQIn, QUALITY_ONE, /*roundUp*/ false);
     cache_.emplace (in, maxSrcToDst, actualOut, srcRedeems);
-    rippleCredit (sb,
+    cbcCredit (sb,
                   src_, dst_, toSTAmount (maxSrcToDst, srcToDstIss),
                   /*checkIssuer*/ true, j_);
     JLOG (j_.trace()) <<
@@ -657,7 +657,7 @@ DirectStepI<TDerived>::fwdImp (
         IOUAmount const out = mulRatio (
             srcToDst, dstQIn, QUALITY_ONE, /*roundUp*/ false);
         setCacheLimiting (in, srcToDst, out, srcRedeems);
-        rippleCredit (sb,
+        cbcCredit (sb,
             src_, dst_, toSTAmount (cache_->srcToDst, srcToDstIss),
             /*checkIssuer*/ true, j_);
         JLOG (j_.trace()) <<
@@ -675,7 +675,7 @@ DirectStepI<TDerived>::fwdImp (
         IOUAmount const out = mulRatio (
             maxSrcToDst, dstQIn, QUALITY_ONE, /*roundUp*/ false);
         setCacheLimiting (actualIn, maxSrcToDst, out, srcRedeems);
-        rippleCredit (sb,
+        cbcCredit (sb,
             src_, dst_, toSTAmount (cache_->srcToDst, srcToDstIss),
             /*checkIssuer*/ true, j_);
         JLOG (j_.trace()) <<
@@ -844,12 +844,12 @@ TER DirectStepI<TDerived>::check (StrandContext const& ctx) const
     }
 
     // If previous step was a direct step then we need to check
-    // no ripple flags.
+    // no cbc flags.
     if (ctx.prevStep)
     {
         if (auto prevSrc = ctx.prevStep->directStepSrcAcct())
         {
-            auto const ter = checkNoRipple(
+            auto const ter = checkNocbc(
                 ctx.view, *prevSrc, src_, dst_, currency_, j_);
             if (ter != tesSUCCESS)
                 return ter;
@@ -939,4 +939,4 @@ make_DirectStepI (
     return {tesSUCCESS, std::move (r)};
 }
 
-} // ripple
+} // cbc

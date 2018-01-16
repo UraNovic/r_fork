@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 /*
-    This file is part of rippled: https://github.com/ripple/rippled
-    Copyright (c) 2012, 2013 Ripple Labs Inc.
+    This file is part of cbcd: https://github.com/cbc/cbcd
+    Copyright (c) 2012, 2013 cbc Labs Inc.
 
     Permission to use, copy, modify, and/or distribute this software for any
     purpose  with  or without fee is hereby granted, provided that the above
@@ -17,15 +17,15 @@
 */
 //==============================================================================
 
-#ifndef RIPPLE_APP_PATHS_PATHSTATE_H_INCLUDED
-#define RIPPLE_APP_PATHS_PATHSTATE_H_INCLUDED
+#ifndef cbc_APP_PATHS_PATHSTATE_H_INCLUDED
+#define cbc_APP_PATHS_PATHSTATE_H_INCLUDED
 
-#include <ripple/app/paths/Node.h>
-#include <ripple/app/paths/Types.h>
-#include <ripple/ledger/PaymentSandbox.h>
+#include <cbc/app/paths/Node.h>
+#include <cbc/app/paths/Types.h>
+#include <cbc/ledger/PaymentSandbox.h>
 #include <boost/optional.hpp>
 
-namespace ripple {
+namespace cbc {
 
 // Holds a single path state under incremental application.
 class PathState : public CountedObject <PathState>
@@ -96,7 +96,7 @@ class PathState : public CountedObject <PathState>
     void setIndex (int i) { mIndex  = i; }
     int index() const { return mIndex; }
 
-    TER checkNoRipple (AccountID const& destinationAccountID,
+    TER checkNocbc (AccountID const& destinationAccountID,
                        AccountID const& sourceAccountID);
     void checkFreeze ();
 
@@ -119,7 +119,7 @@ class PathState : public CountedObject <PathState>
     }
 
 private:
-    TER checkNoRipple (
+    TER checkNocbc (
         AccountID const&, AccountID const&, AccountID const&, Currency const&);
 
     /** Clear path structures, and clear each node. */
@@ -172,6 +172,6 @@ private:
     beast::Journal j_;
 };
 
-} // ripple
+} // cbc
 
 #endif
